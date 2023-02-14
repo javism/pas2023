@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Sánchez Monedero">
+
+<title>Programación y Administración de Sistemas (2022-2023) - Tema 0: Presentación</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Tema 0: Presentación</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Programación y Administración de Sistemas (2022-2023)</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Inicio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema00-presentacion/presentacion.html" class="sidebar-item-text sidebar-link active">Tema 0: Presentación</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema01-introduccion/tema01-introduccion.html" class="sidebar-item-text sidebar-link">Tema 1: Introducción</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#profesorado-y-moodle" id="toc-profesorado-y-moodle" class="nav-link active" data-scroll-target="#profesorado-y-moodle"><span class="toc-section-number">1</span>  Profesorado y Moodle</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos"><span class="toc-section-number">2</span>  Objetivos</a></li>
+  <li><a href="#objetivos-de-la-asignatura" id="toc-objetivos-de-la-asignatura" class="nav-link" data-scroll-target="#objetivos-de-la-asignatura"><span class="toc-section-number">3</span>  Objetivos de la asignatura</a></li>
+  <li><a href="#temario-y-programación" id="toc-temario-y-programación" class="nav-link" data-scroll-target="#temario-y-programación"><span class="toc-section-number">4</span>  Temario y programación</a></li>
+  <li><a href="#bibliografía" id="toc-bibliografía" class="nav-link" data-scroll-target="#bibliografía"><span class="toc-section-number">5</span>  Bibliografía</a></li>
+  <li><a href="#evaluación" id="toc-evaluación" class="nav-link" data-scroll-target="#evaluación"><span class="toc-section-number">6</span>  Evaluación</a></li>
+  <li><a href="#devops" id="toc-devops" class="nav-link" data-scroll-target="#devops"><span class="toc-section-number">7</span>  DevOps</a></li>
+  <li><a href="#sugerencias" id="toc-sugerencias" class="nav-link" data-scroll-target="#sugerencias"><span class="toc-section-number">8</span>  Sugerencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Tema 0: Presentación</h1>
+<p class="subtitle lead">Programación y Administración de Sistemas <br> (2022-2023)</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor/a</div>
+  <div class="quarto-title-meta-heading">Afiliaciones</div>
+  
+    <div class="quarto-title-meta-contents">
+    Javier Sánchez Monedero 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Depto. Informática y Análisis Numérico
+          </p>
+        <p class="affiliation">
+            Escuela Politécnica Superior
+          </p>
+        <p class="affiliation">
+            Universidad de Córdoba
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 de febrero de 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="profesorado-y-moodle" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Profesorado y Moodle</h1>
+<section id="moodle" class="level2">
+<h2 class="anchored" data-anchor-id="moodle">Moodle</h2>
+<p>Todo el material mínimo y opcional de la asignatura está disponible en la plataforma Moodle de la UCO:</p>
+<ul>
+<li><p><a href="http://moodle.uco.es/m2223">http://moodle.uco.es/m2223</a></p></li>
+<li><p><a href="https://moodle.uco.es/m2223/course/view.php?id=1943">Curso: Programación y Administración de Sistemas ( GIINF-2-101390-1-1)</a></p></li>
+</ul>
+</section>
+<section id="profesorado" class="level2">
+<h2 class="anchored" data-anchor-id="profesorado">Profesorado</h2>
+<div class="block">
+<p><strong>Cordinación y teoría:</strong> Javier Sánchez Monedero</p>
+</div>
+<div class="block">
+<p><strong>Prácticas</strong>:</p>
+<ul>
+<li>Prácticas 1-3: María Isabel Jiménez Velasco</li>
+<li>Práctica 4: José Manuel Cuevas</li>
+</ul>
+</div>
+<p>Horarios de tutoría y datos de contacto en Moodle.</p>
+</section>
+<section id="móviles-en-clase-qué-dice-chatgpt-12" class="level2">
+<h2 class="anchored" data-anchor-id="móviles-en-clase-qué-dice-chatgpt-12">Móviles en clase: ¿qué dice ChatGPT? (1/2)</h2>
+<p>El uso de los móviles en la educación puede tener tanto efectos positivos como negativos.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Efectos positivos:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Facilita el acceso a la información y recursos educativos en línea.</li>
+<li>Mejora la colaboración y el trabajo en equipo a través de aplicaciones y herramientas en línea</li>
+<li>Fomenta la independencia y el aprendizaje autónomo.</li>
+<li>Aumenta la motivación y el interés por el aprendizaje.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="móviles-en-clase-qué-dice-chatgpt-22" class="level2">
+<h2 class="anchored" data-anchor-id="móviles-en-clase-qué-dice-chatgpt-22">Móviles en clase: ¿qué dice ChatGPT? (2/2)</h2>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Efectos negativos:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Distracción y pérdida de concentración en la clase.</li>
+<li>Uso inadecuado y poco ético, como la trampa en exámenes o el acceso a contenido no apropiado.</li>
+<li>Adicción a los dispositivos y dependencia en la tecnología.</li>
+<li>Desigualdades socioeconómicas, ya que no todos los estudiantes tienen acceso a dispositivos de alta calidad o a una conexión a Internet confiable.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="objetivos" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Objetivos</h1>
+<section id="actividad-en-clase" class="level2" data-background-color="lightgreen">
+<h2 data-background-color="lightgreen" class="anchored" data-anchor-id="actividad-en-clase">Actividad en clase</h2>
+<p>En buscadores genéricos o de empleo busca “administrador/a de sistemas”, “devops”, “sysadmin”</p>
+<p>Ejemplos:</p>
+<ul>
+<li><p><a href="https://www.linkedin.com/jobs/search/?currentJobId=3196679153&amp;keywords=sysadmin">https://www.linkedin.com/jobs/search/?currentJobId=3196679153&amp;keywords=sysadmin</a></p></li>
+<li><p><a href="https://www.infojobs.net/ofertas-trabajo/administrador-a-de-sistemas-informaticos">https://www.infojobs.net/ofertas-trabajo/administrador-a-de-sistemas-informaticos</a></p></li>
+</ul>
+</section>
+<section id="administradora-de-sistemas" class="level2">
+<h2 class="anchored" data-anchor-id="administradora-de-sistemas">Administrador/a de sistemas</h2>
+<div class="columns">
+<div class="smaller column" style="width:52%;">
+<p>Según <a href="http://es.wikipedia.org/wiki/Administrador_de_sistemas">Wikipedia</a>:</p>
+<blockquote class="blockquote">
+<p>Un Administrador/a de Sistemas es la persona que tiene la responsabilidad de <strong>implementar, configurar, mantener, monitorizar, documentar y asegurar</strong> el correcto funcionamiento de un sistema informático, o algún aspecto de éste.</p>
+</blockquote>
+</div><div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/jc-computer-admin-6389.jpg" class="img-fluid figure-img" alt="Fotografía de una administradora de sistemas conectando cables de fibra óptica" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="memes" class="level2">
+<h2 class="anchored" data-anchor-id="memes">Memes</h2>
+<p><img src="images/meme_sysadmin.jpg" class="img-fluid"></p>
+<p>Fuente: <a href="https://blog.law.cornell.edu/blog/2013/09/16/were-hiring/">we are hiring</a>.</p>
+</section>
+<section id="tareas" class="level2">
+<h2 class="anchored" data-anchor-id="tareas">Tareas</h2>
+<div style="font-size: 80%">
+<ul>
+<li>Mantener el Sistema Informático de una empresa/institución.</li>
+<li>A nivel <em>software</em>:
+<ul>
+<li>Instalar servicios utilizados por la empresa.</li>
+<li>Interconectar servicios (mismo login y contraseña para todo).</li>
+<li>Mantener servicios (p.ej. Moodle, servidor de correo…).</li>
+<li>Realizar copias de respaldo de los datos.</li>
+<li>Controlar la seguridad.</li>
+</ul></li>
+<li>¿A nivel <em>hardware</em>?</li>
+</ul>
+</div>
+</section>
+<section id="software-libre" class="level2">
+<h2 class="anchored" data-anchor-id="software-libre">Software libre</h2>
+<p>Aunque en el escritorio el software privativo sea líder el <strong>software libre</strong> y los sistemas Linux, FreeBSD, etc. son la opción mayoritaria servidores y supercomputadores.</p>
+<p><img src="images/share-linux.png" class="img-fluid"></p>
+<p>Fuente: <a href="http://en.wikipedia.org/wiki/Usage_share_of_operating_systems">Usage share of operating systems en Wikipedia</a>.</p>
+</section>
+<section id="por-qué-software-libre" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-software-libre">¿Por qué software libre?</h2>
+<div class="columns">
+<div class="smaller column" style="width:52%;">
+<ul>
+<li>Entorno empresarial y de investigación cooperativo.</li>
+<li>Adopción de estándares.</li>
+<li>Flexibilidad, fiabilidad, seguridad, transparencia.</li>
+<li>Independencia de proveedores.</li>
+<li>Ética y compromiso social.</li>
+<li>Más económico (¿?)</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p><img src="images/meditate.png" data-fig-align="center" alt="The Gnu from GNU meditating" height="250"> <img src="images/Linux_logo.jpg" data-fig-align="center" alt="Logotipo Linux" height="250"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="objetivos-de-la-asignatura" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Objetivos de la asignatura</h1>
+<section id="objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
+<div class="alertblock">
+<p>El objetivo fundamental es que el alumnado que curse la asignatura adquiera los conocimientos básicos y domine las técnicas fundamentales de la Administración de Sistemas Operativos.</p>
+</div>
+</section>
+<section id="objetivos-concretos" class="level2" style="font-size: 85%">
+<h2 style="font-size: 85%" class="anchored" data-anchor-id="objetivos-concretos">Objetivos concretos</h2>
+<div class="block">
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Conocer los comandos básicos y las secuencias de pasos necesarias para instalar y administrar sistemas.</li>
+<li>Conocer y manejar los ficheros de configuración de los sistemas.</li>
+<li>Adquirir conocimientos básicos sobre lenguajes de <em>scripting</em> y de programación de la <em>Shell</em>.</li>
+<li>Comprender cómo se organiza el sistema operativo y los subsistemas POSIX para poder escribir aplicaciones que interaccionen con los mismos.</li>
+<li>Instalar y mantener servicios en Sistemas Distribuidos.</li>
+<li>Adquirir conceptos teóricos y prácticos de rendimiento y seguridad en sistemas.</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="temario-y-programación" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Temario y programación</h1>
+<section id="temario" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="temario">Temario</h2>
+<ol type="1">
+<li>Introducción a la administración de sistemas.</li>
+<li>Organización de un sistema operativo GNU/Linux.</li>
+<li>Arranque y parada del sistema.</li>
+<li>Gestión de usuarios.</li>
+<li>Gestión de los recursos del sistema.</li>
+<li>Organización de sistemas de ficheros y discos.</li>
+<li>Administración de sistemas de ficheros y discos.</li>
+<li>Instalación de impresoras.</li>
+<li>Restauración y copias de seguridad.</li>
+<li>Gestión de las comunicaciones.</li>
+</ol>
+</section>
+<section id="temario-prácticas" class="level2">
+<h2 class="anchored" data-anchor-id="temario-prácticas">Temario prácticas</h2>
+<div class="block">
+<p><strong>Bloque I</strong>:</p>
+<ol type="1">
+<li>Programación de la shell.</li>
+<li>Expresiones regulares para la programación de la shell.</li>
+</ol>
+</div>
+<div class="block">
+<p><strong>Bloque II</strong>:</p>
+<ol start="3" type="1">
+<li>Programación en POSIX.</li>
+<li>Administración de servidores web: Apache.</li>
+</ol>
+</div>
+</section>
+<section id="planificación-asignatura" class="level2">
+<h2 class="anchored" data-anchor-id="planificación-asignatura">Planificación asignatura</h2>
+<p><a href="https://moodle.uco.es/m2223/mod/resource/view.php?id=214554">Calendario aproximado teoría</a></p>
+<p><a href="https://moodle.uco.es/m2223/mod/resource/view.php?id=214561">Calendario aproximado prácticas</a></p>
+<p><span style="color:red;">Comentarios taller Ansible</span>: martes 1 ó martes 8 de mayo.</p>
+</section>
+</section>
+<section id="bibliografía" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Bibliografía</h1>
+<section id="bibliografía-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="bibliografía-1">Bibliografía</h2>
+<p>Básica para seguir la asignatura:</p>
+<ul>
+<li><p>UNIX and Linux System Administration Handbook, 5th Edition. Evi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. Addison-Wesley. 2018.</p></li>
+<li><p>Essential System Administration (3a ed.). Aeleen Frisch. O’Reilly &amp; Associates. 2002.</p></li>
+<li><p><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-es.md">El Arte del Terminal</a>, Joshua Levy, 2023.</p></li>
+</ul>
+<p>Adicional:</p>
+<ul>
+<li>Administración de sistemas Linux. Adelstein, Tom. Lubanovic, Bill. Anaya multimedia, O Reilly. 2007.</li>
+<li>Unix shell programming, 3a Edición. Kochan, Wood. Sams Publishing. 2003.</li>
+<li>LPI Linux Certification in a Nutshell, Third Edition. Adam Haeder, Stephen Addison Schneiter, Bruno Gomes Pessanha, and James Stanger. 2010.</li>
+<li>K. A. Robbind, S. Robbins. Unix Systems Programming. Prentice Hall, 2003</li>
+</ul>
+</section>
+</section>
+<section id="evaluación" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Evaluación</h1>
+<section id="evaluación-1" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación-1">Evaluación</h2>
+<ul>
+<li><strong>Leer detenidamente la guı́a docente</strong>.</li>
+<li>La evaluación de la asignatura se divide en dos partes, parte teórica y parte práctica (Teorı́a 50 % + Práctica 50 %).</li>
+<li>Para aprobar la asignatura es necesario obtener al menos 5 sobre 10 puntos en la parte de prácticas y 5 sobre 10 puntos en la parte de teorı́a. En caso contrario, la asignatura se considera suspensa.</li>
+<li>Si se aprueba solo la teorı́a o solo la práctica, la nota correspondiente se guarda hasta la convocatoria de septiembre.</li>
+</ul>
+</section>
+<section id="evaluación-exámenes-y-pruebas" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="evaluación-exámenes-y-pruebas">Evaluación: exámenes y pruebas</h2>
+<p>La parte de teorı́a (<strong>50 % de la nota</strong>) se evaluará con un examen final teórico que estará compuesto de:</p>
+<ul>
+<li><p>Pruebas objetivas tipo test (<strong>20 %</strong>, mı́nimo 5 sobre 10).</p></li>
+<li><p>Pruebas de respuesta corta con supuestos prácticos que versen sobre los contenido teóricos dados en clase (<strong>30 %</strong>, mı́nimo 5 sobre 10).</p></li>
+</ul>
+<p>La parte de prácticas (<strong>50 %</strong> de la nota) se organiza en dos bloques. Consta de:</p>
+<ul>
+<li>Examen práctico de programación y administración de sistemas <strong>50 %</strong>, mı́nimo 5 sobre 10). Existen dos posibilidades:
+<ul>
+<li><strong>Exámenes prácticos parciales</strong> realizados durante el curso (eliminan materia de cara al examen final).</li>
+<li><strong>Examen práctico final</strong> realizado durante el periodo de exámenes.</li>
+</ul></li>
+</ul>
+</section>
+<section id="evaluación-exámenes-y-pruebas-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="evaluación-exámenes-y-pruebas-1">Evaluación: exámenes y pruebas</h2>
+<ul>
+<li>Para aprobar las prácticas es necesario aprobar cada Bloque por separado con <strong>5 sobre 10 puntos</strong>.</li>
+<li>Para presentarse a las prácticas en la convocatoria de <strong>junio</strong> es necesario haber asistido a un 80 % de las sesiones de prácticas.</li>
+<li>Para la convocatoria de <strong>julio</strong> y de <strong>septiembre</strong>, la asistencia a las prácticas no es requisito.</li>
+<li>Las calificaciones parciales no se guardan de un curso a otro.</li>
+<li>Se guardan calificaciones parciales (bloques de prácticas o teorı́a) dentro de las convocatorias del mismo curso académico.</li>
+<li>Los alumnos a tiempo parcial deben ponerse en contacto con el profesor.</li>
+</ul>
+</section>
+<section id="tareas-de-administración-i" class="level2">
+<h2 class="anchored" data-anchor-id="tareas-de-administración-i">Tareas de administración (I)</h2>
+<ul>
+<li>Resolución de <strong>ejercicios teóricos y/o prácticos</strong> propuestos y anunciados.</li>
+<li>Las alumnas/os podrán proponer tareas similareas a las propuestas.</li>
+<li>Esta nota se guardará para todas las convocatorias del curso académico. Las tareas pueden llegar a valorarse <strong>hasta 2 puntos</strong> en el examen de teorı́a (sobre 5 puntos). Se tendrá en cuenta para aumentar nota, nunca para aprobar, a aquellos alumnos que participen</li>
+</ul>
+</section>
+<section id="tareas-de-administración-ii" class="level2">
+<h2 class="anchored" data-anchor-id="tareas-de-administración-ii">Tareas de administración (II)</h2>
+<ul>
+<li>Se deberá redactar un guión donde se detalle paso a paso los comandos y operaciones necesarios para llevar a cabo la tarea, acompañados de capturas cuando ası́ se requiera. El documento deberá ser autocontenido y explicativo y todo se deberá realizar sobre una imagen virtual de un sistema operativo GNU/Linux. Se presentará en clase durante un tiempo aproximado de 10-15 minutos.</li>
+</ul>
+</section>
+</section>
+<section id="devops" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> DevOps</h1>
+<section id="devops-1" class="level2">
+<h2 class="anchored" data-anchor-id="devops-1">DevOps</h2>
+<p><a href="https://roadmap.sh/devops/" data-preview-link="true">roadmap.sh/devops</a></p>
+<p><img src="images/devops.png" class="img-fluid" style="width:50.0%"></p>
+</section>
+</section>
+<section id="sugerencias" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Sugerencias</h1>
+<section id="dinamización-de-clases" class="level2" data-background-color="lightgreen">
+<h2 data-background-color="lightgreen" class="anchored" data-anchor-id="dinamización-de-clases">Dinamización de clases</h2>
+<ul>
+<li>Ideal: aula de prácticas para ir probando lo que hacemos…</li>
+<li>Quizz: 1 por tema (cada 2 clases)</li>
+<li>Tareas administración</li>
+<li>Resolución de casos prácticos</li>
+<li>Memes</li>
+<li>…</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
