@@ -172,7 +172,7 @@
     "href": "tema01-introduccion/tema01-introduccion.html#generaciones-de-los-sistemas-operativos-2",
     "title": "Tema 1: Introducción a la administración de sistemas",
     "section": "Generaciones de los sistemas operativos",
-    "text": "Generaciones de los sistemas operativos\nTercera generación (1968-1981)\n\nAparecen los circuitos integrados (Large Scale Integration, LSI), que incluyen multitud de componentes electrónicos.\nComienzan a aparecer equipos de propósito general.\nNuevos conceptos: escalabilidad, multiprogramación]{.rojo}, discos duros.\nMultiprogramación \\(\\rightarrow\\) buffering, gestión de procesos en el SO…\nInfrautilización de los ciclos de CPU $ sistemas de tiempo compartido."
+    "text": "Generaciones de los sistemas operativos\nTercera generación (1968-1981)\n\nAparecen los circuitos integrados (Large Scale Integration, LSI), que incluyen multitud de componentes electrónicos.\nComienzan a aparecer equipos de propósito general.\nNuevos conceptos: escalabilidad, multiprogramación, discos duros.\nMultiprogramación \\(\\rightarrow\\) buffering, gestión de procesos en el SO…\nInfrautilización de los ciclos de CPU $ sistemas de tiempo compartido."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#generaciones-de-los-sistemas-operativos-3",
@@ -249,7 +249,7 @@
     "href": "tema01-introduccion/tema01-introduccion.html#funciones-del-dept.-de-informática-3",
     "title": "Tema 1: Introducción a la administración de sistemas",
     "section": "Funciones del Dept. de Informática",
-    "text": "Funciones del Dept. de Informática\n\nAdministración de la web:\n\nMantenimiento del servidor web y, muchas veces, del contenido de la web.\nHomogeneidad global.\n\n\n\nAdministración de la seguridad\n\nLa seguridad informática es compleja:\n\nDesde la seguridad de la información existente,\nhasta la protección física del equipamiento contra robos, incendios…\n\nTarea presente en todas las funciones."
+    "text": "Funciones del Dept. de Informática\n\nAdministración de la web:\n\nMantenimiento del servidor web y, muchas veces, del contenido de la web.\nHomogeneidad global.\n\n\n\nAdministración de la seguridad\n\nLa seguridad informática es compleja:\n\nDesde la seguridad de la información existente,\nhasta la protección física contra robos, incendios…\n\nTarea presente en todas las funciones."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#funciones-del-dept.-de-informática-4",
@@ -273,11 +273,11 @@
     "text": "Interdependencia\n\n\nInterdependencia\n\nCada función \\(\\rightarrow\\) tareas definidas.\nSin embargo, no son independientes, sino que tienen que trabajar coordinadas.\nLas funciones tienen intersecciones en algunos puntos.\nAlgunas tareas tienen que estar mezcladas para conseguir una gestión, un servicio y una atención al usuario en las mejores condiciones posibles."
   },
   {
-    "objectID": "tema01-introduccion/tema01-introduccion.html#funciones-del-departamento-de-informática",
-    "href": "tema01-introduccion/tema01-introduccion.html#funciones-del-departamento-de-informática",
+    "objectID": "tema01-introduccion/tema01-introduccion.html#funciones-del-dept.-de-informática-6",
+    "href": "tema01-introduccion/tema01-introduccion.html#funciones-del-dept.-de-informática-6",
     "title": "Tema 1: Introducción a la administración de sistemas",
-    "section": "Funciones del Departamento de Informática",
-    "text": "Funciones del Departamento de Informática\n\n\n¿Dar de alta a un usuario en los servicios es una tarea para el administrador de usuarios o para el administrador de servidores?\n\nSi es la misma persona quien hace las dos funciones, no hay problema.\nSi no lo es, se tiene que decidir quién se encarga:\n\nEn caso de que lo haga la persona que administra los servidores, se ha dividido la tarea de dar de alta a los usuarios (y todo lo que comporta) en diversas personas. Hay que valorar si vale la pena.\nSi sólo lo hace la persona que administra a los usuarios, entonces “manipulará” los servidores para hacerlo. Hay que valorar si ello es prudente."
+    "section": "Funciones del Dept. de Informática",
+    "text": "Funciones del Dept. de Informática\n\n\n¿Dar de alta a un usuario en los servicios es una tarea para el administrador de usuarios o para el administrador de servidores?\n\nSi es la misma persona quien hace las dos funciones, no hay problema.\nSi no lo es, se tiene que decidir quién se encarga:\n\nEn caso de que lo haga la persona que administra los servidores, se ha dividido la tarea de dar de alta a los usuarios (y todo lo que comporta) en diversas personas. Hay que valorar si vale la pena.\nSi sólo lo hace la persona que administra a los usuarios, entonces “manipulará” los servidores para hacerlo. Hay que valorar si ello es prudente."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#rol-de-administración-de-sistemas",
@@ -305,7 +305,7 @@
     "href": "tema01-introduccion/tema01-introduccion.html#tareas-detalladas-nivel-más-hardware",
     "title": "Tema 1: Introducción a la administración de sistemas",
     "section": "Tareas detalladas: nivel más hardware",
-    "text": "Tareas detalladas: nivel más hardware\n\nPlanificar y administrar el entorno físico:\n\nDiseñar la habitación, especificar el sistema de refrigeración, las conexiones de energía, el control del entorno (alarma contraincendios, seguridad física…).\n\nPlanificar los cortes de suministro para realizar actualizaciones o para administrar los dispositivos.\nLocalizar, reparar y reemplazar componentes hardware defectuosos.\nConfigurar y mantener la conectividad entre los hosts (redes):\n\nMonitorización.\nResolución de problemas.\nCalidad de servicio.\n\nInstalar y mantener dispositivos del sistema, hardware y drivers. Especificar dispositivos soportados."
+    "text": "Tareas detalladas: nivel más hardware\n\nPlanificar y administrar el entorno físico:\n\nDiseñar la habitación, especificar el sistema de refrigeración, las conexiones de energía, el control del entorno (alarma contraincendios, seguridad física…).\n\nPlanificar los cortes de suministro para realizar actualizaciones o para administrar los dispositivos.\nLocalizar, reparar y reemplazar componentes hardware defectuosos.\nConfigurar y mantener la conectividad entre los hosts (redes):\n\nMonitorización, Resolución de problemas, Calidad de servicio…\n\nInstalar y mantener dispositivos del sistema, hardware y drivers. Especificar dispositivos soportados."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#tareas-detalladas-mantenimiento-software-y-documentación",
@@ -354,7 +354,7 @@
     "href": "tema01-introduccion/tema01-introduccion.html#estrategia-general",
     "title": "Tema 1: Introducción a la administración de sistemas",
     "section": "Estrategia general",
-    "text": "Estrategia general\n\nEstrategia al realizar una tarea:\n\nPlanearlo antes de hacer los cambios, haciendo un estudio detallado de los pasos que hay que realizar.\nHacer los cambios reversibles, haciendo copia de seguridad del sistema o de los ficheros de configuración a modificar.\nRealizar los cambios de forma incremental, probándolos si fuese posible (más fácil localizar los fallos).\nProbarlo, probarlo, probarlo, …, antes de hacerlo público.\nConocer realmente cómo trabajan las cosas.\n\nCuando se realice cualquier modificación:\n\nPrecaución antes de…\nProbarlo después de…\n\nCuaderno de bitácora."
+    "text": "Estrategia general\n\nEstrategia al realizar una tarea:\n\nPlanearlo antes de hacer los cambios, haciendo un estudio detallado de los pasos que hay que realizar.\nHacer los cambios reversibles, haciendo copia de seguridad del sistema o de los ficheros de configuración a modificar.\nRealizar los cambios de forma incremental, probándolos si fuese posible (más fácil localizar los fallos).\nProbarlo, probarlo, probarlo, …, antes de hacerlo público.\nConocer realmente cómo trabajan las cosas.\n\nCuando se realice cualquier modificación:\n\nPrecaución antes de… probarlo después de…\n\nCuaderno de bitácora."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#tareas-de-soporte-a-organización-y-tareas-devops",
@@ -371,11 +371,11 @@
     "text": "Tecnologías y productos para DevOps"
   },
   {
-    "objectID": "tema01-introduccion/tema01-introduccion.html#por-dónde-empezar-en-relación-a-la-asignatura",
-    "href": "tema01-introduccion/tema01-introduccion.html#por-dónde-empezar-en-relación-a-la-asignatura",
+    "objectID": "tema01-introduccion/tema01-introduccion.html#vale-pero-por-dónde-empezar",
+    "href": "tema01-introduccion/tema01-introduccion.html#vale-pero-por-dónde-empezar",
     "title": "Tema 1: Introducción a la administración de sistemas",
-    "section": "¿Por dónde empezar en relación a la asignatura?",
-    "text": "¿Por dónde empezar en relación a la asignatura?\n\nInstalar GNU/Linux:\n\nIdeal: Uso cotidiano como sistema operativo de tu PC\nMenos ideal: Máquina virtual\n\nAprende a “vivir en la terminal”:\n\nEl Arte del Terminal.\n\nAprende algún editor de texto para el terminal:\n\nFácil: nano\nIntermedio-productivo: vi/vim viene instalado en todas las distribuciones de GNU/Linux y *BSD\nDifícil-Pro: emacs: “emacs está bien como sistema operativo pero le falta un buen editor de texto”"
+    "section": "Vale, ¿pero por dónde empezar?",
+    "text": "Vale, ¿pero por dónde empezar?\n\nInstalar GNU/Linux:\n\nIdeal: Uso cotidiano como sistema operativo de tu PC\nMenos ideal: Máquina virtual\n\nAprende a “vivir en la terminal”:\n\nEl Arte del Terminal.\n\nAprende algún editor de texto para el terminal:\n\nFácil: nano\nIntermedio-productivo: vi/vim viene instalado en todas las distribuciones de GNU/Linux y *BSD\nDifícil-Pro: emacs: “emacs está bien como sistema operativo pero le falta un buen editor de texto”"
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#vim-vs-emacs",
