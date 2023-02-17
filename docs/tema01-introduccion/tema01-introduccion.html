@@ -8,7 +8,7 @@
 
 <meta name="author" content="Javier Sánchez Monedero">
 
-<title>Programación y Administración de Sistemas (2022-2023) - Tema 1: Introducción</title>
+<title>Programación y Administración de Sistemas (2022-2023) - Tema 1: Introducción a la administración de sistemas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Tema 1: Introducción</h1>
+      <h1 class="quarto-secondary-nav-title">Tema 1: Introducción a la administración de sistemas</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -108,6 +108,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="../tema01-introduccion/tema01-introduccion.html" class="sidebar-item-text sidebar-link active">Tema 1: Introducción</a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema01-introduccion/tema01-software-libre.html" class="sidebar-item-text sidebar-link">Tema 1: Software Libre y Linux</a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -123,6 +128,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#el-sistema-informático-y-la-organización" id="toc-el-sistema-informático-y-la-organización" class="nav-link" data-scroll-target="#el-sistema-informático-y-la-organización"><span class="toc-section-number">4</span>  El sistema informático y la organización</a></li>
   <li><a href="#la-figura-del-administrador-de-sistemas" id="toc-la-figura-del-administrador-de-sistemas" class="nav-link" data-scroll-target="#la-figura-del-administrador-de-sistemas"><span class="toc-section-number">5</span>  La figura del administrador de sistemas</a></li>
   <li><a href="#tareas-detalladas" id="toc-tareas-detalladas" class="nav-link" data-scroll-target="#tareas-detalladas"><span class="toc-section-number">6</span>  Tareas detalladas</a></li>
+  <li><a href="#estrategias" id="toc-estrategias" class="nav-link" data-scroll-target="#estrategias"><span class="toc-section-number">7</span>  Estrategias</a></li>
+  <li><a href="#por-dónde-empiezo" id="toc-por-dónde-empiezo" class="nav-link" data-scroll-target="#por-dónde-empiezo"><span class="toc-section-number">8</span>  ¿Por dónde empiezo?</a></li>
   </ul>
 </nav>
     </div>
@@ -131,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Tema 1: Introducción</h1>
+<h1 class="title d-none d-lg-block">Tema 1: Introducción a la administración de sistemas</h1>
 <p class="subtitle lead">Programación y Administración de Sistemas <br> (2022-2023)</p>
 </div>
 
@@ -162,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14 de febrero de 2023</p>
+      <p class="date">17 de febrero de 2023</p>
     </div>
   </div>
   
@@ -219,7 +226,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>::: footer Fuente: <a href="https://es.wikipedia.org/wiki/Error_de_software" class="uri">https://es.wikipedia.org/wiki/Error_de_software</a> Fuente: <a href="https://en.wikipedia.org/wiki/Patch_%28computing%29" class="uri">https://en.wikipedia.org/wiki/Patch_%28computing%29</a></p>
+<div class="footer">
+<p>Fuente: <a href="https://es.wikipedia.org/wiki/Error_de_software" class="uri">https://es.wikipedia.org/wiki/Error_de_software</a></p>
+<p>Fuente: <a href="https://en.wikipedia.org/wiki/Patch_%28computing%29" class="uri">https://en.wikipedia.org/wiki/Patch_%28computing%29</a></p>
+</div>
 </section>
 <section id="generaciones-de-los-sistemas-operativos-1" class="level2">
 <h2 class="anchored" data-anchor-id="generaciones-de-los-sistemas-operativos-1">Generaciones de los sistemas operativos</h2>
@@ -229,17 +239,17 @@ ul.task-list li input[type="checkbox"] {
 <li>Lenguaje de Control de Tareas (JCL).</li>
 <li>Lenguajes de <strong>alto nivel</strong> y de <strong>bajo nivel</strong> (<em>assembler</em>).</li>
 <li>Se comienza a hablar de <strong>superusuarios</strong> y de usuarios.</li>
-<li>Dispositivos de <strong>entrada/salida</strong> (cintas magnéticas...).</li>
+<li>Dispositivos de <strong>entrada/salida</strong> (cintas magnéticas…).</li>
 </ul>
 </section>
 <section id="generaciones-de-los-sistemas-operativos-2" class="level2">
 <h2 class="anchored" data-anchor-id="generaciones-de-los-sistemas-operativos-2">Generaciones de los sistemas operativos</h2>
 <p><strong>Tercera generación</strong> (1968-1981)</p>
 <ul>
-<li>Aparecen los circuitos integrados (<em>Large Scale Integration</em>, <span class="rojo">LSI</span>), que incluyen multitud de componentes electrónicos.</li>
+<li>Aparecen los circuitos integrados (<em>Large Scale Integration</em>, LSI), que incluyen multitud de componentes electrónicos.</li>
 <li>Comienzan a aparecer equipos <strong>de propósito general</strong>.</li>
 <li>Nuevos conceptos: escalabilidad, multiprogramación]{.rojo}, discos duros.</li>
-<li>Multiprogramación <span class="math inline">\(\rightarrow\)</span> <em>buffering</em>, gestión de procesos en el SO...</li>
+<li>Multiprogramación <span class="math inline">\(\rightarrow\)</span> <em>buffering</em>, gestión de procesos en el SO…</li>
 <li>Infrautilización de los ciclos de CPU $ sistemas de tiempo compartido.</li>
 </ul>
 </section>
@@ -247,14 +257,14 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="generaciones-de-los-sistemas-operativos-3">Generaciones de los sistemas operativos</h2>
 <p><strong>Cuarta generación</strong> (1981-2001)</p>
 <ul>
-<li><p>Aparecen los <em>Very Large Scale Integration</em>, <span class="rojo">VLSI</span>, y los <strong>microprocesadores</strong>: <strong>ORDENADOR PERSONAL</strong>.</p></li>
-<li><p><span class="rojo">Conectividad</span> de dispositivos (<em>Plug and play</em>).</p></li>
-<li><p>Aplicaciones <span class="rojo">cliente/servidor</span>.</p></li>
-<li><p><span class="rojo">Máquinas virtuales</span>, <span class="rojo">porciones virtuales</span>...</p></li>
+<li><p>Aparecen los <em>Very Large Scale Integration</em>, VLSI, y los <strong>microprocesadores</strong>: <strong>ORDENADOR PERSONAL</strong>.</p></li>
+<li><p><strong>Conectividad</strong> de dispositivos (<em>Plug and play</em>).</p></li>
+<li><p>Aplicaciones <strong>cliente/servidor</strong>.</p></li>
+<li><p><strong>Máquinas virtuales</strong>, <strong>porciones virtuales</strong>…</p></li>
 </ul>
 <p><strong>Quinta generación</strong></p>
 <ul>
-<li>Tendencia a que los ordenadores los puedan manejar personas <span class="rojo">no expertas</span> en la informática.</li>
+<li>Tendencia a que los ordenadores los puedan manejar personas <strong>no expertas</strong> en la informática.</li>
 </ul>
 </section>
 </section>
@@ -278,13 +288,14 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="sistemas-operativos-actuales">Sistemas operativos actuales</h2>
 <p><img src="images/history_so.png" class="img-fluid" style="width:70.0%"></p>
 </section>
-<section id="sistemas-operativos-actuales-1" class="level2">
-<h2 class="anchored" data-anchor-id="sistemas-operativos-actuales-1">Sistemas operativos actuales</h2>
+<section id="cuotas-sistemas-operativos" class="level2">
+<h2 class="anchored" data-anchor-id="cuotas-sistemas-operativos">Cuotas sistemas operativos</h2>
 <p><img src="images/share_so.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="el-sistema-informático-y-la-organización" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> El sistema informático y la organización</h1>
+<p><strong>NOTA</strong>: <em>Esta sección la veremos por encima en clase y se recomienda su lectura en casa</em>.</p>
 <section id="el-sistema-informático" class="level2">
 <h2 class="anchored" data-anchor-id="el-sistema-informático">El sistema informático</h2>
 <div class="block">
@@ -367,7 +378,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Mantener la integridad de la información de la organización.</p></li>
 <li><p>La información debería de estar en los servidores (aunque a veces se encuentra distribuida por todo el sistema).</p></li>
-<li><p><span class="rojo">¿Minería de datos?</span>.</p></li>
+<li><p><strong>¿Minería de datos?</strong>.</p></li>
 </ul>
 </div>
 </section>
@@ -386,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
 <li>La seguridad informática es compleja:
 <ul>
 <li>Desde la seguridad de la información existente,</li>
-<li>hasta la protección física del equipamiento contra robos, incendios...</li>
+<li>hasta la protección física del equipamiento contra robos, incendios…</li>
 </ul></li>
 <li>Tarea presente en todas las funciones.</li>
 </ul>
@@ -403,7 +414,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 <div class="exampleblock">
-<p>Responsable de Informática</p>
+<p><strong>Responsable de Informática</strong></p>
 <ul>
 <li>Es el enlace entre:
 <ul>
@@ -418,10 +429,10 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="funciones-del-dept.-de-informática-5">Funciones del Dept. de Informática</h2>
 <p>UCO: <a href="https://www.uco.es/servicios/informatica/quienes-somos">Servicio de Informática</a></p>
 <ul>
-<li><p>Sistemas y Comunicaciones: servidores, correo, comunicaciones, infrastructura...</p></li>
+<li><p>Sistemas y Comunicaciones: servidores, correo, comunicaciones, infraestructura…</p></li>
 <li><p>Desarrollo y Explotación: aplicaciones propias y externas.</p></li>
 <li><p>Soporte: administración electrónica, docencia…</p></li>
-<li><p>Área de Gestión: usuarios, licencias de <em>software</em>, web, sigma...</p></li>
+<li><p>Área de Gestión: usuarios, licencias de <em>software</em>, web, sigma…</p></li>
 </ul>
 </section>
 <section id="interdependencia" class="level2">
@@ -431,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Interdependencia</p>
 <ul>
 <li>Cada función <span class="math inline">\(\rightarrow\)</span> tareas definidas.</li>
-<li>Sin embargo, <span class="rojo">no son independientes</span>, sino que tienen que trabajar <span class="rojo">coordinadas</span>.</li>
+<li>Sin embargo, <strong>no son independientes</strong>, sino que tienen que trabajar <strong>coordinadas</strong>.</li>
 <li>Las funciones tienen intersecciones en algunos puntos.</li>
 <li>Algunas tareas tienen que estar mezcladas para conseguir una gestión, un servicio y una atención al usuario en las mejores condiciones posibles.</li>
 </ul>
@@ -467,10 +478,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="rol-de-administración-de-sistemas" class="level2">
 <h2 class="anchored" data-anchor-id="rol-de-administración-de-sistemas">Rol de administración de sistemas</h2>
 <blockquote class="blockquote">
-<p>Un <strong>Administrador/a de Sistemas</strong> es la persona que tiene la responsabilidad de <span class="rojo">implementar</span>, <span class="rojo">configurar</span>, <span class="rojo">mantener</span>, <span class="rojo">monitorizar</span>, <span class="rojo">documentar</span> y <span class="rojo">asegurar</span> el correcto funcionamiento de un sistema informático, o algún aspecto de éste.</p>
+<p>Un <strong>Administrador/a de Sistemas</strong> es la persona que tiene la responsabilidad de <strong>implementar</strong>, <strong>configurar</strong>, <strong>mantener</strong>, <strong>monitorizar</strong>, <strong>documentar</strong> y <strong>asegurar</strong> el correcto funcionamiento de un sistema informático, o algún aspecto de éste.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>El <strong>Administrador/a del Sistemas</strong> tiene por objeto garantizar el tiempo de actividad (<span class="rojo">uptime</span>), rendimiento, uso de recursos y la seguridad de los servidores que administra de forma <strong>proactiva</strong>.</p>
+<p>El <strong>Administrador/a del Sistemas</strong> tiene por objeto garantizar el tiempo de actividad (<strong>uptime</strong>), rendimiento, uso de recursos y la seguridad de los servidores que administra de forma <strong>proactiva</strong>.</p>
 </blockquote>
 <p>Fuente: <a href="http://es.wikipedia.org/wiki/Administrador_de_sistemas" class="uri">http://es.wikipedia.org/wiki/Administrador_de_sistemas</a></p>
 <p>Dentro vídeo: <a href="https://www.youtube.com/watch?v=rksCTVFtjM4">The IT crowd</a></p>
@@ -478,7 +489,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="rol-de-administración-de-sistemas-1" class="level2">
 <h2 class="anchored" data-anchor-id="rol-de-administración-de-sistemas-1">Rol de administración de sistemas</h2>
 <div class="alertblock">
-<p>Administrador de sistemas</p>
 <ul>
 <li>Persona con el <strong>poder</strong> y la <strong>responsabilidad</strong> de establecer:
 <ul>
@@ -490,34 +500,33 @@ ul.task-list li input[type="checkbox"] {
 <li>fiable,</li>
 <li>y amigable.</li>
 </ul></li>
-<li>Cualidades:<br>
-<span class="rojo">Autoridad</span> + <span class="rojo">responsabilidad</span> + <span class="rojo">servicio</span> + <span class="rojo">cooperación</span></li>
+<li>Cualidades:<strong>Autoridad</strong> + <strong>responsabilidad</strong> + <strong>servicio</strong> + <strong>cooperación</strong></li>
 </ul>
 </div>
 <!-- TODO: Eliminar -->
 <!-- ## El administrador de sistemas
 
-- Dedicación del [Administrador de sistemas]{.rojo}:
+- Dedicación del **Administrador de sistemas**:
     - **Idealmente** $\rightarrow$ Una persona encargada **solo** de la administración.
     - **Generalmente** $\rightarrow$ Comparte la labor de administración con otro tipo de trabajo.
-- Labores del [Administrador de sistemas]{.rojo}:
+- Labores del **Administrador de sistemas**:
     - **Idealmente** $\rightarrow$ sería uno de los miembros del **Departamento de Informática**.
     - **Generalmente** $\rightarrow$ puede hacer todo o casi todo el
         trabajo del **Departamento de Informática**:
-        - Atender al teléfono, al fax, administrar los ordenadores\...
+        - Atender al teléfono, al fax, administrar los ordenadores...
         - Ordenar pedidos, atender a los usuarios, desarrollar
-            *software*, reparar *hardware*, reírse de los chistes del jefe\... -->
+            *software*, reparar *hardware*, reírse de los chistes del jefe... -->
 </section>
 <section id="rol-de-administración-de-sistemas-2" class="level2">
 <h2 class="anchored" data-anchor-id="rol-de-administración-de-sistemas-2">Rol de administración de sistemas</h2>
 <ul>
-<li><p>¿Qué se espera del <span class="rojo">administrador</span>?</p>
+<li><p>¿Qué se espera del <strong>administrador</strong>?</p>
 <ul>
-<li><p>Amplios conocimientos de todo el sistema: <em>hardware</em>, <em>software</em>, datos, usuarios...</p></li>
+<li><p>Amplios conocimientos de todo el sistema: <em>hardware</em>, <em>software</em>, datos, usuarios…</p></li>
 <li><p>Capacidad reconocida para tomar decisiones.</p></li>
 <li><p>Ambición y espíritu de superación.</p></li>
 <li><p>Eficacia y moral irreprochables.</p></li>
-<li><p>Responsabilidad: se trabaja con datos muy importantes, hay un jefe por encima...</p></li>
+<li><p>Responsabilidad: se trabaja con datos muy importantes, hay un jefe por encima…</p></li>
 </ul></li>
 </ul>
 <!-- TODO: SIMPLIFICAR toda la parte de tareas -->
@@ -533,7 +542,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Diseñar la habitación, especificar el sistema de refrigeración, las conexiones de energía, el control del entorno (alarma contraincendios, seguridad física…).</li>
 </ul></li>
 <li><p>Planificar los <strong>cortes de suministro</strong> para realizar actualizaciones o para administrar los dispositivos.</p></li>
-<li><p>Localizar, reparar y reemplazar componentes defectuosos (a nivel <em>hardware</em>).</p></li>
+<li><p>Localizar, reparar y reemplazar componentes <em>hardware</em> defectuosos.</p></li>
 <li><p>Configurar y mantener la <strong>conectividad</strong> entre los <em>hosts</em> (redes):</p>
 <ul>
 <li>Monitorización.</li>
@@ -554,7 +563,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Aplicaciones propias (p.ej. Sigma en la UCO).</li>
 <li><em>e-mail</em>.</li>
-<li>Agendas, calendarios...</li>
+<li>Agendas, calendarios…</li>
 </ul></li>
 </ul></li>
 <li>Documentación:
@@ -566,35 +575,38 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tareas-detalladas-soporte-a-usuarios" class="level2">
 <h2 class="anchored" data-anchor-id="tareas-detalladas-soporte-a-usuarios">Tareas detalladas: soporte a usuarios</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/itcrowd.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">image</figcaption><p></p>
-</figure>
-</div>
+<p><img src="images/itcrowd.jpg" class="img-fluid" width="400"></p>
 <ul>
-<li><p><span class="rojo">Formar</span> a los usuarios en el manejo del <em>software</em> y en seguridad.</p></li>
+<li><p><strong>Formar</strong> a los usuarios en el manejo del <em>software</em> y en seguridad.</p></li>
 <li><p>Ayudar a los usuarios y proporcionar <strong>soporte</strong>.</p></li>
 <li><p>Establecer un sistema de rastreo de problemas para contestar las cuestiones de los usuarios (sistema Hermes de la UCO para notificación de incidencias).</p></li>
-<li><p>Asegurar que los usuarios tiene acceso a toda la <span class="rojo">documentación</span>.</p></li>
+<li><p>Asegurar que los usuarios tiene acceso a toda la <strong>documentación</strong>.</p></li>
 </ul>
 </section>
 <section id="tareas-detalladas-servicios" class="level2">
 <h2 class="anchored" data-anchor-id="tareas-detalladas-servicios">Tareas detalladas: servicios</h2>
 <ul>
-<li><p>Instalar y mantener las <strong>cuentas de usuario</strong>, desarrollar <span class="rojo">políticas de uso</span> aceptables y de nombrado de usuarios, instalar/configurar/administrar <strong>servicio de nombres</strong>, manejar las licencias de <em>software</em>...</p></li>
-<li><p>Determinar los requisitos <em>software</em>, los <strong>parches</strong> a instalar, los <span class="rojo">servicios</span> a proporcionar y cuáles deshabilitar.</p></li>
-<li><p>Configurar los <span class="rojo">servicios</span> de red (con sus políticas y sus requisitos de <strong>seguridad</strong>):</p>
+<li><p>Instalar y mantener las <strong>cuentas de usuario</strong>, desarrollar <strong>políticas de uso</strong> aceptables y de nombrado de usuarios, instalar/configurar/administrar <strong>servicio de nombres</strong>, manejar las licencias de <em>software</em>…</p></li>
+<li><p>Determinar los requisitos <em>software</em>, los <strong>parches</strong> a instalar, los <strong>servicios</strong> a proporcionar y cuáles deshabilitar.</p></li>
+<li><p>Configurar los <strong>servicios</strong> de red (con sus políticas y sus requisitos de <strong>seguridad</strong>):</p>
 <ul>
-<li>Impresión, ficheros compartidos, servicio de nombres...</li>
+<li>Impresión, ficheros compartidos, servicio de nombres…</li>
 </ul></li>
 <li><p><strong>Instalar, configurar y administrar servidores <em>web</em></strong>.</p></li>
 </ul>
 </section>
 <section id="tareas-detalladas-seguridad" class="level2">
 <h2 class="anchored" data-anchor-id="tareas-detalladas-seguridad">Tareas detalladas: seguridad</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
-<li><p>Determinar <strong>cuotas de disco</strong>, políticas de <strong>manejo del espacio</strong> y monitorizar los ficheros de <code>log</code>.</p></li>
+<li>Determinar <strong>cuotas de disco</strong>, políticas de <strong>manejo del espacio</strong> y monitorizar los ficheros de <code>log</code>.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img src="images/Snort_fulllogo.png" height="200"> <!-- ![](images/ipfire-tux.png){height="20%"} --></p>
+</div>
+</div>
+<ul>
 <li><p>Configurar y manejar la <strong>seguridad del sistema</strong>:</p>
 <ul>
 <li><p>Seguridad para aplicaciones de negocio.</p></li>
@@ -603,77 +615,90 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Recabar evidencias en caso de intrusión y limpiar el rastro.</p></li>
 </ul></li>
 </ul>
-<div class="center">
-<p><img src="images/Snort_fulllogo.png" style="height:2cm"> <img src="images/ipfire-tux.png" style="height:3cm"></p>
-</div>
 </section>
 <section id="tareas-detalladas-copias-de-seguridad" class="level2">
 <h2 class="anchored" data-anchor-id="tareas-detalladas-copias-de-seguridad">Tareas detalladas: copias de seguridad</h2>
+<p><img src="images/SchrodingersBackup.png" class="img-fluid"></p>
+</section>
+<section id="tareas-detalladas-copias-de-seguridad-1" class="level2">
+<h2 class="anchored" data-anchor-id="tareas-detalladas-copias-de-seguridad-1">Tareas detalladas: copias de seguridad</h2>
 <ul>
 <li><p>Configurar y mantener <em>backups</em> del sistema:</p>
 <ul>
-<li><p>Determinar la estrategia y las políticas de <span class="rojo">copias de seguridad</span>.</p></li>
+<li><p>Determinar la estrategia y las <span class="rojo"><strong>políticas de copias de seguridad</strong></span>.</p></li>
 <li><p>Configurar el <em>software</em> de copia.</p></li>
 <li><p>Realizar/<strong>automatizar</strong> copias.</p></li>
 <li><p>Mantener <em>logs</em>.</p></li>
-<li><p>Comprobar la integridad de las copias.</p></li>
-<li><p>Determinar <span class="rojo">planes de supervivencia a catástrofes</span>.</p></li>
+<li><p>Determinar <strong>planes de supervivencia a catástrofes</strong>.</p></li>
 <li><p>Realizar restauraciones.</p></li>
+<li><p>Comprobar la integridad de las copias.</p></li>
 </ul></li>
 </ul>
-<p><img src="images/SchrodingersBackup.png" class="img-fluid"></p>
 </section>
-<section id="estrategias" class="level2">
-<h2 class="anchored" data-anchor-id="estrategias">Estrategias</h2>
-<section id="el-administrador-de-sistemas" class="level3">
-<h3 class="anchored" data-anchor-id="el-administrador-de-sistemas">El administrador de sistemas</h3>
+</section>
+<section id="estrategias" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Estrategias</h1>
+<section id="estrategia-general" class="level2">
+<h2 class="anchored" data-anchor-id="estrategia-general">Estrategia general</h2>
 <ul>
-<li><p>Estrategia del <strong>Administrador de sistemas</strong> al realizar una tarea:</p>
+<li><p><strong>Estrategia</strong> al realizar una tarea:</p>
 <ol type="1">
-<li><p><span class="rojo">Planearlo</span> antes de hacer los cambios, haciendo un estudio detallado de los pasos que hay que realizar.</p></li>
-<li><p>Hacer los <span class="rojo">cambios reversibles</span>, haciendo copia de seguridad del sistema o de los ficheros de configuración a modificar.</p></li>
-<li><p>Realizar los <span class="rojo">cambios de forma incremental</span>, probándolos si fuese posible (más fácil localizar los fallos).</p></li>
-<li><p><span class="rojo">Probarlo, probarlo, probarlo</span>, ..., antes de hacerlo público.</p></li>
-<li><p>Conocer <strong>realmente</strong> <span class="rojo">cómo</span> trabajan las cosas.</p></li>
+<li><p><strong>Planearlo</strong> antes de hacer los cambios, haciendo un estudio detallado de los pasos que hay que realizar.</p></li>
+<li><p>Hacer los <strong>cambios reversibles</strong>, haciendo copia de seguridad del sistema o de los ficheros de configuración a modificar.</p></li>
+<li><p>Realizar los <strong>cambios de forma incremental</strong>, probándolos si fuese posible (más fácil localizar los fallos).</p></li>
+<li><p><strong>Probarlo, probarlo, probarlo</strong>, …, antes de hacerlo público.</p></li>
+<li><p>Conocer <strong>realmente</strong> <strong>cómo</strong> trabajan las cosas.</p></li>
 </ol></li>
 <li><p>Cuando se realice cualquier modificación:</p>
 <ul>
-<li><p>Precaución <span class="rojo">antes de</span>...</p></li>
-<li><p>Probarlo <span class="rojo">después de</span>...</p></li>
+<li><p>Precaución <strong>antes de</strong>…</p></li>
+<li><p>Probarlo <strong>después de</strong>…</p></li>
 </ul></li>
-</ul>
-<!-- TODO: Eliminar y/o cambiar a CI/CD  -->
-</section>
-</section>
-<section id="el-administrador-de-sistemas-1" class="level2">
-<h2 class="anchored" data-anchor-id="el-administrador-de-sistemas-1">El administrador de sistemas</h2>
-<ul>
-<li><p>Es una buena idea disponer de un <strong>cuaderno de bitácora</strong>:</p>
-<ul>
-<li>En el se registran todos los cambios realizados sobre la configuración del sistema.</li>
-<li>Sirve para uno mismo y para los demás.</li>
-</ul></li>
-<li><p>La mayoría de las veces tendremos que editar múltiples ficheros de configuración, para lo que necesitaremos un <strong>editor de texto</strong>.</p>
-<ul>
-<li><code>vi</code> (o su versión mejorada <code>vim</code>) es un editor estándar, que podremos encontrar en cualquier sistema GNU/Linux.</li>
-<li><code>pico</code> es más simple de utilizar.</li>
-<li>Muchas veces solo podremos acceder al servidor por conexión <code>ssh</code>, en modo consola, por lo que no podremos utilizar editores gráficos como <code>gedit</code> o <code>code</code>.</li>
-</ul></li>
+<li><p>Cuaderno de bitácora.</p></li>
 </ul>
 </section>
-<section id="devops" class="level2">
-<h2 class="anchored" data-anchor-id="devops">DevOps</h2>
+</section>
+<section id="por-dónde-empiezo" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> ¿Por dónde empiezo?</h1>
+<section id="tareas-de-soporte-a-organización-y-tareas-devops" class="level2">
+<h2 class="anchored" data-anchor-id="tareas-de-soporte-a-organización-y-tareas-devops">Tareas de soporte a organización y tareas DevOps</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img src="images/devops.png" class="img-fluid"></p>
 </div><div class="column" style="width:50%;">
-<p><strong>DevOps</strong> (acrónimo del inglés): es un conjunto de prácticas que agrupan el desarrollo de software ( <em>Dev</em> ) y las operaciones de TI ( <em>Ops</em> ) <a href="https://roadmap.sh/devops">roadmap.sh/devops</a></p>
+<p>Después del perfil “clásico” de administración de sistemas que hemos visto como soporte a una organización resulta pertinente echar un vistazo al de soporte al desarrollo y despliegue de aplicaciones.</p>
+<p><strong>DevOps</strong> (acrónimo del inglés): es un conjunto de prácticas que agrupan el desarrollo de software ( <em>Dev</em> ) y las operaciones de TI (<em>Ops</em> ) <a href="https://roadmap.sh/devops">roadmap.sh/devops</a></p>
 </div>
 </div>
 </section>
-<section id="devops-ii" class="level2">
-<h2 class="anchored" data-anchor-id="devops-ii">DevOps (II)</h2>
+<section id="tecnologías-y-productos-para-devops" class="level2">
+<h2 class="anchored" data-anchor-id="tecnologías-y-productos-para-devops">Tecnologías y productos para DevOps</h2>
 <p><img src="images/devops2.jpg" class="img-fluid"></p>
+<!-- TODO: Eliminar y/o cambiar a CI/CD  -->
+</section>
+<section id="por-dónde-empezar-en-relación-a-la-asignatura" class="level2">
+<h2 class="anchored" data-anchor-id="por-dónde-empezar-en-relación-a-la-asignatura">¿Por dónde empezar en relación a la asignatura?</h2>
+<ol type="1">
+<li>Instalar GNU/Linux:
+<ul>
+<li>Ideal: Uso cotidiano como sistema operativo de tu PC</li>
+<li>Menos ideal: Máquina virtual</li>
+</ul></li>
+<li>Aprende a “vivir en la terminal”:
+<ul>
+<li><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-es.md">El Arte del Terminal</a>.</li>
+</ul></li>
+<li>Aprende algún editor de texto para el terminal:
+<ul>
+<li>Fácil: <code>nano</code></li>
+<li>Intermedio-productivo: <code>vi</code>/<code>vim</code> viene instalado en todas las distribuciones de GNU/Linux y *BSD</li>
+<li>Difícil-Pro: <code>emacs</code>: “emacs está bien como sistema operativo pero le falta un buen editor de texto”</li>
+</ul></li>
+</ol>
+</section>
+<section id="vim-vs-emacs" class="level2">
+<h2 class="anchored" data-anchor-id="vim-vs-emacs">Vim vs Emacs</h2>
+<p><img src="images/tiraecol_vim_emacs.jpg" class="img-fluid"></p>
 
 
 </section>
