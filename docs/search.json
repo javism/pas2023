@@ -144,7 +144,14 @@
     "href": "index.html",
     "title": "Programación y Administración de Sistemas",
     "section": "",
-    "text": "Bienvenid[o|a|e] a la web de la asignatura “Programación y Administración de Sistemas (curso 2022-2023)”.\nAquí encontrarás el material de teoría de la asignatura en formato HTML. El resto del material lo tienes disponible en la plataforma moodle de la UCO."
+    "text": "Bienvenid[o|a|e] a la web de la asignatura “Programación y Administración de Sistemas (curso 2022-2023)”. Estos apuntes son una actualización de los apuntes del profesor Pedro A. Gutiérrez de cursos anteriores. Aquí encontrarás el material de teoría de la asignatura en formato HTML navegando por el menú de la izquierda. El resto del material lo tienes disponible en la plataforma moodle de la UCO."
+  },
+  {
+    "objectID": "index.html#contenido-en-pdf",
+    "href": "index.html#contenido-en-pdf",
+    "title": "Programación y Administración de Sistemas",
+    "section": "Contenido en PDF",
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux"
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
@@ -557,6 +564,6 @@
     "href": "tema01-introduccion/tema01-software-libre.html#ejercicios",
     "title": "Tema 1: Introducción al software libre y GNU/Linux",
     "section": "Ejercicios",
-    "text": "Ejercicios\n\nWeb Debian: netinstall vs imagen\nCrear VM + disco + conectar .iso\n\n1-2GB + 4GB de disco es suficiente para trabajar sin entorno gráfico\n\nVamos a instalar sin entorno gráfico\nNos piden cosas básicas: ssh, entorno gráfico…\nCambiar contraseña por defecto (en imágenes de VPS/nubes)\nTerminamos: no hay ni sudo, vim, etc.\nAñadir usuario sudo:\n\nsudo usermod -aG sudo username\n\n¿Qué hace sudo !!?\nExplorar la máquina:\n\nDisco libre, particiones y memoria\nProcesadores\nRepositorios\n\nApagado/Reinicio"
+    "text": "Ejercicios\n\nWeb Debian: netinstall vs imagen. Opcionalmente Ubuntu será equivalente para casi todo.\nCrear VM + disco + conectar .iso\n\n1-2GB RM + 4GB de disco es suficiente para trabajar sin entorno gráfico\n\nVamos a instalar sin entorno gráfico\nEn el particionado utilizaremos el por defecto de momento.\nNos piden cosas básicas: ssh, entorno gráfico…\n\nYa tenemos nuestra máquina lista:\n\nCambiar contraseña por defecto (en imágenes de VPS/nubes)\nTerminamos: no hay ni sudo, vim, etc.\nComo root:\n\nInstalar sudo:\n\napt install sudo\n\nEliminar el CD/ISO de las fuentes de software:\n\nnano /etc/apt/sources.list\n\nAñadir usuario sudo:\n\nadduser adminpas\nsudo usermod -aG sudo adminpas\n\n¡Ya hemos terminado con root!\n\nCon el usuario adminpas probamos algún comando, por ejemplo: sudo cat /etc/shadow\n¿Qué hace sudo !!?\nExplorar la máquina:\n\nDisco libre, particiones y memoria: df, fdisk -l, free (quizás necesites sudo para alguno)\nProcesadores y núcleos: cat /proc/cpuinfo\nHerramienta apt y repositorios: APT: el comando básico que debes conocer para usar Linux\n\n¿Cómo apagar o reiniciar desde el terminal de Linux?"
   }
 ]

@@ -191,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#gnulinux" id="toc-gnulinux" class="nav-link" data-scroll-target="#gnulinux"><span class="toc-section-number">2</span>  GNU/Linux</a></li>
   <li><a href="#software-libre-en-la-administración-de-sistemas" id="toc-software-libre-en-la-administración-de-sistemas" class="nav-link" data-scroll-target="#software-libre-en-la-administración-de-sistemas"><span class="toc-section-number">3</span>  Software libre en la administración de sistemas</a></li>
   <li><a href="#herramientas-básicas" id="toc-herramientas-básicas" class="nav-link" data-scroll-target="#herramientas-básicas"><span class="toc-section-number">4</span>  Herramientas básicas</a></li>
+  <li><a href="#proyecto-asignatura" id="toc-proyecto-asignatura" class="nav-link" data-scroll-target="#proyecto-asignatura"><span class="toc-section-number">5</span>  Proyecto asignatura</a></li>
   </ul>
 </nav>
     </div>
@@ -230,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">21 de febrero de 2023</p>
+      <p class="date">22 de febrero de 2023</p>
     </div>
   </div>
   
@@ -493,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="smaller anchored" data-anchor-id="distribuciones-de-gnulinux-debian">Distribuciones de GNU/Linux: Debian</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="http://www.debian.org/"><img src="images/debianopenlogo-nd.svg" class="img-fluid figure-img"></a></p>
+<p><a href="http://www.debian.org/"><img src="images/debianopenlogo-nd.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <ul>
@@ -516,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="distribuciones-de-gnulinux-ubuntu">Distribuciones de GNU/Linux: Ubuntu</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="http://www.ubuntu.com"><img src="images/ubuntu-logo2022.svg" class="img-fluid figure-img"></a></p>
+<p><a href="http://www.ubuntu.com"><img src="images/ubuntu-logo2022.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <ul>
@@ -750,30 +751,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </section>
-<section id="ejercicios" class="level2" data-background-color="lightgreen">
-<h2 data-background-color="lightgreen" class="anchored" data-anchor-id="ejercicios">Ejercicios</h2>
+</section>
+<section id="proyecto-asignatura" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Proyecto asignatura</h1>
+<section id="ejercicios" class="level2 scrollable" data-background-color="lightgreen">
+<h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicios">Ejercicios</h2>
 <ol type="1">
-<li>Web Debian: netinstall vs imagen</li>
+<li><a href="https://www.debian.org/">Web Debian</a>: netinstall vs imagen. Opcionalmente Ubuntu será equivalente para casi todo.</li>
 <li>Crear VM + disco + conectar .iso
-<ol type="1">
-<li>1-2GB + 4GB de disco es suficiente para trabajar sin entorno gráfico</li>
-</ol></li>
+<ul>
+<li>1-2GB RM + 4GB de disco es suficiente para trabajar sin entorno gráfico</li>
+</ul></li>
 <li>Vamos a instalar sin entorno gráfico</li>
+<li>En el particionado utilizaremos el por defecto de momento.</li>
 <li>Nos piden cosas básicas: ssh, entorno gráfico…</li>
+</ol>
+<p>Ya tenemos nuestra máquina lista:</p>
+<ol type="1">
 <li>Cambiar contraseña por defecto (en imágenes de VPS/nubes)</li>
 <li>Terminamos: no hay ni sudo, vim, etc.</li>
+<li>Como <code>root</code>:
+<ol type="1">
+<li>Instalar sudo:
+<ol type="1">
+<li><code>apt install sudo</code></li>
+</ol></li>
+<li>Eliminar el CD/ISO de las fuentes de software:
+<ol type="1">
+<li><code>nano /etc/apt/sources.list</code></li>
+</ol></li>
 <li>Añadir usuario sudo:
 <ol type="1">
-<li><code>sudo usermod -aG sudo username</code></li>
+<li><code>adduser adminpas</code></li>
+<li><code>sudo usermod -aG sudo adminpas</code></li>
 </ol></li>
+<li>¡Ya hemos terminado con <code>root</code>!</li>
+</ol></li>
+<li>Con el usuario <code>adminpas</code> probamos algún comando, por ejemplo: <code>sudo cat /etc/shadow</code></li>
 <li>¿Qué hace <code>sudo !!</code>?</li>
 <li>Explorar la máquina:
 <ol type="1">
-<li>Disco libre, particiones y memoria</li>
-<li>Procesadores</li>
-<li>Repositorios</li>
+<li>Disco libre, particiones y memoria: <code>df</code>, <code>fdisk -l</code>, <code>free</code> (quizás necesites <code>sudo</code> para alguno)</li>
+<li>Procesadores y núcleos: <code>cat /proc/cpuinfo</code></li>
+<li>Herramienta apt y repositorios: <a href="https://www.softzone.es/linux/programas/comando-apt/">APT: el comando básico que debes conocer para usar Linux</a></li>
 </ol></li>
-<li>Apagado/Reinicio</li>
+<li><a href="https://duckduckgo.com/?t=ffab&amp;q=%C2%BFC%C3%B3mo+apagar+o+reiniciar+desde+el+terminal+de+Linux&amp;ia=web">¿Cómo apagar o reiniciar desde el terminal de Linux?</a></li>
 </ol>
 
 
