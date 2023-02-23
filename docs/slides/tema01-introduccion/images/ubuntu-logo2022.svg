@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg:svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 233.93119 225.773"
+   version="1.1"
+   sodipodi:docname="ubuntu-logo2022.svg"
+   width="233.93118"
+   height="225.77299"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:export-filename="ubuntu-logo2022.png"
+   inkscape:export-xdpi="199.84676"
+   inkscape:export-ydpi="199.84676">
+  <svg:metadata
+     id="metadata35">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </svg:metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1853"
+     inkscape:window-height="1022"
+     id="namedview33"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.3804472"
+     inkscape:cx="254.79722"
+     inkscape:cy="100.73008"
+     inkscape:window-x="67"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <style
+     id="autoconsent-prehide" />
+  <svg:defs
+     id="defs4">
+    <svg:style
+       id="style2">.cls-1{fill:#1d1d1b;}.cls-2{fill:#e9500e;}.cls-3{fill:#fff;}</svg:style>
+  </svg:defs>
+  <svg:rect
+     class="cls-2"
+     width="233.93118"
+     height="225.77299"
+     id="rect18"
+     x="0"
+     y="0"
+     style="fill:#e9500e" />
+  <svg:circle
+     class="cls-3"
+     cx="51.021111"
+     cy="109.7972"
+     r="24.5497"
+     id="circle20"
+     style="fill:#ffffff" />
+  <svg:circle
+     class="cls-3"
+     cx="153.26149"
+     cy="55.966217"
+     r="24.5497"
+     id="circle22"
+     style="fill:#ffffff" />
+  <svg:path
+     class="cls-3"
+     d="m 106.38917,172.97827 a 59.78848,59.78848 0 0 1 -40.772,-31.0957 35.34018,35.34018 0 0 1 -20.99024,2.58008 79.92109,79.92109 0 0 0 57.53955,48.22363 80.88379,80.88379 0 0 0 17.43262,1.79395 35.1274,35.1274 0 0 1 -7.188,-20.52539 c -2.02193,-0.22461 -4.04145,-0.55274 -6.02193,-0.97657 z"
+     id="path24"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" />
+  <svg:circle
+     class="cls-3"
+     cx="147.73055"
+     cy="173.11368"
+     r="24.5497"
+     id="circle26"
+     style="fill:#ffffff" />
+  <svg:path
+     class="cls-3"
+     d="m 181.89259,164.09644 a 80.3186,80.3186 0 0 0 4.0249,-94.23828 35.38432,35.38432 0 0 1 -13.80518,16.168 60.18666,60.18666 0 0 1 -1.96728,59.78028 35.20475,35.20475 0 0 1 11.74756,18.29 z"
+     id="path28"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" />
+  <svg:path
+     class="cls-3"
+     d="m 49.12696,74.59058 q 0.93458,-0.0513 1.87012,-0.0508 a 35.42979,35.42979 0 0 1 18.61767,5.30175 59.87445,59.87445 0 0 1 48.2109,-25.78418 35.5969,35.5969 0 0 1 7.44776,-19.90966 80.69546,80.69546 0 0 0 -76.14645,40.44287 z"
+     id="path30"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" />
+</svg:svg>
