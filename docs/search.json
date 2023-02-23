@@ -144,14 +144,14 @@
     "href": "index.html",
     "title": "Programación y Administración de Sistemas",
     "section": "",
-    "text": "Bienvenid[o|a|e] a la web de la asignatura “Programación y Administración de Sistemas (curso 2022-2023)”. Estos apuntes son una actualización de los apuntes del profesor Pedro A. Gutiérrez de cursos anteriores.\nAquí encontrarás el material de teoría de la asignatura en formato HTML navegando por el menú de la izquierda. El resto del material lo tienes disponible en la plataforma moodle de la UCO.\nAl final de cada tema hay una sección sobre el proyecto de la asignatura de construcción de un sistema informático con GNU/Linux."
+    "text": "Bienvenid[o|a|e] a la web de la asignatura “Programación y Administración de Sistemas (curso 2022-2023)”. Estos apuntes son una actualización de los apuntes del profesor Pedro A. Gutiérrez de cursos anteriores.\nAquí encontrarás progresivamente el material de teoría de la asignatura en formato HTML navegando por el menú de la izquierda. El resto del material lo tienes disponible en la plataforma moodle de la UCO.\nAl final de cada tema hay una sección sobre el proyecto de la asignatura de construcción de un sistema informático con GNU/Linux."
   },
   {
     "objectID": "index.html#contenido-en-pdf",
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux"
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
@@ -565,5 +565,271 @@
     "title": "Tema 1: Introducción al software libre y GNU/Linux",
     "section": "Ejercicios",
     "text": "Ejercicios\n\nWeb Debian: netinstall vs imagen. Opcionalmente Ubuntu será equivalente para casi todo.\nCrear VM + disco + conectar .iso\n\n1-2GB RM + 4GB de disco es suficiente para trabajar sin entorno gráfico\n\nVamos a instalar sin entorno gráfico\nEn el particionado utilizaremos el por defecto de momento.\nNos piden cosas básicas: ssh, entorno gráfico…\n\nYa tenemos nuestra máquina lista:\n\nCambiar contraseña por defecto (en imágenes de VPS/nubes)\nTerminamos: no hay ni sudo, vim, etc.\nComo root:\n\nInstalar sudo:\n\napt install sudo\n\nEliminar el CD/ISO de las fuentes de software:\n\nnano /etc/apt/sources.list\n\nAñadir usuario sudo:\n\nadduser adminpas\nsudo usermod -aG sudo adminpas\n\n¡Ya hemos terminado con root!\n\nCon el usuario adminpas probamos algún comando, por ejemplo: sudo cat /etc/shadow\n¿Qué hace sudo !!?\nExplorar la máquina:\n\nDisco libre, particiones y memoria: df, fdisk -l, free (quizás necesites sudo para alguno)\nProcesadores y núcleos: cat /proc/cpuinfo\nHerramienta apt y repositorios: APT: el comando básico que debes conocer para usar Linux\n\n¿Cómo apagar o reiniciar desde el terminal de Linux?"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html",
+    "href": "tema02-organizacion/tema02-ficheros.html",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "",
+    "text": "Describir los elementos fundamentales de organización del sistema operativo GNU/Linux.\nIdentificar la importancia de los ficheros en GNU/Linux (“si algo no es un fichero, entonces es un proceso”).\nDescribir en líneas generales cómo se organiza el sistema de ficheros y qué son los nodos-i.\nDefinir qué papel tienen el usuario y el grupo propietario de un fichero y cómo pueden modificarse.\nInterpretar una cadena de permisos de GNU/Linux.\nCambiar los permisos de un fichero, tanto en modo simbólico como en modo absoluto.\nExplicar el objetivo de los permisos especiales (sticky bit, suid y sgid).\nUtilizar la máscara umask para cambiar los permisos por defecto con los que se crean los archivos y directorios.\nExplicar cómo se aplican los bits de permisos a la hora de decidir si un usuario puede realizar una determinada acción sobre un fichero.\nDistinguir todos los tipos de ficheros que se pueden utilizar en GNU/Linux y diferenciar claramente entre enlaces simbólicos y enlace físicos.\nDefinir el rol de los procesos en GNU/Linux, cuáles son sus atributos y qué tipos de procesos existen.\nExplicar cómo se represan los dispositivos en GNU/Linux.\nEnumerar las carpetas fundamentales de la estructura genérica del sistema de ficheros en GNU/Linux.\nDiferenciar entre contenidos estáticos y dinámicos y contenidos compartibles y no compartibles.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#ficheros",
+    "href": "tema02-organizacion/tema02-ficheros.html#ficheros",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Ficheros",
+    "text": "Ficheros\n\nEn GNU/Linux, todo son ficheros (“si algo no es un fichero, entonces es un proceso”):\n\nLos programas u órdenes son ficheros: /bin/ls, /usr/bin/find…\nLos dispositivos I/O son ficheros: /dev/sda, /dev/fd0, /dev/tty0…\nComunicación entre procesos: sockets o tuberías (pipes).\nDirectorios, ficheros de datos, ficheros de configuración…\nEl propio núcleo del sistema operativo (kernel).\n\nGNU/Linux tiene una estructura jerárquica de directorios, conocida como sistema de archivos:\n\n/ \\(\\rightarrow\\) directorio raíz.\nPuede estar compuesto por varias particiones pertenecientes a varios dispositivos (discos duros, CDs, DVDs...).\nTodos disponibles desde la jerarquía de directorios."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#sistema-de-ficheros-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#sistema-de-ficheros-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Sistema de ficheros",
+    "text": "Sistema de ficheros\n\nGuarda los ficheros del sistema.\nSe organiza de manera jerárquica, en directorios.\nNo hay unidades."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#sistema-de-ficheros-nodos-i",
+    "href": "tema02-organizacion/tema02-ficheros.html#sistema-de-ficheros-nodos-i",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Sistema de ficheros: nodos-i",
+    "text": "Sistema de ficheros: nodos-i\n\nAunque a nivel lógico, el sistema de ficheros parece un árbol, en realidad los ficheros se almacenan desorganizados por el disco duro.\nUn fichero puede tener sectores a lo largo de toda la superficie.\nLos nodos-i son metadatos sobre los ficheros que nos proporcionan información sobre aspectos como su tamaño, sus permisos, la posición de sus sectores, número de enlaces... ¿nombre? ls -i\nCada fichero tiene un nodo-i.\nTodos están localizados en un área del disco duro, que está limitada (nº máximo de nodos-i).\n\n\n¿Por qué enseñar el concepto de i-nodo en administración de sistemas?"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos",
+    "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Gestión del acceso: propietarios y permisos",
+    "text": "Gestión del acceso: propietarios y permisos\nCada fichero tiene dos propietarios: usuario y grupo.\n\nls -l images | head -n 3 # esto filtra las 3 primeas líneas\n\ntotal 828\n\n\n-rw-rw-r-- 1 javi javi  54324 feb 23 23:40 book_filesystem.png\n\n\n-rw-rw-r-- 1 javi javi  80965 feb 23 23:26 book_process_control.png\n\n\nchown \\(\\rightarrow\\) cambia el usuario propietario (se necesitan privilegios de root):\nsudo chown javi fichero\nsudo chown javi:profesores fichero\nsudo chown -R javi directorio\nchgrp \\(\\rightarrow\\) cambia el grupo propietario (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o root).\nsudo chgrp profesores fichero\nsudo chgrp -R profesores directorio"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Gestión del acceso: propietarios y permisos",
+    "text": "Gestión del acceso: propietarios y permisos\nListado con detalles y ficheros ocultos:\n\nls -la /boot/|head -n 8\n\ntotal 184948\n\n\ndrwxr-xr-x  4 root root     4096 feb 16 08:44 .\n\n\ndrwxr-xr-x 30 root root     4096 feb 23 18:28 ..\n\n\n-rw-r--r--  1 root root   206876 mar 27  2020 config-4.15.0-1079-oem\n\n\n-rw-r--r--  1 root root   237757 ene 10 17:37 config-5.4.0-137-generic\n\n\n-rw-r--r--  1 root root   237757 ene 25 16:42 config-5.4.0-139-generic\n\n\ndrwx------  4 root root     4096 ene  1  1970 efi\n\n\ndrwxr-xr-x  5 root root     4096 feb 22 13:23 grub"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-2",
+    "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-2",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Gestión del acceso: propietarios y permisos",
+    "text": "Gestión del acceso: propietarios y permisos\nPermisos simbólicos y absolutos (Estos ejemplos son diferentes):"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-3",
+    "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-3",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Gestión del acceso: propietarios y permisos",
+    "text": "Gestión del acceso: propietarios y permisos\n\nEl acceso a los ficheros se gestiona de la siguiente forma:\n\n\n\nAcceso\nFichero\nDirectorio\n\n\n\n\nr\nVer el contenido\nListar el contenido\n\n\nw\nModificar el contenido\nCrear/eliminar ficheros\n\n\nx\nEjecutar el fichero\nEntrar en el directorio\n\n\n\nSe establecen independientemente para: el usuario propietario (u), usuarios del grupo propietario (g) y resto de usuarios (o).\n\nchmod u+r fichero                 # Modo simbólico\nchmod -R u+rwx,go-rwx directorio  # Modo simbólico\nchmod 740 fichero                 # Modo absoluto u+rwx,g+r,g-wx,o-rwx\n\nOtros comandos: adduser, addgroup..."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#ejercicio-permisos",
+    "href": "tema02-organizacion/tema02-ficheros.html#ejercicio-permisos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Ejercicio permisos",
+    "text": "Ejercicio permisos\n\nEjercicio (probar en modo simbólico y absoluto):\n\nEstablezca permisos de escritura para el fichero ejemplo sólo para el usuario propietario, de lectura para todos y de ejecución para el usuario y grupo propietarios.\nEstablezca permisos de escritura para el fichero ejemplo sólo para el usuario propietario, y de ejecución para el usuario y grupo propietarios y ninguno para el resto."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-4",
+    "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-4",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Gestión del acceso: propietarios y permisos",
+    "text": "Gestión del acceso: propietarios y permisos\n\n\n\nActual\nchmod\nResultado\nDescripción\n\n\n\n\nrw——-\na+x\nrwx–x–x\nAgregar a todos (all) permiso de ejecución.\n\n\nrwx–x–x\ngo-x\nrwx——\nSe elimina permiso de ejecución para grupo y otros.\n\n\nrwxr-xr-x\nu-x,go-r\nrw—x–x\nAl usuario se le quita ejecución, al grupo y a otros se les quita lectura.\n\n\nrwxrwxrwx\nu-x,go-rwx\nrw——-\nAl usuario se le elimina ejecución, al grupo y a otros se les eliminan todos los permisos.\n\n\nr——–\na+r,u+w\nrw-r–r–\nA todos se les agrega lectura, al usuario se le agrega escritura.\n\n\nrw-r—–\nu-rw,g+w,o+x\n—rw—x\nAl usuario se le eliminan lectura y escritura, al grupo se le agrega escritura y a otros se les agrega ejecución."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit",
+    "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Permisos especiales: sticky bit",
+    "text": "Permisos especiales: sticky bit\nTres tipos de permisos especiales: sticky bit, suid y sgid. Más sobre sticky bit.\nt: sticky bit, chmod o+t fichero.\n\nEl comando ls lo representa como una t en el noveno bit (según mayúscula/minúscula, t\\(\\rightarrow\\) o+x, T\\(\\rightarrow\\) o-x).\nPara ejecutables \\(\\rightarrow\\) mantener la imagen del fichero en la memoria de intercambio después de finalizar la ejecución del mismo (en desuso).\nPara directorios \\(\\rightarrow\\) solo root o el propietario de un fichero (o de la carpeta) pueden borrar o renombrar el fichero, aunque tengan permiso de escritura en la carpeta."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Permisos especiales: sticky bit",
+    "text": "Permisos especiales: sticky bit\n\nmkdir -p  carpeta && cd carpeta\ntouch fichero\nls -la fichero \nchmod o+w+t fichero \nls -la fichero \n\n-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero\n\n\n-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero\n\n\n\n¿Qué sentido tiene el sticky bit en este ejemplo?\n\n\nls -ld /tmp/\n\ndrwxrwxrwt 39 root root 20480 feb 24 00:21 /tmp/"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid",
+    "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Permisos especiales: suid",
+    "text": "Permisos especiales: suid\ns: para usuarios, suid, chmod u+s fichero.\n\nEl comando ls lo representa como una s en el tercer bit (según mayúscula/minúscula, s\\(\\rightarrow\\) u+x, S\\(\\rightarrow\\) u-x(estado inconsistente)).\nPara ejecutables \\(\\rightarrow\\) cambio de dominio a nivel de usuario. Durante la ejecución, el usuario efectivo del proceso es el propietario del fichero y no el usuario que lo ejecutó.\nPara directorios \\(\\rightarrow\\) Ignorado.\n\n# El ejecutable \"gestorbd\" lee el fichero \"basedatos\":\n-rwxr--r-x root root /opt/bin/gestorbd\n-rwx------ root root /opt/datos/basedatos\n# El usuario pagutierrez puede ejecutar \"gestorbd\", pero ese programa\n# NO podrá leer \"basedatos\"\n# El programa si podrá leer \"basedatos\" si \"gestorbd\" tiene los permisos:\n-rwsr--r-x root root /opt/bin/gestorbd"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Permisos especiales: suid",
+    "text": "Permisos especiales: suid\n\n¿Cómo es posible que cambiemos la contraseña desde un usuario corriente?\nEjecuta en tu máquina:\nls -l /etc/passwd /etc/shadow /usr/bin/passwd \n\n\n$ ls -l /etc/passwd /etc/shadow /usr/bin/passwd \n-rw-r--r-- 1 root root    2941 feb 13 10:21 /etc/passwd\n-rw-r----- 1 root shadow  1827 feb 13 10:21 /etc/shadow\n-rwsr-xr-x 1 root root   59640 nov 29 13:25 /usr/bin/passwd\nVeamos el código de passwd"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sgid",
+    "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sgid",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Permisos especiales: sgid,",
+    "text": "Permisos especiales: sgid,\ns: para grupos, sgid, chmod g+s fichero.\n\nEl comando ls lo representa como una s en el sexto bit (según mayúscula/minúscula, s\\(\\rightarrow\\) g+x, S\\(\\rightarrow\\) g-x (estado inconsistente)).\nPara ejecutables \\(\\rightarrow\\) cambio de dominio a nivel de grupo. Durante la ejecución, el grupo efectivo del proceso es el grupo propietario del fichero y no el del usuario que lo ejecutó.\nPara directorios \\(\\rightarrow\\) al crear un fichero en su interior, el grupo propietario del nuevo fichero es el grupo del directorio y no del usuario que ejecuta la orden."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#ejemplo-sgid",
+    "href": "tema02-organizacion/tema02-ficheros.html#ejemplo-sgid",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Ejemplo sgid",
+    "text": "Ejemplo sgid\nEl ejecutable “gestorbd” lee el fichero “basedatos”:\n-rwxr-xr-x root root /opt/bin/gestorbd\n-rwxr----- root root /opt/datos/basedatos\nGrupo “alumnos”: pueden ejecutar “gestorbd” pero NO leer “basedatos” El programa si podrá leer “basedatos” si “gestorbd” tiene los permisos:\n-rwxr-Sr-x root root /opt/bin/gestorbd\nEl usuario “pagutierrez” sólo pertenece al grupo “profesores”\nSe tiene el directorio\ndrwxr-sr-x pagutierrez alumnos /practicas\nSi “pagutierrez” ejecuta cp tema2.pdf /practicas entonces el fichero copiado pertenecerá al grupo “alumnos”:\n-rw-r--r-- pagutierrez alumnos /practicas/tema2.pdf"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask",
+    "href": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "CODA: Máscara de permisos (umask)",
+    "text": "CODA: Máscara de permisos (umask)\n\nCuando un fichero nuevo se crea, se le asignan permisos.\nLos permisos se deciden aplicando una máscara de permisos a los permisos base (que se puede consultar/modificar utilizando el comando umask):\n\n$ umask\n0002\n\nLa máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos está restringidos.\nLos permisos base para directorios son 777; para ficheros, 666."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "CODA: Máscara de permisos (umask)",
+    "text": "CODA: Máscara de permisos (umask)\n\n\n¿Podremos especificar una máscara que permita crear ficheros con permisos de ejecución?\nIntenta deducir qué pasará con los siguientes pasos:\n\n\n\n\n\numask\nmkdir -p /tmp/prueba1\nls -ld /tmp/prueba1\ntouch /tmp/prueba1/a \nls -l /tmp/prueba1/\n\n0002\n\n\ndrwxrwxr-x 2 javi javi 4096 feb 24 00:13 /tmp/prueba1\n\n\ntotal 0\n\n\n-rw-rw-r-- 1 javi javi 0 feb 24 00:21 a\n\n\n\n\numask 027\nmkdir -p /tmp/prueba2\nls -ld /tmp/prueba2\ntouch /tmp/prueba2/a \nls -l /tmp/prueba2/\n\ndrwxr-x--- 2 javi javi 4096 feb 24 00:09 /tmp/prueba2\n\n\ntotal 0\n\n\n-rw-r----- 1 javi javi 0 feb 24 00:21 a"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-ls--l",
+    "href": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-ls--l",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Tipos de ficheros (ls -l)",
+    "text": "Tipos de ficheros (ls -l)\n\nNormal.\nDirectorio (d): son ficheros que contienen enlaces a otros ficheros (ya sean directorios o archivos normales).\nEspecial de bloque (b): fichero especial para interactuar con un dispositivo basado en bloques.\nEspecial de carácter (c): fichero especial para interactuar con un dispositivo basado en caracteres.\nNamed Pipes (p): tubería FIFO con nombre (comunicación de procesos de diferentes usuarios con tuberías).\nSocket (s): como los pipes pero con comunicación duplex (ambos sentidos, ej. /tmp/.X11-unix/X0).\nEnlace físico.\nEnlace simbólico (l)."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces",
+    "href": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Tipos de ficheros: enlaces",
+    "text": "Tipos de ficheros: enlaces\n\n\n\nEnlaces: Archivos especiales que permiten que varios nombres (enlaces) se asocien a un único e idéntico archivo.\nVarias instancias de un mismo archivo en diversos lugares de la estructura jerárquica sin necesidad de copiarlos.\nAyuda a asegurar la coherencia y ahorrar espacio en el disco.\nGrupo de personas trabajando sobre un mismo fichero (modificaciones centralizadas)."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Tipos de ficheros: enlaces",
+    "text": "Tipos de ficheros: enlaces\n\nEnlaces físicos (ln archivo-real enlace-físico):\n\nRepresentan un nombre alternativo para un archivo (dos nombres de fichero apuntando al mismo nodo-i).\nSi eliminamos un enlace físico, no eliminamos el archivo original. Mientras quede al menos un enlace físico, el archivo no se elimina.\nSólo es posible entre ficheros que estén en la misma partición.\nNo se pueden realizar a directorios."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces-2",
+    "href": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-enlaces-2",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Tipos de ficheros: enlaces",
+    "text": "Tipos de ficheros: enlaces\n\nEnlaces simbólicos (ln -s archivo-real enlace-simb):\n\nEs un puntero virtual al archivo real (acceso directo).\nFichero de texto (con su nodo-i independiente) que contiene la ruta del archivo al que apunta.\nSi se elimina el enlace simbólico, no se elimina el fichero original."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#ejemplo-enlaces-físicos-y-simbólicos",
+    "href": "tema02-organizacion/tema02-ficheros.html#ejemplo-enlaces-físicos-y-simbólicos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Ejemplo enlaces físicos y simbólicos",
+    "text": "Ejemplo enlaces físicos y simbólicos\n# Observad conteo de referencias (tercera columna, después de permisos).\ntouch prueba\nln prueba enlace.fisico\nls -li prueba enlace.fisico\nln -s prueba enlace.simbolico\nls -li prueba enlace.simbolico\nResultado ejecución:\n$ touch prueba\n$ ln prueba enlace.fisico\n$ ls -li prueba enlace.fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace.fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba\n$ ln -s prueba enlace.simbolico\n$ ls -li prueba enlace.simbolico enlace.fisico \n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace.fisico\n12481314 lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace.simbolico -> prueba\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#procesos-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#procesos-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Procesos",
+    "text": "Procesos"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#procesos-2",
+    "href": "tema02-organizacion/tema02-ficheros.html#procesos-2",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Procesos",
+    "text": "Procesos\n\nProcesos: son programas en ejecución.\nLos atributos de un proceso son:\n\nPID \\(\\Rightarrow\\) identificador del proceso.\nPPID \\(\\Rightarrow\\) identificador del proceso padre.\nNice number \\(\\Rightarrow\\) prioridad asignada al ejecutarlo.\nTTY \\(\\Rightarrow\\) terminal en el que se está ejecutando.\nRUID \\(\\Rightarrow\\) identificador del usuario real, el que lo ejecutó.\nEUID \\(\\Rightarrow\\) identificador del usuario efectivo, si hay cambio de dominio se refleja aquí (permiso suid).\nRGID \\(\\Rightarrow\\) identificador del grupo real, el grupo del usuario que lo ejecutó.\nEGID \\(\\Rightarrow\\) identificador del grupo efectivo, si hay cambio de dominio se refleja aquí (permiso sgid)."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#procesos-3",
+    "href": "tema02-organizacion/tema02-ficheros.html#procesos-3",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Procesos",
+    "text": "Procesos\n\nAtributos de un proceso: ps -Fl PID\nTipos de procesos:\n\nInteractivos: hay alguien conectado al sistema que los inicia (primer o segundo plano &).\nEncolados: procesos que se mandan a un buffer para ser ejecutados (en una fecha concreta o cuando la carga del sistema sea baja).\nDemonios: programas ejecutados en segundo plano durante el arranque, que esperan de forma continua un determinado evento.\n\n\n\nPrueba a añadir -a:\nps -Fla"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#dispositivos-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#dispositivos-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Dispositivos",
+    "text": "Dispositivos\nLos dispositivos se representan/manejan como ficheros:\n\nFicheros especiales de caracteres: representan a dispositivos de caracteres (cinta magnética, puerto paralelo, puerto serie...)\nFicheros especiales de bloques: representan a dispositivos de bloques (disquete, partición de un disco duro o un pendrive...)\nEscribir/leer en un dispositivo se convierte en escribir/leer en el fichero correspondiente.\n\n\nHow to List Your Computer’s Devices From the Linux Terminal"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#dispositivos-ejemplos",
+    "href": "tema02-organizacion/tema02-ficheros.html#dispositivos-ejemplos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Dispositivos: ejemplos",
+    "text": "Dispositivos: ejemplos\n\nEsos ficheros se almacenan en el directorio /dev:\n\n/dev/sda \\(\\Rightarrow\\) primer disco duro (sin considerar particiones).\n/dev/sda1 \\(\\Rightarrow\\) primera partición del primer disco.\n/dev/sdb \\(\\Rightarrow\\) segundo disco duro.\n/dev/sdc \\(\\Rightarrow\\) disco USB (primer nombre de dipositivo libre).\n/dev/tty1 \\(\\Rightarrow\\) primera terminal de consola (tty2 segunda).\n/dev/lp0 \\(\\Rightarrow\\) primer puerto paralelo.\n/dev/fd0 \\(\\Rightarrow\\) disquete de la primera disquetera."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#dispositivos-de-bloques-lsblk",
+    "href": "tema02-organizacion/tema02-ficheros.html#dispositivos-de-bloques-lsblk",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Dispositivos de bloques: lsblk",
+    "text": "Dispositivos de bloques: lsblk\nDepende de tu distribución quizás necesites instalar:\nsudo apt-get install util-linux\nlsblk |grep -v loop\n$ lsblk |grep -v loop\nNAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT\nnvme0n1     259:0    0   477G  0 disk  \n├─nvme0n1p1 259:1    0   780M  0 part  /boot/efi\n├─nvme0n1p2 259:2    0     5G  0 part  \n├─nvme0n1p3 259:3    0  78,1G  0 part  /\n└─nvme0n1p4 259:4    0 393,1G  0 part  \n  └─home    253:0    0 393,1G  0 crypt /home"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#qué-esperas-que-haya-en-un-sistema-de-ficheros",
+    "href": "tema02-organizacion/tema02-ficheros.html#qué-esperas-que-haya-en-un-sistema-de-ficheros",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "¿Qué esperas que haya en un sistema de ficheros?",
+    "text": "¿Qué esperas que haya en un sistema de ficheros?\n\n\nFuente Unix and Linux system administration handbook. Chapter 5. The Filesystem. Addison-Wesley. 5th Edition. 2018.\n\n\nRápido: ¿cuál de los siguientes elementos esperarías encontrar en un “sistema de archivos”?\n\nProcesos\nDispositivos de audio\nEstructuras de datos y parámetros de ajuste del núcleo\nCanales de comunicación entre procesos"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\nFilesystem Hierarchy Standard: Jerarquía Estándar del Sistema de Ficheros.\nEspecificación estándar para sistemas tipo Unix.\nFruto del consenso entre la comunidad (desarrolladores, administradores...).\nVersión 3.0 (2015), especificación disponible en la URL: https://refspecs.linuxfoundation.org/fhs.shtml\nEn Linux, disponible como página de manual: man hier"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-2",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-2",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\nExisten dos tipos de distinciones cuando hablamos del tipo de contenido de un directorio:\nestáticos/dinámicos y compartibles/no compartibles.\n\nEstáticos: Contiene binarios, bibliotecas, documentación y otros ficheros que no cambian sin intervención del administrador. Pueden estar en dispositivos de solo lectura (read-only) y no necesitan que se hagan copias de seguridad tan a menudo como los ficheros dinámicos.\nDinámicos: Contiene ficheros que no son estáticos. Deben de encontrase en dispositivos de lectura-escritura (read-write). Necesitan que se hagan copias de seguridad a menudo.\nCompartibles: Contiene ficheros que se pueden encontrar en un ordenador y utilizarse en otro.\nNo compartibles: Contiene ficheros que no podemos utilizar en distintas máquinas."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-3",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-3",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\nFuente https://linuxconfig.org/filesystem-basics"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-4",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-4",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\n/bin \\(\\Rightarrow\\) ficheros ejecutables básicos compartidos (mv, cp).\n/dev \\(\\Rightarrow\\) ficheros especiales de dispositivos.\n/etc \\(\\Rightarrow\\) la mayoría de los ficheros de configuración locales del sistema (solo archivos de texto).\n/root \\(\\Rightarrow\\) directorio HOME del administrador.\n/sbin \\(\\Rightarrow\\) ficheros ejecutables que, normalmente, sólo el administrador puede ejecutar.\n/home \\(\\Rightarrow\\) los directorios de trabajo de los usuarios.\n/lost+found \\(\\Rightarrow\\) contiene “referencias” a los ficheros marcados como erróneos al chequear el sistema de ficheros.\n/lib \\(\\Rightarrow\\) librerías necesarias para ejecutar los archivos."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-5",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-5",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\n/proc y /sys \\(\\Rightarrow\\) sistemas de ficheros virtuales, contienen información sobre procesos, núcleo, módulos cargados, dispositivos, sucesos...\n/tmp \\(\\Rightarrow\\) ficheros temporales. Tiene el permiso t activo.\n/var \\(\\Rightarrow\\) ficheros variables: colas de datos (spool) de impresión, e-mail..., ficheros del cron, atd, ficheros de log...\n/boot \\(\\Rightarrow\\) núcleo y ficheros necesarios para cargar el núcleo y ficheros de configuración del gestor de arranque.\n/mnt, /mount ó /media \\(\\Rightarrow\\) montaje de otros sistemas de ficheros: disquetes, cdroms...\n\n/mnt/floppy ó /media/floppy\n/mnt/cdrom ó /media/cdrom\n\n/opt: paquetes de aplicaciones estáticas (no actualizables)."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-6",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-6",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\n/usr \\(\\Rightarrow\\) contiene subdirectorios de solo lectura, que no deben ser específicos de la máquina que los usa (Unix system resources):\n\n/usr/bin \\(\\Rightarrow\\) ficheros ejecutables por todos los usuarios.\n/usr/sbin \\(\\Rightarrow\\) ficheros ejecutables de administración.\n/usr/include \\(\\Rightarrow\\) ficheros cabecera de cabecera estándar para compilación.\n/usr/lib \\(\\Rightarrow\\) librerías binarias.\n/usr/local \\(\\Rightarrow\\) software local específico.\n/usr/share \\(\\Rightarrow\\) datos compartidos (independientes de la arquitectura: imágenes, ficheros de texto...).\n\n/usr/share/man.\n/usr/share/doc.\n\n/usr/src \\(\\Rightarrow\\) código fuente, como el del kernel..."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-7",
+    "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-7",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Estructura genérica del sistema de ficheros",
+    "text": "Estructura genérica del sistema de ficheros\n\nEstáticos: /bin, /sbin, /opt, /boot, /usr/bin...\nDinámicos: /var/mail, /var/spool, /var/run, /var/lock, /home\nCompartibles: /usr/bin, /opt...\nNo compartibles: /etc, /boot, /var/run, /var/lock..."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#referencias-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#referencias-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Referencias",
+    "text": "Referencias\nUnix and Linux system administration handbook. Chapter 4. Process control. Chapter 5. The Filesystem. Addison-Wesley. 5th Edition. 2018."
   }
 ]
