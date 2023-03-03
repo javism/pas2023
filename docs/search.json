@@ -151,7 +151,7 @@
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal"
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
@@ -683,7 +683,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "CODA: Máscara de permisos (umask)",
-    "text": "CODA: Máscara de permisos (umask)\n\nCuando un fichero nuevo se crea, se le asignan permisos.\nLos permisos se deciden aplicando una máscara de permisos a los permisos base (que se puede consultar/modificar utilizando el comando umask):\n\n$ umask\n0002\n\nLa máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos está restringidos.\nLos permisos base para directorios son 777; para ficheros, 666."
+    "text": "CODA: Máscara de permisos (umask)\n\nCuando un fichero nuevo se crea, se le asignan permisos.\nLos permisos se deciden aplicando una máscara de permisos a los permisos base (que se puede consultar/modificar utilizando el comando umask):\n\n$ umask\n0002\n\nLa máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos están restringidos.\nLos permisos base para directorios son 777; para ficheros, 666."
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask-1",
@@ -725,7 +725,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#ejemplo-enlaces-físicos-y-simbólicos",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Ejemplo enlaces físicos y simbólicos",
-    "text": "Ejemplo enlaces físicos y simbólicos\n# Observad conteo de referencias (tercera columna, después de permisos).\ntouch prueba\nln prueba enlace.fisico\nls -li prueba enlace.fisico\nln -s prueba enlace.simbolico\nls -li prueba enlace.simbolico\nResultado ejecución:\n$ touch prueba\n$ ln prueba enlace.fisico\n$ ls -li prueba enlace.fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace.fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba\n$ ln -s prueba enlace.simbolico\n$ ls -li prueba enlace.simbolico enlace.fisico \n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace.fisico\n12481314 lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace.simbolico -> prueba\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba"
+    "text": "Ejemplo enlaces físicos y simbólicos\n# Observad conteo de referencias (tercera columna, después de permisos).\ncd /tmp/\ntouch prueba\nln prueba enlace_fisico\nls -li prueba enlace_fisico\nln -s prueba enlace_simbolico\nls -li prueba enlace_simbolico\nResultado ejecución:\n$ touch prueba\n$ ln prueba enlace_fisico\n$ ls -li prueba enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba\n$ ln -s prueba enlace_simbolico\n$ ls -li prueba enlace_simbolico enlace_fisico \n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481314 lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico -> prueba\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#procesos-1",
@@ -795,7 +795,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-3",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Estructura genérica del sistema de ficheros",
-    "text": "Estructura genérica del sistema de ficheros\n\nFuente https://linuxconfig.org/filesystem-basics"
+    "text": "Estructura genérica del sistema de ficheros\n\n\nFuente https://linuxconfig.org/filesystem-basics"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#estructura-genérica-del-sistema-de-ficheros-4",
@@ -831,5 +831,33 @@
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Referencias",
     "text": "Referencias\nUnix and Linux system administration handbook. Chapter 4. Process control. Chapter 5. The Filesystem. Addison-Wesley. 5th Edition. 2018."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html",
+    "href": "tema02-organizacion/tema02-ejercicios.html",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Crea tres usuarios, dos de ellos tendrán un grupo común. Suponiendo que nuestro usuario de administración es pas, lo añadimos al grupo sudo como root:\n/sbin/usermod -aG sudo pas\nCreamos un grupo para la clase y tres usuarios de ejemplo, los dos primeros tendrá como grupo principal clase y el tercero no:\nsudo addgroup clase\nsudo adduser usuario1 --ingroup clase\nsudo adduser usuario2 --ingroup clase\nsudo adduser usuario3\n\n\n\nCon usuario1 Crear un archivo con el contenido HOLA!, utilizando la orden echo, y asignarle permisos para que solo puede ser consultado por su propietario y por los miembros del grupo clase.\nNOTA: Puede ser una buena idea tener varios terminales abiertos con cada usuario del sistema para probar que los permisos son efectivos.\n\n\n\nModifica los permisos por defecto con umask para que los ficheros creados:\n\nno puedan ser leídos por el resto de usuarios y los directorios no puedan ser listados.\npuedan ser leídos y escritos por el grupo.\n\nComprueba que tienen efecto creado ficheros y directorios de ejemplo.\nBusca cómo hacer permanentes en cada usuario los permisos umask.\n\n\n\n\nTransformar los siguientes permisos simbólicos en absolutos:\n\nrwxr-xr-x    r-xr--r--  rw-r-----  r-x--x--x\n\nTransformar los siguientes permisos absolutos en simbólicos:\n\n644    755    610    631\n\nFijar, en modo simbólico, los permisos de arch1 en modo 754.\nFijar, en modo absoluto, los permisos de arch1 en modo rwxr-x–x.\nFijar los permisos del directorio dir1 de modo que todos lo puedan leer y entrar, pero sólo el dueño pueda modificar sus archivos: 1) en modo simbólico; 2) en modo absoluto.\nModificar para que el grupo también pueda modificar archivos.\nFijar en modo simbólico los permisos del archivo ejecutable exec.tar para que sea ejecutable por todos, legible por el dueño y el grupo, y modificable solo por el dueño. Repetir en modo absoluto.\nFijar en modo absoluto los permisos del directorio dir1 de modo que sólo el dueño y el grupo lo puedan recorrer y leer, y sólo el dueño pueda grabar y borrar en él. Repetir en modo simbólico.\n\n\n\n\nSea la siguiente salida del comando ls -l:\n-rwSr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  controlar\n-rw-rw-r-- 1 pagutierrez docentes 2300  may 18 09:37  borrador.txt\n-rw-r--r-- 1 pagutierrez docentes 5895  may 15 12:08  index.htm\n-rwxr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  revisar\n-rwxr--r-- 1 pagutierrez docentes 29024 ene 1  16:29  mostrar\n  drwxrwxrwt 2 pagutierrez tecnicos 1024  may 1  17:23  trabajos\n  drwxr-xr-x 2 pagutierrez tecnicos 1024  oct 16  1998  netscape3\n  drwxrwx--x 2 pagutierrez tecnicos 1024  may 11  7:29  finanzas\n  drwxrwxr-x 2 pagutierrez tecnicos 1024  jul 7   6:54  redes\n  drwxr-xr-x 2 jsanchezm   docentes 1024  jun 17 19:35  corporacion\nEl usuario jsanchezm, del grupo docentes, tiene acceso al presente directorio. Indicar, si los hay:\n\nArchivos de los que puede mostrar contenido.\nArchivos que puede ejecutar como programa.\nArchivos en los que puede modificar contenido.\nSubdirectorios en los que puede ingresar.\nSubdirectorios en que puede crear/eliminar ficheros propios.\nSubdirectorios en los que puede borrar archivos de otros.\nSubdirectorios en los que puede entrar y ejecutar programas contenidos en ellos, pero no ver nombres de archivos.\nArchivos que puede ejecutar como programa con permisos del usuario pagutierrez.\n\n\n\n\nSea la siguiente salida del comando ls -l (suponemos que pagutierrez pertenece a staff):\n-rw-r--r--  1  root        root       33280 jun 12 19:40 Carta.doc\n  drwxrwxrwx 5  pagutierrez staff       1024 dic  4  1999 step\n  drwxrwxr-x 22 pagutierrez staff       1024 nov 20  1999 Office51\n  drwxr-x--- 6  pagutierrez staff       1024 may 7  16:43 argos\n  drwxrwxr-- 21 pagutierrez staff       1024 jul 11 18:22 bajados\n-rw-rw---- 3  root        root         542 jul 13 11:26 boor.exe\n  drwxrwxrwt 3  pagutierrez staff       1024 may 25 10:02 borrador\n-rwSrwSr-x 1  root        root        9218 jun 12 19:41 pph3\n  drwxrwx--x 2  pagutierrez pagutierrez 1024 may 7  16:47 cdir\n-rw-rw-r-- 3  root        root         542 jul 13 11:26 mysql-doc\n-rw-r-xr-- 3  pagutierrez staff       1084 ago 1  10:01 ver.exe\n-rwxr-xr-x 3  pagutierrez staff       1084 ago 1  10:01 ver\n  drwxr-xr-x 7  pagutierrez pagutierrez 1024 jul 25 11:48 lit\nIndicar, si los hay:\n\ndirectorios públicos (todo el mundo puede entrar, listar y borrar archivos);\narchivos que tienen enlaces hard o físicos;\narchivos ejecutables por el usuario pagutierrez;\ndirectorios navegables por todo el mundo;\ndirectorios donde miembros del grupo staff puede borrar archivos;\narchivos que son enlaces simbólicos.\narchivos ejecutables que adquieren permisos de usuario root.\n\n\n\n\nMarca todos los tipos de enlace que pueden establecerse en los siguientes casos (físico, simbólico o ambos).\n\nenlace hacia un archivo en el mismo directorio.\nenlace hacia un archivo en otro sistema de archivos.\nenlace hacia un directorio en el mismo sistema de archivos.\nenlace hacia un directorio en otro sistema de archivos."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-webuco.html",
+    "href": "tema02-organizacion/tema02-webuco.html",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "",
+    "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/\n\n\n\n\n\nAbre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Web de ejemplo</title>\n</head>\n<body>\n    <p>¡Hola Mundo!</p>\n</body>\n</html>\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
+  },
+  {
+    "objectID": "utiles_pas/index.html",
+    "href": "utiles_pas/index.html",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "",
+    "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Proyecto asignatura",
+    "text": "Proyecto asignatura\nHerramientas y conceptos que hemos visto (además de los de los apuntes):\n\nReenvío de puertos (port forwarding) en VirtualBox\nConexiones ssh: ssh usuario@host [-p puerto]\nAutenticación ssh con clave gpg (ssh-copy-id). Importante leer sobre cifrado asimétrico custodia y distribución de tus claves. ssh-copy-id usuario@host [-p puerto]\nHerramienta apt y conceptos y configuración de repositorios"
   }
 ]

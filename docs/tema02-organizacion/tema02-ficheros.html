@@ -181,6 +181,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../tema02-organizacion/tema02-ficheros.html" class="sidebar-item-text sidebar-link active">Tema 2: Organización de GNU/Linux</a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema02-organizacion/tema02-ejercicios.html" class="sidebar-item-text sidebar-link">Tema 2: Ejercicios permisos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema02-organizacion/tema02-webuco.html" class="sidebar-item-text sidebar-link">Tema 2: Ejercicios web personal en la UCO</a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -195,7 +205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#procesos" id="toc-procesos" class="nav-link" data-scroll-target="#procesos"><span class="toc-section-number">3</span>  Procesos</a></li>
   <li><a href="#dispositivos" id="toc-dispositivos" class="nav-link" data-scroll-target="#dispositivos"><span class="toc-section-number">4</span>  Dispositivos</a></li>
   <li><a href="#estructura-genérica-del-sistema-de-ficheros" id="toc-estructura-genérica-del-sistema-de-ficheros" class="nav-link" data-scroll-target="#estructura-genérica-del-sistema-de-ficheros"><span class="toc-section-number">5</span>  Estructura genérica del sistema de ficheros</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">6</span>  Referencias</a></li>
+  <li><a href="#proyecto-asignatura" id="toc-proyecto-asignatura" class="nav-link" data-scroll-target="#proyecto-asignatura"><span class="toc-section-number">6</span>  Proyecto asignatura</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">7</span>  Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -235,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">24 de febrero de 2023</p>
+      <p class="date">3 de marzo de 2023</p>
     </div>
   </div>
   
@@ -574,7 +585,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> umask</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0002</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><p>La máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos está restringidos.</p></li>
+<li><p>La máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos están restringidos.</p></li>
 <li><p>Los permisos base para directorios son 777; para ficheros, 666.</p></li>
 </ul>
 </section>
@@ -681,21 +692,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="ejemplo-enlaces-físicos-y-simbólicos" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-enlaces-físicos-y-simbólicos">Ejemplo enlaces físicos y simbólicos</h2>
 <div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observad conteo de referencias (tercera columna, después de permisos).</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> prueba</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> prueba enlace.fisico</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace.fisico</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> prueba enlace.simbolico</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace.simbolico</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp/</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> prueba</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> prueba enlace_fisico</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_fisico</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> prueba enlace_simbolico</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_simbolico</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Resultado ejecución:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch prueba</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln prueba enlace.fisico</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace.fisico</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace.fisico</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln prueba enlace_fisico</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_fisico</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln <span class="at">-s</span> prueba enlace.simbolico</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace.simbolico enlace.fisico </span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace.fisico</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="ex">12481314</span> lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace.simbolico <span class="at">-</span><span class="op">&gt;</span> prueba</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln <span class="at">-s</span> prueba enlace_simbolico</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_simbolico enlace_fisico </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="ex">12481314</span> lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico <span class="at">-</span><span class="op">&gt;</span> prueba</span>
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
@@ -826,11 +838,13 @@ nvme0n1     259:0    0   477G  0 disk
 </section>
 <section id="estructura-genérica-del-sistema-de-ficheros-3" class="level2">
 <h2 class="anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-3">Estructura genérica del sistema de ficheros</h2>
-<p><img src="images/Directory-Filesystem-Hierarchy-Standard.png"><br>
-Fuente <a href="https://linuxconfig.org/filesystem-basics" class="uri">https://linuxconfig.org/filesystem-basics</a></p>
+<p><img src="images/Directory-Filesystem-Hierarchy-Standard.png" class="img-fluid"></p>
+<div class="footer">
+<p>Fuente <a href="https://linuxconfig.org/filesystem-basics" class="uri">https://linuxconfig.org/filesystem-basics</a></p>
+</div>
 </section>
-<section id="estructura-genérica-del-sistema-de-ficheros-4" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-4">Estructura genérica del sistema de ficheros</h2>
+<section id="estructura-genérica-del-sistema-de-ficheros-4" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-4">Estructura genérica del sistema de ficheros</h2>
 <ul>
 <li><p><code>/bin</code> <span class="math inline">\(\Rightarrow\)</span> ficheros ejecutables básicos compartidos (<code>mv</code>, <code>cp</code>).</p></li>
 <li><p><code>/dev</code> <span class="math inline">\(\Rightarrow\)</span> ficheros especiales de dispositivos.</p></li>
@@ -842,8 +856,8 @@ Fuente <a href="https://linuxconfig.org/filesystem-basics" class="uri">https://l
 <li><p><code>/lib</code> <span class="math inline">\(\Rightarrow\)</span> librerías necesarias para ejecutar los archivos.</p></li>
 </ul>
 </section>
-<section id="estructura-genérica-del-sistema-de-ficheros-5" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-5">Estructura genérica del sistema de ficheros</h2>
+<section id="estructura-genérica-del-sistema-de-ficheros-5" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-5">Estructura genérica del sistema de ficheros</h2>
 <ul>
 <li><p><code>/proc</code> y <code>/sys</code> <span class="math inline">\(\Rightarrow\)</span> sistemas de ficheros virtuales, contienen información sobre procesos, núcleo, módulos cargados, dispositivos, sucesos...</p></li>
 <li><p><code>/tmp</code> <span class="math inline">\(\Rightarrow\)</span> ficheros temporales. Tiene el permiso <code>t</code> activo.</p></li>
@@ -857,8 +871,8 @@ Fuente <a href="https://linuxconfig.org/filesystem-basics" class="uri">https://l
 <li><p><code>/opt</code>: paquetes de aplicaciones estáticas (no actualizables).</p></li>
 </ul>
 </section>
-<section id="estructura-genérica-del-sistema-de-ficheros-6" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-6">Estructura genérica del sistema de ficheros</h2>
+<section id="estructura-genérica-del-sistema-de-ficheros-6" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="estructura-genérica-del-sistema-de-ficheros-6">Estructura genérica del sistema de ficheros</h2>
 <ul>
 <li><p><code>/usr</code> <span class="math inline">\(\Rightarrow\)</span> contiene subdirectorios de solo lectura, que no deben ser específicos de la máquina que los usa (<em>Unix system resources</em>):</p>
 <ul>
@@ -886,8 +900,21 @@ Fuente <a href="https://linuxconfig.org/filesystem-basics" class="uri">https://l
 </ul>
 </section>
 </section>
-<section id="referencias" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Referencias</h1>
+<section id="proyecto-asignatura" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Proyecto asignatura</h1>
+<section id="proyecto-asignatura-1" class="level2">
+<h2 class="anchored" data-anchor-id="proyecto-asignatura-1">Proyecto asignatura</h2>
+<p>Herramientas y conceptos que hemos visto (además de los de los apuntes):</p>
+<ul>
+<li>Reenvío de puertos (<em>port forwarding</em>) en VirtualBox</li>
+<li>Conexiones ssh: <code>ssh usuario@host [-p puerto]</code></li>
+<li>Autenticación ssh con clave gpg (ssh-copy-id). <strong>Importante leer sobre cifrado asimétrico custodia y distribución de tus claves</strong>. <code>ssh-copy-id usuario@host [-p puerto]</code></li>
+<li>Herramienta <code>apt</code> y conceptos y configuración de repositorios</li>
+</ul>
+</section>
+</section>
+<section id="referencias" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Referencias</h1>
 <section id="referencias-1" class="level2">
 <h2 class="anchored" data-anchor-id="referencias-1">Referencias</h2>
 <p><em>Unix and Linux system administration handbook</em>. Chapter 4. Process control. Chapter 5. The Filesystem. Addison-Wesley. 5th Edition. 2018.</p>
