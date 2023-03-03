@@ -826,6 +826,13 @@
     "text": "Estructura genérica del sistema de ficheros\n\nEstáticos: /bin, /sbin, /opt, /boot, /usr/bin...\nDinámicos: /var/mail, /var/spool, /var/run, /var/lock, /home\nCompartibles: /usr/bin, /opt...\nNo compartibles: /etc, /boot, /var/run, /var/lock..."
   },
   {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
+    "href": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "Proyecto asignatura",
+    "text": "Proyecto asignatura\nHerramientas y conceptos que hemos visto (además de los de los apuntes):\n\nReenvío de puertos (port forwarding) en VirtualBox\nConexiones ssh: ssh usuario@host [-p puerto]\nAutenticación ssh con clave gpg (ssh-copy-id). Importante leer sobre cifrado asimétrico custodia y distribución de tus claves. ssh-copy-id usuario@host [-p puerto]\nHerramienta apt y conceptos y configuración de repositorios"
+  },
+  {
     "objectID": "tema02-organizacion/tema02-ficheros.html#referencias-1",
     "href": "tema02-organizacion/tema02-ficheros.html#referencias-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
@@ -852,12 +859,5 @@
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "",
     "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
-  },
-  {
-    "objectID": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
-    "href": "tema02-organizacion/tema02-ficheros.html#proyecto-asignatura-1",
-    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
-    "section": "Proyecto asignatura",
-    "text": "Proyecto asignatura\nHerramientas y conceptos que hemos visto (además de los de los apuntes):\n\nReenvío de puertos (port forwarding) en VirtualBox\nConexiones ssh: ssh usuario@host [-p puerto]\nAutenticación ssh con clave gpg (ssh-copy-id). Importante leer sobre cifrado asimétrico custodia y distribución de tus claves. ssh-copy-id usuario@host [-p puerto]\nHerramienta apt y conceptos y configuración de repositorios"
   }
 ]
