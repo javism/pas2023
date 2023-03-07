@@ -154,6 +154,20 @@
     "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 4: Gestión de Usuarios"
   },
   {
+    "objectID": "enlaces.html",
+    "href": "enlaces.html",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "",
+    "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
+  },
+  {
+    "objectID": "enlaces.html#escalado-de-privilegios",
+    "href": "enlaces.html#escalado-de-privilegios",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "Escalado de privilegios",
+    "text": "Escalado de privilegios\nIncluye enlaces a scripts de auditoría: Privilege Escalation on Linux\nAlgunos ejemplos básicos de explotación de errores de configuración (permisos, grupos, usuarios, etc.): Linux Privilege Escalation: Three Easy Ways to Get a Root Shell"
+  },
+  {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
     "href": "tema01-introduccion/tema01-introduccion.html",
     "title": "Tema 1: Introducción a la administración de sistemas",
@@ -858,14 +872,14 @@
     "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Gestión del acceso: propietarios y permisos",
-    "text": "Gestión del acceso: propietarios y permisos\nCada fichero tiene dos propietarios: usuario y grupo.\nls -l images | head -n 3 # esto filtra las 3 primeas líneas\nchown \\(\\rightarrow\\) cambia el usuario propietario (se necesitan privilegios de root):\nsudo chown javi fichero\nsudo chown javi:profesores fichero\nsudo chown -R javi directorio\nchgrp \\(\\rightarrow\\) cambia el grupo propietario (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o root).\nsudo chgrp profesores fichero\nsudo chgrp -R profesores directorio"
+    "text": "Gestión del acceso: propietarios y permisos\nCada fichero tiene dos propietarios: usuario y grupo.\n\nls -l images | head -n 3 # esto filtra las 3 primeas líneas\n\nls: no se puede acceder a 'images': No existe el archivo o el directorio\n\n\nchown \\(\\rightarrow\\) cambia el usuario propietario (se necesitan privilegios de root):\nsudo chown javi fichero\nsudo chown javi:profesores fichero\nsudo chown -R javi directorio\nchgrp \\(\\rightarrow\\) cambia el grupo propietario (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o root).\nsudo chgrp profesores fichero\nsudo chgrp -R profesores directorio"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
     "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Gestión del acceso: propietarios y permisos",
-    "text": "Gestión del acceso: propietarios y permisos\nListado con detalles y ficheros ocultos:\nls -la /boot/|head -n 8"
+    "text": "Gestión del acceso: propietarios y permisos\nListado con detalles y ficheros ocultos:\n\nls -la /boot/|head -n 8\n\ntotal 535232\n\n\ndrwxr-xr-x  4 root root     4096 mar  6 10:25 .\n\n\ndrwxr-xr-x 20 root root     4096 may 17  2021 ..\n\n\n-rw-r--r--  1 root root   237852 nov 24 16:40 config-5.4.0-136-generic\n\n\n-rw-r--r--  1 root root   237852 ene  5 17:08 config-5.4.0-137-generic\n\n\n-rw-r--r--  1 root root   237852 ene 20 15:39 config-5.4.0-139-generic\n\n\n-rw-r--r--  1 root root   237887 feb  3 15:30 config-5.4.0-144-generic\n\n\n-rw-r--r--  1 root root   237764 dic  9  2020 config-5.4.0-58-generic"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-2",
@@ -893,7 +907,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-4",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Gestión del acceso: propietarios y permisos",
-    "text": "Gestión del acceso: propietarios y permisos\n\n\n\nActual\nchmod\nResultado\nDescripción\n\n\n\n\nrw——-\na+x\nrwx–x–x\nAgregar a todos (all) permiso de ejecución.\n\n\nrwx–x–x\ngo-x\nrwx——\nSe elimina permiso de ejecución para grupo y otros.\n\n\nrwxr-xr-x\nu-x,go-r\nrw—x–x\nAl usuario se le quita ejecución, al grupo y a otros se les quita lectura.\n\n\nrwxrwxrwx\nu-x,go-rwx\nrw——-\nAl usuario se le elimina ejecución, al grupo y a otros se les eliminan todos los permisos.\n\n\nr——–\na+r,u+w\nrw-r–r–\nA todos se les agrega lectura, al usuario se le agrega escritura.\n\n\nrw-r—–\nu-rw,g+w,o+x\n—rw—x\nAl usuario se le eliminan lectura y escritura, al grupo se le agrega escritura y a otros se les agrega ejecución."
+    "text": "Gestión del acceso: propietarios y permisos\n\n\n\nActual\nchmod\nResultado\nDescripción\n\n\n\n\nrw-------\na+x\n`rwx–x-\n-xAgregar a todos (all`) permiso de ejecución.\n\n\nrwx--x--x\ngo-x\n`rwx——\n` Se elimina permiso de ejecución para grupo y otros.\n\n\nrwxr-xr-x\nu-x,go-r\nrw---x--x\nAl usuario se le quita ejecución, al grupo y a otros se les quita lectura.\n\n\nrwxrwxrwx\nu-x,go-rwx\nrw-------\nAl usuario se le elimina ejecución, al grupo y a otros se les eliminan todos los permisos.\n\n\nr--------\na+r,u+w\n`rw-r–\nr–` A todos se les agrega lectura, al usuario se le agrega escritura.\n\n\nrw-r-----\nu-rw,g+w,o+x\n`—rw—\nx` Al usuario se le eliminan lectura y escritura, al grupo se le agrega escritura y a otros se les agrega ejecución."
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit",
@@ -907,7 +921,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Permisos especiales: sticky bit",
-    "text": "Permisos especiales: sticky bit\nmkdir -p  carpeta && cd carpeta\ntouch fichero\nls -la fichero \nchmod o+w+t fichero \nls -la fichero \n\n¿Qué sentido tiene el sticky bit en este ejemplo?\n\nls -ld /tmp/"
+    "text": "Permisos especiales: sticky bit\n\nmkdir -p  carpeta && cd carpeta\ntouch fichero\nls -la fichero \nchmod o+w+t fichero \nls -la fichero \n\n-rw-r----- 1 javi javi 0 mar  7 12:56 fichero\n\n\n-rw-r---wT 1 javi javi 0 mar  7 12:56 fichero\n\n\n\n¿Qué sentido tiene el sticky bit en este ejemplo?\n\n\nls -ld /tmp/\n\ndrwxrwxrwt 24 root root 20480 mar  7 12:56 /tmp/"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid",
@@ -949,7 +963,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "CODA: Máscara de permisos (umask)",
-    "text": "CODA: Máscara de permisos (umask)\n\n\n¿Podremos especificar una máscara que permita crear ficheros con permisos de ejecución?\nIntenta deducir qué pasará con los siguientes pasos:\n\n\n\n\numask\nmkdir -p /tmp/prueba1\nls -ld /tmp/prueba1\ntouch /tmp/prueba1/a \nls -l /tmp/prueba1/\n\numask 027\nmkdir -p /tmp/prueba2\nls -ld /tmp/prueba2\ntouch /tmp/prueba2/a \nls -l /tmp/prueba2/"
+    "text": "CODA: Máscara de permisos (umask)\n\n\n¿Podremos especificar una máscara que permita crear ficheros con permisos de ejecución?\nIntenta deducir qué pasará con los siguientes pasos:\n\n\n\n\n\numask\nmkdir -p /tmp/prueba1\nls -ld /tmp/prueba1\ntouch /tmp/prueba1/a \nls -l /tmp/prueba1/\n\n0027\n\n\ndrwxrwxr-x 2 javi javi 4096 mar  7 12:56 /tmp/prueba1\n\n\ntotal 0\n\n\n-rw-rw-r-- 1 javi javi 0 mar  7 12:56 a\n\n\n\n\numask 027\nmkdir -p /tmp/prueba2\nls -ld /tmp/prueba2\ntouch /tmp/prueba2/a \nls -l /tmp/prueba2/\n\ndrwxr-x--- 2 javi javi 4096 mar  7 12:56 /tmp/prueba2\n\n\ntotal 0\n\n\n-rw-r----- 1 javi javi 0 mar  7 12:56 a"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-ls--l",
@@ -1111,19 +1125,5 @@
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "",
     "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/\n\n\n\n\n\nAbre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Web de ejemplo</title>\n</head>\n<body>\n    <p>¡Hola Mundo!</p>\n</body>\n</html>\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
-  },
-  {
-    "objectID": "utiles_pas/index.html",
-    "href": "utiles_pas/index.html",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
-    "section": "",
-    "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
-  },
-  {
-    "objectID": "utiles_pas/index.html#escalado-de-privilegios",
-    "href": "utiles_pas/index.html#escalado-de-privilegios",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
-    "section": "Escalado de privilegios",
-    "text": "Escalado de privilegios\nIncluye enlaces a scripts de auditoría: https://delinea.com/blog/linux-privilege-escalation\nAlgunos ejemplos básicos de errores de configuración: https://patchthenet.com/articles/linux-privilege-escalation-three-easy-ways-to-get-a-root-shell/"
   }
 ]
