@@ -627,7 +627,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#contraseñas-1",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Contraseñas",
-    "text": "Contraseñas\n\nConsejos sin llegar a políticas absurdas (<dumbpasswordrules.com>):\n\nIntroducir 2 o más caracteres extras, símbolos especiales...\nEscribir mal las palabras.\nUtilizar mayúsculas y minúsculas, pero no de forma evidente.\nConcatenar, embeber o mezclar 2 o más palabras.\nUsar caracteres poco comunes: $, &, #..."
+    "text": "Contraseñas\n\nConsejos sin llegar a políticas absurdas:\n\nIntroducir 2 o más caracteres extras, símbolos especiales...\nEscribir mal las palabras.\nUtilizar mayúsculas y minúsculas, pero no de forma evidente.\nConcatenar, embeber o mezclar 2 o más palabras.\nUsar caracteres poco comunes: $, &, #..."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#contraseñas-2",
@@ -642,6 +642,13 @@
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Herramientas de robustez de contraseñas",
     "text": "Herramientas de robustez de contraseñas\npam_cracklib y pam_pwquality son dos herramientas para forzar políticas de seguridad de contraseñas fuertes.\nPuedes ver un mínimo de fortaleza de una contraseña escribiendo por teclado:\ncracklib-check\nó así:\n\necho \"1234\" | cracklib-check\necho \"micontra\" | cracklib-check\necho \"M1contra$\" | cracklib-check\n\n1234: Es demasiado corta.\n\n\nmicontra: Está basada en una palabra del diccionario.\n\n\nM1contra$: OK"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#algunos-recursos-web",
+    "href": "tema04-usuarios/tema04-usuarios.html#algunos-recursos-web",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Algunos recursos web",
+    "text": "Algunos recursos web\n\n\ndumbpasswordrules.com\nhaveibeenpwned.com"
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords",
