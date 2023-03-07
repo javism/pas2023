@@ -151,7 +151,7 @@
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 4: Gestión de Usuarios"
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
@@ -567,6 +567,258 @@
     "text": "Ejercicios\n\nWeb Debian: netinstall vs imagen. Opcionalmente Ubuntu será equivalente para casi todo.\nCrear VM + disco + conectar .iso\n\n1-2GB RM + 4GB de disco es suficiente para trabajar sin entorno gráfico\n\nVamos a instalar sin entorno gráfico\nEn el particionado utilizaremos el por defecto de momento.\nNos piden cosas básicas: ssh, entorno gráfico…\n\nYa tenemos nuestra máquina lista:\n\nCambiar contraseña por defecto (en imágenes de VPS/nubes)\nTerminamos: no hay ni sudo, vim, etc.\nComo root:\n\nInstalar sudo:\n\napt install sudo\n\nEliminar el CD/ISO de las fuentes de software:\n\nnano /etc/apt/sources.list\n\nAñadir usuario sudo:\n\nadduser adminpas\nsudo usermod -aG sudo adminpas\n\n¡Ya hemos terminado con root!\n\nCon el usuario adminpas probamos algún comando, por ejemplo: sudo cat /etc/shadow\n¿Qué hace sudo !!?\nExplorar la máquina:\n\nDisco libre, particiones y memoria: df, fdisk -l, free (quizás necesites sudo para alguno)\nProcesadores y núcleos: cat /proc/cpuinfo\nHerramienta apt y repositorios: APT: el comando básico que debes conocer para usar Linux\n\n¿Cómo apagar o reiniciar desde el terminal de Linux?"
   },
   {
+    "objectID": "tema04-usuarios/tema04-usuarios.html",
+    "href": "tema04-usuarios/tema04-usuarios.html",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "",
+    "text": "Definir qué son usuarios del sistema, las características de los mismos y sus ficheros de configuración.\nEnumerar y explicar los campos del fichero /etc/passwd y /etc/shadow.\nExplicar las características que deberían tener las contraseñas para los usuarios.\nExplicar el mecanismo de shadow passwords y el mecanismo de cifrado de contraseñas que evita guardar las contraseñas del sistema en texto plano.\nEnumerar los mecanismos de revocación de contraseñas, las restricciones de tiempo en cuanto a la validez de las contraseñas y las herramientas de administración que permiten configurarlas.\nCambiar el intérprete de órdenes por defecto de los usuarios.\nConfigurar cuentas restrictivas para usuarios especiales.\nEnumerar los pasos para añadir un usuario al sistema.\nUtilizar herramientas administrativas para añadir o modificar cuentas de usuario.\nEstablecer el objetivo de los grupos de usuarios, identificar grupo primario y grupo activo de un usuario, enumerar y explicar los campos del fichero /etc/group.\nConfigurar grupos con contraseñas.\nUtilizar las distintas herramientas administrativas para grupos.\nIdentificar usuarios y grupos estándar en un sistema GNU/Linux.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#introducción-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#introducción-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Introducción",
+    "text": "Introducción\n\n\nDefinición de usuario\n\nPersona que trabaja en el sistema, editando ficheros, ejecutando programas...\nPseudo-usuario: entidad, que sin ser una persona, puede ejecutar programas o poseer ficheros (se les reserva identificadores de 0 a 499) y se utiliza típicamente para servicios y tareas automatizadas."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#información-mínima-usuario",
+    "href": "tema04-usuarios/tema04-usuarios.html#información-mínima-usuario",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Información mínima usuario",
+    "text": "Información mínima usuario\n\nCaracterísticas básicas de un usuario:\n\nNombre de usuario (logname o username).\nIdentificador de usuario (UID): el sistema trabaja, internamente, con el UID y no con el nombre de usuario.\nIdentificadores de los grupos a los que pertenece (GIDs)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#ficheros-básicos",
+    "href": "tema04-usuarios/tema04-usuarios.html#ficheros-básicos",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Ficheros básicos",
+    "text": "Ficheros básicos\n\nFicheros de configuración: \\(\\;\\)\n\n/etc/passwd: información de las cuentas de usuarios.\n/etc/shadow: passwords cifradas (hash de las contraseñas) e información de “envejecimiento” de las cuentas.\n/etc/group: definición de los grupos y usuarios miembros.\n/etc/gshadow: passwords de grupos cifradas.\n\n\n\nEjercicio: lista los permisos de todos estos ficheros y trata de entender la política de seguridad.\nls -l /etc/passwd /etc/shadow /etc/group /etc/gshadow"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd",
+    "href": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Fichero /etc/passwd",
+    "text": "Fichero /etc/passwd\n\nContiene la lista de usuarios del sistema y sus contraseñas.\nFormato: nombre:password:uid:gid:gecos:home:shell.\n\nnombre \\(\\rightarrow\\) Nombre del usuario, logname o username.\npassword \\(\\rightarrow\\) contraseña cifrada o:\n\n“*” o “!!” \\(\\rightarrow\\) la cuenta está desactivada o bloqueada.\n“x” \\(\\rightarrow\\) las shadow están activas, la contraseña cifrada se guarda en /etc/shadow.\n\nuid \\(\\rightarrow\\) identificador del usuario.\ngid \\(\\rightarrow\\) identificador del grupo primario al que pertenece.\ngecos \\(\\rightarrow\\) campo de información referente al usuario (nombre, teléfono, ...).\nhome \\(\\rightarrow\\) Path del directorio $HOME del usuario.\nshell \\(\\rightarrow\\) Intérprete de órdenes."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Fichero /etc/passwd",
+    "text": "Fichero /etc/passwd\n\nEl propietario del fichero es root y el grupo root.\nLos permisos del fichero son rw-r-r-.\nEl programa /usr/sbin/vipw permite editar el fichero manualmente.\nEl programa pwck verifica la integridad de /etc/passwd y /etc/shadow.\nSe permite el acceso al fichero /etc/passwd en modo lectura para poder leer información del usuario, pero no se debería permitir acceso a las passwords (aunque estén cifradas)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd-2",
+    "href": "tema04-usuarios/tema04-usuarios.html#fichero-etcpasswd-2",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Fichero /etc/passwd",
+    "text": "Fichero /etc/passwd"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#contraseñas",
+    "href": "tema04-usuarios/tema04-usuarios.html#contraseñas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Contraseñas",
+    "text": "Contraseñas\n\npasswd <nombre_usuario> \\(\\Rightarrow\\) asignar contraseña a un usuario (o cambiarla).\nElección de una contraseña adecuada\nNo utilizar:\n\nLas contraseñas más usadas\nTu nombre, parte de él, o el de alguien cercano a ti.\nNúmeros significativos para ti o alguien cercano.\nNombre, nº, lugar o persona, relacionados con tu trabajo.\nNombres de gente famosa, lugares, películas, publicidad...\nPalabras que estén en el diccionario (ver cracklib)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#contraseñas-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#contraseñas-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Contraseñas",
+    "text": "Contraseñas\n\nConsejos sin llegar a políticas absurdas (<dumbpasswordrules.com>):\n\nIntroducir 2 o más caracteres extras, símbolos especiales...\nEscribir mal las palabras.\nUtilizar mayúsculas y minúsculas, pero no de forma evidente.\nConcatenar, embeber o mezclar 2 o más palabras.\nUsar caracteres poco comunes: $, &, #..."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#contraseñas-2",
+    "href": "tema04-usuarios/tema04-usuarios.html#contraseñas-2",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Contraseñas",
+    "text": "Contraseñas\n\nLa contraseña se debe cambiar cuando:\n\nSe sospecha que alguien la ha podido conocer o averiguar.\nSe sospecha que alguien ha conseguido el fichero con las contraseñas (/etc/passwd o /etc/shadow).\nUn usuario se marcha del trabajo \\(\\Rightarrow\\) cambiar todas las que conozca.\nUn administrador del sistema se va \\(\\Rightarrow\\) cambiar TODAS.\nUn intruso ha conseguido entrar en el sistema.\n\nPeriódicamente, se debe forzar a que los usuarios cambien sus contraseñas, incluido el administrador.\n\nPor otro lado, si se obliga a los usuarios a cambiar su contraseña con demasiada frecuencia, lo normal es que elijan malas contraseñas, fáciles de adivinar..."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#herramientas-de-robustez-de-contraseñas",
+    "href": "tema04-usuarios/tema04-usuarios.html#herramientas-de-robustez-de-contraseñas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Herramientas de robustez de contraseñas",
+    "text": "Herramientas de robustez de contraseñas\npam_cracklib y pam_pwquality son dos herramientas para forzar políticas de seguridad de contraseñas fuertes.\nPuedes ver un mínimo de fortaleza de una contraseña escribiendo por teclado:\ncracklib-check\nó así:\n\necho \"1234\" | cracklib-check\necho \"micontra\" | cracklib-check\necho \"M1contra$\" | cracklib-check\n\n1234: Es demasiado corta.\n\n\nmicontra: Está basada en una palabra del diccionario.\n\n\nM1contra$: OK"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords",
+    "text": "Shadow passwords\n\nPermiten que las contraseñas cifradas no se guarden en el fichero /etc/passwd sino en /etc/shadow (más restringido).\n/etc/shadow tiene los permisos rw------, y el usuario y grupo propietario es root.\n\nEn las últimas versiones, tiene permisos rw-r---- y el grupo propietario es shadow (flexibilidad para comprobación de contraseña por usuarios que pertenezcan a dicho grupo).\n\nEste fichero guarda para cada usuario del sistema, la contraseña cifrada junto con su información de envejecimiento.\nSolo para aquellos usuarios que tengan una “x” en /etc/passwd.\nPor defecto, están activas y se actualizan automáticamente."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords",
+    "text": "Shadow passwords"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-2",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-2",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords",
+    "text": "Shadow passwords\nnom:pass:changed:minlife:maxlife:warn:inactive:expired:unused\n\nnom \\(\\Rightarrow\\) nombre del usuario, logname o username.\npass \\(\\Rightarrow\\) contraseña cifrada.\n\nmkpasswd -method=sha-512 contraseña salt\n\nComandos de actualización:\n\npwconv \\(\\Rightarrow\\) crear y actualizar el fichero /etc/shadow.\npwunconv \\(\\Rightarrow\\) desactivar los shadow passwords."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-3",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-3",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords",
+    "text": "Shadow passwords\n\nPara cifrar una contraseña, se utilizan algoritmos criptográficos de generación de resumen (función hash, \\(H(\\cdot)\\)).\n\nEl mensaje en este caso es la contraseña (\\(C\\)).\nsalt (\\(S\\)) es una palabra aleatoria que se concatena a los bytes de contraseña \\(\\rightarrow\\) dificulta ataques con diccionarios y tablas de hash precomputadas; añade aleatoriedad al resumen.\nEl sistema concatena \\(C\\) con \\(S\\), \\(\\{C,S\\}\\), calcula el resumen \\(F=H(\\{C,S\\})\\) y almacena \\(S\\) y \\(F\\).\nCuando el usuario introduce una contraseña \\(C'\\), se repite todo el proceso: \\(F'=H(\\{C',S\\})\\).\nSi \\(F=F'\\), entonces el usuario puede entrar al sistema."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-4",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-4",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords",
+    "text": "Shadow passwords\n\nPropiedades deseables de las funciones de resumen:\n\nDado \\(C\\), debe ser fácil calcular \\(H(C)\\) \\(\\rightarrow\\) para que el coste computacional no sea alto.\nDado \\(H(C)\\), debe ser extremadamente difícil calcular \\(C\\) \\(\\rightarrow\\) para que las contraseñas originales no se puedan conocer sabiendo el resumen (fugas de información).\nDado \\(C\\), debe ser muy difícil encontrar otro mensaje \\(C'\\) tal que \\(H(C)=H(C')\\) \\(\\rightarrow\\) para que dos usuarios no terminen con la misma contraseña.\n\nEste tipo de funciones se denominan funciones de dispersión de un solo sentido."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords: Algoritmos de hash",
+    "text": "Shadow passwords: Algoritmos de hash\nDos algoritmos: MD5 y SHA\nMD5 (Message-Digest algorithm 5)\n\nAplica funciones no lineales a los 17 segmentos de 32 bits de un bloque de 512 bits.\nSe obtiene un resumen de 128 bits.\nObtener suma MD5 (GNU/Linux):\n\nmd5sum Fichero.ext > Fichero.md5\n\nChequear suma MD5 (GNU/Linux) (se busca un fichero con el nombre correcto en la carpeta actual):\n\nmd5sum -c Fichero.md5"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Shadow passwords: Algoritmos de hash",
+    "text": "Shadow passwords: Algoritmos de hash\n\nSHA (Secure Hash Algorithm):\n\nEstándar del NIST.\nParecido a MD5, pero genera resúmenes más grandes, que lo hacen más seguro contra ataques de fuerza bruta o del cumpleaños.\nSe pueden considerar 160, 224, 256, 384 o 512 bits para el resumen.\nObtener suma SHA (GNU/Linux):\n\nshasum [-anumBits] Fichero.ext > Fichero.sha\n\nChequear suma SHA (GNU/Linux):\n\nshasum -c Fichero.sha\n\nSHA-512 es el algoritmo utilizado por defecto en GNU/Linux para guardar la contraseña."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#ejemplo-sha",
+    "href": "tema04-usuarios/tema04-usuarios.html#ejemplo-sha",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Ejemplo SHA:",
+    "text": "Ejemplo SHA:\n\nshasum /etc/passwd > resumen_pw.sha \ncat resumen_pw.sha \nshasum -c resumen_pw.sha\n\n073070775bc5a6c360148c81c079d8ae47d555a6  /etc/passwd\n\n\n/etc/passwd: OK"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-etcshadow",
+    "href": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-etcshadow",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Restricciones de tiempo (/etc/shadow)",
+    "text": "Restricciones de tiempo (/etc/shadow)\n\nIntroducir restricciones de tiempo o envejecimiento para la validez de la cuenta o de la contraseña.\n\nchanged \\(\\Rightarrow\\) fecha del último cambio de contraseña.\nminlife \\(\\Rightarrow\\) nº de días que han de pasar para poder cambiar la contraseña.\nmaxlife \\(\\Rightarrow\\) nº de días máximo que puede estar con la misma contraseña sin cambiarla.\nwarn \\(\\Rightarrow\\) cuántos días antes de que la contraseña expire (maxlife) el usuario será informado sobre ello, indicándole que tiene que cambiarla.\ninactive \\(\\Rightarrow\\) nº de días después de que la contraseña expire en que la cuenta se deshabilitará si no ha sido cambiada.\nexpired \\(\\Rightarrow\\) fecha en la que la cuenta expira y se deshabilita de forma automática."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo",
+    "href": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Restricciones de tiempo",
+    "text": "Restricciones de tiempo\n\nEl fichero /etc/login.defs tiene los valores por defecto.\nComando chage (administrador):\n\nchage -d ult_día usuario \\(\\Rightarrow\\) último cambio de password.\nchage -m min_días usuario \\(\\Rightarrow\\) nº de días que han de pasar para poder cambiar la contraseña.\nchage -M max_días usuario \\(\\Rightarrow\\) nº de días máximo que puede estar con la misma contraseña sin cambiarla.\nchage -W warn_días usuario \\(\\Rightarrow\\) establece un aviso de que la contraseña expira un número de días antes de que expire, indicándole que tiene que cambiarla.\nchage -I inac_días usuario \\(\\Rightarrow\\) nº de días después de que la contraseña expire que la cuenta se deshabilitará de forma automática si la contraseña no ha sido cambiada.\nchage -E exp_días usuario \\(\\Rightarrow\\) fecha en la que la cuenta expira y se deshabilita de forma automática."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Restricciones de tiempo",
+    "text": "Restricciones de tiempo\nSupongamos que el usuario pagutierrez cambia su contraseña el 1 de marzo y root ejecuta estas órdenes:\nchage -M 20 pagutierrez\nchage -W 6 pagutierrez\nchage -I 5 pagutierrez\nchage -E 2023-10-30 pagutierrez\nLos tiempos quedan fijados de la siguiente manera:\n\nEl 14 de marzo pagutierrez recibirá el primer aviso para que cambie su contraseña.\nEl 20 de marzo, debería haber cambiado su contraseña.\nSi no cambia la contraseña, como se ha fijado el tiempo de inactividad, la cuenta aún no se bloqueará.\nSi el 25 de marzo pagutierrez no ha cambiado su contraseña, la cuenta será bloqueada.\nLa cuenta expira, pase lo que pase, el 30 de octubre."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#ficheros-de-inicialización",
+    "href": "tema04-usuarios/tema04-usuarios.html#ficheros-de-inicialización",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Ficheros de inicialización",
+    "text": "Ficheros de inicialización\n\nDirectorio /etc/skel/ \\(\\Rightarrow\\) ficheros que se copian automáticamente a cada $HOME.\nLos ficheros de inicialización son scripts shell que realizan tareas como dar valor a variables, nombrar alias, realizar funciones específicas...\nLos ficheros dependen del intérprete de órdenes seleccionado: Bourne shell (sh), Bourne again shell (bash), C shell (csh)...\nIncluyen el PATH, variables de entorno, umask, funciones de inicialización, alias, var. del propio shell...\nLo normal es que lean parte de su contenido de algún fichero global (/etc/profile, /etc/bash.bashrc)"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#ficheros-de-inicialización-y-cierre",
+    "href": "tema04-usuarios/tema04-usuarios.html#ficheros-de-inicialización-y-cierre",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Ficheros de inicialización y cierre",
+    "text": "Ficheros de inicialización y cierre\n.bash_profile en bash / .profile en bash y sh / .login en csh: Se ejecuta al hacer un login en el sistema por SSH o por terminal real.\n.bashrc / .cshrc en csh: Cada vez que se ejecuta una shell en bash aunque no conlleve login.\n.bash_logout en bash / .logout en C csh: Al salir del sistema el usuario (al finalizar la sesión)"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#selección-de-intérprete-de-órdenes",
+    "href": "tema04-usuarios/tema04-usuarios.html#selección-de-intérprete-de-órdenes",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Selección de intérprete de órdenes",
+    "text": "Selección de intérprete de órdenes\n\nEn el último campo del fichero /etc/passwd, se establece el intérprete de órdenes que se ejecuta al entrar al sistema.\nEn el fichero /etc/shells se indican los shells permitidos.\nUn usuario puede cambiar su shell con chsh:\n\n¡Ojo! Si se prohíbe un shell, no se podrá elegir con chsh, pero los usuarios que ya lo tenían asignado lo podrán seguir usando.\n\nSi un usuario no tiene asignado ningún intérprete de órdenes, se usará el **shell por defecto /bin/sh.\nSi se desea que el usuario no pueda entrar al sistema se le puede asignar /bin/false o /sbin/nologin.\nTambién se puede establecer como shell un fichero ejecutable:\n\nCuando el usuario entre al sistema se ejecuta, y, al finalizar la ejecución, el usuario sale del sistema (no llega a hacer login)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas",
+    "href": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Cuentas restrictivas",
+    "text": "Cuentas restrictivas\n\nLas cuentas restrictivas permiten limitar las acciones de los usuarios en el sistema.\nSe pueden crear de dos formas:\n\nAsignar como shell un fichero ejecutable que realice una tarea determinada, y al terminar se sale del sistema:\n\nUsuario para hacer copias de seguridad: como shell tiene un script que hace esa tarea.\nUsuario para apagar el sistema: ejecuta la orden shutdown.\n\nLos usuarios restrictivos de este tipo tienen que tener los permisos necesarios para poder hacer la tarea asignada. Estos permisos se asignan a nivel de identificador de usuario.\n\nPara apagar el sistema, se necesitan permisos de administración."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Cuentas restrictivas",
+    "text": "Cuentas restrictivas\n\nUsando el shell restrictivo /bin/rbash:\n\nrbash es un enlace simbólico a /bin/bash (rbash es equivalente a /bin/bash -r).\nEste intérprete se comporta como un intérprete normal, salvo que el usuario no puede hacer determinadas tareas, como:\n\nCambiar de directorio.\nEstablecer o modificar los valores de $PATH o $HOME.\nEspecificar nombres u órdenes que contengan /.\nUsar redirección.\nUtilizar la orden exec para reemplazar el shell por otro programa.\n\nA estos usuarios hay que limitarles los ficheros que pueden ejecutar, copiándolos a un directorio y que su PATH sea sólo ese directorio. En otro caso, con un PATH “normal”, es casi como si no tuviesen restricciones."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema",
+    "href": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Añadir nuevos usuarios al sistema",
+    "text": "Añadir nuevos usuarios al sistema\nPasos a realizar (del 1 al 7, automatizados con herramientas):\n\nDecidir el nombre de usuario, el UID, y los grupos a los que va a pertenecer (grupo primario y grupos secundarios).\nIntroducir los datos en los ficheros /etc/passwd y /etc/group (poniendo como contraseña “*”).\nAsignar un password a la nueva cuenta.\nSi las shadow están activas, escribir la contraseña.\nEstablecer los parámetros de envejecimiento de la cuenta.\nCrear el directorio $HOME del nuevo usuario, establecer el propietario y grupo correspondiente y los permisos adecuados.\nCopiar ficheros necesarios por defecto (.bash_profile, .bashrc...) desde /etc/skel/.\nEstablecer otras facilidades: quotas, mail, permisos, etc.\nEjecutar cualquier tarea de inicialización propia del sistema.\nProbar la nueva cuenta."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#herramientas-para-crearmodificar-cuentas-de-usuario",
+    "href": "tema04-usuarios/tema04-usuarios.html#herramientas-para-crearmodificar-cuentas-de-usuario",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Herramientas para crear/modificar cuentas de usuario",
+    "text": "Herramientas para crear/modificar cuentas de usuario\nLas herramientas de creación de cuentas de usuario suelen realizar todas las tareas básicas del proceso, a excepción de las específicas (quotas, impresión, etc.).\n\nadduser o useradd \\(\\Rightarrow\\) crear cuentas de usuario, o modificar cuentas ya existentes. Toma los valores por defecto de /etc/default/useradd y de /etc/login.defs.\nuseradd se salta algunos pasos.\nusermod \\(\\Rightarrow\\) modificar cuentas.\ndeluser o userdel \\(\\Rightarrow\\) eliminar cuentas (por defecto no borra el directorio $HOME).\nnewusers \\(\\Rightarrow\\) crea cuentas de usuarios utilizando la información introducida en un fichero de texto (en batch), que ha de tener el formato del fichero /etc/passwd (no copia los ficheros de inicialización).\nusers-admin \\(\\Rightarrow\\) herramienta en modo gráfico."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos",
+    "text": "Grupos\n\nGrupos: colecciones de usuarios que comparten recursos o ficheros del sistema.\n\nCaracterísticas de un grupo:\n\nNombre del grupo o groupname.\nIdentificador del grupo (GID) \\(\\Rightarrow\\) internamente el sistema identifica al grupo por este número.\n\nObjetivo: Garantizar permisos concretos para un conjunto de usuarios, sin tener que aplicarlos a cada uno.\n\nEl fichero de configuración es /etc/group, con el formato: nombre:x:gid:lista de usuarios\n\nnombre \\(\\Rightarrow\\) nombre del grupo.\ngid \\(\\Rightarrow\\) identificador del grupo.\nlista de usuarios que pertenecen al grupo, sep. por “,”.\n\n\npas:x:519:pagutierrez,jsanchezm"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-2",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-2",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos",
+    "text": "Grupos\n\nLos grupos pueden tener contraseña \\(\\Rightarrow\\) /etc/gshadow:\n\nSi un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden newgrp.\nInformación en /etc/gshadow: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al /etc/shadow).\n\nTipos de grupos:\n\nPrimarios \\(\\Rightarrow\\) grupo especificado en /etc/passwd.\nSecundarios \\(\\Rightarrow\\) otros grupos (indicados en /etc/group).\n\nFuncionamiento de los grupos:\n\nAl crear un fichero se establece como grupo propietario el grupo activo del usuario en ese momento.\nGrupo activo \\(\\Rightarrow\\) grupo primario (salvo que usemos newgrp).\nAl determinar los permisos sobre un fichero, se usan todos los grupos del usuario."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-3",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-3",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos",
+    "text": "Grupos\n\naddgroup grupo \\(\\Rightarrow\\) crear un nuevo grupo.\ngroupmod grupo \\(\\Rightarrow\\) modificar un grupo existente.\ndelgroup grupo \\(\\Rightarrow\\) eliminar un grupo.\nnewgrp grupo \\(\\Rightarrow\\) cambiar de grupo activo (lanza un shell)\ngpasswd grupo \\(\\Rightarrow\\) asignar una contraseña a un grupo:\n\nSi el usuario no pertenece al grupo, pero el grupo tiene contraseña, se le solicita y pasa a ser su grupo activo.\n\ngpasswd -a user grupo \\(\\Rightarrow\\) añadir un usuario a un grupo.\ngroups [usuario] \\(\\Rightarrow\\) grupos a los que pertenece un usuario.\nid [usuario] \\(\\Rightarrow\\) lista el identificador del usuario y los grupos a los que pertenece.\ngrpck \\(\\Rightarrow\\) chequea la consistencia del fichero de grupos."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#rangos-del-uid",
+    "href": "tema04-usuarios/tema04-usuarios.html#rangos-del-uid",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Rangos del UID",
+    "text": "Rangos del UID\n\n\\(UID\\in[0,99]\\): Usuarios que representan al propio SO.\n\\(UID\\in[100,499]\\): Usuarios especiales que representan servicios o programas.\n\\(UID\\ge 1000\\): Usuarios normales."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#algunos-usuarios-y-grupos-estándar",
+    "href": "tema04-usuarios/tema04-usuarios.html#algunos-usuarios-y-grupos-estándar",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Algunos usuarios y grupos estándar",
+    "text": "Algunos usuarios y grupos estándar\n\nUsuarios estándar:\n\nroot \\(\\Rightarrow\\) Cuenta del administrador (\\(0\\)).\nbin (utilidades comunes de usuarios, \\(2\\)), daemon (ejecución de demonios, \\(1\\)), lp, sync, shutdown, etc. \\(\\Rightarrow\\) Tradicionalmente usados para poseer ficheros o ejecutar servicios\nmail, news, ftp \\(\\Rightarrow\\) Asociados con herramientas o facilidades.\npostgres, mysql, xfs \\(\\Rightarrow\\) Creados por herramientas instaladas en el sistema para administrar y ejecutar sus servicios.\nnobody o nfsnobody \\(\\Rightarrow\\) Usado por NFS y otras utilidades, usuario sin privilegios."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#algunos-usuarios-y-grupos-estándar-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#algunos-usuarios-y-grupos-estándar-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Algunos usuarios y grupos estándar",
+    "text": "Algunos usuarios y grupos estándar\n\nGrupos estándar:\n\nroot, sys.\nbin, daemon, adm, lp, disk, mail, ftp, nobody, etc.\nkmem \\(\\Rightarrow\\) Grupo propietario de los programas para leer la memoria del kernel.\nuser o users \\(\\Rightarrow\\) Grupo de los usuarios normales (no siempre se usa)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#referencias-1",
+    "href": "tema04-usuarios/tema04-usuarios.html#referencias-1",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Referencias",
+    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. UNIX and Linux System Administration Handbook, 5th Edition. Capítulo 8: User Management. Addison-Wesley. 2018.\nAeleen Frisch. Essential system administration. Capítulo 6. Managing users and groups. O’Reilly and Associates. Tercera edición. 2002."
+  },
+  {
     "objectID": "tema02-organizacion/tema02-ficheros.html",
     "href": "tema02-organizacion/tema02-ficheros.html",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
@@ -599,14 +851,14 @@
     "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Gestión del acceso: propietarios y permisos",
-    "text": "Gestión del acceso: propietarios y permisos\nCada fichero tiene dos propietarios: usuario y grupo.\n\nls -l images | head -n 3 # esto filtra las 3 primeas líneas\n\ntotal 828\n\n\n-rw-rw-r-- 1 javi javi  54324 feb 23 23:40 book_filesystem.png\n\n\n-rw-rw-r-- 1 javi javi  80965 feb 23 23:26 book_process_control.png\n\n\nchown \\(\\rightarrow\\) cambia el usuario propietario (se necesitan privilegios de root):\nsudo chown javi fichero\nsudo chown javi:profesores fichero\nsudo chown -R javi directorio\nchgrp \\(\\rightarrow\\) cambia el grupo propietario (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o root).\nsudo chgrp profesores fichero\nsudo chgrp -R profesores directorio"
+    "text": "Gestión del acceso: propietarios y permisos\nCada fichero tiene dos propietarios: usuario y grupo.\nls -l images | head -n 3 # esto filtra las 3 primeas líneas\nchown \\(\\rightarrow\\) cambia el usuario propietario (se necesitan privilegios de root):\nsudo chown javi fichero\nsudo chown javi:profesores fichero\nsudo chown -R javi directorio\nchgrp \\(\\rightarrow\\) cambia el grupo propietario (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o root).\nsudo chgrp profesores fichero\nsudo chgrp -R profesores directorio"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
     "href": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Gestión del acceso: propietarios y permisos",
-    "text": "Gestión del acceso: propietarios y permisos\nListado con detalles y ficheros ocultos:\n\nls -la /boot/|head -n 8\n\ntotal 184948\n\n\ndrwxr-xr-x  4 root root     4096 feb 16 08:44 .\n\n\ndrwxr-xr-x 30 root root     4096 feb 23 18:28 ..\n\n\n-rw-r--r--  1 root root   206876 mar 27  2020 config-4.15.0-1079-oem\n\n\n-rw-r--r--  1 root root   237757 ene 10 17:37 config-5.4.0-137-generic\n\n\n-rw-r--r--  1 root root   237757 ene 25 16:42 config-5.4.0-139-generic\n\n\ndrwx------  4 root root     4096 ene  1  1970 efi\n\n\ndrwxr-xr-x  5 root root     4096 feb 22 13:23 grub"
+    "text": "Gestión del acceso: propietarios y permisos\nListado con detalles y ficheros ocultos:\nls -la /boot/|head -n 8"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#gestión-del-acceso-propietarios-y-permisos-2",
@@ -648,7 +900,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sticky-bit-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Permisos especiales: sticky bit",
-    "text": "Permisos especiales: sticky bit\n\nmkdir -p  carpeta && cd carpeta\ntouch fichero\nls -la fichero \nchmod o+w+t fichero \nls -la fichero \n\n-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero\n\n\n-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero\n\n\n\n¿Qué sentido tiene el sticky bit en este ejemplo?\n\n\nls -ld /tmp/\n\ndrwxrwxrwt 39 root root 20480 feb 24 00:21 /tmp/"
+    "text": "Permisos especiales: sticky bit\nmkdir -p  carpeta && cd carpeta\ntouch fichero\nls -la fichero \nchmod o+w+t fichero \nls -la fichero \n\n¿Qué sentido tiene el sticky bit en este ejemplo?\n\nls -ld /tmp/"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid",
@@ -690,7 +942,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#coda-máscara-de-permisos-umask-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "CODA: Máscara de permisos (umask)",
-    "text": "CODA: Máscara de permisos (umask)\n\n\n¿Podremos especificar una máscara que permita crear ficheros con permisos de ejecución?\nIntenta deducir qué pasará con los siguientes pasos:\n\n\n\n\n\numask\nmkdir -p /tmp/prueba1\nls -ld /tmp/prueba1\ntouch /tmp/prueba1/a \nls -l /tmp/prueba1/\n\n0002\n\n\ndrwxrwxr-x 2 javi javi 4096 feb 24 00:13 /tmp/prueba1\n\n\ntotal 0\n\n\n-rw-rw-r-- 1 javi javi 0 feb 24 00:21 a\n\n\n\n\numask 027\nmkdir -p /tmp/prueba2\nls -ld /tmp/prueba2\ntouch /tmp/prueba2/a \nls -l /tmp/prueba2/\n\ndrwxr-x--- 2 javi javi 4096 feb 24 00:09 /tmp/prueba2\n\n\ntotal 0\n\n\n-rw-r----- 1 javi javi 0 feb 24 00:21 a"
+    "text": "CODA: Máscara de permisos (umask)\n\n\n¿Podremos especificar una máscara que permita crear ficheros con permisos de ejecución?\nIntenta deducir qué pasará con los siguientes pasos:\n\n\n\n\numask\nmkdir -p /tmp/prueba1\nls -ld /tmp/prueba1\ntouch /tmp/prueba1/a \nls -l /tmp/prueba1/\n\numask 027\nmkdir -p /tmp/prueba2\nls -ld /tmp/prueba2\ntouch /tmp/prueba2/a \nls -l /tmp/prueba2/"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#tipos-de-ficheros-ls--l",
@@ -859,5 +1111,12 @@
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "",
     "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
+  },
+  {
+    "objectID": "utiles_pas/index.html#escalado-de-privilegios",
+    "href": "utiles_pas/index.html#escalado-de-privilegios",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "Escalado de privilegios",
+    "text": "Escalado de privilegios\nIncluye enlaces a scripts de auditoría: https://delinea.com/blog/linux-privilege-escalation\nAlgunos ejemplos básicos de errores de configuración: https://patchthenet.com/articles/linux-privilege-escalation-three-easy-ways-to-get-a-root-shell/"
   }
 ]

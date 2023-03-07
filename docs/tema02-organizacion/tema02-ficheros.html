@@ -191,6 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../tema02-organizacion/tema02-webuco.html" class="sidebar-item-text sidebar-link">Tema 2: Ejercicios web personal en la UCO</a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema04-usuarios/tema04-usuarios.html" class="sidebar-item-text sidebar-link">Tema 4: Gestión de usuarios</a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -246,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">3 de marzo de 2023</p>
+      <p class="date">7 de marzo de 2023</p>
     </div>
   </div>
   
@@ -331,56 +336,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="gestión-del-acceso-propietarios-y-permisos" class="level2">
 <h2 class="anchored" data-anchor-id="gestión-del-acceso-propietarios-y-permisos">Gestión del acceso: propietarios y permisos</h2>
 <p>Cada fichero tiene dos propietarios: <strong>usuario</strong> y <strong>grupo</strong>.</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> images <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 3 <span class="co"># esto filtra las 3 primeas líneas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>total 828</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-rw-r-- 1 javi javi  54324 feb 23 23:40 book_filesystem.png</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-rw-r-- 1 javi javi  80965 feb 23 23:26 book_process_control.png</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>ls -l images | head -n 3 # esto filtra las 3 primeas líneas</code></pre>
 <p><code>chown</code> <span class="math inline">\(\rightarrow\)</span> cambia el <strong>usuario propietario</strong> (se necesitan privilegios de <strong>root</strong>):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown javi fichero</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown javi:profesores fichero</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> javi directorio</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown javi fichero</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown javi:profesores fichero</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> javi directorio</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>chgrp</code> <span class="math inline">\(\rightarrow\)</span> cambia el <strong>grupo propietario</strong> (puede hacerlo el propietario del fichero, el que pertenezca al grupo, o <strong>root</strong>).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chgrp profesores fichero</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chgrp <span class="at">-R</span> profesores directorio</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chgrp profesores fichero</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chgrp <span class="at">-R</span> profesores directorio</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestión-del-acceso-propietarios-y-permisos-1" class="level2">
 <h2 class="anchored" data-anchor-id="gestión-del-acceso-propietarios-y-permisos-1">Gestión del acceso: propietarios y permisos</h2>
 <p>Listado con detalles y ficheros ocultos:</p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /boot/<span class="kw">|</span><span class="fu">head</span> <span class="at">-n</span> 8</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>total 184948</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxr-xr-x  4 root root     4096 feb 16 08:44 .</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxr-xr-x 30 root root     4096 feb 23 18:28 ..</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r--  1 root root   206876 mar 27  2020 config-4.15.0-1079-oem</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r--  1 root root   237757 ene 10 17:37 config-5.4.0-137-generic</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-r--r--  1 root root   237757 ene 25 16:42 config-5.4.0-139-generic</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwx------  4 root root     4096 ene  1  1970 efi</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxr-xr-x  5 root root     4096 feb 22 13:23 grub</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>ls -la /boot/|head -n 8</code></pre>
 <p><img src="images/file-permission-explanation-1-1.png" class="img-fluid" width="400"></p>
 </section>
 <section id="gestión-del-acceso-propietarios-y-permisos-2" class="level2">
@@ -420,9 +388,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table></li>
 <li><p>Se establecen independientemente para: el usuario propietario (<code>u</code>), usuarios del grupo propietario (<code>g</code>) y resto de usuarios (<code>o</code>).</p></li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+r fichero                 <span class="co"># Modo simbólico</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> u+rwx,go-rwx directorio  <span class="co"># Modo simbólico</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 740 fichero                 <span class="co"># Modo absoluto u+rwx,g+r,g-wx,o-rwx</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+r fichero                 <span class="co"># Modo simbólico</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> u+rwx,go-rwx directorio  <span class="co"># Modo simbólico</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 740 fichero                 <span class="co"># Modo absoluto u+rwx,g+r,g-wx,o-rwx</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Otros comandos: <code>adduser</code>, <code>addgroup</code>...</li>
 </ul>
@@ -500,28 +468,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="permisos-especiales-sticky-bit-1" class="level2">
 <h2 class="anchored" data-anchor-id="permisos-especiales-sticky-bit-1">Permisos especiales: sticky bit</h2>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span>  carpeta <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> carpeta</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> fichero</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> fichero </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> o+w+t fichero </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> fichero </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-rw-rwT 1 javi javi 0 feb 24 00:21 fichero</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>mkdir -p  carpeta &amp;&amp; cd carpeta
+touch fichero
+ls -la fichero 
+chmod o+w+t fichero 
+ls -la fichero </code></pre>
 <div class="exampleblock">
 <p>¿Qué sentido tiene el sticky bit en este ejemplo?</p>
 </div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /tmp/</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxrwxrwt 39 root root 20480 feb 24 00:21 /tmp/</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>ls -ld /tmp/</code></pre>
 </section>
 <section id="permisos-especiales-suid" class="level2">
 <h2 class="anchored" data-anchor-id="permisos-especiales-suid">Permisos especiales: suid</h2>
@@ -531,26 +486,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Para <strong>ejecutables</strong> <span class="math inline">\(\rightarrow\)</span> cambio de dominio a nivel de usuario. Durante la ejecución, el usuario efectivo del proceso es el propietario del fichero y no el usuario que lo ejecutó.</p></li>
 <li><p>Para <strong>directorios</strong> <span class="math inline">\(\rightarrow\)</span> Ignorado.</p></li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El ejecutable "gestorbd" lee el fichero "basedatos":</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxr--r-x</span> root root /opt/bin/gestorbd</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwx------</span> root root /opt/datos/basedatos</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># El usuario pagutierrez puede ejecutar "gestorbd", pero ese programa</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NO podrá leer "basedatos"</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># El programa si podrá leer "basedatos" si "gestorbd" tiene los permisos:</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwsr--r-x</span> root root /opt/bin/gestorbd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El ejecutable "gestorbd" lee el fichero "basedatos":</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwxr--r-x</span> root root /opt/bin/gestorbd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwx------</span> root root /opt/datos/basedatos</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># El usuario pagutierrez puede ejecutar "gestorbd", pero ese programa</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NO podrá leer "basedatos"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># El programa si podrá leer "basedatos" si "gestorbd" tiene los permisos:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwsr--r-x</span> root root /opt/bin/gestorbd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="permisos-especiales-suid-1" class="level2">
 <h2 class="anchored" data-anchor-id="permisos-especiales-suid-1">Permisos especiales: suid</h2>
 <div class="exampleblock">
 <p>¿Cómo es posible que cambiemos la contraseña desde un usuario corriente?</p>
 <p>Ejecuta en tu máquina:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /etc/passwd /etc/shadow /usr/bin/passwd </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /etc/passwd /etc/shadow /usr/bin/passwd </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="incremental">
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> /etc/passwd /etc/shadow /usr/bin/passwd </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 root root    2941 feb 13 10:21 /etc/passwd</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r-----</span> 1 root shadow  1827 feb 13 10:21 /etc/shadow</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwsr-xr-x</span> 1 root root   59640 nov 29 13:25 /usr/bin/passwd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> /etc/passwd /etc/shadow /usr/bin/passwd </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r--r--</span> 1 root root    2941 feb 13 10:21 /etc/passwd</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">-rw-r-----</span> 1 root shadow  1827 feb 13 10:21 /etc/shadow</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">-rwsr-xr-x</span> 1 root root   59640 nov 29 13:25 /usr/bin/passwd</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Veamos <a href="https://github.com/shadow-maint/shadow/blob/master/src/passwd.c#L969">el código de <code>passwd</code></a></p>
 </div>
 </section>
@@ -582,8 +537,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Cuando un fichero nuevo se crea, se le asignan permisos.</p></li>
 <li><p>Los permisos se deciden aplicando una máscara de permisos a los permisos base (que se puede consultar/modificar utilizando el comando <code>umask</code>):</p></li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> umask</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0002</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> umask</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0002</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>La máscara de bits indica con un 1 aquellos bits que deberán ser 0 en la cadena de permisos, es decir, indica qué permisos están restringidos.</p></li>
 <li><p>Los permisos base para directorios son 777; para ficheros, 666.</p></li>
@@ -599,47 +554,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /tmp/prueba1</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /tmp/prueba1</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> /tmp/prueba1/a </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /tmp/prueba1/</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0002</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxrwxr-x 2 javi javi 4096 feb 24 00:13 /tmp/prueba1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>total 0</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-rw-r-- 1 javi javi 0 feb 24 00:21 a</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>umask
+mkdir -p /tmp/prueba1
+ls -ld /tmp/prueba1
+touch /tmp/prueba1/a 
+ls -l /tmp/prueba1/</code></pre>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span> 027</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /tmp/prueba2</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-ld</span> /tmp/prueba2</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> /tmp/prueba2/a </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /tmp/prueba2/</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>drwxr-x--- 2 javi javi 4096 feb 24 00:09 /tmp/prueba2</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>total 0</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-rw-r----- 1 javi javi 0 feb 24 00:21 a</code></pre>
-</div>
-</div>
+<pre class="{bash}"><code>umask 027
+mkdir -p /tmp/prueba2
+ls -ld /tmp/prueba2
+touch /tmp/prueba2/a 
+ls -l /tmp/prueba2/</code></pre>
 </div>
 </div>
 </section>
-<section id="tipos-de-ficheros-ls--l" class="level2">
-<h2 class="anchored" data-anchor-id="tipos-de-ficheros-ls--l">Tipos de ficheros (<code>ls -l</code>)</h2>
+<section id="tipos-de-ficheros-ls--l" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="tipos-de-ficheros-ls--l">Tipos de ficheros (<code>ls -l</code>)</h2>
 <ul>
 <li><p><strong>Normal</strong>.</p></li>
 <li><p><strong>Directorio</strong> (<code>d</code>): son ficheros que contienen enlaces a otros ficheros (ya sean directorios o archivos normales).</p></li>
@@ -691,24 +621,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="ejemplo-enlaces-físicos-y-simbólicos" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-enlaces-físicos-y-simbólicos">Ejemplo enlaces físicos y simbólicos</h2>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observad conteo de referencias (tercera columna, después de permisos).</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp/</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> prueba</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> prueba enlace_fisico</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_fisico</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> prueba enlace_simbolico</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_simbolico</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observad conteo de referencias (tercera columna, después de permisos).</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp/</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> prueba</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> prueba enlace_fisico</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_fisico</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> prueba enlace_simbolico</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-li</span> prueba enlace_simbolico</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Resultado ejecución:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch prueba</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln prueba enlace_fisico</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_fisico</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln <span class="at">-s</span> prueba enlace_simbolico</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_simbolico enlace_fisico </span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="ex">12481314</span> lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico <span class="at">-</span><span class="op">&gt;</span> prueba</span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch prueba</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln prueba enlace_fisico</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_fisico</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ln <span class="at">-s</span> prueba enlace_simbolico</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-li</span> prueba enlace_simbolico enlace_fisico </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 enlace_fisico</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="ex">12481314</span> lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico <span class="at">-</span><span class="op">&gt;</span> prueba</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="ex">12481313</span> <span class="at">-rw-rw-r--</span> 2 javi javi 0 feb 23 23:00 prueba</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="procesos" class="level1" data-number="3">
@@ -717,8 +647,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="procesos-1">Procesos</h2>
 <p><img src="images/book_process_control.png" class="img-fluid"></p>
 </section>
-<section id="procesos-2" class="level2">
-<h2 class="anchored" data-anchor-id="procesos-2">Procesos</h2>
+<section id="procesos-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="procesos-2">Procesos</h2>
 <ul>
 <li><p><strong>Procesos</strong>: son programas en ejecución.</p></li>
 <li><p>Los atributos de un proceso son:</p>
@@ -747,7 +677,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="exampleblock">
 <p>Prueba a añadir <code>-a</code>:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-Fla</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-Fla</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -783,8 +713,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="dispositivos-de-bloques-lsblk" class="level2">
 <h2 class="anchored" data-anchor-id="dispositivos-de-bloques-lsblk">Dispositivos de bloques: lsblk</h2>
 <p>Depende de tu distribución quizás necesites instalar:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install util-linux</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span> <span class="kw">|</span><span class="fu">grep</span> <span class="at">-v</span> loop</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install util-linux</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span> <span class="kw">|</span><span class="fu">grep</span> <span class="at">-v</span> loop</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>$ lsblk |grep -v loop
 NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
 nvme0n1     259:0    0   477G  0 disk  

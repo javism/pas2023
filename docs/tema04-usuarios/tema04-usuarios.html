@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Javier Sánchez Monedero">
+
+<title>Programación y Administración de Sistemas (2022-2023) - Tema 4: Gestión de Usuarios</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Tema 4: Gestión de Usuarios</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Programación y Administración de Sistemas (2022-2023)</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Inicio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema00-presentacion/presentacion.html" class="sidebar-item-text sidebar-link">Tema 0: Presentación</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema01-introduccion/tema01-introduccion.html" class="sidebar-item-text sidebar-link">Tema 1: Introducción</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema01-introduccion/tema01-software-libre.html" class="sidebar-item-text sidebar-link">Tema 1: Software Libre y Linux</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema02-organizacion/tema02-ficheros.html" class="sidebar-item-text sidebar-link">Tema 2: Organización de GNU/Linux</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema02-organizacion/tema02-ejercicios.html" class="sidebar-item-text sidebar-link">Tema 2: Ejercicios permisos</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema02-organizacion/tema02-webuco.html" class="sidebar-item-text sidebar-link">Tema 2: Ejercicios web personal en la UCO</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tema04-usuarios/tema04-usuarios.html" class="sidebar-item-text sidebar-link active">Tema 4: Gestión de usuarios</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#objetivos-y-evaluación" id="toc-objetivos-y-evaluación" class="nav-link active" data-scroll-target="#objetivos-y-evaluación"><span class="toc-section-number">1</span>  Objetivos y evaluación</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="toc-section-number">2</span>  Introducción</a></li>
+  <li><a href="#usuarios" id="toc-usuarios" class="nav-link" data-scroll-target="#usuarios"><span class="toc-section-number">3</span>  Usuarios</a></li>
+  <li><a href="#grupos" id="toc-grupos" class="nav-link" data-scroll-target="#grupos"><span class="toc-section-number">4</span>  Grupos</a></li>
+  <li><a href="#usuarios-y-grupos-estándar" id="toc-usuarios-y-grupos-estándar" class="nav-link" data-scroll-target="#usuarios-y-grupos-estándar"><span class="toc-section-number">5</span>  Usuarios y grupos estándar</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">6</span>  Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Tema 4: Gestión de Usuarios</h1>
+<p class="subtitle lead">Programación y Administración de Sistemas <br> (2022-2023)</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor/a</div>
+  <div class="quarto-title-meta-heading">Afiliaciones</div>
+  
+    <div class="quarto-title-meta-contents">
+    Javier Sánchez Monedero 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Depto. Informática y Análisis Numérico
+          </p>
+        <p class="affiliation">
+            Escuela Politécnica Superior
+          </p>
+        <p class="affiliation">
+            Universidad de Córdoba
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">7 de marzo de 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="objetivos-y-evaluación" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Objetivos y evaluación</h1>
+<section id="objetivos-de-aprendizaje" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="objetivos-de-aprendizaje">Objetivos de aprendizaje</h2>
+<ul>
+<li><p>Definir qué son <strong>usuarios del sistema</strong>, las características de los mismos y sus ficheros de configuración.</p></li>
+<li><p>Enumerar y explicar los campos del fichero <code>/etc/passwd</code> y <code>/etc/shadow</code>.</p></li>
+<li><p>Explicar las características que deberían tener las <strong>contraseñas</strong> para los usuarios.</p></li>
+<li><p>Explicar el mecanismo de <em>shadow passwords</em> y el mecanismo de <strong>cifrado de contraseña</strong>s que evita guardar las contraseñas del sistema en texto plano.</p></li>
+<li><p>Enumerar los <strong>mecanismos de revocación de contraseñas</strong>, las <strong>restricciones</strong> de tiempo en cuanto a la validez de las contraseñas y las <strong>herramientas</strong> de administración que permiten configurarlas.</p></li>
+<li><p>Cambiar el <strong>intérprete</strong> de órdenes por defecto de los usuarios.</p></li>
+<li><p>Configurar <strong>cuentas restrictivas</strong> para usuarios especiales.</p></li>
+<li><p>Enumerar los pasos para <strong>añadir un usuario</strong> al sistema.</p></li>
+<li><p>Utilizar herramientas administrativas para <strong>añadir o modificar cuentas</strong> de usuario.</p></li>
+<li><p>Establecer el objetivo de los <strong>grupos de usuarios</strong>, identificar grupo primario y grupo activo de un usuario, enumerar y explicar los campos del fichero <code>/etc/group</code>.</p></li>
+<li><p>Configurar grupos con contraseñas.</p></li>
+<li><p>Utilizar las distintas herramientas administrativas para grupos.</p></li>
+<li><p>Identificar <strong>usuarios y grupos estándar</strong> en un sistema GNU/Linux.</p></li>
+</ul>
+</section>
+<section id="evaluación" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación">Evaluación</h2>
+<ul>
+<li><p>Cuestionarios objetivos.</p></li>
+<li><p>Pruebas de respuesta libre.</p></li>
+<li><p>Tareas de administración.</p></li>
+</ul>
+</section>
+</section>
+<section id="introducción" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Introducción</h1>
+<section id="introducción-1" class="level2">
+<h2 class="anchored" data-anchor-id="introducción-1">Introducción</h2>
+<p><img src="images/book_users.png" class="img-fluid"></p>
+<div class="block">
+<p>Definición de <strong>usuario</strong></p>
+<ul>
+<li><p>Persona que trabaja en el sistema, editando ficheros, ejecutando programas...</p></li>
+<li><p><strong>Pseudo-usuario</strong>: entidad, que sin ser una persona, puede ejecutar programas o poseer ficheros (se les reserva identificadores de 0 a 499) y se utiliza típicamente para servicios y tareas automatizadas.</p></li>
+</ul>
+</div>
+</section>
+<section id="información-mínima-usuario" class="level2">
+<h2 class="anchored" data-anchor-id="información-mínima-usuario">Información mínima usuario</h2>
+<div class="exampleblock">
+<p>Características básicas de un usuario:</p>
+<ul>
+<li><p>Nombre de usuario (<code>logname</code> o <code>username</code>).</p></li>
+<li><p>Identificador de usuario (UID): el sistema trabaja, internamente, con el UID y no con el nombre de usuario.</p></li>
+<li><p>Identificadores de los grupos a los que pertenece (GIDs).</p></li>
+</ul>
+</div>
+</section>
+<section id="ficheros-básicos" class="level2">
+<h2 class="anchored" data-anchor-id="ficheros-básicos">Ficheros básicos</h2>
+<div class="block">
+<p>Ficheros de configuración: <span class="math inline">\(\;\)</span></p>
+<ul>
+<li><p><code>/etc/passwd</code>: información de las cuentas de usuarios.</p></li>
+<li><p><code>/etc/shadow</code>: <em>passwords</em> cifradas (<em>hash</em> de las contraseñas) e información de “envejecimiento” de las cuentas.</p></li>
+<li><p><code>/etc/group</code>: definición de los grupos y usuarios miembros.</p></li>
+<li><p><code>/etc/gshadow</code>: <em>passwords</em> de grupos cifradas.</p></li>
+</ul>
+</div>
+<div class="exampleblock">
+<p>Ejercicio: lista los permisos de todos estos ficheros y trata de entender la política de seguridad.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /etc/passwd /etc/shadow /etc/group /etc/gshadow</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="usuarios" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Usuarios</h1>
+<section id="fichero-etcpasswd" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="fichero-etcpasswd">Fichero <code>/etc/passwd</code></h2>
+<ul>
+<li><p>Contiene la lista de usuarios del sistema y sus contraseñas.</p></li>
+<li><p>Formato: <code>nombre:password:uid:gid:gecos:home:shell</code>.</p>
+<ul>
+<li><p><code>nombre</code> <span class="math inline">\(\rightarrow\)</span> Nombre del usuario, logname o username.</p></li>
+<li><p><code>password</code> <span class="math inline">\(\rightarrow\)</span> contraseña cifrada o:</p>
+<ul>
+<li><p>“<code>*</code>” o “<code>!!</code>” <span class="math inline">\(\rightarrow\)</span> la cuenta está desactivada o bloqueada.</p></li>
+<li><p>“<code>x</code>” <span class="math inline">\(\rightarrow\)</span> las shadow están activas, la contraseña cifrada se guarda en <code>/etc/shadow</code>.</p></li>
+</ul></li>
+<li><p><code>uid</code> <span class="math inline">\(\rightarrow\)</span> identificador del usuario.</p></li>
+<li><p><code>gid</code> <span class="math inline">\(\rightarrow\)</span> identificador del grupo primario al que pertenece.</p></li>
+<li><p><code>gecos</code> <span class="math inline">\(\rightarrow\)</span> campo de información referente al usuario (nombre, teléfono, ...).</p></li>
+<li><p><code>home</code> <span class="math inline">\(\rightarrow\)</span> Path del directorio <code>$HOME</code> del usuario.</p></li>
+<li><p><code>shell</code> <span class="math inline">\(\rightarrow\)</span> Intérprete de órdenes.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="fichero-etcpasswd-1" class="level2">
+<h2 class="anchored" data-anchor-id="fichero-etcpasswd-1">Fichero <code>/etc/passwd</code></h2>
+<ul>
+<li><p>El propietario del fichero es <code>root</code> y el grupo <code>root</code>.</p></li>
+<li><p>Los permisos del fichero son <span class="rojo"><code>rw-r-r-</code></span>.</p></li>
+<li><p>El programa <code>/usr/sbin/vipw</code> permite editar el fichero manualmente.</p></li>
+<li><p>El programa <code>pwck</code> verifica la integridad de <code>/etc/passwd</code> y <code>/etc/shadow</code>.</p></li>
+<li><p>Se permite el acceso al fichero <code>/etc/passwd</code> en modo lectura para poder leer información del usuario, pero no se debería permitir acceso a las <em>passwords</em> (aunque estén cifradas).</p></li>
+</ul>
+</section>
+<section id="fichero-etcpasswd-2" class="level2">
+<h2 class="anchored" data-anchor-id="fichero-etcpasswd-2">Fichero <code>/etc/passwd</code></h2>
+<div class="center">
+<p><img src="images/passwd.png" class="img-fluid"></p>
+</div>
+</section>
+<section id="contraseñas" class="level2">
+<h2 class="anchored" data-anchor-id="contraseñas">Contraseñas</h2>
+<ul>
+<li><p><code>passwd &lt;nombre_usuario&gt;</code> <span class="math inline">\(\Rightarrow\)</span> asignar contraseña a un usuario (o cambiarla).</p></li>
+<li><p>Elección de una contraseña adecuada</p></li>
+<li><p><span class="rojo">No utilizar</span>:</p>
+<ul>
+<li><p><a href="https://duckduckgo.com/?q=contrase%C3%B1as+m%C3%A1s+usadas&amp;t=h_&amp;ia=web">Las contraseñas más usadas</a></p></li>
+<li><p>Tu nombre, parte de él, o el de alguien cercano a ti.</p></li>
+<li><p>Números significativos para ti o alguien cercano.</p></li>
+<li><p>Nombre, nº, lugar o persona, relacionados con tu trabajo.</p></li>
+<li><p>Nombres de gente famosa, lugares, películas, publicidad...</p></li>
+<li><p>Palabras que estén en el diccionario (ver <code>cracklib</code>).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="contraseñas-1" class="level2">
+<h2 class="anchored" data-anchor-id="contraseñas-1">Contraseñas</h2>
+<ul>
+<li><p><strong>Consejos</strong> sin llegar a políticas absurdas (&lt;dumbpasswordrules.com&gt;):</p>
+<ul>
+<li><p>Introducir 2 o más caracteres extras, símbolos especiales...</p></li>
+<li><p>Escribir mal las palabras.</p></li>
+<li><p>Utilizar mayúsculas y minúsculas, pero no de forma evidente.</p></li>
+<li><p>Concatenar, embeber o mezclar 2 o más palabras.</p></li>
+<li><p>Usar caracteres poco comunes: $, &amp;, #...</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="contraseñas-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="contraseñas-2">Contraseñas</h2>
+<ul>
+<li><p>La contraseña <span class="rojo">se debe</span> cambiar cuando:</p>
+<ul>
+<li><p>Se sospecha que alguien la ha podido conocer o averiguar.</p></li>
+<li><p>Se sospecha que alguien ha conseguido el fichero con las contraseñas (<code>/etc/passwd</code> o <code>/etc/shadow</code>).</p></li>
+<li><p>Un usuario se marcha del trabajo <span class="math inline">\(\Rightarrow\)</span> cambiar todas las que conozca.</p></li>
+<li><p>Un administrador del sistema se va <span class="math inline">\(\Rightarrow\)</span> cambiar TODAS.</p></li>
+<li><p>Un intruso ha conseguido entrar en el sistema.</p></li>
+</ul></li>
+<li><p><span class="rojo">Periódicamente</span>, se debe forzar a que los usuarios cambien sus contraseñas, incluido el administrador.</p>
+<ul>
+<li>Por otro lado, si se obliga a los usuarios a cambiar su contraseña con <span class="rojo">demasiada frecuencia</span>, lo normal es que elijan malas contraseñas, fáciles de adivinar...</li>
+</ul></li>
+</ul>
+</section>
+<section id="herramientas-de-robustez-de-contraseñas" class="level2">
+<h2 class="anchored" data-anchor-id="herramientas-de-robustez-de-contraseñas">Herramientas de robustez de contraseñas</h2>
+<p><code>pam_cracklib</code> y <a href="https://manpages.ubuntu.com/manpages/kinetic/en/man8/pam_pwquality.8.html"><code>pam_pwquality</code></a> son dos herramientas para forzar políticas de seguridad de contraseñas fuertes.</p>
+<p>Puedes ver un mínimo de fortaleza de una contraseña escribiendo por teclado:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cracklib-check</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>ó así:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"1234"</span> <span class="kw">|</span> <span class="ex">cracklib-check</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"micontra"</span> <span class="kw">|</span> <span class="ex">cracklib-check</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"M1contra$"</span> <span class="kw">|</span> <span class="ex">cracklib-check</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1234: Es demasiado corta.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>micontra: Está basada en una palabra del diccionario.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>M1contra$: OK</code></pre>
+</div>
+</div>
+</section>
+<section id="shadow-passwords" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords">Shadow passwords</h2>
+<ul>
+<li><p>Permiten que las contraseñas cifradas no se guarden en el fichero <code>/etc/passwd</code> sino en <code>/etc/shadow</code> (más restringido).</p></li>
+<li><p><code>/etc/shadow</code> tiene los permisos <span class="rojo"><code>rw------</code></span>, y el usuario y grupo propietario es <strong>root</strong>.</p>
+<ul>
+<li>En las últimas versiones, tiene permisos <span class="rojo"><code>rw-r----</code></span> y el grupo propietario es <code>shadow</code> (flexibilidad para comprobación de contraseña por usuarios que pertenezcan a dicho grupo).</li>
+</ul></li>
+<li><p>Este fichero guarda para cada usuario del sistema, la contraseña cifrada junto con su <strong>información de envejecimiento</strong>.</p></li>
+<li><p>Solo para aquellos usuarios que tengan una “<code>x</code>” en <code>/etc/passwd</code>.</p></li>
+<li><p>Por defecto, están activas y se actualizan automáticamente.</p></li>
+</ul>
+</section>
+<section id="shadow-passwords-1" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-1">Shadow passwords</h2>
+<div class="center">
+<p><img src="images/shadow.png" class="img-fluid"></p>
+</div>
+</section>
+<section id="shadow-passwords-2" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-2">Shadow passwords</h2>
+<p><code>nom:pass:changed:minlife:maxlife:warn:inactive:expired:unused</code></p>
+<ul>
+<li><p><code>nom</code> <span class="math inline">\(\Rightarrow\)</span> nombre del usuario, <em>logname</em> o <em>username</em>.</p></li>
+<li><p><code>pass</code> <span class="math inline">\(\Rightarrow\)</span> contraseña cifrada.</p>
+<ul>
+<li><code>mkpasswd -method=sha-512 contraseña salt</code></li>
+</ul></li>
+<li><p>Comandos de <strong>actualización</strong>:</p>
+<ul>
+<li><p><code>pwconv</code> <span class="math inline">\(\Rightarrow\)</span> crear y actualizar el fichero <code>/etc/shadow</code>.</p></li>
+<li><p><code>pwunconv</code> <span class="math inline">\(\Rightarrow\)</span> desactivar los <em>shadow passwords</em>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="shadow-passwords-3" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-3">Shadow passwords</h2>
+<ul>
+<li><p>Para cifrar una contraseña, se utilizan <strong>algoritmos criptográficos de generación de resumen</strong> (función <em>hash</em>, <span class="math inline">\(H(\cdot)\)</span>).</p>
+<ol type="1">
+<li><p>El mensaje en este caso es la <code>contraseña</code> (<span class="math inline">\(C\)</span>).</p></li>
+<li><p><code>salt</code> (<span class="math inline">\(S\)</span>) es una palabra aleatoria que se concatena a los bytes de <code>contraseña</code> <span class="math inline">\(\rightarrow\)</span> dificulta <span class="rojo">ataques</span> con diccionarios y tablas de <em>hash</em> precomputadas; añade aleatoriedad al resumen.</p></li>
+<li><p>El sistema concatena <span class="math inline">\(C\)</span> con <span class="math inline">\(S\)</span>, <span class="math inline">\(\{C,S\}\)</span>, calcula el resumen <span class="math inline">\(F=H(\{C,S\})\)</span> y almacena <span class="math inline">\(S\)</span> y <span class="math inline">\(F\)</span>.</p></li>
+<li><p>Cuando el usuario introduce una contraseña <span class="math inline">\(C'\)</span>, se repite todo el proceso: <span class="math inline">\(F'=H(\{C',S\})\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(F=F'\)</span>, entonces el usuario puede entrar al sistema.</p></li>
+</ol></li>
+</ul>
+</section>
+<section id="shadow-passwords-4" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-4">Shadow passwords</h2>
+<ul>
+<li><p>Propiedades <strong>deseables</strong> de las funciones de resumen:</p>
+<ul>
+<li><p><strong>Dado <span class="math inline">\(C\)</span>, debe ser fácil calcular <span class="math inline">\(H(C)\)</span> <span class="math inline">\(\rightarrow\)</span></strong> para que el coste computacional no sea alto.</p></li>
+<li><p><strong>Dado <span class="math inline">\(H(C)\)</span>, debe ser extremadamente difícil calcular <span class="math inline">\(C\)</span></strong> <span class="math inline">\(\rightarrow\)</span> para que las contraseñas originales no se puedan conocer sabiendo el resumen (fugas de información).</p></li>
+<li><p><strong>Dado <span class="math inline">\(C\)</span>, debe ser muy difícil encontrar otro mensaje <span class="math inline">\(C'\)</span> tal que <span class="math inline">\(H(C)=H(C')\)</span></strong> <span class="math inline">\(\rightarrow\)</span> para que dos usuarios no terminen con la misma contraseña.</p></li>
+</ul></li>
+<li><p>Este tipo de funciones se denominan <strong>funciones de dispersión de un solo sentido</strong>.</p></li>
+</ul>
+</section>
+<section id="shadow-passwords-algoritmos-de-hash" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-algoritmos-de-hash">Shadow passwords: Algoritmos de hash</h2>
+<p>Dos algoritmos: <strong>MD5</strong> y <strong>SHA</strong></p>
+<p><strong>MD5</strong> (<em>Message-Digest algorithm 5</em>)</p>
+<ul>
+<li><p>Aplica funciones no lineales a los 17 segmentos de 32 bits de un bloque de 512 bits.</p></li>
+<li><p>Se obtiene un resumen de 128 bits.</p></li>
+<li><p>Obtener suma MD5 (GNU/Linux):</p></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md5sum</span> Fichero.ext <span class="op">&gt;</span> Fichero.md5</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Chequear suma MD5 (GNU/Linux) (se busca un fichero con el nombre correcto en la carpeta actual):</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md5sum</span> <span class="at">-c</span> Fichero.md5</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="shadow-passwords-algoritmos-de-hash-1" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-passwords-algoritmos-de-hash-1">Shadow passwords: Algoritmos de hash</h2>
+<section id="sha-secure-hash-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="sha-secure-hash-algorithm"><strong>SHA</strong> (<em>Secure Hash Algorithm</em>):</h3>
+<ul>
+<li><p>Estándar del NIST.</p></li>
+<li><p>Parecido a MD5, pero genera resúmenes más grandes, que lo hacen más seguro contra ataques de fuerza bruta o del cumpleaños.</p></li>
+<li><p>Se pueden considerar 160, 224, 256, 384 o 512 bits para el resumen.</p></li>
+<li><p>Obtener suma SHA (GNU/Linux):</p></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> [-anumBits] Fichero.ext <span class="op">&gt;</span> Fichero.sha</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Chequear suma SHA (GNU/Linux):</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-c</span> Fichero.sha</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>SHA-512 es el algoritmo utilizado por defecto en GNU/Linux para guardar la contraseña.</li>
+</ul>
+</section>
+</section>
+<section id="ejemplo-sha" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-sha">Ejemplo SHA:</h2>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> /etc/passwd <span class="op">&gt;</span> resumen_pw.sha </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> resumen_pw.sha </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-c</span> resumen_pw.sha</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>073070775bc5a6c360148c81c079d8ae47d555a6  /etc/passwd</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/etc/passwd: OK</code></pre>
+</div>
+</div>
+</section>
+<section id="restricciones-de-tiempo-etcshadow" class="level2">
+<h2 class="anchored" data-anchor-id="restricciones-de-tiempo-etcshadow">Restricciones de tiempo (<code>/etc/shadow</code>)</h2>
+<ul>
+<li><p>Introducir restricciones de tiempo o envejecimiento para la validez de la cuenta o de la contraseña.</p>
+<ul>
+<li><p><code>changed</code> <span class="math inline">\(\Rightarrow\)</span> fecha del último cambio de contraseña.</p></li>
+<li><p><code>minlife</code> <span class="math inline">\(\Rightarrow\)</span> nº de días que han de pasar para poder cambiar la contraseña.</p></li>
+<li><p><code>maxlife</code> <span class="math inline">\(\Rightarrow\)</span> nº de días máximo que puede estar con la misma contraseña sin cambiarla.</p></li>
+<li><p><code>warn</code> <span class="math inline">\(\Rightarrow\)</span> cuántos días antes de que la contraseña expire (<code>maxlife</code>) el usuario será informado sobre ello, indicándole que tiene que cambiarla.</p></li>
+<li><p><code>inactive</code> <span class="math inline">\(\Rightarrow\)</span> nº de días después de que la contraseña expire en que la cuenta se deshabilitará si no ha sido cambiada.</p></li>
+<li><p><code>expired</code> <span class="math inline">\(\Rightarrow\)</span> fecha en la que la cuenta expira y se deshabilita de forma automática.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="restricciones-de-tiempo" class="level2">
+<h2 class="anchored" data-anchor-id="restricciones-de-tiempo">Restricciones de tiempo</h2>
+<ul>
+<li><p>El fichero <code>/etc/login.defs</code> tiene los valores por defecto.</p></li>
+<li><p>Comando <code>chage</code> (administrador):</p>
+<ul>
+<li><p><code>chage -d ult_día usuario</code> <span class="math inline">\(\Rightarrow\)</span> último cambio de password.</p></li>
+<li><p><code>chage -m min_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días que han de pasar para poder cambiar la contraseña.</p></li>
+<li><p><code>chage -M max_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días máximo que puede estar con la misma contraseña sin cambiarla.</p></li>
+<li><p><code>chage -W warn_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> establece un aviso de que la contraseña expira un número de días antes de que expire, indicándole que tiene que cambiarla.</p></li>
+<li><p><code>chage -I inac_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días después de que la contraseña expire que la cuenta se deshabilitará de forma automática si la contraseña no ha sido cambiada.</p></li>
+<li><p><code>chage -E exp_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> fecha en la que la cuenta expira y se deshabilita de forma automática.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="restricciones-de-tiempo-1" class="level2">
+<h2 class="anchored" data-anchor-id="restricciones-de-tiempo-1">Restricciones de tiempo</h2>
+<p>Supongamos que el usuario <code>pagutierrez</code> cambia su contraseña el 1 de marzo y <strong>root</strong> ejecuta estas órdenes:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chage</span> <span class="at">-M</span> 20 pagutierrez</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">chage</span> <span class="at">-W</span> 6 pagutierrez</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">chage</span> <span class="at">-I</span> 5 pagutierrez</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ex">chage</span> <span class="at">-E</span> 2023-10-30 pagutierrez</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Los tiempos quedan fijados de la siguiente manera:</p>
+<ul>
+<li><p>El 14 de marzo <code>pagutierrez</code> recibirá el primer aviso para que cambie su contraseña.</p></li>
+<li><p>El 20 de marzo, debería haber cambiado su contraseña.</p></li>
+<li><p>Si no cambia la contraseña, como se ha fijado el tiempo de inactividad, la cuenta aún no se bloqueará.</p></li>
+<li><p>Si el 25 de marzo <code>pagutierrez</code> no ha cambiado su contraseña, la cuenta será bloqueada.</p></li>
+<li><p>La cuenta expira, pase lo que pase, el 30 de octubre.</p></li>
+</ul>
+</section>
+<section id="ficheros-de-inicialización" class="level2">
+<h2 class="anchored" data-anchor-id="ficheros-de-inicialización">Ficheros de inicialización</h2>
+<ul>
+<li><p>Directorio <code>/etc/skel/</code> <span class="math inline">\(\Rightarrow\)</span> ficheros que se copian automáticamente a cada <code>$HOME</code>.</p></li>
+<li><p>Los <strong>ficheros de inicialización</strong> son <em>scripts</em> <code>shell</code> que realizan tareas como dar valor a variables, nombrar alias, realizar funciones específicas...</p></li>
+<li><p>Los ficheros dependen del intérprete de órdenes seleccionado: <em>Bourne shell</em> (<code>sh</code>), <em>Bourne again shell</em> (<code>bash</code>), <em>C shell</em> (<code>csh</code>)...</p></li>
+<li><p>Incluyen el PATH, variables de entorno, <code>umask</code>, funciones de inicialización, alias, var. del propio shell...</p></li>
+<li><p>Lo normal es que lean parte de su contenido de algún fichero global (<code>/etc/profile</code>, <code>/etc/bash.bashrc</code>)</p></li>
+</ul>
+</section>
+<section id="ficheros-de-inicialización-y-cierre" class="level2">
+<h2 class="anchored" data-anchor-id="ficheros-de-inicialización-y-cierre">Ficheros de inicialización y cierre</h2>
+<p><code>.bash_profile</code> en <strong>bash</strong> / <code>.profile</code> en <strong>bash</strong> y <strong>sh</strong> / <code>.login</code> en <strong>csh</strong>: Se ejecuta al hacer un <em>login</em> en el sistema por SSH o por terminal real.</p>
+<p><code>.bashrc</code> / <code>.cshrc</code> en <strong>csh</strong>: Cada vez que se ejecuta una shell en <strong>bash</strong> aunque no conlleve <em>login</em>.</p>
+<p><code>.bash_logout</code> en <strong>bash</strong> / <code>.logout</code> en C <strong>csh</strong>: Al salir del sistema el usuario (al finalizar la sesión)</p>
+</section>
+<section id="selección-de-intérprete-de-órdenes" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="selección-de-intérprete-de-órdenes">Selección de intérprete de órdenes</h2>
+<ul>
+<li><p>En el último campo del fichero <code>/etc/passwd</code>, se establece el <strong>intérprete de órdenes</strong> que se ejecuta al entrar al sistema.</p></li>
+<li><p>En el fichero <code>/etc/shells</code> se indican los <em>shells</em> permitidos.</p></li>
+<li><p>Un usuario puede cambiar su <em>shell</em> con <code>chsh</code>:</p>
+<ul>
+<li>¡Ojo! Si se <span class="rojo">prohíbe</span> un <em>shell</em>, no se podrá elegir con <code>chsh</code>, pero los usuarios que ya lo tenían asignado lo podrán seguir usando.</li>
+</ul></li>
+<li><p>Si un usuario no tiene asignado ningún intérprete de órdenes, se usará el **<em>shell</em> por defecto <code>/bin/sh</code>.</p></li>
+<li><p>Si se desea que el usuario no pueda entrar al sistema se le puede asignar <span class="rojo"><code>/bin/false</code></span> o <span class="rojo"><code>/sbin/nologin</code></span>.</p></li>
+<li><p>También se puede establecer como <em>shell</em> un <strong>fichero ejecutable</strong>:</p>
+<ul>
+<li>Cuando el usuario entre al sistema se ejecuta, y, al finalizar la ejecución, el usuario sale del sistema (no llega a hacer login).</li>
+</ul></li>
+</ul>
+</section>
+<section id="cuentas-restrictivas" class="level2">
+<h2 class="anchored" data-anchor-id="cuentas-restrictivas">Cuentas restrictivas</h2>
+<ul>
+<li><p>Las <span class="rojo">cuentas restrictivas</span> permiten limitar las acciones de los usuarios en el sistema.</p></li>
+<li><p>Se pueden crear de dos formas:</p>
+<ul>
+<li><p>Asignar como <em>shell</em> un fichero ejecutable que realice una tarea determinada, y al terminar se sale del sistema:</p>
+<ul>
+<li><p>Usuario para hacer copias de seguridad: como <em>shell</em> tiene un <em>script</em> que hace esa tarea.</p></li>
+<li><p>Usuario para apagar el sistema: ejecuta la orden <code>shutdown</code>.</p></li>
+</ul></li>
+<li><p>Los usuarios restrictivos de este tipo tienen que tener los permisos necesarios para poder hacer la tarea asignada. Estos permisos se asignan a nivel de identificador de usuario.</p>
+<ul>
+<li>Para apagar el sistema, se necesitan permisos de administración.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="cuentas-restrictivas-1" class="level2">
+<h2 class="anchored" data-anchor-id="cuentas-restrictivas-1">Cuentas restrictivas</h2>
+<ul>
+<li><p>Usando el <em>shell</em> restrictivo <span class="rojo"><code>/bin/rbash</code></span>:</p>
+<ul>
+<li><p><code>rbash</code> es un enlace simbólico a <code>/bin/bash</code> (<code>rbash</code> es equivalente a <code>/bin/bash -r</code>).</p></li>
+<li><p>Este intérprete se comporta como un intérprete normal, salvo que el usuario <span class="rojo">no</span> puede hacer determinadas tareas, como:</p>
+<ul>
+<li><p>Cambiar de directorio.</p></li>
+<li><p>Establecer o modificar los valores de <code>$PATH</code> o <code>$HOME</code>.</p></li>
+<li><p>Especificar nombres u órdenes que contengan <code>/</code>.</p></li>
+<li><p>Usar redirección.</p></li>
+<li><p>Utilizar la orden <code>exec</code> para reemplazar el <em>shell</em> por otro programa.</p></li>
+</ul></li>
+<li><p>A estos usuarios <span class="rojo">hay que limitarles los ficheros</span> que pueden ejecutar, copiándolos a un directorio y que su <code>PATH</code> sea sólo ese directorio. En otro caso, con un <code>PATH</code> “normal”, es casi como si no tuviesen restricciones.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="añadir-nuevos-usuarios-al-sistema" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="añadir-nuevos-usuarios-al-sistema">Añadir nuevos usuarios al sistema</h2>
+<p>Pasos a realizar (del 1 al 7, automatizados con herramientas):</p>
+<ol type="1">
+<li><p>Decidir el nombre de usuario, el UID, y los grupos a los que va a pertenecer (grupo <strong>primario</strong> y grupos <strong>secundarios</strong>).</p></li>
+<li><p>Introducir los datos en los ficheros <code>/etc/passwd</code> y <code>/etc/group</code> (poniendo como contraseña “<code>*</code>”).</p></li>
+<li><p>Asignar un <em>password</em> a la nueva cuenta.</p></li>
+<li><p>Si las <em>shadow</em> están activas, escribir la contraseña.</p></li>
+<li><p>Establecer los parámetros de <strong>envejecimiento</strong> de la cuenta.</p></li>
+<li><p>Crear el directorio <code>$HOME</code> del nuevo usuario, establecer el propietario y grupo correspondiente y los permisos adecuados.</p></li>
+<li><p>Copiar ficheros necesarios por defecto (<code>.bash_profile</code>, <code>.bashrc</code>...) desde <code>/etc/skel/</code>.</p></li>
+<li><p>Establecer otras facilidades: <em>quotas</em>, <em>mail</em>, permisos, etc.</p></li>
+<li><p>Ejecutar cualquier tarea de inicialización propia del sistema.</p></li>
+<li><p>Probar la nueva cuenta.</p></li>
+</ol>
+</section>
+<section id="herramientas-para-crearmodificar-cuentas-de-usuario" class="level2">
+<h2 class="anchored" data-anchor-id="herramientas-para-crearmodificar-cuentas-de-usuario">Herramientas para crear/modificar cuentas de usuario</h2>
+<p>Las herramientas de creación de cuentas de usuario suelen realizar todas las tareas básicas del proceso, a excepción de las específicas (<code>quotas</code>, impresión, etc.).</p>
+<ul>
+<li><p><code>adduser</code> o <code>useradd</code> <span class="math inline">\(\Rightarrow\)</span> crear cuentas de usuario, o modificar cuentas ya existentes. Toma los valores por defecto de <code>/etc/default/useradd</code> y de <code>/etc/login.defs</code>.<br>
+<code>useradd</code> se salta algunos pasos.</p></li>
+<li><p><code>usermod</code> <span class="math inline">\(\Rightarrow\)</span> modificar cuentas.</p></li>
+<li><p><code>deluser</code> o <code>userdel</code> <span class="math inline">\(\Rightarrow\)</span> eliminar cuentas (por defecto no borra el directorio <code>$HOME</code>).</p></li>
+<li><p><code>newusers</code> <span class="math inline">\(\Rightarrow\)</span> crea cuentas de usuarios utilizando la información introducida en un fichero de texto (en <em>batch</em>), que ha de tener el formato del fichero <code>/etc/passwd</code> (no copia los ficheros de inicialización).</p></li>
+<li><p><code>users-admin</code> <span class="math inline">\(\Rightarrow\)</span> herramienta en modo gráfico.</p></li>
+</ul>
+</section>
+</section>
+<section id="grupos" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Grupos</h1>
+<section id="grupos-1" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-1">Grupos</h2>
+<ul>
+<li><p><strong>Grupos</strong>: colecciones de usuarios que comparten recursos o ficheros del sistema.</p>
+<ul>
+<li><p>Características de un grupo:</p>
+<ul>
+<li><p>Nombre del grupo o <code>groupname</code>.</p></li>
+<li><p>Identificador del grupo (<code>GID</code>) <span class="math inline">\(\Rightarrow\)</span> internamente el sistema identifica al grupo por este número.</p></li>
+</ul></li>
+<li><p><span class="rojo">Objetivo</span>: Garantizar permisos concretos para un conjunto de usuarios, sin tener que aplicarlos a cada uno.</p></li>
+</ul></li>
+<li><p>El fichero de configuración es <code>/etc/group</code>, con el formato: <code>nombre:x:gid:lista de usuarios</code></p>
+<ul>
+<li><p><code>nombre</code> <span class="math inline">\(\Rightarrow\)</span> nombre del grupo.</p></li>
+<li><p><code>gid</code> <span class="math inline">\(\Rightarrow\)</span> identificador del grupo.</p></li>
+<li><p><code>lista de usuarios</code> que pertenecen al grupo, sep. por “<code>,</code>”.</p></li>
+</ul></li>
+</ul>
+<p><code>pas:x:519:pagutierrez,jsanchezm</code></p>
+</section>
+<section id="grupos-2" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-2">Grupos</h2>
+<ul>
+<li><p>Los grupos pueden tener contraseña <span class="math inline">\(\Rightarrow\)</span> <code>/etc/gshadow</code>:</p>
+<ul>
+<li><p>Si un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden <code>newgrp</code>.</p></li>
+<li><p>Información en <code>/etc/gshadow</code>: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al <code>/etc/shadow</code>).</p></li>
+</ul></li>
+<li><p>Tipos de grupos:</p>
+<ul>
+<li><p><span class="rojo">Primarios</span> <span class="math inline">\(\Rightarrow\)</span> grupo especificado en <code>/etc/passwd</code>.</p></li>
+<li><p><span class="rojo">Secundarios</span> <span class="math inline">\(\Rightarrow\)</span> otros grupos (indicados en <code>/etc/group</code>).</p></li>
+</ul></li>
+<li><p>Funcionamiento de los grupos:</p>
+<ul>
+<li><p>Al crear un fichero se establece como grupo propietario el <strong>grupo activo</strong> del usuario en ese momento.</p></li>
+<li><p>Grupo activo <span class="math inline">\(\Rightarrow\)</span> grupo primario (salvo que usemos <code>newgrp</code>).</p></li>
+<li><p>Al determinar los permisos sobre un fichero, se usan todos los grupos del usuario.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="grupos-3" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-3">Grupos</h2>
+<ul>
+<li><p><code>addgroup grupo</code> <span class="math inline">\(\Rightarrow\)</span> crear un nuevo grupo.</p></li>
+<li><p><code>groupmod grupo</code> <span class="math inline">\(\Rightarrow\)</span> modificar un grupo existente.</p></li>
+<li><p><code>delgroup grupo</code> <span class="math inline">\(\Rightarrow\)</span> eliminar un grupo.</p></li>
+<li><p><code>newgrp grupo</code> <span class="math inline">\(\Rightarrow\)</span> cambiar de grupo activo (lanza un shell)</p></li>
+<li><p><code>gpasswd grupo</code> <span class="math inline">\(\Rightarrow\)</span> asignar una contraseña a un grupo:</p>
+<ul>
+<li>Si el usuario no pertenece al grupo, pero el grupo tiene contraseña, se le solicita y pasa a ser su grupo activo.</li>
+</ul></li>
+<li><p><code>gpasswd -a user grupo</code> <span class="math inline">\(\Rightarrow\)</span> añadir un usuario a un grupo.</p></li>
+<li><p><code>groups [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> grupos a los que pertenece un usuario.</p></li>
+<li><p><code>id [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> lista el identificador del usuario y los grupos a los que pertenece.</p></li>
+<li><p><code>grpck</code> <span class="math inline">\(\Rightarrow\)</span> chequea la consistencia del fichero de grupos.</p></li>
+</ul>
+</section>
+</section>
+<section id="usuarios-y-grupos-estándar" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Usuarios y grupos estándar</h1>
+<section id="rangos-del-uid" class="level2">
+<h2 class="anchored" data-anchor-id="rangos-del-uid">Rangos del UID</h2>
+<ul>
+<li><p><span class="math inline">\(UID\in[0,99]\)</span>: Usuarios que representan al propio SO.</p></li>
+<li><p><span class="math inline">\(UID\in[100,499]\)</span>: Usuarios especiales que representan servicios o programas.</p></li>
+<li><p><span class="math inline">\(UID\ge 1000\)</span>: Usuarios normales.</p></li>
+</ul>
+</section>
+<section id="algunos-usuarios-y-grupos-estándar" class="level2">
+<h2 class="anchored" data-anchor-id="algunos-usuarios-y-grupos-estándar">Algunos usuarios y grupos estándar</h2>
+<ul>
+<li><p><strong>Usuarios</strong> estándar:</p>
+<ul>
+<li><p><code>root</code> <span class="math inline">\(\Rightarrow\)</span> Cuenta del administrador (<span class="math inline">\(0\)</span>).</p></li>
+<li><p><code>bin</code> (utilidades comunes de usuarios, <span class="math inline">\(2\)</span>), <code>daemon</code> (ejecución de demonios, <span class="math inline">\(1\)</span>), <code>lp</code>, <code>sync</code>, <code>shutdown</code>, etc. <span class="math inline">\(\Rightarrow\)</span> Tradicionalmente usados para poseer ficheros o ejecutar servicios</p></li>
+<li><p><code>mail</code>, <code>news</code>, <code>ftp</code> <span class="math inline">\(\Rightarrow\)</span> Asociados con herramientas o facilidades.</p></li>
+<li><p><code>postgres</code>, <code>mysql</code>, <code>xfs</code> <span class="math inline">\(\Rightarrow\)</span> Creados por herramientas instaladas en el sistema para administrar y ejecutar sus servicios.</p></li>
+<li><p><code>nobody</code> o <code>nfsnobody</code> <span class="math inline">\(\Rightarrow\)</span> Usado por NFS y otras utilidades, usuario sin privilegios.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="algunos-usuarios-y-grupos-estándar-1" class="level2">
+<h2 class="anchored" data-anchor-id="algunos-usuarios-y-grupos-estándar-1">Algunos usuarios y grupos estándar</h2>
+<ul>
+<li><p><strong>Grupos</strong> estándar:</p>
+<ul>
+<li><p><code>root</code>, <code>sys</code>.</p></li>
+<li><p><code>bin</code>, <code>daemon</code>, <code>adm</code>, <code>lp</code>, <code>disk</code>, <code>mail</code>, <code>ftp</code>, <code>nobody</code>, etc.</p></li>
+<li><p><code>kmem</code> <span class="math inline">\(\Rightarrow\)</span> Grupo propietario de los programas para leer la memoria del kernel.</p></li>
+<li><p><code>user</code> o <code>users</code> <span class="math inline">\(\Rightarrow\)</span> Grupo de los usuarios normales (no siempre se usa).</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="referencias" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Referencias</h1>
+<section id="referencias-1" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-1">Referencias</h2>
+<p>Evi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. UNIX and Linux System Administration Handbook, 5th Edition. Capítulo 8: <em>User Management</em>. Addison-Wesley. 2018.</p>
+<p>Aeleen Frisch. Essential system administration. Capítulo 6. <em>Managing users and groups</em>. O’Reilly and Associates. Tercera edición. 2002.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
