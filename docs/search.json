@@ -732,7 +732,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Restricciones de tiempo",
-    "text": "Restricciones de tiempo\n\nEl fichero /etc/login.defs tiene los valores por defecto.\nComando chage (administrador):\n\nchage -d ult_día usuario \\(\\Rightarrow\\) último cambio de password.\nchage -m min_días usuario \\(\\Rightarrow\\) nº de días que han de pasar para poder cambiar la contraseña.\nchage -M max_días usuario \\(\\Rightarrow\\) nº de días máximo que puede estar con la misma contraseña sin cambiarla.\nchage -W warn_días usuario \\(\\Rightarrow\\) establece un aviso de que la contraseña expira un número de días antes de que expire, indicándole que tiene que cambiarla.\nchage -I inac_días usuario \\(\\Rightarrow\\) nº de días después de que la contraseña expire que la cuenta se deshabilitará de forma automática si la contraseña no ha sido cambiada.\nchage -E exp_días usuario \\(\\Rightarrow\\) fecha en la que la cuenta expira y se deshabilita de forma automática."
+    "text": "Restricciones de tiempo\n\nEl fichero /etc/login.defs tiene los valores por defecto.\nComando chage (administrador):\n\nchage -d ult_día usuario \\(\\Rightarrow\\) último cambio de password.\nchage -m min_días usuario \\(\\Rightarrow\\) nº de días que han de pasar para poder cambiar la contraseña.\nchage -M max_días usuario \\(\\Rightarrow\\) nº de días máximo que puede estar con la misma contraseña sin cambiarla.\nchage -W warn_días usuario \\(\\Rightarrow\\) establece un aviso de que la contraseña expira un número de días antes de que expire.\nchage -I inac_días usuario \\(\\Rightarrow\\) nº de días después de que la contraseña expire que la cuenta se deshabilitará de forma automática si la contraseña no ha sido cambiada.\nchage -E exp_días usuario \\(\\Rightarrow\\) fecha en la que la cuenta expira y se deshabilita de forma automática."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-1",
@@ -753,7 +753,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#ficheros-de-inicialización-y-cierre",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Ficheros de inicialización y cierre",
-    "text": "Ficheros de inicialización y cierre\n.bash_profile en bash / .profile en bash y sh / .login en csh: Se ejecuta al hacer un login en el sistema por SSH o por terminal real.\n.bashrc / .cshrc en csh: Cada vez que se ejecuta una shell en bash aunque no conlleve login.\n.bash_logout en bash / .logout en C csh: Al salir del sistema el usuario (al finalizar la sesión)"
+    "text": "Ficheros de inicialización y cierre\nSe ejecuta al hacer un login en el sistema por SSH o por terminal real:\n\n.bash_profile en bash / .profile en bash y sh / .login en csh:\n\nCada vez que se ejecuta una shell en bash aunque no conlleve login:\n\n.bashrc / .cshrc en csh:\n\nAl salir del sistema el usuario (al finalizar la sesión):\n\n.bash_logout en bash / .logout en C csh"
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#selección-de-intérprete-de-órdenes",
@@ -767,7 +767,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Cuentas restrictivas",
-    "text": "Cuentas restrictivas\n\nLas cuentas restrictivas permiten limitar las acciones de los usuarios en el sistema.\nSe pueden crear de dos formas:\n\nAsignar como shell un fichero ejecutable que realice una tarea determinada, y al terminar se sale del sistema:\n\nUsuario para hacer copias de seguridad: como shell tiene un script que hace esa tarea.\nUsuario para apagar el sistema: ejecuta la orden shutdown.\n\nLos usuarios restrictivos de este tipo tienen que tener los permisos necesarios para poder hacer la tarea asignada. Estos permisos se asignan a nivel de identificador de usuario.\n\nPara apagar el sistema, se necesitan permisos de administración."
+    "text": "Cuentas restrictivas\nLas cuentas restrictivas permiten limitar las acciones de los usuarios en el sistema.\nSe pueden crear de dos formas:\n\nAsignar como shell un fichero ejecutable que realice una tarea determinada, y al terminar se sale del sistema:\n\nUsuario para hacer copias de seguridad: como shell tiene un script que hace esa tarea.\nUsuario para apagar el sistema: ejecuta la orden shutdown.\n\nLos usuarios restrictivos de este tipo tienen que tener los permisos necesarios para poder hacer la tarea asignada. Estos permisos se asignan a nivel de identificador de usuario.\n\nPara apagar el sistema, se necesitan permisos de administración."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#cuentas-restrictivas-1",
@@ -795,14 +795,14 @@
     "href": "tema04-usuarios/tema04-usuarios.html#grupos-1",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Grupos",
-    "text": "Grupos\n\nGrupos: colecciones de usuarios que comparten recursos o ficheros del sistema.\n\nCaracterísticas de un grupo:\n\nNombre del grupo o groupname.\nIdentificador del grupo (GID) \\(\\Rightarrow\\) internamente el sistema identifica al grupo por este número.\n\nObjetivo: Garantizar permisos concretos para un conjunto de usuarios, sin tener que aplicarlos a cada uno.\n\nEl fichero de configuración es /etc/group, con el formato: nombre:x:gid:lista de usuarios\n\nnombre \\(\\Rightarrow\\) nombre del grupo.\ngid \\(\\Rightarrow\\) identificador del grupo.\nlista de usuarios que pertenecen al grupo, sep. por “,”.\n\n\npas:x:519:pagutierrez,jsanchezm"
+    "text": "Grupos\n\nGrupos: colecciones de usuarios que comparten recursos o ficheros del sistema. Características: nombre del grupo o groupname e identificador del grupo (GID) \\(\\Rightarrow\\) internamente el sistema identifica al grupo por este número.\nObjetivo: Garantizar permisos concretos para un conjunto de usuarios, sin tener que aplicarlos a cada uno.\nEl fichero de configuración es /etc/group, con el formato: nombre:x:gid:lista de usuarios\n\nnombre \\(\\Rightarrow\\) nombre del grupo.\ngid \\(\\Rightarrow\\) identificador del grupo.\nlista de usuarios que pertenecen al grupo, sep. por “,”.\n\n\npas:x:519:pagutierrez,jsanchezm"
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-2",
     "href": "tema04-usuarios/tema04-usuarios.html#grupos-2",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Grupos",
-    "text": "Grupos\n\nLos grupos pueden tener contraseña \\(\\Rightarrow\\) /etc/gshadow:\n\nSi un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden newgrp.\nInformación en /etc/gshadow: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al /etc/shadow).\n\nTipos de grupos:\n\nPrimarios \\(\\Rightarrow\\) grupo especificado en /etc/passwd.\nSecundarios \\(\\Rightarrow\\) otros grupos (indicados en /etc/group).\n\nFuncionamiento de los grupos:\n\nAl crear un fichero se establece como grupo propietario el grupo activo del usuario en ese momento.\nGrupo activo \\(\\Rightarrow\\) grupo primario (salvo que usemos newgrp).\nAl determinar los permisos sobre un fichero, se usan todos los grupos del usuario."
+    "text": "Grupos\n\nTipos de grupos:\n\nPrimarios \\(\\Rightarrow\\) grupo especificado en /etc/passwd.\nSecundarios \\(\\Rightarrow\\) otros grupos (indicados en /etc/group).\n\nFuncionamiento de los grupos:\n\nAl crear un fichero se establece como grupo propietario el grupo activo del usuario en ese momento.\nGrupo activo \\(\\Rightarrow\\) grupo primario (salvo que usemos newgrp).\nAl determinar los permisos sobre un fichero, se usan todos los grupos del usuario."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-3",
@@ -1125,5 +1125,68 @@
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "",
     "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/\n\n\n\n\n\nAbre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Web de ejemplo</title>\n</head>\n<body>\n    <p>¡Hola Mundo!</p>\n</body>\n</html>\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#cómo-se-almacena-el-hash-y-salt-en-shadows",
+    "href": "tema04-usuarios/tema04-usuarios.html#cómo-se-almacena-el-hash-y-salt-en-shadows",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "¿Cómo se almacena el hash y salt en shadows?",
+    "text": "¿Cómo se almacena el hash y salt en shadows?\n¿Dónde se guarda la sal? El campo de la contraseña shadow tiene 3 subcampos: $id$salt$hash donde:\n\n$1$ es MD5\n$2a$ es Blowfish\n$2y$ es Blowfish\n$5$ es SHA-256\n$6$ es SHA-512\n\nMás información en:\n\nAdding Salt to Hashing: A Better Way to Store Passwords (con vídeo)\nPassword Storage Tier List: encryption, hashing, salting, bcrypt, and beyond"
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#cuentas",
+    "href": "tema04-usuarios/tema04-usuarios.html#cuentas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Cuentas",
+    "text": "Cuentas\nUsando el shell restrictivo /bin/rbash:\n\nrbash es un enlace simbólico a /bin/bash (rbash es equivalente a /bin/bash -r).\nEste intérprete se comporta como un intérprete normal, salvo que el usuario no puede hacer determinadas tareas, como:\n\nCambiar de directorio.\nEstablecer o modificar los valores de $PATH o $HOME.\nEspecificar nombres u órdenes que contengan /.\nUsar redirección.\nUtilizar la orden exec para reemplazar el shell por otro programa.\n\nA estos usuarios hay que limitarles los ficheros que pueden ejecutar, copiándolos a un directorio y que su PATH sea sólo ese directorio. En otro caso, con un PATH “normal”, es casi como si no tuviesen restricciones."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema-i",
+    "href": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema-i",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Añadir nuevos usuarios al sistema (I)",
+    "text": "Añadir nuevos usuarios al sistema (I)\nPasos a realizar (del 1 al 7, automatizados con herramientas):\n\nDecidir el nombre de usuario, el UID, y los grupos a los que va a pertenecer (grupo primario y grupos secundarios).\nIntroducir los datos en los ficheros /etc/passwd y /etc/group (poniendo como contraseña “*”).\nAsignar un password a la nueva cuenta.\nSi las shadow están activas, escribir la contraseña.\nEstablecer los parámetros de envejecimiento de la cuenta.\nCrear el directorio $HOME del nuevo usuario, establecer el propietario y grupo correspondiente y los permisos adecuados.\nCopiar ficheros necesarios por defecto (.bash_profile, .bashrc...) desde /etc/skel/."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema-ii",
+    "href": "tema04-usuarios/tema04-usuarios.html#añadir-nuevos-usuarios-al-sistema-ii",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Añadir nuevos usuarios al sistema (II)",
+    "text": "Añadir nuevos usuarios al sistema (II)\nPasos opcionales:\n\nEstablecer otras facilidades: quotas, mail, permisos, etc.\nEjecutar cualquier tarea de inicialización propia del sistema.\nProbar la nueva cuenta."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-contraseñas",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-contraseñas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos: contraseñas",
+    "text": "Grupos: contraseñas\nEsta es una funcionalidad con poco uso en la actualidad.\nLos grupos pueden tener contraseña \\(\\Rightarrow\\) /etc/gshadow:\n\nSi un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden newgrp.\nInformación en /etc/gshadow: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al /etc/shadow)."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-herramientas",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-herramientas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos: herramientas",
+    "text": "Grupos: herramientas\n\naddgroup grupo \\(\\Rightarrow\\) crear un nuevo grupo.\ngroupmod grupo \\(\\Rightarrow\\) modificar un grupo existente.\ndelgroup grupo \\(\\Rightarrow\\) eliminar un grupo.\ngroups [usuario] \\(\\Rightarrow\\) grupos a los que pertenece un usuario.\nid [usuario] \\(\\Rightarrow\\) lista el identificador del usuario y los grupos a los que pertenece.\ngrpck \\(\\Rightarrow\\) chequea la consistencia del fichero de grupos."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-herramientas-para-contraseñas",
+    "href": "tema04-usuarios/tema04-usuarios.html#grupos-herramientas-para-contraseñas",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Grupos: herramientas para contraseñas",
+    "text": "Grupos: herramientas para contraseñas\n\nnewgrp grupo \\(\\Rightarrow\\) cambiar de grupo activo (lanza un shell)\ngpasswd grupo \\(\\Rightarrow\\) asignar una contraseña a un grupo:\n\nSi el usuario no pertenece al grupo, pero el grupo tiene contraseña, se le solicita y pasa a ser su grupo activo.\n\ngpasswd -a user grupo \\(\\Rightarrow\\) añadir un usuario a un grupo."
+  },
+  {
+    "objectID": "enlaces.html#trucos-vim",
+    "href": "enlaces.html#trucos-vim",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "Trucos VIM",
+    "text": "Trucos VIM\nGuardar con sudo un fichero que hemos abierto sin sudo (y añadir un atajo permanente): TL;DR: :w !sudo tee %\nhttps://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/"
+  },
+  {
+    "objectID": "enlaces.html#cifrado",
+    "href": "enlaces.html#cifrado",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "Cifrado:",
+    "text": "Cifrado:\nDiferencias de seguridad bcrypt vs SHA\nNIST Post-Quantum Cryptography Standardization"
   }
 ]

@@ -255,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">7 de marzo de 2023</p>
+      <p class="date">8 de marzo de 2023</p>
     </div>
   </div>
   
@@ -511,6 +511,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Este tipo de funciones se denominan <strong>funciones de dispersión de un solo sentido</strong>.</p></li>
 </ul>
 </section>
+<section id="cómo-se-almacena-el-hash-y-salt-en-shadows" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="cómo-se-almacena-el-hash-y-salt-en-shadows">¿Cómo se almacena el <em>hash</em> y <em>salt</em> en <em>shadows</em>?</h2>
+<p>¿Dónde se guarda la sal? El campo de la contraseña shadow tiene 3 subcampos: <code>$id$salt$hash</code> donde:</p>
+<ul>
+<li><code>$1$</code> es MD5</li>
+<li><code>$2a$</code> es Blowfish</li>
+<li><code>$2y$</code> es Blowfish</li>
+<li><code>$5$</code> es SHA-256</li>
+<li><code>$6$</code> es SHA-512</li>
+</ul>
+<p>Más información en:</p>
+<ul>
+<li><a href="https://auth0.com/blog/adding-salt-to-hashing-a-better-way-to-store-passwords/">Adding Salt to Hashing: A Better Way to Store Passwords (con vídeo)</a></li>
+<li><a href="https://www.youtube.com/watch?v=qgpsIBLvrGY">Password Storage Tier List: encryption, hashing, salting, bcrypt, and beyond</a></li>
+</ul>
+</section>
 <section id="shadow-passwords-algoritmos-de-hash" class="level2">
 <h2 class="anchored" data-anchor-id="shadow-passwords-algoritmos-de-hash">Shadow passwords: Algoritmos de hash</h2>
 <p>Dos algoritmos: <strong>MD5</strong> y <strong>SHA</strong></p>
@@ -574,8 +590,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </section>
-<section id="restricciones-de-tiempo" class="level2">
-<h2 class="anchored" data-anchor-id="restricciones-de-tiempo">Restricciones de tiempo</h2>
+<section id="restricciones-de-tiempo" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="restricciones-de-tiempo">Restricciones de tiempo</h2>
 <ul>
 <li><p>El fichero <code>/etc/login.defs</code> tiene los valores por defecto.</p></li>
 <li><p>Comando <code>chage</code> (administrador):</p>
@@ -583,7 +599,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>chage -d ult_día usuario</code> <span class="math inline">\(\Rightarrow\)</span> último cambio de password.</p></li>
 <li><p><code>chage -m min_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días que han de pasar para poder cambiar la contraseña.</p></li>
 <li><p><code>chage -M max_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días máximo que puede estar con la misma contraseña sin cambiarla.</p></li>
-<li><p><code>chage -W warn_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> establece un aviso de que la contraseña expira un número de días antes de que expire, indicándole que tiene que cambiarla.</p></li>
+<li><p><code>chage -W warn_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> establece un aviso de que la contraseña expira un número de días antes de que expire.</p></li>
 <li><p><code>chage -I inac_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> nº de días después de que la contraseña expire que la cuenta se deshabilitará de forma automática si la contraseña no ha sido cambiada.</p></li>
 <li><p><code>chage -E exp_días usuario</code> <span class="math inline">\(\Rightarrow\)</span> fecha en la que la cuenta expira y se deshabilita de forma automática.</p></li>
 </ul></li>
@@ -617,9 +633,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="ficheros-de-inicialización-y-cierre" class="level2">
 <h2 class="anchored" data-anchor-id="ficheros-de-inicialización-y-cierre">Ficheros de inicialización y cierre</h2>
-<p><code>.bash_profile</code> en <strong>bash</strong> / <code>.profile</code> en <strong>bash</strong> y <strong>sh</strong> / <code>.login</code> en <strong>csh</strong>: Se ejecuta al hacer un <em>login</em> en el sistema por SSH o por terminal real.</p>
-<p><code>.bashrc</code> / <code>.cshrc</code> en <strong>csh</strong>: Cada vez que se ejecuta una shell en <strong>bash</strong> aunque no conlleve <em>login</em>.</p>
-<p><code>.bash_logout</code> en <strong>bash</strong> / <code>.logout</code> en C <strong>csh</strong>: Al salir del sistema el usuario (al finalizar la sesión)</p>
+<p>Se ejecuta al hacer un <em>login</em> en el sistema por SSH o por terminal real:</p>
+<ul>
+<li><code>.bash_profile</code> en <strong>bash</strong> / <code>.profile</code> en <strong>bash</strong> y <strong>sh</strong> / <code>.login</code> en <strong>csh</strong>:</li>
+</ul>
+<p>Cada vez que se ejecuta una shell en <strong>bash</strong> aunque no conlleve <em>login</em>:</p>
+<ul>
+<li><code>.bashrc</code> / <code>.cshrc</code> en <strong>csh</strong>:</li>
+</ul>
+<p>Al salir del sistema el usuario (al finalizar la sesión):</p>
+<ul>
+<li><code>.bash_logout</code> en <strong>bash</strong> / <code>.logout</code> en C <strong>csh</strong></li>
+</ul>
 </section>
 <section id="selección-de-intérprete-de-órdenes" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="selección-de-intérprete-de-órdenes">Selección de intérprete de órdenes</h2>
@@ -640,9 +665,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="cuentas-restrictivas" class="level2">
 <h2 class="anchored" data-anchor-id="cuentas-restrictivas">Cuentas restrictivas</h2>
-<ul>
-<li><p>Las <span class="rojo">cuentas restrictivas</span> permiten limitar las acciones de los usuarios en el sistema.</p></li>
-<li><p>Se pueden crear de dos formas:</p>
+<p>Las <span class="rojo">cuentas restrictivas</span> permiten limitar las acciones de los usuarios en el sistema.</p>
+<p>Se pueden crear de dos formas:</p>
 <ul>
 <li><p>Asignar como <em>shell</em> un fichero ejecutable que realice una tarea determinada, y al terminar se sale del sistema:</p>
 <ul>
@@ -653,13 +677,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Para apagar el sistema, se necesitan permisos de administración.</li>
 </ul></li>
-</ul></li>
 </ul>
 </section>
-<section id="cuentas-restrictivas-1" class="level2">
-<h2 class="anchored" data-anchor-id="cuentas-restrictivas-1">Cuentas restrictivas</h2>
-<ul>
-<li><p>Usando el <em>shell</em> restrictivo <span class="rojo"><code>/bin/rbash</code></span>:</p>
+<section id="cuentas" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="cuentas">Cuentas</h2>
+<p>Usando el <em>shell</em> restrictivo <span class="rojo"><code>/bin/rbash</code></span>:</p>
 <ul>
 <li><p><code>rbash</code> es un enlace simbólico a <code>/bin/bash</code> (<code>rbash</code> es equivalente a <code>/bin/bash -r</code>).</p></li>
 <li><p>Este intérprete se comporta como un intérprete normal, salvo que el usuario <span class="rojo">no</span> puede hacer determinadas tareas, como:</p>
@@ -671,11 +693,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Utilizar la orden <code>exec</code> para reemplazar el <em>shell</em> por otro programa.</p></li>
 </ul></li>
 <li><p>A estos usuarios <span class="rojo">hay que limitarles los ficheros</span> que pueden ejecutar, copiándolos a un directorio y que su <code>PATH</code> sea sólo ese directorio. En otro caso, con un <code>PATH</code> “normal”, es casi como si no tuviesen restricciones.</p></li>
-</ul></li>
 </ul>
 </section>
-<section id="añadir-nuevos-usuarios-al-sistema" class="level2 scrollable">
-<h2 class="scrollable anchored" data-anchor-id="añadir-nuevos-usuarios-al-sistema">Añadir nuevos usuarios al sistema</h2>
+<section id="añadir-nuevos-usuarios-al-sistema-i" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="añadir-nuevos-usuarios-al-sistema-i">Añadir nuevos usuarios al sistema (I)</h2>
 <p>Pasos a realizar (del 1 al 7, automatizados con herramientas):</p>
 <ol type="1">
 <li><p>Decidir el nombre de usuario, el UID, y los grupos a los que va a pertenecer (grupo <strong>primario</strong> y grupos <strong>secundarios</strong>).</p></li>
@@ -685,6 +706,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Establecer los parámetros de <strong>envejecimiento</strong> de la cuenta.</p></li>
 <li><p>Crear el directorio <code>$HOME</code> del nuevo usuario, establecer el propietario y grupo correspondiente y los permisos adecuados.</p></li>
 <li><p>Copiar ficheros necesarios por defecto (<code>.bash_profile</code>, <code>.bashrc</code>...) desde <code>/etc/skel/</code>.</p></li>
+</ol>
+</section>
+<section id="añadir-nuevos-usuarios-al-sistema-ii" class="level2">
+<h2 class="anchored" data-anchor-id="añadir-nuevos-usuarios-al-sistema-ii">Añadir nuevos usuarios al sistema (II)</h2>
+<p>Pasos opcionales:</p>
+<ol start="8" type="1">
 <li><p>Establecer otras facilidades: <em>quotas</em>, <em>mail</em>, permisos, etc.</p></li>
 <li><p>Ejecutar cualquier tarea de inicialización propia del sistema.</p></li>
 <li><p>Probar la nueva cuenta.</p></li>
@@ -705,18 +732,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="grupos" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Grupos</h1>
-<section id="grupos-1" class="level2">
-<h2 class="anchored" data-anchor-id="grupos-1">Grupos</h2>
+<section id="grupos-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="grupos-1">Grupos</h2>
 <ul>
-<li><p><strong>Grupos</strong>: colecciones de usuarios que comparten recursos o ficheros del sistema.</p>
-<ul>
-<li><p>Características de un grupo:</p>
-<ul>
-<li><p>Nombre del grupo o <code>groupname</code>.</p></li>
-<li><p>Identificador del grupo (<code>GID</code>) <span class="math inline">\(\Rightarrow\)</span> internamente el sistema identifica al grupo por este número.</p></li>
-</ul></li>
+<li><p><strong>Grupos</strong>: colecciones de usuarios que comparten recursos o ficheros del sistema. Características: nombre del grupo o <code>groupname</code> e identificador del grupo (<code>GID</code>) <span class="math inline">\(\Rightarrow\)</span> internamente el sistema identifica al grupo por este número.</p></li>
 <li><p><span class="rojo">Objetivo</span>: Garantizar permisos concretos para un conjunto de usuarios, sin tener que aplicarlos a cada uno.</p></li>
-</ul></li>
 <li><p>El fichero de configuración es <code>/etc/group</code>, con el formato: <code>nombre:x:gid:lista de usuarios</code></p>
 <ul>
 <li><p><code>nombre</code> <span class="math inline">\(\Rightarrow\)</span> nombre del grupo.</p></li>
@@ -729,11 +749,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="grupos-2" class="level2">
 <h2 class="anchored" data-anchor-id="grupos-2">Grupos</h2>
 <ul>
-<li><p>Los grupos pueden tener contraseña <span class="math inline">\(\Rightarrow\)</span> <code>/etc/gshadow</code>:</p>
-<ul>
-<li><p>Si un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden <code>newgrp</code>.</p></li>
-<li><p>Información en <code>/etc/gshadow</code>: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al <code>/etc/shadow</code>).</p></li>
-</ul></li>
 <li><p>Tipos de grupos:</p>
 <ul>
 <li><p><span class="rojo">Primarios</span> <span class="math inline">\(\Rightarrow\)</span> grupo especificado en <code>/etc/passwd</code>.</p></li>
@@ -747,21 +762,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </section>
-<section id="grupos-3" class="level2">
-<h2 class="anchored" data-anchor-id="grupos-3">Grupos</h2>
+<section id="grupos-contraseñas" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-contraseñas">Grupos: contraseñas</h2>
+<p>Esta es una funcionalidad con poco uso en la actualidad.</p>
+<p>Los grupos pueden tener contraseña <span class="math inline">\(\Rightarrow\)</span> <code>/etc/gshadow</code>:</p>
+<ul>
+<li><p>Si un usuario sabe la contraseña de un grupo, puede usarlo sin pertenecer a él con la orden <code>newgrp</code>.</p></li>
+<li><p>Información en <code>/etc/gshadow</code>: grupo, contraseña, usuarios administradores (pueden cambiar la contraseña y los miembros) y miembros (idea parecida al <code>/etc/shadow</code>).</p></li>
+</ul>
+</section>
+<section id="grupos-herramientas" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-herramientas">Grupos: herramientas</h2>
 <ul>
 <li><p><code>addgroup grupo</code> <span class="math inline">\(\Rightarrow\)</span> crear un nuevo grupo.</p></li>
 <li><p><code>groupmod grupo</code> <span class="math inline">\(\Rightarrow\)</span> modificar un grupo existente.</p></li>
 <li><p><code>delgroup grupo</code> <span class="math inline">\(\Rightarrow\)</span> eliminar un grupo.</p></li>
+<li><p><code>groups [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> grupos a los que pertenece un usuario.</p></li>
+<li><p><code>id [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> lista el identificador del usuario y los grupos a los que pertenece.</p></li>
+<li><p><code>grpck</code> <span class="math inline">\(\Rightarrow\)</span> chequea la consistencia del fichero de grupos.</p></li>
+</ul>
+</section>
+<section id="grupos-herramientas-para-contraseñas" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-herramientas-para-contraseñas">Grupos: herramientas para contraseñas</h2>
+<ul>
 <li><p><code>newgrp grupo</code> <span class="math inline">\(\Rightarrow\)</span> cambiar de grupo activo (lanza un shell)</p></li>
 <li><p><code>gpasswd grupo</code> <span class="math inline">\(\Rightarrow\)</span> asignar una contraseña a un grupo:</p>
 <ul>
 <li>Si el usuario no pertenece al grupo, pero el grupo tiene contraseña, se le solicita y pasa a ser su grupo activo.</li>
 </ul></li>
 <li><p><code>gpasswd -a user grupo</code> <span class="math inline">\(\Rightarrow\)</span> añadir un usuario a un grupo.</p></li>
-<li><p><code>groups [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> grupos a los que pertenece un usuario.</p></li>
-<li><p><code>id [usuario]</code> <span class="math inline">\(\Rightarrow\)</span> lista el identificador del usuario y los grupos a los que pertenece.</p></li>
-<li><p><code>grpck</code> <span class="math inline">\(\Rightarrow\)</span> chequea la consistencia del fichero de grupos.</p></li>
 </ul>
 </section>
 </section>
