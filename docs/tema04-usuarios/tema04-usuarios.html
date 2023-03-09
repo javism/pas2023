@@ -255,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">8 de marzo de 2023</p>
+      <p class="date">10 de marzo de 2023</p>
     </div>
   </div>
   
@@ -621,6 +621,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>La cuenta expira, pase lo que pase, el 30 de octubre.</p></li>
 </ul>
 </section>
+<section id="ejercicio-restricciones-de-tiempo" class="level2 scrollable" data-background-color="lightgreen">
+<h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-restricciones-de-tiempo">Ejercicio restricciones de tiempo</h2>
+<p><span class="rojo">Importante: no hacer esto sobre el único usuario de entrada al sistema.</span></p>
+<ol type="1">
+<li><p>Consulta la ayuda del comando <code>lslogin</code> y lista las últimas sesiones de los usuarios.</p></li>
+<li><p>Consulta los parámetros de caducidad de algún usuario con: <code>chage -l usuario</code>.</p></li>
+<li><p>Cambia la caducidad de contraseña de alguna cuenta y comprueba el resultado intentando iniciar sesión con esa cuenta.</p></li>
+</ol>
+</section>
 <section id="ficheros-de-inicialización" class="level2">
 <h2 class="anchored" data-anchor-id="ficheros-de-inicialización">Ficheros de inicialización</h2>
 <ul>
@@ -645,6 +654,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>.bash_logout</code> en <strong>bash</strong> / <code>.logout</code> en C <strong>csh</strong></li>
 </ul>
+</section>
+<section id="ejercicio-ficheros-inicialización" class="level2 scrollable" data-background-color="lightgreen">
+<h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-ficheros-inicialización">Ejercicio ficheros inicialización</h2>
+<ol type="1">
+<li><p>Prueba a añadir algún alias útil a tu fichero <code>.bashrc</code>. Por ejemplo un alias para <code>rm</code> que pida siempre confirmación antes de borrar.</p></li>
+<li><p>Prueba a cambiar tu <em>prompt</em> y a hacerlo permanente si te gusta:</p></li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PS1</span><span class="op">=</span><span class="st">'\e[33;1m\u@\h: \e[31m\W\e[0m\$ '</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>Prueba a poner una máscara por defecto para todos los usuarios de nueva creación. Por ejemplo una restrictiva que no deje hacer nada al resto del grupo y usuarios.</li>
+</ol>
 </section>
 <section id="selección-de-intérprete-de-órdenes" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="selección-de-intérprete-de-órdenes">Selección de intérprete de órdenes</h2>
@@ -762,8 +782,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </section>
-<section id="grupos-contraseñas" class="level2">
-<h2 class="anchored" data-anchor-id="grupos-contraseñas">Grupos: contraseñas</h2>
+<section id="grupos-contraseñas-opcional" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-contraseñas-opcional">Grupos: contraseñas (opcional)</h2>
 <p>Esta es una funcionalidad con poco uso en la actualidad.</p>
 <p>Los grupos pueden tener contraseña <span class="math inline">\(\Rightarrow\)</span> <code>/etc/gshadow</code>:</p>
 <ul>
@@ -782,8 +802,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>grpck</code> <span class="math inline">\(\Rightarrow\)</span> chequea la consistencia del fichero de grupos.</p></li>
 </ul>
 </section>
-<section id="grupos-herramientas-para-contraseñas" class="level2">
-<h2 class="anchored" data-anchor-id="grupos-herramientas-para-contraseñas">Grupos: herramientas para contraseñas</h2>
+<section id="grupos-herramientas-para-contraseñas-opcional" class="level2">
+<h2 class="anchored" data-anchor-id="grupos-herramientas-para-contraseñas-opcional">Grupos: herramientas para contraseñas (opcional)</h2>
 <ul>
 <li><p><code>newgrp grupo</code> <span class="math inline">\(\Rightarrow\)</span> cambiar de grupo activo (lanza un shell)</p></li>
 <li><p><code>gpasswd grupo</code> <span class="math inline">\(\Rightarrow\)</span> asignar una contraseña a un grupo:</p>
@@ -828,6 +848,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>user</code> o <code>users</code> <span class="math inline">\(\Rightarrow\)</span> Grupo de los usuarios normales (no siempre se usa).</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="ejercicio-usuario-y-grupo-para-apache" class="level2 scrollable" data-background-color="lightgreen">
+<h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-usuario-y-grupo-para-apache">Ejercicio usuario y grupo para Apache</h2>
+<ol type="1">
+<li><p>Instala apache en Debian con: <code>apt install apache2</code>.</p></li>
+<li><p>Examina qué usuario y grupo utiliza el proceso y carpetas y las características de estos,</p></li>
+<li><p>Supón que tu usuario va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet)</p></li>
+</ol>
 </section>
 </section>
 <section id="referencias" class="level1" data-number="6">
