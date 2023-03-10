@@ -837,7 +837,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#referencias-1",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Referencias",
-    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. UNIX and Linux System Administration Handbook, 5th Edition. Capítulo 8: User Management. Addison-Wesley. 2018.\nAeleen Frisch. Essential system administration. Capítulo 6. Managing users and groups. O’Reilly and Associates. Tercera edición. 2002."
+    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. UNIX and Linux System Administration Handbook, 5th Edition. Capítulo 8: User Management. Addison-Wesley. 2018.\nAeleen Frisch. Essential system administration. Capítulo 6. Managing users and groups. O’Reilly and Associates. Tercera edición. 2002.\nPrivilege Escalation on Linux\nLinux Privilege Escalation: Three Easy Ways to Get a Root Shell"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html",
@@ -1201,7 +1201,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#ejercicio-ficheros-inicialización",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Ejercicio ficheros inicialización",
-    "text": "Ejercicio ficheros inicialización\n\nPrueba a añadir algún alias útil a tu fichero .bashrc. Por ejemplo un alias para rm que pida siempre confirmación antes de borrar.\nPrueba a cambiar tu prompt y a hacerlo permanente si te gusta:\n\nexport PS1='\\e[33;1m\\u@\\h: \\e[31m\\W\\e[0m\\$ '\n\nPrueba a poner una máscara por defecto para todos los usuarios de nueva creación. Por ejemplo una restrictiva que no deje hacer nada al resto del grupo y usuarios."
+    "text": "Ejercicio ficheros inicialización\n\nPrueba a añadir algún alias útil a tu fichero .bashrc. Por ejemplo un alias para rm que pida siempre confirmación antes de borrar.\nPrueba a cambiar tu prompt y a hacerlo permanente si te gusta:\n\nexport PS1='\\e[33;1m\\u@\\h: \\e[31m\\W\\e[0m\\$ '\n\nPrueba a poner una máscara por defecto para todos los usuarios de nueva creación. Por ejemplo una restrictiva que no deje hacer nada al resto del grupo y usuarios.\nAñade un saludo con una vaca (necesitarás sudo apt install cowsay)."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#grupos-contraseñas-opcional",
@@ -1222,6 +1222,13 @@
     "href": "tema04-usuarios/tema04-usuarios.html#ejercicio-usuario-y-grupo-para-apache",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Ejercicio usuario y grupo para Apache",
-    "text": "Ejercicio usuario y grupo para Apache\n\nInstala apache en Debian con: apt install apache2.\nExamina qué usuario y grupo utiliza el proceso y carpetas y las características de estos,\nSupón que tu usuario va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet)"
+    "text": "Ejercicio usuario y grupo para Apache\n\nInstala apache en Debian con: apt install apache2.\nExamina qué usuario y grupo utiliza el proceso y carpetas y las características de estos.\nSupón que tu usuario va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet). Este hilo en stackoverflow sobre establecer permisos adecuados y seguridad en Apache es interesante."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#configuración-de-login-de-usuarios",
+    "href": "tema04-usuarios/tema04-usuarios.html#configuración-de-login-de-usuarios",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "Configuración de login de usuarios",
+    "text": "Configuración de login de usuarios\nLas política generales de gestión de contraseñas, creación de usuarios, umask por defecto, etc. se definen en: /etc/login.defs.\nPuedes ver un resumen de todo esto en Gestión de política de contraseñas en Linux: login.defs y pam_pwquality&pam_cracklib"
   }
 ]
