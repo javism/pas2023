@@ -1222,7 +1222,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#ejercicio-usuario-y-grupo-para-apache",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Ejercicio usuario y grupo para Apache",
-    "text": "Ejercicio usuario y grupo para Apache\n\nInstala apache en Debian con: apt install apache2.\nExamina qué usuario y grupo utiliza el proceso y carpetas y las características de estos.\nSupón que tu usuario va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet). Este hilo en stackoverflow sobre establecer permisos adecuados y seguridad en Apache es interesante."
+    "text": "Ejercicio usuario y grupo para Apache\n\nInstala apache en Debian con: apt install apache2.\nExamina qué usuario y grupo utiliza el proceso y carpetas y las características de estos.\nSupón que un usuario no administrador del sistema operativo va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet). Este hilo en stackoverflow sobre establecer permisos adecuados y seguridad en Apache es interesante."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#configuración-de-login-de-usuarios",
