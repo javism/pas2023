@@ -660,6 +660,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>.bash_logout</code> en <strong>bash</strong> / <code>.logout</code> en C <strong>csh</strong></li>
 </ul>
 </section>
+<section id="configuración-de-login-de-usuarios" class="level2">
+<h2 class="anchored" data-anchor-id="configuración-de-login-de-usuarios">Configuración de login de usuarios</h2>
+<p>Las política generales de gestión de contraseñas, creación de usuarios, umask por defecto, etc. se definen en: <code>/etc/login.defs</code>.</p>
+<p>Puedes ver un resumen de todo esto en <a href="https://www.zonasystem.com/2020/04/gestion-de-las-politicas-de-contrasenas-en-linux-logindefs-pam-pwquality-cracklib.html">Gestión de política de contraseñas en Linux: login.defs y pam_pwquality&amp;pam_cracklib</a></p>
+</section>
 <section id="ejercicio-ficheros-inicialización" class="level2 scrollable" data-background-color="lightgreen">
 <h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-ficheros-inicialización">Ejercicio ficheros inicialización</h2>
 <ol type="1">
@@ -668,7 +673,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PS1</span><span class="op">=</span><span class="st">'\e[33;1m\u@\h: \e[31m\W\e[0m\$ '</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
-<li>Prueba a poner una máscara por defecto para todos los usuarios de nueva creación. Por ejemplo una restrictiva que no deje hacer nada al resto del grupo y usuarios.</li>
+<li><p>Prueba a poner una máscara por defecto para todos los usuarios de nueva creación. Por ejemplo una restrictiva que no deje hacer nada al resto del grupo y usuarios.</p></li>
+<li><p>Añade un saludo con una vaca (necesitarás <code>sudo apt install cowsay</code>).</p></li>
 </ol>
 </section>
 <section id="selección-de-intérprete-de-órdenes" class="level2 smaller">
@@ -858,8 +864,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="scrollable anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-usuario-y-grupo-para-apache">Ejercicio usuario y grupo para Apache</h2>
 <ol type="1">
 <li><p>Instala apache en Debian con: <code>apt install apache2</code>.</p></li>
-<li><p>Examina qué usuario y grupo utiliza el proceso y carpetas y las características de estos,</p></li>
-<li><p>Supón que tu usuario va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet)</p></li>
+<li><p>Examina qué usuario y grupo utiliza el proceso y carpetas y las características de estos.</p></li>
+<li><p>Supón que un usuario no administrador del sistema operativo va a ser el administrador web de esta instancia de Apache. ¿Qué estrategia de permisos y grupos se te ocurren para que sea práctico y seguro? (puedes buscar en internet). Este <a href="https://askubuntu.com/a/767534">hilo en stackoverflow</a> sobre establecer permisos adecuados y seguridad en Apache es interesante.</p></li>
 </ol>
 </section>
 </section>
@@ -869,6 +875,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="referencias-1">Referencias</h2>
 <p>Evi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley and Dan Mackin. UNIX and Linux System Administration Handbook, 5th Edition. Capítulo 8: <em>User Management</em>. Addison-Wesley. 2018.</p>
 <p>Aeleen Frisch. Essential system administration. Capítulo 6. <em>Managing users and groups</em>. O’Reilly and Associates. Tercera edición. 2002.</p>
+<p><a href="https://delinea.com/blog/linux-privilege-escalation">Privilege Escalation on Linux</a></p>
+<p><a href="https://patchthenet.com/articles/linux-privilege-escalation-three-easy-ways-to-get-a-root-shell/">Linux Privilege Escalation: Three Easy Ways to Get a Root Shell</a></p>
 
 
 </section>
