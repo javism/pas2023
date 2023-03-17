@@ -264,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">13 de marzo de 2023</p>
+      <p class="date">17 de marzo de 2023</p>
     </div>
   </div>
   
@@ -666,8 +666,8 @@ Importante
 <p>Has conseguido entrar en la sala de servidores echándole laxante en el café al guardia de seguridad. ¿Podrías hacerte con el usuario <code>root</code> del sistema y ponerle la contraseña que quieras?</p>
 <p>Para conseguirlo puedes hacer algo extraordinario como mirar la bibliografía del tema.</p>
 </section>
-<section id="modo-monousuario-3" class="level2">
-<h2 class="anchored" data-anchor-id="modo-monousuario-3">Modo monousuario</h2>
+<section id="modo-monousuario-3" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="modo-monousuario-3">Modo monousuario</h2>
 <ul>
 <li><p><strong>Solución</strong>: no existe una solución única sino un <strong>conjunto de medidas de mitigación</strong> para proteger ante accesos físicos al sistema.</p></li>
 <li><p>Por ejemplo, solicitar contraseña para la entrada de administración.</p>
@@ -685,7 +685,7 @@ Importante
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Reenter</span> password: </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> PBKDF2 is grub.pbkdf2.sha512.10000.086EB0CC8CB1E39E2...</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Modificar la entrada de administración, para que requiera password: <code>--users user1</code>.</li>
+<li>Ejecutar <code>update-grub</code> o modificar la entrada de administración para que requiera password: <code>--users user1</code>.</li>
 </ul></li>
 </ul>
 </section>
@@ -931,6 +931,22 @@ Importante
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar un servicio a todos los niveles</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">update-rc.d</span> apache2 remove</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="herramientas-de-systemd" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="herramientas-de-systemd">Herramientas de systemd</h2>
+<p>systemd con su abanico de herramientas permite consultar información y realizar acciones sobre arranque, servicios y logs muy útiles que son difíciles o imposibles con init:</p>
+<p>Mostrar servicios y servicios activos:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemd-cgls</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> <span class="at">--type</span><span class="op">=</span>service</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> <span class="at">--type</span><span class="op">=</span>service <span class="at">--state</span><span class="op">=</span>active</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Listar temporizadores:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> list-timers<span class="kw">`</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Mostrar logs de un servicio (ej. <code>ssh.service</code>, <code>apache2.service</code>):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">journalctl</span> <span class="at">-u</span> service-name.service</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">journalctl</span> <span class="at">-u</span> service-name.service <span class="at">-b</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Mostrar logs desde una fecha (también se puede elegir un intervalo):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">journalctl</span> <span class="at">--since</span> <span class="st">"2023-01-30"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="resumen-del-proceso-de-arranque" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Resumen del proceso de arranque</h1>
@@ -977,9 +993,9 @@ Importante
 <h2 class="anchored" data-anchor-id="parada-del-sistema-shutdown">Parada del sistema: <code>shutdown</code></h2>
 <p><strong><code>shutdown [opciones] tiempo [mensaje]</code></strong>:</p>
 <ul>
-<li><p>Sin opciones: modo monousuario (<code>telinit 1</code>).</p></li>
-<li><p><code>-r</code>: reiniciar (<code>telinit 6</code>).</p></li>
-<li><p><code>-h</code>: parar (<code>telinit 0</code>).</p></li>
+<li><p>Sin opciones: modo monousuario (<code>telinit 1</code> o <code>systemctl isolate rescue.target</code>).</p></li>
+<li><p><code>-r</code>: reiniciar (<code>telinit 6</code> o <code>systemctl isolate reboot.target</code>).</p></li>
+<li><p><code>-h</code>: parar (<code>telinit 0</code> o <code>systemctl isolate shutdown.target</code>).</p></li>
 <li><p><code>-c</code>: cancelar.</p></li>
 <li><p><code>-k</code>: hacer una simulación de apagado.</p></li>
 <li><p><code>tiempo</code>: <code>+minutos</code>, <code>now</code>, <code>horas:minutos</code>.</p></li>
@@ -989,8 +1005,8 @@ Importante
 </section>
 <section id="caídas-del-sistema-y-problemas-de-arranque" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Caídas del sistema y problemas de arranque</h1>
-<section id="caídas-del-sistema-y-problemas-de-arranque-1" class="level2">
-<h2 class="anchored" data-anchor-id="caídas-del-sistema-y-problemas-de-arranque-1">Caídas del sistema y problemas de arranque</h2>
+<section id="diagnóstico-de-sistema-y-arranque" class="level2">
+<h2 class="anchored" data-anchor-id="diagnóstico-de-sistema-y-arranque">Diagnóstico de sistema y arranque</h2>
 <p>Posibles causas de caídas del sistema</p>
 <ul>
 <li><p>Fallos <em>hardware</em>.</p></li>
@@ -1001,8 +1017,8 @@ Importante
 <li><p>Problemas de algún sistema de ficheros.</p></li>
 </ul>
 </section>
-<section id="caídas-del-sistema-y-problemas-de-arranque-2" class="level2">
-<h2 class="anchored" data-anchor-id="caídas-del-sistema-y-problemas-de-arranque-2">Caídas del sistema y problemas de arranque</h2>
+<section id="diagnóstico-de-sistema-y-arranque-1" class="level2">
+<h2 class="anchored" data-anchor-id="diagnóstico-de-sistema-y-arranque-1">Diagnóstico de sistema y arranque</h2>
 <p>Problemas de arranque:</p>
 <ul>
 <li><p>Fallos <em>hardware</em>.</p></li>
@@ -1012,8 +1028,8 @@ Importante
 <li><p>Errores en la configuración del sistema.</p></li>
 </ul>
 </section>
-<section id="caídas-del-sistema-y-problemas-de-arranque-3" class="level2">
-<h2 class="anchored" data-anchor-id="caídas-del-sistema-y-problemas-de-arranque-3">Caídas del sistema y problemas de arranque</h2>
+<section id="diagnóstico-de-sistema-y-arranque-2" class="level2">
+<h2 class="anchored" data-anchor-id="diagnóstico-de-sistema-y-arranque-2">Diagnóstico de sistema y arranque</h2>
 <ul>
 <li><p>Al rearrancar mirar los mensajes que hay en el fichero <code>/var/log/messages</code>.</p></li>
 <li><p>La orden <code>dmesg</code> <span class="math inline">\(\Rightarrow\)</span> mensajes producidos durante el arranque.</p></li>
