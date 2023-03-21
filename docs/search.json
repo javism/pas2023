@@ -858,7 +858,7 @@
     "href": "tema05-recursos/tema05-recursos.html#vmstat-ejemplo",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "vmstat: ejemplo",
-    "text": "vmstat: ejemplo\nRepetir cada 2 segundos 5 veces:\n$ vmstat 2 5\nprocs  ----------memory------------ -swap- --io-- -system-- -----cpu------\nr  b   swpd     free   buff   cache si  so  bi bo  in    cs us sy id wa st\n0  0      0 10368052 221628 3251020  0   0 109 71  142  482 5  1 93  0   0\n0  0      0 10367408 221636 3251288  0   0   0 58 1526 7113 4  2 94  0   0\n0  0      0 10350648 221636 3269616  0   0   0  0 1165 3711 9  1 90  0   0\n1  0      0 10351420 221636 3268904  0   0   0  0  575 1578 6  0 93  0   0\n1  0      0 10345792 221636 3274928  0   0   0 26 2497 8090 6  3 91  0   0"
+    "text": "vmstat: ejemplo\nRepetir cada 2 segundos 5 veces:\n$ vmstat 2 5\nprocs  ----------memory------------ -swap- --io-- -system-- -----cpu------\nr  b   swpd     free   buff   cache si  so  bi bo  in    cs us sy id wa st\n0  0      0 10368052 221628 3251020  0   0 109 71  142  482 5  1 93  0   0\n0  0      0 10367408 221636 3251288  0   0   0 58 1526 7113 4  2 94  0   0\n0  0      0 10350648 221636 3269616  0   0   0  0 1165 3711 9  1 90  0   0\n1  0      0 10351420 221636 3268904  0   0   0  0  575 1578 6  0 93  0   0\n1  0      0 10345792 221636 3274928  0   0   0 26 2497 8090 6  3 91  0   0\nMás posibilidades en How to Use the vmstat Command"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#carpeta-proc",
