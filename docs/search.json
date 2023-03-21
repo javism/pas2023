@@ -151,7 +151,14 @@
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios\nTema 5: Gestión de Recursos"
+  },
+  {
+    "objectID": "index.html#evi-nemeth",
+    "href": "index.html#evi-nemeth",
+    "title": "Programación y Administración de Sistemas",
+    "section": "Evi Nemeth",
+    "text": "Evi Nemeth\nEvi Tribute at admin.com.\n\n\n\nEvi Nemeth retired from the Computer Science faculty at the University of Colorado in 2001. She explored the Pacific on her 40-foot sailboat named Wonderland for many years before becoming lost at sea in 2013. Fuente http://www.techfestival.org/evi-nemeth\n\n\n\n\n\nEvi Nemeth and Dennis Ritchie at the Phoenix 1987 USENIX conference. Evi, a UNIX engineer, author, and teacher, famous for one of the UNIX/Linux sys admin “bibles”. Dennis Ritchie co-developed UNIX and also the C programming language. Fuente @bioreconstruct"
   },
   {
     "objectID": "tema03-arranque/tema03-arranque.html",
@@ -567,6 +574,13 @@
     "text": "Escalado de privilegios\nIncluye enlaces a scripts de auditoría: Privilege Escalation on Linux\nAlgunos ejemplos básicos de explotación de errores de configuración (permisos, grupos, usuarios, etc.): Linux Privilege Escalation: Three Easy Ways to Get a Root Shell"
   },
   {
+    "objectID": "enlaces.html#fork-bomb-y-protecciones",
+    "href": "enlaces.html#fork-bomb-y-protecciones",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "Fork bomb y protecciones",
+    "text": "Fork bomb y protecciones\nUnderstanding Bash fork() Bomb :(){ :|:& };: code. https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/\nHow to: Prevent a fork bomb by limiting user process. https://www.cyberciti.biz/tips/linux-limiting-user-process.html\nFork Bomb y el apocalipsis zombie en GNU/Linux. https://juncotic.com/fork-bomb-el-apocalipsis-zombie-en-linux/"
+  },
+  {
     "objectID": "enlaces.html#trucos-vim",
     "href": "enlaces.html#trucos-vim",
     "title": "Programación y Administración de Sistemas (2022-2023)",
@@ -579,6 +593,412 @@
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "Cifrado:",
     "text": "Cifrado:\nDiferencias de seguridad bcrypt vs SHA\nNIST Post-Quantum Cryptography Standardization"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html",
+    "href": "tema05-recursos/tema05-recursos.html",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "",
+    "text": "Conocer cuáles son los recursos básicos del sistema operativo (CPU, memoria y espacio en disco) y la necesidad e importancia de su monitorización y gestión.\nDefinir los procesos en GNU/Linux y distinguir los modos de ejecución básicos (modo usuario y modo núcleo).\nEstablecer los tipos de procesos que pueden ejecutarse en el sistema operativo.\nUtilizar la herramienta ps para ver los procesos en ejecución y sus atributos.\nExplicar el ciclo de vida de un proceso en GNU/Linux desde el punto de vista de su administración, detallando los distintos estados por los que puede pasar.\nConocer el mecanismo de planificación utilizado en GNU/Linux para ejecutar los procesos.\nUtilizar el número nice para modificar la prioridad de los procesos.\nEnviar señales a procesos para controlar su ejecución y distinguir entre el efecto de las distintas señales.\nMonitorizar el tiempo de actividad de un sistema mediante la herramienta uptime.\nMonitorizar el árbol de ejecución de procesos de un sistema mediante la herramienta pstree.\nMonitorizar los procesos en ejecución de forma interactiva mediante la herramienta top.\nObtener informes sobre la ejecución de procesos en un sistema mediante la herramienta vmstat.\nConocer el contenido de la carpeta /proc y los ficheros que en ella aparecen para cada uno de los procesos en ejecución.\nPostergar la ejecución de procesos mediante el uso de la herramienta at.\nPlanificar la ejecución periódica de procesos mediante la herramienta cron.\nRastrear señales y llamadas al sistema de un determinado proceso mediante la herramienta strace.\nMonitorizar la cantidad de memoria libre mediante la herramienta free.\nMonitorizar el uso de memoria mediante vmstat.\nDecidir el espacio de paginación necesario para un sistema operativo.\nControlar el espacio en disco mediante las herramientas df y du.\nMonitorizar el rendimiento de los discos mediante el uso de la herramienta iostat.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#tareas-típicas",
+    "href": "tema05-recursos/tema05-recursos.html#tareas-típicas",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Tareas típicas",
+    "text": "Tareas típicas\nEmpieza a ir lento un servicio, ¿qué puede pasar?\n\n¿Cuántos recursos gasta nuestro servidor web según aumentan las peticiones?\n\n\n¿cómo programo una tarea para que se ejecute repetidamente?"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#introducción-1",
+    "href": "tema05-recursos/tema05-recursos.html#introducción-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Introducción",
+    "text": "Introducción\nUna correcta administración del sistema implica obtener información sobre sus recursos y rendimiento:\n\nProcesos en ejecución,\ncantidad de memoria disponible,\nespacio en disco,\nnº de particiones,\nprioridad de procesos, etc.\n\npara poder identificar y mitigar cuellos de botella, ataques, incidencias, etc."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-en-gnulinux",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-en-gnulinux",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos en GNU/Linux",
+    "text": "Procesos en GNU/Linux\n\nFuente Nemeth et. al 2018"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-en-gnulinux-1",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-en-gnulinux-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos en GNU/Linux",
+    "text": "Procesos en GNU/Linux\n\nProceso: representa un programa en ejecución (el SO crea el proceso cuando comienza la ejecución y lo elimina al finalizarla). Es una abstracción a través de la cuál la memoria, tiempo de procesador y recursos E/S pueden gestionarse y monitorizarse.\nUn sistema de tiempo compartido como GNU/Linux permite múltiples usuarios que ejecuten múltiples procesos, aunque la CPU solo puede ejecutar un proceso a la vez por núcleo.\nLa CPU conmuta rápidamente de un proceso al siguiente, ejecutando un cuanto (por ejemplo, 100ms) de cada proceso.\nEl SO es el encargado de decidir qué proceso se ejecuta en qué lugar \\(\\rightarrow\\) planificación de la CPU."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#información-de-cpu-y-núcleos-pc",
+    "href": "tema05-recursos/tema05-recursos.html#información-de-cpu-y-núcleos-pc",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Información de CPU y núcleos: PC",
+    "text": "Información de CPU y núcleos: PC\nEn un PC:\n$ lscpu | grep -E '^Hilo|^Núcleo|^socket|^CPU\\('\nCPU(s):                              8\nHilo(s) de procesamiento por núcleo: 2\nNúcleo(s) por «socket»:              4\nCPU(s) del nodo NUMA 0:              0-7\n$ grep -m 1 'cpu cores' /proc/cpuinfo\ncpu cores   : 4\n$ nproc --all\n8"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#información-de-cpu-y-núcleos-servidor",
+    "href": "tema05-recursos/tema05-recursos.html#información-de-cpu-y-núcleos-servidor",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Información de CPU y núcleos: servidor",
+    "text": "Información de CPU y núcleos: servidor\nEn un servidor:\n$ grep -m 1 'cpu cores' /proc/cpuinfo\ncpu cores   : 20\n$ nproc --all\n160\n$ lscpu | grep -E '^Hilo|^Núcleo|^socket|^CPU\\('\nCPU(s):                              160\nHilo(s) de procesamiento por núcleo: 2\nNúcleo(s) por «socket»:              20\nCPU(s) del nodo NUMA 0:              0-19,80-99\nCPU(s) del nodo NUMA 1:              20-39,100-119\nCPU(s) del nodo NUMA 2:              40-59,120-139\nCPU(s) del nodo NUMA 3:              60-79,140-159"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-modos-de-ejecución",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-modos-de-ejecución",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: modos de ejecución",
+    "text": "Procesos: modos de ejecución\nModos de ejecución (distinción para proteger mejor las direcciones de memoria a las que puede acceder un proceso)\n\nModo usuario: se ejecuta código normal del programa.\nModo núcleo: se ejecutan las funciones del núcleo (en realidad, es el kernel ejecutándose en nombre del proceso):\n\nLlamadas al sistema: Los procesos de usuario solicitan servicios explícitamente a través de la interfaz de llamadas al sistema (p.ej. crear un hilo, abrir un fichero…).\nExcepciones: Situaciones excepcionales (división por cero, errores de direccionamiento…) causan excepciones hardware que requieren intervención del kernel.\nInterrupciones: Los dispositivos periféricos interrumpen para notificar al kernel de diversos sucesos (terminación de E/S, cambio de estado…)."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-tipos-de-procesos-iii",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-tipos-de-procesos-iii",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: tipos de procesos (I/II)",
+    "text": "Procesos: tipos de procesos (I/II)\n\nProcesos de usuario\n\nProcesos creados por un usuario real.\nSe ejecutan en modo usuario, excepto en los casos anteriores.\n\n\n\nProcesos demonio\n\nNo asociados a un usuario, o asociados a uno ficticio.\nSe ejecutan en modo usuario, excepto en los casos anteriores.\nRealizan tareas periódicas relacionadas con la administración del sistema (gestión de la red, crontab…)."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-tipos-de-procesos-iiii",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-tipos-de-procesos-iiii",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: tipos de procesos (II/II)",
+    "text": "Procesos: tipos de procesos (II/II)\n\nProcesos núcleo\n\nNo asociados a un usuario.\nCorresponden al código del kernel.\nSe ejecutan siempre en modo núcleo.\nTareas de administración más delicadas (planificación, intercambio de procesos, intercambio de páginas…)."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-monitorizar-con-ps",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-monitorizar-con-ps",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: monitorizar con ps",
+    "text": "Procesos: monitorizar con ps\nps: información sobre los procesos en ejecución\n\nUSER \\(\\Rightarrow\\) usuario que lanzó el programa.\nPID \\(\\Rightarrow\\) identificador del proceso.\nPPID \\(\\Rightarrow\\) identificador del proceso padre (los nuevos procesos se crean clonándose con fork).\n%CPU \\(\\Rightarrow\\) porcentaje de la CPU consumido por este proceso (en ese momento).\n%MEM \\(\\Rightarrow\\) fracción de memoria consumida (es una estimación).\nVSZ \\(\\Rightarrow\\) tamaño virtual (código+datos+pila) en KB.\nRSS \\(\\Rightarrow\\) memoria real usada en KB (VSZ incluye a RSS).\nTTY \\(\\Rightarrow\\) terminal asociado con el proceso."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-monitorizar-con-ps-1",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-monitorizar-con-ps-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: monitorizar con ps",
+    "text": "Procesos: monitorizar con ps\n\n\nps: información sobre los procesos en ejecución\n\nSTAT estado del proceso:\n\nR: en ejecución\nS: durmiendo\nZ: proceso zombie\nD: durmiendo ininterrumpible (E/S)\nT: parado (señal o trace)\n\n\n\n\n\n\n\nSTAT banderas adicionales:\n\n<:prioridad más alta de lo normal (\\(<0\\)), N: más baja de lo normal (\\(>0\\))\nl: tiene multithread, +: proceso, foreground, s: líder de sesión\nL: tiene páginas bloqueadas en memoria"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: estados de los procesos",
+    "text": "Procesos: estados de los procesos\n\n\n\n\nR: un proceso en ejecución está listo para ejecutarse en cuanto la CPU esté libre. Tiene todos los recursos que necesita y está esperando su cuanto para ejecutarse.\nS: durmiendo, esperando a que ocurra un evento específico (petición I/O, lectura de un socket…). bash y los demonios del sistema pasan casi todo su tiempo durmiendo, esperando la entrada por terminal o que un cliente haga una petición por la red. Estos procesos no recibirán tiempo de CPU hasta que el evento ocurra o que se reciba una señal específica."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-1",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: estados de los procesos",
+    "text": "Procesos: estados de los procesos\n\n\n\n\nD: durmiendo, espera ininterrumpible. Algunas operaciones causan este estado, en el que el proceso no maneja señales, solo despertará cuando pase el evento. Normalmente, el estado D es transitorio y no llegaríamos a verlo en el ps. Sin embargo, determinadas situaciones anómalas hacen que el estado se mantenga (p.ej. pedir un fichero a un servidor NFS al que no podemos acceder y que hemos montado con hard). Solo podemos reiniciar o arreglar el problema."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-2",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-2",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: estados de los procesos",
+    "text": "Procesos: estados de los procesos\n\n\n\n\nZ: zombie, el proceso termina correctamente pero el padre no recoge su código de error \\(\\rightarrow\\) Consultar el PPID para ver el origen del problema.\nT: proceso detenido temporalmente mediante señales (Ctrl+Z) o porque está siendo examinado (trace). Solo volverán a ejecutarse tras otra señal."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-3",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-3",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: estados de los procesos",
+    "text": "Procesos: estados de los procesos\n\n\n\n\nI: idle, este estado se introdujo en 2017 con la versión 4.17 del núcleo. Significa que estamos ante un proceso ocioso de un hilo del núcleo, en espera ininterrumpible. A diferencia del estado D, solo se aplica a procesos del núcleo y no contribuye a la carga de la CPU."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-4",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-4",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos: estados de los procesos",
+    "text": "Procesos: estados de los procesos\n\ns: líder de sesión. Los procesos se pueden agrupar. Si se manda una señal al grupo, se le manda a todos los procesos. El líder es el que interactúa con la terminal.\nl: hilos creados con CLONE_THREAD (p.ej. hilos Native Posix Thread Library, NPTL).\nL: el proceso ha pedido al kernel bloquear determinadas páginas de memoria, para evitar que no se modifiquen mientras se hacen determinadas operaciones.\n+: foreground, proceso de primer plano, iniciado sin &."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejemplo-salida-ps",
+    "href": "tema05-recursos/tema05-recursos.html#ejemplo-salida-ps",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejemplo salida ps",
+    "text": "Ejemplo salida ps\n$ ps aux | less #a-> Todos usuarios, x-> Procesos sin terminal, u -> Añadir nombre de usuario\nUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot           1  0.0  0.0 166852 11240 ?        Ss   11:50   0:02 /sbin/init\nroot           2  0.0  0.0      0     0 ?        S    11:50   0:00 [kthreadd]\nroot           3  0.0  0.0      0     0 ?        I<   11:50   0:00 [rcu_gp]\nroot           4  0.0  0.0      0     0 ?        I<   11:50   0:00 [rcu_par_gp]\nroot          12  0.0  0.0      0     0 ?        S    11:50   0:00 [ksoftirqd/0]\nroot          13  0.0  0.0      0     0 ?        I    11:50   0:30 [rcu_sched]\n...\npedroa     18651  0.0  0.0  14096  3400 pts/1    R+   20:36   0:00 ps aux\npedroa     18652  0.0  0.0   8140   912 pts/1    S+   20:36   0:00 less\n$ ps al #a-> Todos usuarios, l -> Formato \"long\"\nF   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND\n4     0    1323    1315  20   0 633340 217800 -   Ssl+ tty7      31:12 /usr/lib/xorg/Xorg :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch\n4     0    1324       1  20   0   8340  1760 -    Ss+  tty1       0:00 /sbin/agetty -o -p -- \\u --noclear tty1 linux\n0  1000   18303   18292  20   0  10644  4860 core_s Ss+  pts/0      0:00 bash\n0  1000   18649   18292  20   0  10644  4912 -    Ss   pts/1      0:00 bash\n4  1000   18718   18649  20   0  13816  1308 -    R+   pts/1      0:00 ps al"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#árbol-de-procesos-pstree",
+    "href": "tema05-recursos/tema05-recursos.html#árbol-de-procesos-pstree",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Árbol de procesos: pstree",
+    "text": "Árbol de procesos: pstree\npstree \\(\\Rightarrow\\) visualiza un árbol de los procesos en ejecución\ninit---NetworkManager---2*[{NetworkManager}]\n        |--acpid\n        |--atd\n        |--avahi-daemon---avahi-daemon\n        |--bamfdaemon\n        |--bluetoothd\n        |--bonobo-activati---2*[{bonobo-activat}]\n        |--console-kit-dae---64*[{console-kit-da}]\n        |--cron\n        |--cupsd\n        |--2*[dbus-daemon]\n        |--dbus-launch\n        |--dconf-service---{dconf-service}\n        |--evince---3*[{evince}]\n        |--evinced---{evinced}\n        |--firefox---plugin-containe---7*[{plugin-contain}]\n        |         |--21*[{firefox}]\n        |--gconfd-2"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#prioridad",
+    "href": "tema05-recursos/tema05-recursos.html#prioridad",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Prioridad",
+    "text": "Prioridad\nNúmero nice (“buena gente”) y prioridad de procesos:\n\nPlanificación de procesos por prioridades dinámicas.\nAl lanzar el proceso, se le asigna un número nice o prioridad estática (se hereda por defecto del proceso padre).\nLa prioridad por defecto se obtiene mediante el número nice.\nValores bajos (negativos): más prioridad.\nValores altos (positivos): menos prioridad.\nRango de prioridad estática \\(\\Rightarrow [-20,19]\\)"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#prioridad-y-señales-ejemplos-nice",
+    "href": "tema05-recursos/tema05-recursos.html#prioridad-y-señales-ejemplos-nice",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Prioridad y señales: ejemplos nice",
+    "text": "Prioridad y señales: ejemplos nice\nAsignación de prioridades mayores o menores que la actual:\n\nnice -5 nautilus: lanzar nautilus con nº nice incrementado en 5.\nnice --10 nautilus: lanzar nautilus con nº nice decrementado en 10 (solo root).\nrenice 14 890: prioridad 14 al proceso 890.\nrenice 5 -u pedroa: prioridad 5 para todos los procesos del usuario pedroa."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-nice",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-nice",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio nice",
+    "text": "Ejercicio nice\n\nLista la información los procesos relacionados con apache\nBusca cómo averiguar la prioridad de estos procesos (hay varias alternativas).\nLista y cambia la prioridad a algún proceso."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-nice-solución",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-nice-solución",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio nice (solución)",
+    "text": "Ejercicio nice (solución)\nInformación con ps:\n$ ps axu|grep -E 'apache|COMMAND'\nUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot       29822  0.0  0.0   6524  4396 ?        Ss   12:45   0:00 /usr/sbin/apache2 -k start\nwww-data   29823  0.0  0.0 1997844 4320 ?        Sl   12:45   0:00 /usr/sbin/apache2 -k start\nwww-data   29824  0.0  0.0 1932308 4316 ?        Sl   12:45   0:00 /usr/sbin/apache2 -k start\nCon la opción -l:\nps -lu www-data\nUna vez sabemos el PID podemos consultar su prioridad:\nps -o pid 29822\nTambién con top."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#señales-y-procesos-kill",
+    "href": "tema05-recursos/tema05-recursos.html#señales-y-procesos-kill",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Señales y procesos: kill",
+    "text": "Señales y procesos: kill\nEnvío de señales a los procesos (pararlos, hacer que continúen, eliminarlos…):\n\nkill -señal pid (donde señal es un número).\nkill pid: mandar señal por defecto al proceso pid (señal SIGTERM, número 15, se puede capturar).\nSIGKILL (9) fuerza la salida del proceso. No se puede capturar.\nParar un proceso SIGSTOP (19), Reiniciarlo SIGCONT (18).\nkillall comando: permite mandar una señal a todos los procesos con un determinado nombre de comando.\npkill ó skill \\(\\Rightarrow\\) enviar una señal usando el nombre u otros atributos o criterios (uid, gid, terminal…).\nLos procesos en estado D o Z no se detienen pese a recibir la señal KILL."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#señales-posix",
+    "href": "tema05-recursos/tema05-recursos.html#señales-posix",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Señales POSIX",
+    "text": "Señales POSIX\n\nFuente Nemeth et. al 2018."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#señales-posix-1",
+    "href": "tema05-recursos/tema05-recursos.html#señales-posix-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Señales POSIX",
+    "text": "Señales POSIX\n\n\n\n#\nNombre\nDescripción\nPor defecto\n¿Se puede capturar?\n¿Se puede bloquear?\n¿core dump?\n\n\n1\nHUP\nHang up (terminal)\nTerminar\nSi\nSi\nNo\n\n\n2\nINT\nInterrumpir (Ctrl+C)\nTerminar\nSi\nSi\nNo\n\n\n3\nQUIT\nSimilar a TERM\nTerminar\nSi\nSi\nSi\n\n\n9\nKILL\nMatar proceso\nTerminar\nNo\nNo\nNo\n\n\n*\nBUS\nError manejo bus\nTerminar\nSi\nSi\nSi\n\n\n11\nSEGV\nViolación de segmento\nTerminar\nSi\nSi\nSi\n\n\n15\nTERM\nParar software\nTerminar\nSi\nSi\nNo\n\n\n*\nSTOP\nParada\nParar\nNo\nNo\nNo\n\n\n*\nTSTP\nParada (Ctrl+Z)\nParar\nSi\nSi\nNo\n\n\n*\nCONT\nContinuar (tras STOP)\nContinuar\nSi\nNo\nNo\n\n\n*\nWINCH\nCambio tamaño\nContinuar\nSi\nSi\nNo\n\n\n*\nUSR1\nA definir\nTerminar\nSi\nSi\nNo\n\n\n*\nUSR2\nA definir\nTerminar\nSi\nSi\nNo\n\n\n\n*: depende del Sistema Operativo."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#señales-y-procesos",
+    "href": "tema05-recursos/tema05-recursos.html#señales-y-procesos",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Señales y procesos",
+    "text": "Señales y procesos\n\nKILL (9): No se puede bloquear ni capturar.\nINT (2): La que se envía al pulsar Crtl+C.\n\nSe puede bloquear.\nSi se manda a un intérprete de órdenes, podría cancelar la orden que está ejecutando, pero no el programa completo.\n\nTERM (15): La que se manda al cerrar el proceso padre o al reiniciar. Se puede bloquear y capturar.\nDiferencia entre STOP y TSP: STOP no se puede ni bloquear ni capturar."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#señales-y-procesos-1",
+    "href": "tema05-recursos/tema05-recursos.html#señales-y-procesos-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Señales y procesos",
+    "text": "Señales y procesos\n\nHUP (1):\n\nSi se trata de demonios, debería provocar que se reinicien, volviendo a leer su configuración.\nSi se trata de procesos iniciados en una terminal, se manda al cerrar la terminal (algunos intérpretes hacen inmunes los procesos background a esta señal, en bash, hay que hacerlo con el comando nohup).\n\nQUIT (3): Similar a TERM pero hace un core dump.\nTSTP: La que se envía al pulsar Crtl+Z.\nLos procesos detenidos con TSTP o con STOP, se puede reanudar con:\n\nla señal CONT, o usando el comando fg (vuelve al foreground) o bg (vuelve al background)."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#monitorizar-uso-cpu-con-uptime",
+    "href": "tema05-recursos/tema05-recursos.html#monitorizar-uso-cpu-con-uptime",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Monitorizar uso CPU con uptime",
+    "text": "Monitorizar uso CPU con uptime\nuptime: hora actual, cuánto tiempo lleva en marcha el sistema, número de usuarios conectados, y carga media del sistema (el número medio de procesos del sistema que durante los últimos \\(1\\), \\(5\\) y \\(15\\) minutos han estado en los estados R o D).\n\nValores altos implican que el sistema se está usando mucho, pero ¿cuándo se considera que un valor es alto? \\(\\rightarrow\\) depende del número de núcleos.\nValores bajos no significan que el tiempo de respuesta vaya a ser bajo.\n\ni02samoj@VTS1:~$ uptime\n 13:54:52 up  7:55,  4 users,  load average: 0,00, 0,00, 0,00"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#top",
+    "href": "tema05-recursos/tema05-recursos.html#top",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "top",
+    "text": "top\ntop: proporciona una visión continua de la actividad del procesador, en tiempo real, mostrando las tareas que hacen más uso de la CPU. Además, permite manipular procesos de forma interactiva.\n\nLas cinco líneas primeras muestran información general:\n\nEstadísticas uptime.\nResumen de procesos en el sistema: nº procesos, nº procesos en ejecución, durmiendo, parados o zombies.\nPorcentaje de tiempo de CPU gastado en: modo usuario (us), modo sistema o núcleo (sy), procesos valor nice positivo (ni), tiempo ocioso (id), procesos esperando eventos E/S (wa), tratando interrupciones (hardware o software, hi o si), espera involuntaria en virtualización (st).\nEstado actual de la memoria física: total disponible, usada, libre, usada en buffers.\nEspacio swap: total disponible, usada, libre, usada en buffers, usada en caché de página."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#top-ejemplo",
+    "href": "tema05-recursos/tema05-recursos.html#top-ejemplo",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "top (ejemplo)",
+    "text": "top (ejemplo)\ntop - 14:06:52 up  4:58,  1 user,  load average: 0,73, 1,04, 1,09\nTareas: 338 total,   1 ejecutar,  336 hibernar,    0 detener,    1 zombie\n%Cpu(s):  2,4 usuario,  1,2 sist,  0,0 adecuado, 96,0 inact,  0,0 en espera,  0,0 hardw int,  0,4 softw int,  0,0 roba\nMiB Mem :  31976,8 total,  16274,0 libre,   5729,4 usado,   9973,5 búfer/caché\nMiB Intercambio:   2048,0 total,   2048,0 libre,      0,0 usado.  24470,8 dispon Mem \n\n    PID USUARIO   PR  NI    VIRT    RES    SHR S  %CPU  %MEM     HORA+ ORDEN                                          \n    927 root      20   0 1059784 340240 279388 S   6,9   1,0  24:22.48 Xorg                                           \n  14955 javi      20   0   54,5g 300016 117956 S   5,6   0,9  10:38.54 code                                           \n  14926 javi      20   0   32,5g 129396  87796 S   5,0   0,4   3:36.17 code                                           \n  14860 javi      20   0  658428  69480  47412 S   3,0   0,2   0:28.59 mate-terminal                                  \n   1174 javi       9 -11 2460768  20644  15760 S   2,0   0,1   6:21.53 pulseaudio                                     \n   1402 javi      20   0  386468  80468  47844 S   1,3   0,2   4:31.08 marco                                          \n   2307 javi      20   0   20,6g 755064 283428 S   1,3   2,3  64:47.79 firefox-bin                                    \n  38250 javi      20   0   14892   4132   3296 R   1,0   0,0   0:00.15 top                                            \n   1292 javi      20   0  317004  11644   6160 S   0,7   0,0   2:24.85 ibus-daemon                                    \n   1916 javi      20   0 3680980 594664 237824 S   0,7   1,8   6:55.73 thunderbird                                    \n    710 root      20   0  486964  20516  17240 S   0,3   0,1   0:17.27 NetworkManager                                 \n   1424 javi      20   0  756152 108576  51740 S   0,3   0,3   1:02.19 mintmenu                                       \n   1569 javi      20   0 5177956 295572  76252 S   0,3   0,9   2:01.15 dropbox                                        \n  14892 javi      20   0   36,6g 191608 136864 S   0,3   0,6   1:47.41 code                                           \n  25532 root      20   0       0      0      0 I   0,3   0,0   0:05.80 kworker/u16:4-events_unbound                   \n  26234 javi      20   0 2574928 164384  95444 S   0,3   0,5   0:31.49 Isolated Web Co                                \n  29156 javi      20   0 1596016 205008 129828 S   0,3   0,6   0:21.91 VirtualBox                                     \n  29176 javi      20   0   77236  15284  12404 S   0,3   0,0   0:13.22 VBoxXPCOMIPCD                                  \n  31941 javi      20   0 2821780 302532 114364 S   0,3   0,9   1:02.87 Isolated Web Co"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#top-ejemplo-1",
+    "href": "tema05-recursos/tema05-recursos.html#top-ejemplo-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "top (ejemplo)",
+    "text": "top (ejemplo)"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#top-interacción",
+    "href": "tema05-recursos/tema05-recursos.html#top-interacción",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "top: interacción",
+    "text": "top: interacción\n\nLos datos de la parte inferior son similares a los de ps (excepto [SHR] memoria compartida disponible para ser utilizada).\nProcesos ordenados decrecientemente por uso de CPU.\nLista actualizada interactivamente, normalmente cada 5s o pulsar intro/espacio."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#top-interacción-1",
+    "href": "tema05-recursos/tema05-recursos.html#top-interacción-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "top: interacción",
+    "text": "top: interacción\n\nTareas sobre los procesos:\n\nCambiar la prioridad de alguno utilizando la opción “r”.\nMatar o enviar una señal con la opción “k”.\nOrdenarlos según diferentes criterios (por PID con “N”, uso de CPU con “P”, tiempo con “T”, por memoria con “M”, etc.).\nCon “n” se cambia el número de procesos que se muestran.\nPara salir se utiliza la letra “q”.\n“u” mostrar un usuario.\n“R” cambiar ordenación.\n“1” información independiente por cada procesador."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#alternativas-a-top",
+    "href": "tema05-recursos/tema05-recursos.html#alternativas-a-top",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Alternativas a top",
+    "text": "Alternativas a top\ntop viene con todas las distribuciones de linux, pero hay otras alternativas como htop"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-top",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-top",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio top",
+    "text": "Ejercicio top\n\nRecuerda que puedes ver la ayuda pulsando h.\nPrueba a monitorizar los procesos de un solo usuario.\nPrueba a ordenar por diferentes criterios. Busca el proceso que más memoria consume.\nBusca cómo saber el número de hilos del sistema.\nInstala htop y prueba de nuevo."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#vmstat",
+    "href": "tema05-recursos/tema05-recursos.html#vmstat",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "vmstat",
+    "text": "vmstat\n**vmstat [options] [delay [count]]: información sobre memoria virtual (y más)\n\nr \\(\\Rightarrow\\) número de procesos esperando su tiempo de ejecución.\nb \\(\\Rightarrow\\) número de procesos en espera ininterrumpible.\nus \\(\\Rightarrow\\) tiempo de CPU en modo usuario (modo usuario).\nsy \\(\\Rightarrow\\) tiempo de CPU en modo sistema (modo núcleo).\nid \\(\\Rightarrow\\) tiempo de CPU en inactividad.\nwa \\(\\Rightarrow\\) tiempo de CPU usado en espera de E/S.\nst \\(\\Rightarrow\\) tiempo de CPU usado en virtualización."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#vmstat-ejemplo",
+    "href": "tema05-recursos/tema05-recursos.html#vmstat-ejemplo",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "vmstat: ejemplo",
+    "text": "vmstat: ejemplo\nRepetir cada 2 segundos 5 veces:\n$ vmstat 2 5\nprocs  ----------memory------------ -swap- --io-- -system-- -----cpu------\nr  b   swpd     free   buff   cache si  so  bi bo  in    cs us sy id wa st\n0  0      0 10368052 221628 3251020  0   0 109 71  142  482 5  1 93  0   0\n0  0      0 10367408 221636 3251288  0   0   0 58 1526 7113 4  2 94  0   0\n0  0      0 10350648 221636 3269616  0   0   0  0 1165 3711 9  1 90  0   0\n1  0      0 10351420 221636 3268904  0   0   0  0  575 1578 6  0 93  0   0\n1  0      0 10345792 221636 3274928  0   0   0 26 2497 8090 6  3 91  0   0"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#carpeta-proc",
+    "href": "tema05-recursos/tema05-recursos.html#carpeta-proc",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Carpeta /proc",
+    "text": "Carpeta /proc\nps y top leen la información que necesitan de /proc.\nCada proceso tiene una carpeta (cuyo nombre es el pid) y en esa carpeta hay información sobre el mismo:\n\ncmdline: línea de comandos con que fue iniciado.\ncwd: enlace simbólico al directorio actual del proceso.\nenviron: Las variables de entorno en el momento de invocación.\nexe: enlace simbólico al fichero ejecutado.\nfd: carpeta con cualquier descriptor de fichero abierto.\nmaps: información de mapeo de memoria.\nroot: enlace simbólico a la raíz del sistema (/).\nstat: estado del proceso.\nstatm: uso de memoria."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-monitoriza-apache",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-monitoriza-apache",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio: monitoriza apache",
+    "text": "Ejercicio: monitoriza apache\n\nInstala las utilidades de apache:\n\nsudo apt install apache2-utils\n\nVamos a usar apache benchmark para probar el rendimiento de nuestro servidor. Nota: Idealmente ab debe utilizarse desde otra máquina distinta al servidor.\n\n# esto lanza 10000 peticiones con un máximo de 100 concurrentes\nab -n 10000 -c 100 http://localhost/\n\nAbre 3 terminales en tu servidor.\nInicia top para vigilar la CPU.\nLanza vmstat para mostrar información periódicamente.\nUsa ab y observa qué pasa."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-fork-bomb",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-fork-bomb",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio: fork bomb",
+    "text": "Ejercicio: fork bomb\nEl siguiente código lanza una subprocesos de forma recursiva :(){ :|:& };:. [ATENCIÓN: prueba esto sólo en tu máquina virtual]. Explicación en Understanding Bash fork() Bomb.\n\nLanza vmstat 1.\nLanza el ataque:\n\n:(){ :|:& };:\n\nIntenta arreglarlo.\n¿Cómo podemos protegernos frente a este ataque?"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#programar-ejecución-de-procesos-con-at",
+    "href": "tema05-recursos/tema05-recursos.html#programar-ejecución-de-procesos-con-at",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Programar ejecución de procesos con at",
+    "text": "Programar ejecución de procesos con at\nat: ejecutar tareas a una determinada hora (no viene instalado por defecto).\n\nPuede recibir un fichero de texto con las órdenes a ejecutar.\nDispone de un prompt para ir introduciendo las órdenes (Ctrl+D para finalizar introduce <EOT>).\natd: demonio que ejecuta las órdenes.\natq: consulta la lista de órdenes.\natrm: eliminar órdenes."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#at-ejemplo",
+    "href": "tema05-recursos/tema05-recursos.html#at-ejemplo",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "at: ejemplo",
+    "text": "at: ejemplo\n$ date\nlun 20 mar 2023 14:36:50 CET\n$ at 14:40\nwarning: commands will be executed using /bin/sh\nat> echo \"Hola Mundo\" > /tmp/saludo\nat> <EOT>\njob 3 at Mon Mar 20 14:40:00 2023\n$ atq \n3   Mon Mar 20 14:40:00 2023 a javi\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:37:39 CET\ncat: /tmp/saludo: No existe el archivo o el directorio\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:40:20 CET\nHola Mundo"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#tareas-periódicas-con-cron",
+    "href": "tema05-recursos/tema05-recursos.html#tareas-periódicas-con-cron",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Tareas periódicas con cron",
+    "text": "Tareas periódicas con cron\n\ncron: ejecutar tareas periódicamente.\n\ncrond: demonio encargado de ejecutar las órdenes.\ncrontab: establecer las tareas a ejecutar (-e: añadir/modificar tareas, -l: listar tareas, -r: eliminar tareas).\n/etc/crontab: fichero de configuración del administrador.\n/etc/cron.d: directorio en el que el administrador puede copiar ficheros con formato del crontab que ejecutará cron."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#crontab",
+    "href": "tema05-recursos/tema05-recursos.html#crontab",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "crontab",
+    "text": "crontab\n\nFormato de crontab:\nminuto hora día_mes mes día_semana [user] comando\nSe interpreta como una conjunción de condiciones, salvo para día_semana y día_mes (que sería disyunción).\nLos domingos son el día 0 y 7 de la semana.\n\n        # Hacer una copia de seguridad del home cada semana\n        0 5 * * 1       tar -zcf /var/backups/home.tgz /home/\n        # Otras tareas\n        5 9 * * *       $HOME/tareadiaria     # 9:05\n        15 14 1 * *     $HOME/tareames        # 14:15 el día 1 cada mes\n        0 22 * * 1-5    $HOME/tareasemanal    # 22:0 de lunes a viernes\n        21 0-23/2 * * * $HOME/tareacada2horas # 0h, 2h, 4h, 6h, y 21m\n        5 4 * * sun     $HOME/tareadomingos   # Domingos a las 4:05\n        0 9 1 * 5       $HOME/otratarea       # A las 9:00h el día 1 \n                                              # de cada mes O los viernes"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#anacron",
+    "href": "tema05-recursos/tema05-recursos.html#anacron",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "anacron",
+    "text": "anacron\n\nSi la máquina no está encendida cuando se ha requerido lanzar el proceso \\(\\Rightarrow\\) cron no lo lanza.\nSe podría hacer 0 10 */3 * * para conseguir algo parecido (lo intentaría a las 10h cada tres días).\nanacron: no asume que la máquina está siempre encendida.\n\nCombina el uso de scripts al inicio con el uso de cron.\nPermite especificar tareas diarias, semanales o mensuales, de forma muy simple.\nIntroducir aplicaciones o enlaces a las mismas en:\n\n/etc/cron.daily/, /etc/cron.hourly/, /etc/cron.monthly/, /etc/cron.weekly/"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema",
+    "href": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Rastreo de señales y llamadas al sistema",
+    "text": "Rastreo de señales y llamadas al sistema\nEl comando strace nos permite observar qué es lo que está haciendo un proceso.\nMuestra cada llamada al sistema que hace y cada señal que recibe.\n\nstrace -p pid: rastrear un proceso ya iniciado.\nstrace comando: iniciar un proceso y rastrearlo.\nstrace -o salida.txt comando: utilizar un fichero para guardar la salida.\n\nProcesos acaparadores:\n\nComo administradores, debemos sospechar cuando un proceso acapara mucha CPU.\nAntes de matarlos, deberíamos saber qué están haciendo.\nSi el proceso parece legítimo, deberíamos suspenderlo con STOP, aplicarle renice y reanudarlo con CONT tras hablar con el dueño del proceso."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema-1",
+    "href": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Rastreo de señales y llamadas al sistema",
+    "text": "Rastreo de señales y llamadas al sistema\n    while 1\n       mkdir adir\n       cd adir\n       touch afile\n    end\n\nNo consume mucho espacio, pero bloquea el uso del disco ¿por qué?.\nEl árbol que se genera es tan grande, que ni si quiera rm -R es capaz de manejarlo."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#controlgestión-de-la-actividad-de-la-memoria",
+    "href": "tema05-recursos/tema05-recursos.html#controlgestión-de-la-actividad-de-la-memoria",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Control/gestión de la actividad de la memoria",
+    "text": "Control/gestión de la actividad de la memoria\n\nIntercambio y paginación \\(\\Rightarrow\\) memoria virtual para alojar procesos.\nDebemos gestionar la RAM y la zona de intercambio.\nvmstat (todo en KBs):\n\nswpd \\(\\Rightarrow\\) Cantidad de memoria virtual (intercambio) ocupada.\nfree \\(\\Rightarrow\\) Cantidad de memoria virtual sin usar.\nbuff \\(\\Rightarrow\\) Cantidad de memoria empleada como buffers para E/S (memoria temporal empleada por algunos dispositivos, p.ej. una tarjeta de red).\ncache \\(\\Rightarrow\\) La cantidad de memoria empleada como caché de disco.\n\n\n$ vmstat 2 2\nprocs ------------memory---------- --swap- --io-- -system-- -----cpu------\nr  b  swpd     free   buff   cache  si  so  bi bo  in    cs us sy id wa st\n0  0     0 10368052 221628 3251020  0   0  109 71  142  482 5  1 93  0   0\n0  0     0 10367408 221636 3251288  0   0    0 58 1526 7113 4  2 94  0   0"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#controlgestión-de-la-actividad-de-la-memoria-1",
+    "href": "tema05-recursos/tema05-recursos.html#controlgestión-de-la-actividad-de-la-memoria-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Control/gestión de la actividad de la memoria",
+    "text": "Control/gestión de la actividad de la memoria\n\nvmstat\n\nsi \\(\\Rightarrow\\) Cantidad de memoria traída del espacio de intercambio desde disco en KB/s.\nso \\(\\Rightarrow\\) Cantidad de memoria intercambiada al disco en KB/s.\nbi \\(\\Rightarrow\\) Bloques recibidos desde un dispositivo de bloques (en bloques/s).\nbo \\(\\Rightarrow\\) Bloques enviados a un dispositivo de bloques (en bloques/s).\nin \\(\\Rightarrow\\) Nº de interrupciones por segundo (contando el reloj).\ncs \\(\\Rightarrow\\) Nº de cambios de contexto por segundo.\n\n\n$ vmstat 2 2\nprocs ------------memory---------- --swap- --io-- -system-- -----cpu------\nr  b  swpd     free   buff   cache  si  so  bi bo   in   cs us sy id wa st\n0  0     0 10368052 221628 3251020   0   0 109 71  142  482 5  1 93  0   0\n0  0     0 10367408 221636 3251288   0   0   0 58 1526 7113 4  2 94  0   0"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#memoria-de-intercambio",
+    "href": "tema05-recursos/tema05-recursos.html#memoria-de-intercambio",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Memoria de intercambio",
+    "text": "Memoria de intercambio\nEspacio para paginación:\n\n¿Qué tamaño es el adecuado para la paginación?. Depende:\n\nMemoria requerida por los procesos, número de procesos simultáneos, etc…\nDemanda del sistema.\nEn portátiles, para posibilitar la hibernación, al menos tanto espacio como memoria RAM.\n\nSe puede tener una partición de intercambio o un fichero de intercambio, ¿qué opción es la mejor?\nSe puede controlar con números de prioridad en /etc/fstab."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#gestión-memoria-de-intercambio",
+    "href": "tema05-recursos/tema05-recursos.html#gestión-memoria-de-intercambio",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Gestión memoria de intercambio:",
+    "text": "Gestión memoria de intercambio:\nEspacio para paginación:\n\nswapon -s: nos da un listado de particiones o ficheros activos.\nswapon /dev/sdd1: activar una determinada partición.\nswapoff /dev/sdd1: desactivar una determinada partición.\n¿Cómo se crea un fichero de paginación?\n\n# El fichero debe ser contiguo en disco\nsudo dd if=/dev/zero of=/.fichero_swap bs=1048576 count=1024\nsudo mkswap /.fichero_swap\nsudo sync\nsudo swapon /.fichero_swap"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#uso-de-memoria-free",
+    "href": "tema05-recursos/tema05-recursos.html#uso-de-memoria-free",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Uso de memoria: free",
+    "text": "Uso de memoria: free\nfree: obtener información sobre el uso de memoria (mismos campos que top).\n$ free\ntotal        used        free      shared  buff/cache   available\nMem:     16203968     3778368     3046064      570784     9379536    11514988\nSwap:           0           0           0"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#espacio-en-disco-df",
+    "href": "tema05-recursos/tema05-recursos.html#espacio-en-disco-df",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Espacio en disco: df",
+    "text": "Espacio en disco: df\nEspacio en disco (particiones):\n\ndf: muestra la capacidad, el espacio libre y el punto de montaje de cada sistema de ficheros del equipo.\n\n$ df -h\nS.ficheros     Tamaño Usados  Disp Uso% Montado en\nudev             7,7G      0  7,7G   0% /dev\ntmpfs            1,6G   1,8M  1,6G   1% /run\n/dev/nvme0n1p6    58G    32G   24G  58% /\ntmpfs            7,8G   279M  7,5G   4% /dev/shm\ntmpfs            5,0M   4,0K  5,0M   1% /run/lock\n/dev/nvme0n1p5   314G   131G  167G  45% /home\n/dev/loop1        83M    83M     0 100% /snap/scrcpy/274\n...\n\nSi el sistema de ficheros raíz se quedase sin espacio el sistema tendría problemas. P.ej., no podría arrancar, (¿por qué?).\n“-i” nos permite mostrar información sobre los nodos-i.\n\n$ df -i /dev/nvme0n1p5\nS.ficheros      Nodos-i NUsados  NLibres NUso% Montado en\n/dev/nvme0n1p5 20946944 1021112 19925832    5% /home"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#espacio-en-disco-du",
+    "href": "tema05-recursos/tema05-recursos.html#espacio-en-disco-du",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Espacio en disco: du",
+    "text": "Espacio en disco: du\nEspacio en disco (carpetas):\n\ndu: muestra el espacio usado por cada subdirectorio del directorio actual.\n\n/PAS$ du -h --max-depth=1\n196K    ./Programa2021\n176K    ./logs\n32K ./reservas\n79M ./Evaluacion\n45M ./MaterialDocente\n6,9M    ./guiaDocente\n1,4M    ./listaClase\n133M\n\nSi no ponemos --max-depth=1 nos muestra todas las carpetas.\nLa última línea es el acumulado.\n¡OJO! du cuenta bloques del sistema de ficheros, estén o no completamente ocupados (para un fichero de 1B cuenta 4 KB)."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#estadísticas-memoria-iostat",
+    "href": "tema05-recursos/tema05-recursos.html#estadísticas-memoria-iostat",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Estadísticas memoria: iostat",
+    "text": "Estadísticas memoria: iostat\nEstadísticas de entrada/salida de disco\niostat intervalo numero: presenta estadísticas sobre la CPU y los dispositivos y particiones de E/S.\n\ntps \\(\\Rightarrow\\) nº de transferencias por segundo.\nkB_read/s \\(\\Rightarrow\\) nº de kBs leídos por segundo.\nkB_wrtn/s \\(\\Rightarrow\\) nº de kBs escritos por segundo.\nkB_read \\(\\Rightarrow\\) nº total de kBs leídos.\nkB_wrtn \\(\\Rightarrow\\) nº total de kBs escritos.\n\n$ iostat \nLinux 5.4.0-144-generic     20/03/23    _x86_64_    (8 CPU)\n\navg-cpu:  %user   %nice %system %iowait  %steal   %idle\n           7,41    0,79    2,62    0,91    0,00   88,28\n\nDevice             tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn\nloop0             0,11         0,91         0,00       1158          0\n...\nnvme0n1         218,69      3299,26      2384,25    4185145    3024449\nloop8             0,09         0,89         0,00       1131          0\nloop9             0,13         0,93         0,00       1181          0\n...\ndm-0            208,57      1415,84       427,96    1796005     542868"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#procesos-y-acceso-a-disco-iotop",
+    "href": "tema05-recursos/tema05-recursos.html#procesos-y-acceso-a-disco-iotop",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Procesos y acceso a disco: iotop",
+    "text": "Procesos y acceso a disco: iotop\niotop:\n\nIs your Linux server too slow or load is too high? One of the possible causes of such symptoms may be high IO (input/output) waiting time, which basically means that some of your processes need to read or write to a hard drive while it is too slow and not ready yet, serving data for some other processes.\nCommon practice is to use iostat -x in order to find out which block device (hard drive) is slow, but this information is not always helpful. It could help you much more if you knew which process reads or writes the most data from your slow disk, so you could renice it using ionice or even kill it.\niotop identifies processes that use high amount of input/output requests on your machine. It is similar to the well known top utility, but instead of showing you what consumes CPU the most, it lists processes by their IO usage. Inspired by iotop Python script from Guillaume Chazarain, rewritten in C by Vyacheslav Trushkin and improved by Boian Bonev so it runs without Python at all."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#referencias-1",
+    "href": "tema05-recursos/tema05-recursos.html#referencias-1",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Referencias",
+    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley y Dan Mackin. Unix and Linux system administration handbook. Capítulo 4. Process Control, Capítulo 10. Logging. Addison-Wesley. 5th Edition. 2018.\nAeleen Frisch. Essential system administration. Capítulo 15. Managing system resources. O’Reilly and Associates. Tercera edición. 2002."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html",
