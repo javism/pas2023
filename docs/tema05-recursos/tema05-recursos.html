@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">21 de marzo de 2023</p>
+      <p class="date">23 de marzo de 2023</p>
     </div>
   </div>
   
@@ -942,7 +942,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="ejercicio-fork-bomb" class="level2" data-background-color="lightgreen">
 <h2 data-background-color="lightgreen" class="anchored" data-anchor-id="ejercicio-fork-bomb">Ejercicio: fork bomb</h2>
-<p>El siguiente código lanza una subprocesos de forma recursiva <code>:(){ :|:&amp; };:</code>. [ATENCIÓN: prueba esto sólo en tu máquina virtual]. Explicación en <a href="https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/">Understanding Bash fork() Bomb</a>.</p>
+<p>El siguiente código lanza una subprocesos de forma recursiva <code>:(){ :|:&amp; };:</code>. <span class="rojo">ATENCIÓN: prueba esto sólo en tu máquina virtual</span>. Explicación en <a href="https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/">Understanding Bash fork() Bomb</a>.</p>
 <ol type="1">
 <li>Lanza <code>vmstat 1</code>.</li>
 <li>Lanza el ataque:</li>
@@ -952,6 +952,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Intenta arreglarlo.</li>
 <li>¿Cómo podemos protegernos frente a este ataque?</li>
 </ol>
+<ul>
+<li>Echa un vistazo a <code>ulimit</code> en el enlace anterior.</li>
+<li>Mira los parámetros de <a href="https://www.geeksforgeeks.org/limits-conf-file-to-limit-users-process-in-linux-with-examples/"><code>/etc/security/limits.conf</code></a>.</li>
+</ul>
 </section>
 </section>
 <section id="programación-y-temporizadores" class="level1" data-number="4">
@@ -1000,21 +1004,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="crontab" class="level2">
 <h2 class="anchored" data-anchor-id="crontab"><code>crontab</code></h2>
 <ul>
-<li><p>Formato de <code>crontab</code>:<br>
-<code>minuto hora día_mes mes día_semana [user] comando</code></p></li>
+<li><p>Formato de <code>crontab</code>: <code>minuto hora día_mes mes día_semana [user] comando</code></p></li>
 <li><p>Se interpreta como una conjunción de condiciones, salvo para <code>día_semana</code> y <code>día_mes</code> (que sería disyunción).</p></li>
 <li><p>Los domingos son el día 0 y 7 de la semana.</p></li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Hacer una copia de seguridad del home cada semana</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="ex">0</span> 5 <span class="pp">*</span> <span class="pp">*</span> 1       tar <span class="at">-zcf</span> /var/backups/home.tgz /home/</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Otras tareas</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">5</span> 9 <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span>       <span class="va">$HOME</span>/tareadiaria     <span class="co"># 9:05</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="ex">15</span> 14 1 <span class="pp">*</span> <span class="pp">*</span>     <span class="va">$HOME</span>/tareames        <span class="co"># 14:15 el día 1 cada mes</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">0</span> 22 <span class="pp">*</span> <span class="pp">*</span> 1-5    <span class="va">$HOME</span>/tareasemanal    <span class="co"># 22:0 de lunes a viernes</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">21</span> 0-23/2 <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span> <span class="va">$HOME</span>/tareacada2horas <span class="co"># 0h, 2h, 4h, 6h, y 21m</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">5</span> 4 <span class="pp">*</span> <span class="pp">*</span> sun     <span class="va">$HOME</span>/tareadomingos   <span class="co"># Domingos a las 4:05</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">0</span> 9 1 <span class="pp">*</span> 5       <span class="va">$HOME</span>/otratarea       <span class="co"># A las 9:00h el día 1 </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                              <span class="co"># de cada mes O los viernes</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of job definition:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .---------------- minute (0 - 59)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># |  .------------- hour (0 - 23)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># |  |  .---------- day of month (1 - 31)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># |  |  |  |  |</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># *  *  *  *  * user-name command to be executed</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ex">17</span> <span class="pp">*</span>    <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span>   root    cd / <span class="kw">&amp;&amp;</span> <span class="fu">run-parts</span> <span class="at">--report</span> /etc/cron.hourly</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="ex">25</span> 6    <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span>   root    test <span class="at">-x</span> /usr/sbin/anacron <span class="kw">||</span> <span class="kw">(</span> <span class="bu">cd</span> / <span class="kw">&amp;&amp;</span> <span class="fu">run-parts</span> <span class="at">--report</span> /etc/cron.daily <span class="kw">)</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="ex">47</span> 6    <span class="pp">*</span> <span class="pp">*</span> 7   root    test <span class="at">-x</span> /usr/sbin/anacron <span class="kw">||</span> <span class="kw">(</span> <span class="bu">cd</span> / <span class="kw">&amp;&amp;</span> <span class="fu">run-parts</span> <span class="at">--report</span> /etc/cron.weekly <span class="kw">)</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="ex">52</span> 6    1 <span class="pp">*</span> <span class="pp">*</span>   root    test <span class="at">-x</span> /usr/sbin/anacron <span class="kw">||</span> <span class="kw">(</span> <span class="bu">cd</span> / <span class="kw">&amp;&amp;</span> <span class="fu">run-parts</span> <span class="at">--report</span> /etc/cron.monthly <span class="kw">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="crontab-ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="crontab-ejemplo"><code>crontab</code> ejemplo</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hacer una copia de seguridad del home cada semana</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 5 <span class="pp">*</span> <span class="pp">*</span> 1       tar <span class="at">-zcf</span> /var/backups/home_<span class="va">$(</span><span class="fu">date</span> +<span class="dt">\%</span>Y<span class="dt">\%</span>m<span class="dt">\%</span>d%S<span class="va">)</span>.tgz /home/</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Otras tareas</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 9 <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span>       <span class="va">$HOME</span>/tareadiaria     <span class="co"># 9:05</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="ex">15</span> 14 1 <span class="pp">*</span> <span class="pp">*</span>     <span class="va">$HOME</span>/tareames        <span class="co"># 14:15 el día 1 cada mes</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 22 <span class="pp">*</span> <span class="pp">*</span> 1-5    <span class="va">$HOME</span>/tareasemanal    <span class="co"># 22:0 de lunes a viernes</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="ex">21</span> 0-23/2 <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span> <span class="va">$HOME</span>/tareacada2horas <span class="co"># 0h, 2h, 4h, 6h, y 21m</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ex">5</span> 4 <span class="pp">*</span> <span class="pp">*</span> sun     <span class="va">$HOME</span>/tareadomingos   <span class="co"># Domingos a las 4:05</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> 9 1 <span class="pp">*</span> 5       <span class="va">$HOME</span>/otratarea       <span class="co"># A las 9:00h el día 1 </span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                                      <span class="co"># de cada mes O los viernes</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="anacron" class="level2">
 <h2 class="anchored" data-anchor-id="anacron"><code>anacron</code></h2>
@@ -1031,6 +1050,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 </ul>
+</section>
+<section id="cron-anacron-y-systemd" class="level2">
+<h2 class="anchored" data-anchor-id="cron-anacron-y-systemd"><code>cron</code>, <code>anacron</code> y <code>systemd</code></h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> service anacron status</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Los <em>timers</em> de systemd son una alternativa a <code>cron</code> y <code>anacron</code> si bien <code>systemd</code> se encarga de integrarlos por compatibilidad hacia atrás. Puedes ver un <a href="https://atareao.es/tutorial/trabajando-con-systemd/cron-con-systemd-timer/">ejemplo de timers aquí</a>.</p>
+<p>Esto añade más posibilidades, por ejemplo, controlar que <code>anacron</code> se ejecute sólo cuando el portátil está conectado a la corriente (ver <code>/lib/systemd/system/anacron.service</code>.)</p>
+</section>
+<section id="ejercicio-dónde-pondrías" class="level2" data-background-color="lightgreen">
+<h2 data-background-color="lightgreen" class="anchored" data-anchor-id="ejercicio-dónde-pondrías">Ejercicio: ¿dónde pondrías…?</h2>
+<ol type="1">
+<li>Copia de seguridad de un portátil</li>
+<li>Programar el apagado de la máquina a una hora una sola vez</li>
+<li>Copia de seguridad en un servidor</li>
+</ol>
 </section>
 </section>
 <section id="rastreo-de-procesos" class="level1" data-number="5">
@@ -1053,15 +1086,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="rastreo-de-señales-y-llamadas-al-sistema-1" class="level2">
 <h2 class="anchored" data-anchor-id="rastreo-de-señales-y-llamadas-al-sistema-1">Rastreo de señales y llamadas al sistema</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="ex">1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">mkdir</span> adir</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="bu">cd</span> adir</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">touch</span> afile</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">end</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>¿Algo así qué haría?</p>
+<p><span class="rojo">ATENCIÓN. No hacer esto fuera de tu máquina virtual controlada</span></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="ex">1</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mkdir</span> adir</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> adir</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">touch</span> afile</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">end</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="incremental">
 <ul>
-<li><p>No consume mucho espacio, pero bloquea el uso del disco <span class="alert">¿por qué?</span>.</p></li>
+<li><p>No consume mucho espacio, pero bloquea el uso del disco <span class="rojo">¿por qué?</span>.</p></li>
 <li><p>El árbol que se genera es tan grande, que ni si quiera <code>rm -R</code> es capaz de manejarlo.</p></li>
 </ul>
+</div>
 </section>
 </section>
 <section id="memoria" class="level1" data-number="6">
@@ -1071,7 +1108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>Intercambio y paginación <span class="math inline">\(\Rightarrow\)</span> memoria virtual para alojar procesos.</p></li>
 <li><p>Debemos gestionar la RAM y la zona de intercambio.</p></li>
-<li><p><strong><code>vmstat</code></strong> (todo en KBs):</p>
+<li><p><strong><code>vmstat</code></strong> (todo en KBs salvo con <code>-S</code> ):</p>
 <ul>
 <li><p><code>swpd</code> <span class="math inline">\(\Rightarrow\)</span> Cantidad de memoria virtual (intercambio) ocupada.</p></li>
 <li><p><code>free</code> <span class="math inline">\(\Rightarrow\)</span> Cantidad de memoria virtual sin usar.</p></li>
@@ -1079,11 +1116,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>cache</code> <span class="math inline">\(\Rightarrow\)</span> La cantidad de memoria empleada como caché de disco.</p></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vmstat 2 2</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">procs</span> <span class="at">------------memory----------</span> <span class="at">--swap-</span> <span class="at">--io--</span> <span class="at">-system--</span> <span class="at">-----cpu------</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r</span>  b  swpd     free   buff   cache  si  so  bi bo  in    cs us sy id wa st</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10368052 221628 3251020  0   0  109 71  142  482 5  1 93  0   0</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10367408 221636 3251288  0   0    0 58 1526 7113 4  2 94  0   0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vmstat 2 2</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">procs</span> <span class="at">------------memory----------</span> <span class="at">--swap-</span> <span class="at">--io--</span> <span class="at">-system--</span> <span class="at">-----cpu------</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r</span>  b  swpd     free   buff   cache  si  so  bi bo  in    cs us sy id wa st</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10368052 221628 3251020  0   0  109 71  142  482 5  1 93  0   0</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10367408 221636 3251288  0   0    0 58 1526 7113 4  2 94  0   0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="controlgestión-de-la-actividad-de-la-memoria-1" class="level2">
 <h2 class="anchored" data-anchor-id="controlgestión-de-la-actividad-de-la-memoria-1">Control/gestión de la actividad de la memoria</h2>
@@ -1098,11 +1135,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>cs</code> <span class="math inline">\(\Rightarrow\)</span> Nº de cambios de contexto por segundo.</p></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vmstat 2 2</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">procs</span> <span class="at">------------memory----------</span> <span class="at">--swap-</span> <span class="at">--io--</span> <span class="at">-system--</span> <span class="at">-----cpu------</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r</span>  b  swpd     free   buff   cache  si  so  bi bo   in   cs us sy id wa st</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10368052 221628 3251020   0   0 109 71  142  482 5  1 93  0   0</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10367408 221636 3251288   0   0   0 58 1526 7113 4  2 94  0   0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vmstat 2 2</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">procs</span> <span class="at">------------memory----------</span> <span class="at">--swap-</span> <span class="at">--io--</span> <span class="at">-system--</span> <span class="at">-----cpu------</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">r</span>  b  swpd     free   buff   cache  si  so  bi bo   in   cs us sy id wa st</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10368052 221628 3251020   0   0 109 71  142  482 5  1 93  0   0</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span>  0     0 10367408 221636 3251288   0   0   0 58 1526 7113 4  2 94  0   0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="memoria-de-intercambio" class="level2">
 <h2 class="anchored" data-anchor-id="memoria-de-intercambio">Memoria de intercambio</h2>
@@ -1123,23 +1160,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Espacio para paginación</strong>:</p>
 <ul>
 <li><p><code>swapon -s</code>: nos da un listado de particiones o ficheros activos.</p></li>
-<li><p><code>swapon /dev/sdd1</code>: activar una determinada partición.</p></li>
-<li><p><code>swapoff /dev/sdd1</code>: desactivar una determinada partición.</p></li>
+<li><p><code>swapon /dev/sda5</code>: activar una determinada partición.</p></li>
+<li><p><code>swapoff /dev/sda5</code>: desactivar una determinada partición.</p></li>
 <li><p>¿Cómo se crea un fichero de paginación?</p></li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El fichero debe ser contiguo en disco</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dd if=/dev/zero of=/.fichero_swap bs=1048576 count=1024</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkswap /.fichero_swap</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sync</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> swapon /.fichero_swap</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El fichero debe ser contiguo en disco</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dd if=/dev/zero of=/.fichero_swap bs=1048576 count=1024</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkswap /.fichero_swap</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sync</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> swapon /.fichero_swap</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="uso-de-memoria-free" class="level2">
 <h2 class="anchored" data-anchor-id="uso-de-memoria-free">Uso de memoria: <code>free</code></h2>
 <p><code>free</code>: obtener información sobre el uso de memoria (mismos campos que <strong>top</strong>).</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> free</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span>        used        free      shared  buff/cache   available</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Mem:</span>     16203968     3778368     3046064      570784     9379536    11514988</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Swap:</span>           0           0           0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> free</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span>        used        free      shared  buff/cache   available</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Mem:</span>     16203968     3778368     3046064      570784     9379536    11514988</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Swap:</span>           0           0           0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ejercicio-paginación" class="level2" data-background-color="lightgreen">
+<h2 data-background-color="lightgreen" class="anchored" data-anchor-id="ejercicio-paginación">Ejercicio: paginación</h2>
+<ol type="1">
+<li>Consulta si tienes la swap activada y la memoria con <code>swapon -s</code> y <code>free</code></li>
+<li>Comprueba si está en uso</li>
+<li>Desactívala</li>
+<li>Activa la swap en un fichero</li>
+<li>Comprueba el resultado con <code>swapon -s</code> y <code>free</code></li>
+<li>Deja todo como estaba</li>
+</ol>
+</section>
+<section id="ejercicio-memoria-en-uso" class="level2 autoscroll" data-background-color="lightgreen">
+<h2 class="autoscroll anchored" data-background-color="lightgreen" data-anchor-id="ejercicio-memoria-en-uso">Ejercicio: memoria en uso</h2>
+<p>Utiliza el siguiente código para reservar el 90% de la memoria libre del ordenador. Comprueba el efecto que tiene con <code>vmstat</code> y <code>free</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;sys/sysinfo.h&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printmemsize<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>str<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">long</span> ramsize<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"%s: %ld in bytes / %ld in KB / %ld in MB / %ld in GB</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>               str<span class="op">,</span> ramsize<span class="op">,</span> ramsize<span class="op">/</span><span class="dv">1024</span><span class="op">,</span> <span class="op">(</span>ramsize<span class="op">/</span><span class="dv">1024</span><span class="op">)/</span><span class="dv">1024</span><span class="op">,</span> <span class="op">((</span>ramsize<span class="op">/</span><span class="dv">1024</span><span class="op">)/</span><span class="dv">1024</span><span class="op">)/</span><span class="dv">1024</span><span class="op">);</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">struct</span> sysinfo info<span class="op">;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        sysinfo<span class="op">(&amp;</span>info<span class="op">);</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"uptime: %ld</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> info<span class="op">.</span>uptime<span class="op">);</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// print total ram size</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        printmemsize<span class="op">(</span><span class="st">"totalram"</span><span class="op">,</span> info<span class="op">.</span>totalram<span class="op">);</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        printmemsize<span class="op">(</span><span class="st">"freeram"</span><span class="op">,</span> info<span class="op">.</span>freeram<span class="op">);</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        printmemsize<span class="op">(</span><span class="st">"sharedram"</span><span class="op">,</span> info<span class="op">.</span>sharedram<span class="op">);</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        printmemsize<span class="op">(</span><span class="st">"bufferram"</span><span class="op">,</span> info<span class="op">.</span>bufferram<span class="op">);</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        printmemsize<span class="op">(</span><span class="st">"freeswap"</span><span class="op">,</span> info<span class="op">.</span>freeswap<span class="op">);</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">"current running processes: %d</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> info<span class="op">.</span>procs<span class="op">);</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> <span class="op">*</span>v <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">unsigned</span> <span class="dt">long</span> n<span class="op">;</span> </span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> info<span class="op">.</span>freeram<span class="op">/</span><span class="kw">sizeof</span><span class="op">(</span><span class="dt">long</span><span class="op">);</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"n: %ld; sizeof(long): %ld</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> n<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">long</span><span class="op">));</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> ceill<span class="op">(</span><span class="fl">0.9</span> <span class="op">*</span> n<span class="op">);</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    printmemsize<span class="op">(</span><span class="st">"allocating 90% of free memory"</span><span class="op">,</span> n<span class="op">);</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> malloc<span class="op">(</span>n <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">long</span><span class="op">));</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>v <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">"cannot allocate memory</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">long</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        v<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    getchar<span class="op">();</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="dispositivos-entradasalida" class="level1" data-number="7">
@@ -1150,23 +1246,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>df</code>: muestra la capacidad, el espacio libre y el punto de montaje de cada sistema de ficheros del equipo.</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> df <span class="at">-h</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">S.ficheros</span>     Tamaño Usados  Disp Uso% Montado en</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">udev</span>             7,7G      0  7,7G   0% /dev</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            1,6G   1,8M  1,6G   1% /run</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p6</span>    58G    32G   24G  58% /</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            7,8G   279M  7,5G   4% /dev/shm</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            5,0M   4,0K  5,0M   1% /run/lock</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p5</span>   314G   131G  167G  45% /home</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/loop1</span>        83M    83M     0 100% /snap/scrcpy/274</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> df <span class="at">-h</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">S.ficheros</span>     Tamaño Usados  Disp Uso% Montado en</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">udev</span>             7,7G      0  7,7G   0% /dev</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            1,6G   1,8M  1,6G   1% /run</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p6</span>    58G    32G   24G  58% /</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            7,8G   279M  7,5G   4% /dev/shm</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tmpfs</span>            5,0M   4,0K  5,0M   1% /run/lock</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p5</span>   314G   131G  167G  45% /home</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/loop1</span>        83M    83M     0 100% /snap/scrcpy/274</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><p>Si el sistema de ficheros raíz se quedase sin espacio el sistema tendría problemas. P.ej., no podría arrancar, (<span class="alert">¿por qué?</span>).</p></li>
+<li><p>Si el sistema de ficheros raíz se quedase sin espacio el sistema tendría problemas. P.ej., no podría arrancar, (<span class="rojo">¿por qué?</span>).</p></li>
 <li><p>“<code>-i</code>” nos permite mostrar información sobre los nodos-i.</p></li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> df <span class="at">-i</span> /dev/nvme0n1p5</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">S.ficheros</span>      Nodos-i NUsados  NLibres NUso% Montado en</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p5</span> 20946944 1021112 19925832    5% /home</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> df <span class="at">-i</span> /dev/nvme0n1p5</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">S.ficheros</span>      Nodos-i NUsados  NLibres NUso% Montado en</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme0n1p5</span> 20946944 1021112 19925832    5% /home</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="espacio-en-disco-du" class="level2">
 <h2 class="anchored" data-anchor-id="espacio-en-disco-du">Espacio en disco: <code>du</code></h2>
@@ -1174,19 +1270,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>du</code>: muestra el espacio usado por cada subdirectorio del directorio actual.</li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/PAS$</span> du <span class="at">-h</span> <span class="at">--max-depth</span><span class="op">=</span>1</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">196K</span>    ./Programa2021</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">176K</span>    ./logs</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="ex">32K</span> ./reservas</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">79M</span> ./Evaluacion</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="ex">45M</span> ./MaterialDocente</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="ex">6,9M</span>    ./guiaDocente</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1,4M</span>    ./listaClase</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="ex">133M</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/PAS$</span> du <span class="at">-h</span> <span class="at">--max-depth</span><span class="op">=</span>1</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">196K</span>    ./Programa2021</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">176K</span>    ./logs</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ex">32K</span> ./reservas</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="ex">79M</span> ./Evaluacion</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ex">45M</span> ./MaterialDocente</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="ex">6,9M</span>    ./guiaDocente</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="ex">1,4M</span>    ./listaClase</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="ex">133M</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>Si no ponemos <code>--max-depth=1</code> nos muestra <strong>todas</strong> las carpetas.</p></li>
 <li><p>La última línea es el acumulado.</p></li>
-<li><p><span class="alert">¡OJO!</span> <strong>du</strong> cuenta bloques del sistema de ficheros, estén o no completamente ocupados (para un fichero de 1B cuenta 4 KB).</p></li>
+<li><p><span class="rojo">¡OJO!</span> <strong>du</strong> cuenta bloques del sistema de ficheros, estén o no completamente ocupados (para un fichero de 1B cuenta 4 KB).</p></li>
 </ul>
 </section>
 <section id="estadísticas-memoria-iostat" class="level2">
@@ -1200,20 +1296,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>kB_read</code> <span class="math inline">\(\Rightarrow\)</span> nº total de kBs leídos.</p></li>
 <li><p><code>kB_wrtn</code> <span class="math inline">\(\Rightarrow\)</span> nº total de kBs escritos.</p></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> iostat </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Linux</span> 5.4.0-144-generic     20/03/23    _x86_64_    <span class="er">(</span><span class="ex">8</span> CPU<span class="kw">)</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">avg-cpu:</span>  %user   %nice %system %iowait  %steal   %idle</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>           <span class="ex">7,41</span>    0,79    2,62    0,91    0,00   88,28</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Device</span>             tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>             0,11         0,91         0,00       1158          0</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme0n1</span>         218,69      3299,26      2384,25    4185145    3024449</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="ex">loop8</span>             0,09         0,89         0,00       1131          0</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="ex">loop9</span>             0,13         0,93         0,00       1181          0</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="ex">dm-0</span>            208,57      1415,84       427,96    1796005     542868</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> iostat </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Linux</span> 5.4.0-144-generic     20/03/23    _x86_64_    <span class="er">(</span><span class="ex">8</span> CPU<span class="kw">)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">avg-cpu:</span>  %user   %nice %system %iowait  %steal   %idle</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>           <span class="ex">7,41</span>    0,79    2,62    0,91    0,00   88,28</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Device</span>             tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>             0,11         0,91         0,00       1158          0</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme0n1</span>         218,69      3299,26      2384,25    4185145    3024449</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="ex">loop8</span>             0,09         0,89         0,00       1131          0</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="ex">loop9</span>             0,13         0,93         0,00       1181          0</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="ex">dm-0</span>            208,57      1415,84       427,96    1796005     542868</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="procesos-y-acceso-a-disco-iotop" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="procesos-y-acceso-a-disco-iotop">Procesos y acceso a disco: <code>iotop</code></h2>
