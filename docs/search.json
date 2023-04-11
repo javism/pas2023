@@ -1,10 +1,353 @@
 [
   {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#sistema-de-archivos-virtual",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#sistema-de-archivos-virtual",
+    "title": "1 Objetivos",
+    "section": "Sistema de archivos virtual",
+    "text": "Sistema de archivos virtual\n\nServidor de Archivos\n\nSistema de archivos virtual:\n\nProporciona la interfaz para las llamadas de E/S que deseen realizar los procesos de usuario, interactuando con el módulo de organización de archivos.\nCumple las funciones de manejo de directorios, gestión de nombres, servicios de seguridad, integración de archivos de distintos dispositivos/particiones...\nPor ello, es necesario utilizar una estructura adicional (nodos virtuales o nodos-v en UNIX), que incluye las características comunes a todos los sistemas de archivos y un enlace al descriptor de archivo particular (nodo-i o registro).\n\n\n\n\nServidor de Archivos\n\nSistema de archivos virtual:\n\nHay operaciones genéricas que se pueden realizar en cualquier SA (caché de nombres, gestión de nodos virtuales...).\nOtras operaciones deben ser implementadas independientemente para cada tipo de SA.\nLos nodos virtuales contienen la siguiente información:\n\nAtributos del archivo.\nPuntero al nodo-i real.\nPunteros a funciones que realizan las operaciones genéricas de cualquier SA.\nPunteros a funciones que realizan las operaciones propias del SA concreto."
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#módulo-de-organización-de-archivos",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#módulo-de-organización-de-archivos",
+    "title": "1 Objetivos",
+    "section": "Módulo de organización de archivos",
+    "text": "Módulo de organización de archivos\n\nServidor de Archivos\n\nMódulo de organización de archivos:\n\nSe implementa por separado para cada tipo de SA.\nRelaciona la imagen lógica de un archivo con su imagen física, traduciendo direcciones lógicas (contiguas) del archivo a las direcciones físicas (normalmente dispersas) del dispositivo.\nSe prestan los servicios de gestión de espacio libre y manejo de descriptores de archivos físicos (no virtuales).\nEste nivel se basa en la información de los nodos-i y utiliza los servicios del servidor de bloques para realizar las operaciones correspondientes."
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#servidor-de-bloques",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#servidor-de-bloques",
+    "title": "1 Objetivos",
+    "section": "Servidor de bloques",
+    "text": "Servidor de bloques\n\nServidor de Archivos\n\nServidor de bloques:\n\nEste nivel emite los mandatos genéricos para leer y escribir bloques en los manejadores de dispositivo (E/S de bloques).\nSe traducirán en llamadas al manejador específico del SA.\nEn este nivel se realiza la caché de bloques."
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#manejador-de-dispositivos",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#manejador-de-dispositivos",
+    "title": "1 Objetivos",
+    "section": "Manejador de dispositivos",
+    "text": "Manejador de dispositivos\n\nServidor de Archivos\n\nManejadores de dispositivos:\n\nSon específicos para cada hardware.\nTraducen órdenes de E/S de alto nivel a un formato que pueda entender el dispositivo (dependiente del hardware).\n\n\n\n\nServidor de Archivos\n\n\n\n\nimage"
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#funcionamiento-esquemático",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#funcionamiento-esquemático",
+    "title": "1 Objetivos",
+    "section": "Funcionamiento esquemático",
+    "text": "Funcionamiento esquemático\n\nDirectorios\n\nUn directorio es un fichero con un formato determinado.\nEl contenido de un directorio es una serie de entradas (registros), una por cada fichero contenido en él.\nCada registro tiene, al menos, el nombre del fichero y el puntero al descriptor físico correspondiente.\n\n\n\n\n\nimage\n\n\n\n\n\nDirectorios\n\n\n\n\nimage\n\n\n\n\n\nDirectorios\n\nLa ruta /users/luis/claves se interpreta de forma recursiva:\n\nTraer a memoria bloque del i-nodo 2 (i-nodo raíz, conocido).\nSe busca dentro users y se obtiene el i-nodo 342.\nTraer a memoria bloque del i-nodo 342.\nSe busca dentro luis y se obtiene el i-nodo 256.\nTraer a memoria bloque del i-nodo 256.\nSe busca dentro claves y se obtiene el i-nodo 758.\nAl leer el i-nodo 758, se detecta que es un fichero y ya se tienen dónde están los datos del archivo.\nLeer los bloques del fichero.\n\n¿Cuándo parar?\n\nNo se tienen permisos.\nSe ha encontrado el i-nodo del archivo.\nNo se encuentra el siguiente elemento de la ruta.\n\n\n\n\nDirectorios\n\nLa llamada open() termina con la lectura del i-nodo.\nLa verificación de permisos se hace con los datos del i-nodo.\nUn directorio no es un i-nodo:\n\n\n\n\n\nimage\n\n\n\n\n\nEnlaces\n\n\n\n\nimage"
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#lista-enlazada",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#lista-enlazada",
+    "title": "1 Objetivos",
+    "section": "Lista enlazada",
+    "text": "Lista enlazada\n\nAsignación de bloques\n\nLista enlazada\n\nCada bloque tiene un apuntador al siguiente bloque que seguiría en el archivo.\nEl descriptor del archivo solo debe incluir la referencia al primer bloque. El acceso secuencial es muy rápido. El acceso aleatorio a un bloque concreto de un archivo es muy costoso. Cada bloque incluye un apuntador que aumenta su tamaño (y complica el cálculo de espacio libre). La pérdida de un bloque supone perder el archivo completo."
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#tabla-de-asignación-de-archivos-fat",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#tabla-de-asignación-de-archivos-fat",
+    "title": "1 Objetivos",
+    "section": "Tabla de asignación de archivos (FAT)",
+    "text": "Tabla de asignación de archivos (FAT)\n\nAsignación de bloques\n\nTabla de asignación de archivos\n\nEs una variación del método lista enlazada.\nLos apuntadores se almacenan en una tabla independiente de los bloques (File Allocation Table, FAT).\nLa tabla posee una entrada por cada bloque del SA.\nLa FAT ocupará un espacio prefijado en la partición.\nDescriptor fichero \\(\\rightarrow\\) incluye su primera posición en la tabla.\nAcceso aleatorio al archivo: recorriendo la tabla.\nLa tabla se aloja en caché para mejorar las prestaciones y se mantiene una copia doble en el disco para mayor fiabilidad. ¡La FAT puede llegar a ocupar mucho! \\(\\rightarrow\\) agrupaciones.\n\n\n\n\nAsignación de bloques\n\n\n\n\nimage\n\n\n\n\n\nAsignación de bloques\n\n\n0.4\n\nFAT de 12 bits: 4K agrupaciones.\nFAT de 16 bits: 64K agrupaciones.\nFAT de 32 bits: \\(2^{28}\\) agrupaciones (solo usa 28 bits). Tamaño de fichero en directorios \\(\\rightarrow\\) 32 bits. Tamaño máximo \\(\\rightarrow 2^{32} -1 = 4GB -1\\)\n\n\n0.7"
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#índices-e-índices-multinivel",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#índices-e-índices-multinivel",
+    "title": "1 Objetivos",
+    "section": "Índices e índices multinivel",
+    "text": "Índices e índices multinivel\n\nAsignación de bloques\n\nÍndices\n\nLos punteros a los bloques están juntos y contiguos en una localización concreta \\(\\rightarrow\\) Bloques índice.\nCada archivo tiene un bloque índice.\nPara buscar el \\(i\\)-ésimo bloque de un fichero, buscamos la \\(i\\)-ésima entrada en su bloque índice Buen acceso directo. Se evita la fragmentación. ¿Tamaño del bloque índice? \\(\\rightarrow\\) debe fijarse un número de entradas y hay que reservar espacio para todas ellas. Limitamos el tamaño máximo de los archivos.\n\n\n\n\nAsignación de bloques\n\nÍndice multinivel\n\nConsiste en introducir \\(n\\) niveles de apuntadores, de manera que los apuntadores del descriptor apuntan a otros.\nÍndice multinivel de nivel 1: el bloque índice apunta a otros bloques índices que finalmente apunta a un bloque de datos del fichero. Evita tener que prefijar el tamaño del bloque índice (podemos poner apuntadores a NULL). El bloque índice tendrá un número pequeño de entradas. Cada nivel, supone un acceso a disco adicional. Para archivos pequeños, se desaprovechan muchos bloques índice.\n\n\n\n\nAsignación de bloques\n\nSolución UNIX \\(\\rightarrow\\) Esquema híbrido\n\nPor cada nodo-i incluir 15 punteros:\n\nPunteros directos a los 12 primeros bloques (para archivos pequeños). Nota: la siguiente figura indica 10 erróneamente.\nPuntero a un bloque índice de primer nivel (donde encontraremos punteros a bloques).\nPuntero a un bloque índice de segundo nivel (donde encontraremos punteros a punteros a bloques).\nPuntero a un bloque índice de tercer nivel (donde encontraremos punteros a punteros a punteros a bloques).\n\nBloques del disco: bloques de datos o bloques índice.\nEn ext4 y en NTFS existen los extents (bloques índice especiales que marcan una zona contigua del disco “numeroBloqueInicial, numeroBloques”).\n\n\n\n\nAsignación de bloques: indexado multinivel\n\n\n\n\nimage"
+  },
+  {
+    "objectID": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#footnotes",
+    "href": "tema06-sf/tema6-organizacionSistemasFicheros/latex-src/presentation.html#footnotes",
+    "title": "1 Objetivos",
+    "section": "Notas",
+    "text": "Notas\n\n\nhttps://whereismydata.wordpress.com/2008/08/23/file-systems-mbr-and-volume-boot-record-basic/↩︎"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html",
+    "href": "tema06-sf/tema06-sf.html",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "",
+    "text": "Distinguir entre discos duros rígidos y discos duros SSD.\nEnumerar las partes de las que está compuesto un disco duro rígido.\nExplicar qué es el sistema de archivos de un sistema operativo y cómo funciona.\nAnalizar la estructura del sistema de archivos: bloques de carga, bloques de datos, metainformación, superbloques, descriptores físicos, mapas de bits, listas de recursos libres...\nDividir el servidor de archivos de un sistema operativo en los componentes que lo forman: sistema de archivos virtual, módulo de organización de archivos, servidor de bloques y manejadores de dispositivos, analizando la función de cada uno.\nEstablecer la distintas opciones para implementar la asignación de bloques (con las distintas alternativas ofrecidas por los diferentes sistemas de archivos).\nEnumerar mecanismos para gestión del espacio libre.\nEnumerar y explicar mecanismos para el incremento de prestaciones mediante el uso de caché.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#objetivos",
+    "href": "tema06-sf/tema06-sf.html#objetivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "",
+    "text": "Distinguir entre discos duros rígidos y discos duros SSD.\nEnumerar las partes de las que está compuesto un disco duro rígido.\nExplicar qué es el sistema de archivos de un sistema operativo y cómo funciona.\nAnalizar la estructura del sistema de archivos: bloques de carga, bloques de datos, metainformación, superbloques, descriptores físicos, mapas de bits, listas de recursos libres...\nDividir el servidor de archivos de un sistema operativo en los componentes que lo forman: sistema de archivos virtual, módulo de organización de archivos, servidor de bloques y manejadores de dispositivos, analizando la función de cada uno.\nEstablecer la distintas opciones para implementar la asignación de bloques (con las distintas alternativas ofrecidas por los diferentes sistemas de archivos).\nEnumerar mecanismos para gestión del espacio libre.\nEnumerar y explicar mecanismos para el incremento de prestaciones mediante el uso de caché."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#evaluación",
+    "href": "tema06-sf/tema06-sf.html#evaluación",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "",
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#introducción-1",
+    "href": "tema06-sf/tema06-sf.html#introducción-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Introducción",
+    "text": "Introducción\n\nLa función principal de un disco duro es almacenar la información del PC cuando no se encuentra conectado a la corriente eléctrica.\nTambién puede servir de extensión para la memoria RAM, gracias al mecanismo de memoria virtual (intercambio).\nEn la actualidad, existen dos tecnologías que conviven en los discos duros: la de los SSD y la de los discos rígidos.\nLos discos rígidos funcionan de forma parecida a un tocadiscos, mientras que los discos SSD (Solid State Disk o, mejor, Solid State Drive) utilizan una memoria formada por semiconductores para almacenar la información (similar a pendrives o tarjetas de memoria)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#discos-rígidos",
+    "href": "tema06-sf/tema06-sf.html#discos-rígidos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Discos rígidos",
+    "text": "Discos rígidos"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#discos-rígidos-1",
+    "href": "tema06-sf/tema06-sf.html#discos-rígidos-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Discos rígidos",
+    "text": "Discos rígidos\n\n¿De qué esta compuesto un disco duro rígido?\n\nPlato: Cada uno de los discos que se encuentran apilados en su interior, cubiertos de un material magnetizable (de aluminio o cristal). La escritura cambia el estado de este material.\nCabezal: es un brazo que se mueve sobre el plato. Como los discos giran, permite acceder a cualquier punto de los mismos.\nPista: Se trata de cada una de las líneas esféricas que se pueden formar sobre cada plato.\nCilindro: Conjunto de varias pistas que se encuentran una encima de otra.\nSector: Cada una de las divisiones que se hace de la circunferencia que se forma en el disco. Normalmente en un sólo sector tendremos varios cientos de bytes de información.\n\nIndicando el cilindro, la cabeza y el sector podemos acceder a cualquier dato del disco."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#discos-rígidos-escritura",
+    "href": "tema06-sf/tema06-sf.html#discos-rígidos-escritura",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Discos rígidos: escritura",
+    "text": "Discos rígidos: escritura"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#archivos",
+    "href": "tema06-sf/tema06-sf.html#archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Archivos",
+    "text": "Archivos\nArchivo: unidad de almacenamiento lógico no volátil que agrupa un conjunto de información relacionada entre si bajo un mismo nombre.\n\nUn archivo debe poseer un nombre que permita acceder al mismo de forma unívoca.\nEste nombre incluye una extensión (.txt, .zip…) que identifica el tipo de archivo (no significa que lo sea obligatoriamente)\nExisten códigos de identificación de tipo de archivos que usan herramientas como file (más en wikipedia).\nEl acceso a un archivo puede ser secuencial (para acceder a una posición hay que acceder antes a las anteriores) o directo/aleatorio (se puede acceder a cualquier posición)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-ficheros-o-archivos",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-ficheros-o-archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Ficheros o Archivos",
+    "text": "Sistema de Ficheros o Archivos\n\nSistema de Archivos/Ficheros (SA/SF)\n\nOrganiza la información de los dispositivos de almacenamiento secundario (disco duro, disco extraíble, DVDs, CDRom...).\nEl dispositivo se divide manera lógica para que quede organizado de una forma inteligible para el SO.\nLa división se hace a múltiples niveles:\n\nParticiones o volúmenes.\nBloques.\nAgrupaciones."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-partición",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-partición",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: partición",
+    "text": "Sistema de Archivos: partición\nPartición: porción de un disco a la que se le dota de una identidad propia y que se manipula como un entidad lógica independiente.\n\nLas particiones deben formatearse para que se creen las estructuras necesarias que permiten al SO manipular el disco.\nPuedes verlas con gparted."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-bloques",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-bloques",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: bloques",
+    "text": "Sistema de Archivos: bloques\nBloque: agrupación lógica de sectores físicos del disco, la cual supone la unidad de transferencia mínima que usa el SA.\n\nEl tamaño de bloque es un parámetro decisivo que afecta a la eficiencia del acceso a disco y a la fragmentación del mismo.\n\nTamaño de bloque pequeño: Mayor número de operaciones de Entrada/Salida (E/S) para acceder al archivo. Menor fragmentación.\nTamaño de bloque grande: Menor número de operaciones E/S para acceder al archivo. Mayor fragmentación.\n\nPuedes ver el tamaño de bloque con stat -f .\n\nAgrupación: conjunto de bloques gestionado como una unidad lógica de almacenamiento."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#estructura-del-sistema-de-archivos",
+    "href": "tema06-sf/tema06-sf.html#estructura-del-sistema-de-archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Estructura del Sistema de Archivos",
+    "text": "Estructura del Sistema de Archivos"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-boot",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-boot",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: boot",
+    "text": "Sistema de Archivos: boot\nEl bloque de carga (boot o Volume Boot Record) contiene código ejecutado al arrancar el ordenador por el iniciador ROM utilizando esa partición.\n\nEl MBR apunta al VBR de la partición activa.\nSe suele incluir en todas las particiones (aunque no contengan el SO) para así mantener una estructura uniforme.\nSe añade un número mágico, el cuál será comprobado por el iniciador ROM para demostrar que el bloque de carga es válido.\n\n\n\nhttps://whereismydata.wordpress.com/2008/08/23/file-systems-mbr-and-volume-boot-record-basic/"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-metainformación",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-metainformación",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: metainformación",
+    "text": "Sistema de Archivos: metainformación\nMetainformación: super-bloques, FAT, nodos-i, mapas de bits, descriptores físicos...\n\nDescribe el SA y la distribución de sus componentes.\nEs necesaria para poder acceder a los datos."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-superbloque",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-superbloque",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: superbloque",
+    "text": "Sistema de Archivos: superbloque\nSuperbloque: características del SA, posición de los distintos elementos, tamaño…\n\nSe mantiene una serie de información común para todos los SAs y una entrada característica para cada tipo de SA.\nAl arrancar la máquina, los superbloques de todos los SAs que son cargados se mantienen en memoria."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#información-de-discos-particiones-y-superbloques",
+    "href": "tema06-sf/tema06-sf.html#información-de-discos-particiones-y-superbloques",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Información de discos, particiones y superbloques",
+    "text": "Información de discos, particiones y superbloques\n\nListado discos y particiones: sudo fdisk -l y gparted\nInformación superbloque:\n\nsudo dumpe2fs /dev/nvme0n1p3|less\nsudo dumpe2fs /dev/nvme0n1p3|grep -i super\n\n¿por qué está copiado varias veces el superbloque a lo largo del disco?"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#ejemplo-superbloque",
+    "href": "tema06-sf/tema06-sf.html#ejemplo-superbloque",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Ejemplo superbloque",
+    "text": "Ejemplo superbloque\nFilesystem volume name:   UBUNTU\nLast mounted on:          /\nFilesystem UUID:          eca06da0-02e9-4c2b-9fe0-1fd03743502c\nFilesystem magic number:  0xEF53\nFilesystem revision #:    1 (dynamic)\nFilesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum\nFilesystem flags:         signed_directory_hash \nDefault mount options:    user_xattr acl\nFilesystem state:         clean\nErrors behavior:          Continue\nFilesystem OS type:       Linux\nInode count:              5120000\nBlock count:              20480000\nReserved block count:     1024000\nFree blocks:              4982222\nFree inodes:              4358040\nFirst block:              0\nBlock size:               4096\nFragment size:            4096"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-descriptores",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-descriptores",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: descriptores",
+    "text": "Sistema de Archivos: descriptores\nDescriptores físicos de archivos: nodos-i, registros de Windows-NT…\n\nDescriben cada uno de los archivos almacenados.\nTienen una estructura y tamaño muy dependiente del SO.\nEl número de descriptores debe ser proporcional al tamaño total del disco.\nIncluyen: tamaño, apuntadores a los bloques del archivo, permisos, propietarios…"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-descriptores-1",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-descriptores-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de Archivos: descriptores",
+    "text": "Sistema de Archivos: descriptores\nInformación inodos fichero:\n$ ls -i /etc/passwd \n24352 /etc/passwd\n$ stat /etc/passwd\n  Fichero: /etc/passwd\n  Tamaño: 3042          Bloques: 8          Bloque E/S: 4096   fichero regular\nDispositivo: 10303h/66307d  Nodo-i: 24352       Enlaces: 1\nAcceso: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)\nAcceso: 2023-04-10 11:25:47.835159901 +0200\nModificación: 2023-03-27 17:39:11.826105357 +0200\n      Cambio: 2023-03-27 17:39:11.826105357 +0200\n    Creación: -"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre",
+    "href": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Gestión del espacio libre",
+    "text": "Gestión del espacio libre\nGestión del espacio libre: distintos mecanismos permiten gestionar el espacio libre.\n\nSe pueden utilizar mapas de bits o listas de recursos libres.\nGestión de dos tipos de recursos:\n\nMapas de bloques: indican qué bloques (o agrupaciones) están libres.\nMapas de descriptores de archivos: indican qué descriptores de archivos (nodos-i, registros…) están libres.\n\n\nBloques de datos: es dónde se almacena realmente la información."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#servidor-de-archivos-1",
+    "href": "tema06-sf/tema06-sf.html#servidor-de-archivos-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Servidor de Archivos",
+    "text": "Servidor de Archivos\nServidor de Archivos: es el componente del SO que se encargará de gestionar el acceso a archivos.\n\nSe sigue una filosofía de organización en capas.\nLos niveles inferiores proporcionan servicios a los niveles superiores, y en cada nivel se aumenta la abstracción de las operaciones.\n\n\nCapas del servidor de archivos\n\nSistema de archivos virtual (+ abstracto).\nMódulo de organización de archivos.\nServidor de bloques.\nManejadores de dispositivos (- abstracto)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#esquema-servidor-de-archivos",
+    "href": "tema06-sf/tema06-sf.html#esquema-servidor-de-archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Esquema Servidor de Archivos",
+    "text": "Esquema Servidor de Archivos"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-virtual-iii",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-virtual-iii",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de archivos virtual (I/II)",
+    "text": "Sistema de archivos virtual (I/II)\n\nSistema de archivos virtual (Virtual File System):\n\n\nProporciona la interfaz para las llamadas de E/S que deseen realizar los procesos de usuario, interactuando con el módulo de organización de archivos.\nCumple las funciones de manejo de directorios, gestión de nombres, servicios de seguridad, integración de archivos de distintos dispositivos/particiones…\nPor ello, es necesario utilizar una estructura adicional (nodos virtuales o nodos-v en UNIX), que incluye las características comunes a todos los sistemas de archivos y un enlace al descriptor de archivo particular (nodo-i o registro)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#sistema-de-archivos-virtual-iiii",
+    "href": "tema06-sf/tema06-sf.html#sistema-de-archivos-virtual-iiii",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Sistema de archivos virtual (II/II)",
+    "text": "Sistema de archivos virtual (II/II)\n\nSistema de archivos virtual:\n\n\nHay operaciones genéricas que se pueden realizar en cualquier SA (caché de nombres, gestión de nodos virtuales...).\nOtras operaciones deben ser implementadas independientemente para cada tipo de SA.\nLos nodos virtuales contienen la siguiente información:\n\nAtributos del archivo.\nPuntero al nodo-i real.\nPunteros a funciones que realizan las operaciones genéricas de cualquier SA.\nPunteros a funciones que realizan las operaciones propias del SA concreto."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#módulo-de-organización-de-archivos",
+    "href": "tema06-sf/tema06-sf.html#módulo-de-organización-de-archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Módulo de organización de archivos",
+    "text": "Módulo de organización de archivos\n\nMódulo de organización de archivos:\n\n\nSe implementa por separado para cada tipo de SA.\nRelaciona la imagen lógica de un archivo con su imagen física, traduciendo direcciones lógicas (contiguas) del archivo a las direcciones físicas (normalmente dispersas) del dispositivo.\nSe prestan los servicios de gestión de espacio libre y manejo de descriptores de archivos físicos (no virtuales).\nEste nivel se basa en la información de los nodos-i y utiliza los servicios del servidor de bloques para realizar las operaciones correspondientes."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#servidor-de-bloques",
+    "href": "tema06-sf/tema06-sf.html#servidor-de-bloques",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Servidor de bloques",
+    "text": "Servidor de bloques\n\nServidor de bloques:\n\n\nEste nivel emite los mandatos genéricos para leer y escribir bloques en los manejadores de dispositivo (E/S de bloques).\nSe traducirán en llamadas al manejador específico del SA.\nEn este nivel se realiza la caché de bloques."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#manejador-de-dispositivos",
+    "href": "tema06-sf/tema06-sf.html#manejador-de-dispositivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Manejador de dispositivos",
+    "text": "Manejador de dispositivos\n\nManejadores de dispositivos:\n\n\nSon específicos para cada hardware.\nTraducen órdenes de E/S de alto nivel a un formato que pueda entender el dispositivo (dependiente del hardware)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#funcionamiento-esquemático-servidor-archivos",
+    "href": "tema06-sf/tema06-sf.html#funcionamiento-esquemático-servidor-archivos",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Funcionamiento esquemático servidor archivos",
+    "text": "Funcionamiento esquemático servidor archivos"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#linux-storage-stack-diagram",
+    "href": "tema06-sf/tema06-sf.html#linux-storage-stack-diagram",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Linux Storage Stack Diagram",
+    "text": "Linux Storage Stack Diagram\n\nLinux Storage Stack Diagram (PDF)\nFuente thomas-krenn"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#directorios",
+    "href": "tema06-sf/tema06-sf.html#directorios",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Directorios",
+    "text": "Directorios\n\nUn directorio es un fichero con un formato determinado.\nEl contenido de un directorio es una serie de entradas (registros), una por cada fichero contenido en él.\nCada registro tiene, al menos, el nombre del fichero y el puntero al descriptor físico correspondiente."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#directorios-resolución-nombre",
+    "href": "tema06-sf/tema06-sf.html#directorios-resolución-nombre",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Directorios: resolución nombre",
+    "text": "Directorios: resolución nombre"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#directorios-resolución-nombre-1",
+    "href": "tema06-sf/tema06-sf.html#directorios-resolución-nombre-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Directorios: resolución nombre",
+    "text": "Directorios: resolución nombre\n\nLa ruta /users/luis/claves se interpreta de forma recursiva:\n\nTraer a memoria bloque del i-nodo 2 (i-nodo raíz, conocido).\nSe busca dentro users y se obtiene el i-nodo 342.\nTraer a memoria bloque del i-nodo 342.\nSe busca dentro luis y se obtiene el i-nodo 256.\nTraer a memoria bloque del i-nodo 256.\nSe busca dentro claves y se obtiene el i-nodo 758.\nAl leer el i-nodo 758, se detecta que es un fichero y accede a los datos del archivo.\nLeer los bloques del fichero."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#directorios-cuándo-parar",
+    "href": "tema06-sf/tema06-sf.html#directorios-cuándo-parar",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Directorios: ¿Cuándo parar?",
+    "text": "Directorios: ¿Cuándo parar?\n\n¿Cuándo parar?\n\nNo se tienen permisos.\nSe ha encontrado el i-nodo del archivo.\nNo se encuentra el siguiente elemento de la ruta."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#directorios-1",
+    "href": "tema06-sf/tema06-sf.html#directorios-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Directorios",
+    "text": "Directorios\n\nLa llamada open() termina con la lectura del i-nodo.\nLa verificación de permisos se hace con los datos del i-nodo.\nUn directorio no es un i-nodo:"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#enlaces",
+    "href": "tema06-sf/tema06-sf.html#enlaces",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Enlaces",
+    "text": "Enlaces"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#referencias-1",
+    "href": "tema06-sf/tema06-sf.html#referencias-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Referencias",
+    "text": "Referencias\nFernando Pérez-Costoya, Jesús Carretero-Pérez y Félix García-Carballeira. Problemas de Sistemas Operativos. De la base al diseño. Tema 8. Archivos y directorios. Sección 8.4. Sistemas de Archivos. Mc Graw Hill, Segunda Edición, 2003.\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley y Dan Mackin. Unix and Linux system administration handbook. Capítulo 20. Storage. Addison-Wesley. 5th Edition. 2018."
+  },
+  {
     "objectID": "tema00-presentacion/presentacion.html",
     "href": "tema00-presentacion/presentacion.html",
     "title": "Tema 0: Presentación",
     "section": "",
     "text": "Todo el material mínimo y opcional de la asignatura está disponible en la plataforma Moodle de la UCO:\n\nhttp://moodle.uco.es/m2223\nCurso: Programación y Administración de Sistemas ( GIINF-2-101390-1-1)\n\n\n\n\n\nCordinación y teoría: Javier Sánchez Monedero\n\n\nPrácticas:\n\nPrácticas 1-3: María Isabel Jiménez Velasco\nPráctica 4: José Manuel Cuevas\n\n\nHorarios de tutoría y datos de contacto en Moodle.\n\n\n\nEl uso de los móviles en la educación puede tener tanto efectos positivos como negativos.\n\n\n\n\n\n\nEfectos positivos:\n\n\n\n\nFacilita el acceso a la información y recursos educativos en línea.\nMejora la colaboración y el trabajo en equipo a través de aplicaciones y herramientas en línea\nFomenta la independencia y el aprendizaje autónomo.\nAumenta la motivación y el interés por el aprendizaje.\n\n\n\n\n\n\n\n\n\n\n\n\nEfectos negativos:\n\n\n\n\nDistracción y pérdida de concentración en la clase.\nUso inadecuado y poco ético, como la trampa en exámenes o el acceso a contenido no apropiado.\nAdicción a los dispositivos y dependencia en la tecnología.\nDesigualdades socioeconómicas, ya que no todos los estudiantes tienen acceso a dispositivos de alta calidad o a una conexión a Internet confiable."
+  },
+  {
+    "objectID": "tema00-presentacion/presentacion.html#moodle",
+    "href": "tema00-presentacion/presentacion.html#moodle",
+    "title": "Tema 0: Presentación",
+    "section": "",
+    "text": "Todo el material mínimo y opcional de la asignatura está disponible en la plataforma Moodle de la UCO:\n\nhttp://moodle.uco.es/m2223\nCurso: Programación y Administración de Sistemas ( GIINF-2-101390-1-1)"
+  },
+  {
+    "objectID": "tema00-presentacion/presentacion.html#profesorado",
+    "href": "tema00-presentacion/presentacion.html#profesorado",
+    "title": "Tema 0: Presentación",
+    "section": "",
+    "text": "Cordinación y teoría: Javier Sánchez Monedero\n\n\nPrácticas:\n\nPrácticas 1-3: María Isabel Jiménez Velasco\nPráctica 4: José Manuel Cuevas\n\n\nHorarios de tutoría y datos de contacto en Moodle."
+  },
+  {
+    "objectID": "tema00-presentacion/presentacion.html#móviles-en-clase-qué-dice-chatgpt-12",
+    "href": "tema00-presentacion/presentacion.html#móviles-en-clase-qué-dice-chatgpt-12",
+    "title": "Tema 0: Presentación",
+    "section": "",
+    "text": "El uso de los móviles en la educación puede tener tanto efectos positivos como negativos.\n\n\n\n\n\n\nEfectos positivos:\n\n\n\n\nFacilita el acceso a la información y recursos educativos en línea.\nMejora la colaboración y el trabajo en equipo a través de aplicaciones y herramientas en línea\nFomenta la independencia y el aprendizaje autónomo.\nAumenta la motivación y el interés por el aprendizaje."
+  },
+  {
+    "objectID": "tema00-presentacion/presentacion.html#móviles-en-clase-qué-dice-chatgpt-22",
+    "href": "tema00-presentacion/presentacion.html#móviles-en-clase-qué-dice-chatgpt-22",
+    "title": "Tema 0: Presentación",
+    "section": "",
+    "text": "Efectos negativos:\n\n\n\n\nDistracción y pérdida de concentración en la clase.\nUso inadecuado y poco ético, como la trampa en exámenes o el acceso a contenido no apropiado.\nAdicción a los dispositivos y dependencia en la tecnología.\nDesigualdades socioeconómicas, ya que no todos los estudiantes tienen acceso a dispositivos de alta calidad o a una conexión a Internet confiable."
   },
   {
     "objectID": "tema00-presentacion/presentacion.html#actividad-en-clase",
@@ -151,7 +494,7 @@
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios\nTema 5: Gestión de Recursos"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios\nTema 5: Gestión de Recursos\nTema 6: Sistemas de ficheros y discos"
   },
   {
     "objectID": "index.html#evi-nemeth",
@@ -166,6 +509,20 @@
     "title": "Tema 3: Arranque y parada del sistema",
     "section": "",
     "text": "Describir todas las fases del proceso de arranque del sistema GNU/Linux, estableciendo qué elementos hardware y, sobre todo, software intervienen.\nExplicar qué misión tienen en el arranque los siguientes componentes: iniciador ROM, programa cargador, núcleo del sistema operativo, initrd y proceso Init.\nConfigurar los distintos parámetros del programa cargador GRUB y utilizar el modo interactivo.\nDistinguir la diferencia entre modo de ejecución monousuario y multiusuario.\nExplicar los problemas de seguridad asociados al modo monousuario.\nConocer systemd como sustituto para el Init de GNU/Linux\nEnumerar los pasos necesarios para la configuración del sistema en modo multiusuario.\nExplicar el concepto de niveles de ejecución y las funciones típicas de cada nivel.\nConfigurar los servicios de cada nivel de ejecución u objetivos.\nArrancar, parar, listar, añadir y eliminar servicios en cada nivel.\nEnumerar las acciones que se llevan a cabo durante la parada del sistema.\nUtilizar la herramienta shutdown.\nEnumerar posibles causas de caídas del sistema operativo.\nEnumerar posibles problemas durante el arranque del sistema operativo.\nConocer los principales mecanismos para consultar los logs del sistema operativo.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\n\n\n\n\n\n\n\nNota\n\n\n\nComo en otros temas, en estos apuntes se dan muchos detalles que por supuesto no hay que memorizar. Si hay que saber en qué directorio se encuentran el/los ficheros de configuración pero no los parámetros de memoria, estos los ponemos aquí para conocer las posibilidades de cada herramienta."
+  },
+  {
+    "objectID": "tema03-arranque/tema03-arranque.html#objetivos-de-aprendizaje",
+    "href": "tema03-arranque/tema03-arranque.html#objetivos-de-aprendizaje",
+    "title": "Tema 3: Arranque y parada del sistema",
+    "section": "",
+    "text": "Describir todas las fases del proceso de arranque del sistema GNU/Linux, estableciendo qué elementos hardware y, sobre todo, software intervienen.\nExplicar qué misión tienen en el arranque los siguientes componentes: iniciador ROM, programa cargador, núcleo del sistema operativo, initrd y proceso Init.\nConfigurar los distintos parámetros del programa cargador GRUB y utilizar el modo interactivo.\nDistinguir la diferencia entre modo de ejecución monousuario y multiusuario.\nExplicar los problemas de seguridad asociados al modo monousuario.\nConocer systemd como sustituto para el Init de GNU/Linux\nEnumerar los pasos necesarios para la configuración del sistema en modo multiusuario.\nExplicar el concepto de niveles de ejecución y las funciones típicas de cada nivel.\nConfigurar los servicios de cada nivel de ejecución u objetivos.\nArrancar, parar, listar, añadir y eliminar servicios en cada nivel.\nEnumerar las acciones que se llevan a cabo durante la parada del sistema.\nUtilizar la herramienta shutdown.\nEnumerar posibles causas de caídas del sistema operativo.\nEnumerar posibles problemas durante el arranque del sistema operativo.\nConocer los principales mecanismos para consultar los logs del sistema operativo."
+  },
+  {
+    "objectID": "tema03-arranque/tema03-arranque.html#evaluación",
+    "href": "tema03-arranque/tema03-arranque.html#evaluación",
+    "title": "Tema 3: Arranque y parada del sistema",
+    "section": "",
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\n\n\n\n\n\n\n\nNota\n\n\n\nComo en otros temas, en estos apuntes se dan muchos detalles que por supuesto no hay que memorizar. Si hay que saber en qué directorio se encuentran el/los ficheros de configuración pero no los parámetros de memoria, estos los ponemos aquí para conocer las posibilidades de cada herramienta."
   },
   {
     "objectID": "tema03-arranque/tema03-arranque.html#arranque-y-parada-del-sistema",
@@ -284,14 +641,14 @@
     "href": "tema03-arranque/tema03-arranque.html#grub-algunas-opciones-iii",
     "title": "Tema 3: Arranque y parada del sistema",
     "section": "GRUB: algunas opciones (III)",
-    "text": "GRUB: algunas opciones (III)\nFichero /etc/default/grub:\n\nGRUB_DISTRIBUTOR``` =lsb_release -i -s 2> /dev/null || echo Debian` ``: obtener el nombre de la distribución.\nGRUB_DISABLE_LINUX_UUID``=\"true\": no utilizar el UUID del dispositivo raíz (utilizar nomenclatura tradicional /dev/sda).\nGRUB_GFXMODE``=640x480: seleccionar manualmente la resolución para el menú.\nGRUB_INIT_TUNE``=\"480 440 1\": hacer beep antes del menú de inicio (tempo [pitch1 duration1] [pitch2 duration2]...).\nGRUB_BACKGROUND: imagen de fondo."
+    "text": "GRUB: algunas opciones (III)\nFichero /etc/default/grub:\n\nGRUB_DISTRIBUTOR``` =lsb_release -i -s 2&gt; /dev/null || echo Debian` ``: obtener el nombre de la distribución.\nGRUB_DISABLE_LINUX_UUID``=\"true\": no utilizar el UUID del dispositivo raíz (utilizar nomenclatura tradicional /dev/sda).\nGRUB_GFXMODE``=640x480: seleccionar manualmente la resolución para el menú.\nGRUB_INIT_TUNE``=\"480 440 1\": hacer beep antes del menú de inicio (tempo [pitch1 duration1] [pitch2 duration2]...).\nGRUB_BACKGROUND: imagen de fondo."
   },
   {
     "objectID": "tema03-arranque/tema03-arranque.html#gestor-de-arranque-grub-2",
     "href": "tema03-arranque/tema03-arranque.html#gestor-de-arranque-grub-2",
     "title": "Tema 3: Arranque y parada del sistema",
     "section": "Gestor de arranque GRUB",
-    "text": "Gestor de arranque GRUB\nGRUB permite (durante la selección del SO):\n\nEditar las entradas:\n\nPulsar tecla e, permite modificar las entradas de arranque para solucionar errores.\nLos cambios no son permanentes, solo sirve para probar.\n\nConsola interactiva GRUB: pulsar la tecla c. Permite ejecutar comandos para arreglar el arranque (seleccionar otro initrd, cargar módulos...).\nTerminología de GRUB, numerando los dispositivos según los reconozca la BIOS empezando en cero:\n\nNombres de dispositivos: (<t><n>,<np>)\n(hd0,0) \\(\\Rightarrow\\) /dev/sda1\nNombres de ficheros (hd0,0)/boot/grub/grub.conf"
+    "text": "Gestor de arranque GRUB\nGRUB permite (durante la selección del SO):\n\nEditar las entradas:\n\nPulsar tecla e, permite modificar las entradas de arranque para solucionar errores.\nLos cambios no son permanentes, solo sirve para probar.\n\nConsola interactiva GRUB: pulsar la tecla c. Permite ejecutar comandos para arreglar el arranque (seleccionar otro initrd, cargar módulos...).\nTerminología de GRUB, numerando los dispositivos según los reconozca la BIOS empezando en cero:\n\nNombres de dispositivos: (&lt;t&gt;&lt;n&gt;,&lt;np&gt;)\n(hd0,0) \\(\\Rightarrow\\) /dev/sda1\nNombres de ficheros (hd0,0)/boot/grub/grub.conf"
   },
   {
     "objectID": "tema03-arranque/tema03-arranque.html#fragmento-bootgrubgrub.cfg-linux",
@@ -438,7 +795,7 @@
     "href": "tema03-arranque/tema03-arranque.html#ficheros-de-inicialización-2",
     "title": "Tema 3: Arranque y parada del sistema",
     "section": "Ficheros de inicialización",
-    "text": "Ficheros de inicialización\n$ ls /etc/rc2.d/ -la\ntotal 16\ndrwxr-xr-x   2 root root  4096 feb 13 10:21 .\ndrwxr-xr-x 180 root root 12288 mar 13 09:11 ..\nlrwxrwxrwx   1 root root    22 nov 14  2019 K01cups-browsed -> ../init.d/cups-browsed\nlrwxrwxrwx   1 root root    18 nov 14  2019 K01whoopsie -> ../init.d/whoopsie\nlrwxrwxrwx   1 root root    15 nov 14  2019 S01acpid -> ../init.d/acpid\nlrwxrwxrwx   1 root root    17 nov 14  2019 S01anacron -> ../init.d/anacron\nlrwxrwxrwx   1 root root    16 nov 14  2019 S01apport -> ../init.d/apport\nlrwxrwxrwx   1 root root    13 mar 22  2022 S01atd -> ../init.d/atd\nlrwxrwxrwx   1 root root    22 nov 14  2019 S01avahi-daemon -> ../init.d/avahi-daemon\nlrwxrwxrwx   1 root root    24 may  3  2020 S01binfmt-support -> ../init.d/binfmt-support\nlrwxrwxrwx   1 root root    19 nov 14  2019 S01bluetooth -> ../init.d/bluetooth\nlrwxrwxrwx   1 root root    26 nov 14  2019 S01console-setup.sh -> ../init.d/console-setup.sh\nlrwxrwxrwx   1 root root    22 mar  9  2021 S01cpufrequtils -> ../init.d/cpufrequtils\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01cron -> ../init.d/cron\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01cups -> ../init.d/cups\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01dbus -> ../init.d/dbus\nlrwxrwxrwx   1 root root    16 ene 26 12:59 S01docker -> ../init.d/docker\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01gdm3 -> ../init.d/gdm3\nlrwxrwxrwx   1 root root    21 nov 14  2019 S01grub-common -> ../init.d/grub-common\nlrwxrwxrwx   1 root root    17 mar  9  2021 S01hddtemp -> ../init.d/hddtemp\nlrwxrwxrwx   1 root root    20 nov 14  2019 S01irqbalance -> ../init.d/irqbalance\nlrwxrwxrwx   1 root root    16 mar 20  2020 S01jicofo -> ../init.d/jicofo\nlrwxrwxrwx   1 root root    20 nov 14  2019 S01kerneloops -> ../init.d/kerneloops\nlrwxrwxrwx   1 root root    17 mar  9  2021 S01lightdm -> ../init.d/lightdm\nlrwxrwxrwx   1 root root    21 mar  9  2021 S01loadcpufreq -> ../init.d/loadcpufreq\nlrwxrwxrwx   1 root root    22 nov 14  2019 S01lvm2-lvmetad -> ../init.d/lvm2-lvmetad\nlrwxrwxrwx   1 root root    23 nov 14  2019 S01lvm2-lvmpolld -> ../init.d/lvm2-lvmpolld\nlrwxrwxrwx   1 root root    15 nov 14  2019 S01mdadm -> ../init.d/mdadm\nlrwxrwxrwx   1 root root    13 feb 13 10:21 S01mpd -> ../init.d/mpd\nlrwxrwxrwx   1 root root    17 mar  4  2020 S01openvpn -> ../init.d/openvpn\nlrwxrwxrwx   1 root root    18 nov 14  2019 S01plymouth -> ../init.d/plymouth"
+    "text": "Ficheros de inicialización\n$ ls /etc/rc2.d/ -la\ntotal 16\ndrwxr-xr-x   2 root root  4096 feb 13 10:21 .\ndrwxr-xr-x 180 root root 12288 mar 13 09:11 ..\nlrwxrwxrwx   1 root root    22 nov 14  2019 K01cups-browsed -&gt; ../init.d/cups-browsed\nlrwxrwxrwx   1 root root    18 nov 14  2019 K01whoopsie -&gt; ../init.d/whoopsie\nlrwxrwxrwx   1 root root    15 nov 14  2019 S01acpid -&gt; ../init.d/acpid\nlrwxrwxrwx   1 root root    17 nov 14  2019 S01anacron -&gt; ../init.d/anacron\nlrwxrwxrwx   1 root root    16 nov 14  2019 S01apport -&gt; ../init.d/apport\nlrwxrwxrwx   1 root root    13 mar 22  2022 S01atd -&gt; ../init.d/atd\nlrwxrwxrwx   1 root root    22 nov 14  2019 S01avahi-daemon -&gt; ../init.d/avahi-daemon\nlrwxrwxrwx   1 root root    24 may  3  2020 S01binfmt-support -&gt; ../init.d/binfmt-support\nlrwxrwxrwx   1 root root    19 nov 14  2019 S01bluetooth -&gt; ../init.d/bluetooth\nlrwxrwxrwx   1 root root    26 nov 14  2019 S01console-setup.sh -&gt; ../init.d/console-setup.sh\nlrwxrwxrwx   1 root root    22 mar  9  2021 S01cpufrequtils -&gt; ../init.d/cpufrequtils\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01cron -&gt; ../init.d/cron\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01cups -&gt; ../init.d/cups\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01dbus -&gt; ../init.d/dbus\nlrwxrwxrwx   1 root root    16 ene 26 12:59 S01docker -&gt; ../init.d/docker\nlrwxrwxrwx   1 root root    14 nov 14  2019 S01gdm3 -&gt; ../init.d/gdm3\nlrwxrwxrwx   1 root root    21 nov 14  2019 S01grub-common -&gt; ../init.d/grub-common\nlrwxrwxrwx   1 root root    17 mar  9  2021 S01hddtemp -&gt; ../init.d/hddtemp\nlrwxrwxrwx   1 root root    20 nov 14  2019 S01irqbalance -&gt; ../init.d/irqbalance\nlrwxrwxrwx   1 root root    16 mar 20  2020 S01jicofo -&gt; ../init.d/jicofo\nlrwxrwxrwx   1 root root    20 nov 14  2019 S01kerneloops -&gt; ../init.d/kerneloops\nlrwxrwxrwx   1 root root    17 mar  9  2021 S01lightdm -&gt; ../init.d/lightdm\nlrwxrwxrwx   1 root root    21 mar  9  2021 S01loadcpufreq -&gt; ../init.d/loadcpufreq\nlrwxrwxrwx   1 root root    22 nov 14  2019 S01lvm2-lvmetad -&gt; ../init.d/lvm2-lvmetad\nlrwxrwxrwx   1 root root    23 nov 14  2019 S01lvm2-lvmpolld -&gt; ../init.d/lvm2-lvmpolld\nlrwxrwxrwx   1 root root    15 nov 14  2019 S01mdadm -&gt; ../init.d/mdadm\nlrwxrwxrwx   1 root root    13 feb 13 10:21 S01mpd -&gt; ../init.d/mpd\nlrwxrwxrwx   1 root root    17 mar  4  2020 S01openvpn -&gt; ../init.d/openvpn\nlrwxrwxrwx   1 root root    18 nov 14  2019 S01plymouth -&gt; ../init.d/plymouth"
   },
   {
     "objectID": "tema03-arranque/tema03-arranque.html#systemd-1",
@@ -520,41 +877,55 @@
   {
     "objectID": "tema03-arranque/latex-src/beamer.html#programa-cargador-grub",
     "href": "tema03-arranque/latex-src/beamer.html#programa-cargador-grub",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Objetivos",
     "section": "Programa cargador: GRUB",
-    "text": "Programa cargador: GRUB\n\nGestor de arranque GRUB\n\nGRUB: GRand Unified Bootloader:\n\nGRUB se instala en el master boot record (MBR) o como UEFI boot loader y hace de las funciones de master boot program (MBP, programa cargador de arranque).\nPregunta qué SO arrancar: p.ej. Linux o Windows.\n\nSi la respuesta es Linux \\(\\Rightarrow\\) carga el núcleo solicitado y le pasa el control para que el arranque continúe.\nSi la respuesta es Windows \\(\\Rightarrow\\) pasa el control a Windows que realiza su arranque.\n\nGRUB 2.0: desde el año 2009.\n\nArchivo fundamental de configuración: /boot/grub/grub.cfg\n¡No editar a mano!.\nEste archivo se genera a partir del comando sudo update-grub2, utilizando todos los scripts incluidos en la carpeta /etc/grub.d/.\n\n\n\n\n\nGestor de arranque GRUB\n\nContenidos de la carpeta /etc/grub.d/ (en principio, no modificar nada):\n\n/etc/grub.d/00_header: Cabeceras.\n/etc/grub.d/05_debian_theme: Aspecto visual del menú, colores, temas, imagen de fondo...\n/etc/grub.d/10_linux: Este archivo contiene mandatos y scripts que se encargan del kernel Linux de la partición principal (se incluyen todos los núcleos presentes en /boot).\n/etc/grub.d/20_*: Aplicaciones third party (20_memtest86+, 20_linux_xen...)\n/etc/grub.d/30_os-prober: Este archivo contiene comandos y scripts que se encargan de otros sistemas operativos.\n/etc/grub.d/30_uefi-firmware: Este archivo contiene comandos que automatizan la extracción de configuraciones incluidas en la partición EFI.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nEste fichero si es editable (00_header lee su contenido).\nGRUB_DEFAULT=0: entrada por defecto para el arranque. Si ponemos saved, será seleccionada por el administrador (comandos grub-set-default, permanente, y grub-reboot, un solo arranque).\nGRUB_SAVEDEFAULT=true: la entrada por defecto es siempre la última seleccionada.\nGRUB_HIDDEN_TIMEOUT=0:\n\nMuestra una pantalla en negro o con una imagen, durante el número de segundos indicado, antes del menú de arranque (pulsar una tecla para saltarla).\nSuele no usarse cuando hay múltiples sistemas (comentado).\nEs 0 cuando solo hay linux (el menú puede aparecer con Shift).\n\nGRUB_HIDDEN_TIMEOUT_QUIET=true: sin cuenta atrás.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nGRUB_TIMEOUT=10: número de segundos hasta seleccionar entrada por defecto.\nGRUB_CMDLINE_LINUX=“opciones\": pasar opciones de arranque al kernel linux (modo normal o recuperación).\nGRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\": pasar opciones de arranque al kernel linux (modo normal).\nGRUB_TERMINAL=console: desactivar modo gráfico.\nGRUB_BADRAM=\"0x7DDF0000,0xffffc000\": deshabilitar el uso de algunas direcciones de memoria (el primer argumento es la primera dirección a partir de la cual se aplica, el segundo es una máscara con un 1 en los bits que voy a considerar) \\(\\Rightarrow\\) en el ejemplo, no se usan posiciones de la 0x7DDF0000 a la 0x7DDF4000.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nGRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`: obtener el nombre de la distribución.\nGRUB_DISABLE_LINUX_UUID=\"true\": no utilizar el UUID del dispositivo raíz (utilizar nomenclatura tradicional /dev/sda).\nGRUB_GFXMODE=640x480: seleccionar manualmente la resolución para el menú.\nGRUB_INIT_TUNE=\"480 440 1\": hacer beep antes del menú de inicio (tempo [pitch1 duration1] [pitch2 duration2]...).\nGRUB_BACKGROUND: imagen de fondo.\n\nReinstalar GRUB (por ejemplo, después de que Windows borre el MBR): sudo grub-install /dev/sda.\n\n\n\nGestor de arranque GRUB\n\nGRUB permite (durante la selección del SO):\n\nEditar las entradas:\n\nPulsar tecla e, permite modificar las entradas de arranque para solucionar errores.\nLos cambios no son permanentes, solo sirve para probar.\n\nConsola interactiva GRUB: pulsar la tecla c. Permite ejecutar comandos para arreglar el arranque (seleccionar otro initrd, cargar módulos...).\nTerminología de GRUB, numerando los dispositivos según los reconozca la BIOS empezando en cero:\n\nNombres de dispositivos: (<t><n>,<np>)\n(hd0,0) \\(\\Rightarrow\\) /dev/sda1\nNombres de ficheros (hd0,0)/boot/grub/grub.conf\n\n\n\n\n\nFragmento /boot/grub/grub.cfg (Linux)\n...\nmenuentry 'Debian GNU/Linux, con Linux 5.4.0-0.bpo.3-amd64' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.4.0-0.bpo.3-amd64-advanced-bf8474c5-958e-4cca-a568-4828b2310fda' {\n   load_video\n   insmod gzio\n   insmod part_msdos\n   insmod ext2\n   set root='hd0,msdos1'\n   search --no-floppy --fs-uuid --set=root bf8474c5-958e-4cca-a568-4828b2310fda\n   echo 'Cargando Linux 5.4.0-0.bpo.3-amd64...'\n   linux /boot/vmlinuz-5.4.0-0.bpo.3-amd64 root=UUID=bf8474c5-958e-4cca-a568-4828b2310fda ro initrd=/install/gtk/initrd.gz quiet\n   echo 'Cargando imagen de memoria inicial...'\n   initrd /boot/initrd.img-5.4.0-0.bpo.3-amd64\n}\nmenuentry 'Debian GNU/Linux, with Linux 5.4.0-0.bpo.3-amd64 (recovery mode)' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.4.0-0.bpo.3-amd64-recovery-bf8474c5-958e-4cca-a568-4828b2310fda' {\n   load_video   \n   insmod gzio\n   insmod part_msdos\n   insmod ext2\n   set root='hd0,msdos1'\n   search --no-floppy --fs-uuid --set=root bf8474c5-958e-4cca-a568-4828b2310fda\n   echo 'Cargando Linux 5.4.0-0.bpo.3-amd64...'\n   linux /boot/vmlinuz-5.4.0-0.bpo.3-amd64 root=UUID=bf8474c5-958e-4cca-a568-4828b2310fda ro single initrd=/install/gtk/initrd.gz\n   echo 'Cargando imagen de memoria inicial...'\n   initrd /boot/initrd.img-5.4.0-0.bpo.3-amd64\n } \n...\n\n\nFragmento /boot/grub/grub.cfg (Windows)\n...\n### BEGIN /etc/grub.d/30_os-prober ###\nmenuentry 'Windows 7 (en /dev/sdb1)' --class windows --class os $menuentry_id_option 'osprober-chain-DA3EBC4E3EBC2583' {\n   insmod part_msdos\n   insmod ntfs\n   set root='hd1,msdos1'\n   search --no-floppy --fs-uuid --set=root DA3EBC4E3EBC2583\n   parttool ${root} hidden-\n   chainloader +1\n}\n### END /etc/grub.d/30_os-prober ### \n..."
+    "text": "Programa cargador: GRUB\n\nGestor de arranque GRUB\n\nGRUB: GRand Unified Bootloader:\n\nGRUB se instala en el master boot record (MBR) o como UEFI boot loader y hace de las funciones de master boot program (MBP, programa cargador de arranque).\nPregunta qué SO arrancar: p.ej. Linux o Windows.\n\nSi la respuesta es Linux \\(\\Rightarrow\\) carga el núcleo solicitado y le pasa el control para que el arranque continúe.\nSi la respuesta es Windows \\(\\Rightarrow\\) pasa el control a Windows que realiza su arranque.\n\nGRUB 2.0: desde el año 2009.\n\nArchivo fundamental de configuración: /boot/grub/grub.cfg\n¡No editar a mano!.\nEste archivo se genera a partir del comando sudo update-grub2, utilizando todos los scripts incluidos en la carpeta /etc/grub.d/.\n\n\n\n\n\nGestor de arranque GRUB\n\nContenidos de la carpeta /etc/grub.d/ (en principio, no modificar nada):\n\n/etc/grub.d/00_header: Cabeceras.\n/etc/grub.d/05_debian_theme: Aspecto visual del menú, colores, temas, imagen de fondo...\n/etc/grub.d/10_linux: Este archivo contiene mandatos y scripts que se encargan del kernel Linux de la partición principal (se incluyen todos los núcleos presentes en /boot).\n/etc/grub.d/20_*: Aplicaciones third party (20_memtest86+, 20_linux_xen...)\n/etc/grub.d/30_os-prober: Este archivo contiene comandos y scripts que se encargan de otros sistemas operativos.\n/etc/grub.d/30_uefi-firmware: Este archivo contiene comandos que automatizan la extracción de configuraciones incluidas en la partición EFI.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nEste fichero si es editable (00_header lee su contenido).\nGRUB_DEFAULT=0: entrada por defecto para el arranque. Si ponemos saved, será seleccionada por el administrador (comandos grub-set-default, permanente, y grub-reboot, un solo arranque).\nGRUB_SAVEDEFAULT=true: la entrada por defecto es siempre la última seleccionada.\nGRUB_HIDDEN_TIMEOUT=0:\n\nMuestra una pantalla en negro o con una imagen, durante el número de segundos indicado, antes del menú de arranque (pulsar una tecla para saltarla).\nSuele no usarse cuando hay múltiples sistemas (comentado).\nEs 0 cuando solo hay linux (el menú puede aparecer con Shift).\n\nGRUB_HIDDEN_TIMEOUT_QUIET=true: sin cuenta atrás.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nGRUB_TIMEOUT=10: número de segundos hasta seleccionar entrada por defecto.\nGRUB_CMDLINE_LINUX=“opciones\": pasar opciones de arranque al kernel linux (modo normal o recuperación).\nGRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash\": pasar opciones de arranque al kernel linux (modo normal).\nGRUB_TERMINAL=console: desactivar modo gráfico.\nGRUB_BADRAM=\"0x7DDF0000,0xffffc000\": deshabilitar el uso de algunas direcciones de memoria (el primer argumento es la primera dirección a partir de la cual se aplica, el segundo es una máscara con un 1 en los bits que voy a considerar) \\(\\Rightarrow\\) en el ejemplo, no se usan posiciones de la 0x7DDF0000 a la 0x7DDF4000.\n\n\n\n\nGestor de arranque GRUB\n\nFichero /etc/default/grub:\n\nGRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Debian`: obtener el nombre de la distribución.\nGRUB_DISABLE_LINUX_UUID=\"true\": no utilizar el UUID del dispositivo raíz (utilizar nomenclatura tradicional /dev/sda).\nGRUB_GFXMODE=640x480: seleccionar manualmente la resolución para el menú.\nGRUB_INIT_TUNE=\"480 440 1\": hacer beep antes del menú de inicio (tempo [pitch1 duration1] [pitch2 duration2]...).\nGRUB_BACKGROUND: imagen de fondo.\n\nReinstalar GRUB (por ejemplo, después de que Windows borre el MBR): sudo grub-install /dev/sda.\n\n\n\nGestor de arranque GRUB\n\nGRUB permite (durante la selección del SO):\n\nEditar las entradas:\n\nPulsar tecla e, permite modificar las entradas de arranque para solucionar errores.\nLos cambios no son permanentes, solo sirve para probar.\n\nConsola interactiva GRUB: pulsar la tecla c. Permite ejecutar comandos para arreglar el arranque (seleccionar otro initrd, cargar módulos...).\nTerminología de GRUB, numerando los dispositivos según los reconozca la BIOS empezando en cero:\n\nNombres de dispositivos: (&lt;t&gt;&lt;n&gt;,&lt;np&gt;)\n(hd0,0) \\(\\Rightarrow\\) /dev/sda1\nNombres de ficheros (hd0,0)/boot/grub/grub.conf\n\n\n\n\n\nFragmento /boot/grub/grub.cfg (Linux)\n...\nmenuentry 'Debian GNU/Linux, con Linux 5.4.0-0.bpo.3-amd64' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.4.0-0.bpo.3-amd64-advanced-bf8474c5-958e-4cca-a568-4828b2310fda' {\n   load_video\n   insmod gzio\n   insmod part_msdos\n   insmod ext2\n   set root='hd0,msdos1'\n   search --no-floppy --fs-uuid --set=root bf8474c5-958e-4cca-a568-4828b2310fda\n   echo 'Cargando Linux 5.4.0-0.bpo.3-amd64...'\n   linux /boot/vmlinuz-5.4.0-0.bpo.3-amd64 root=UUID=bf8474c5-958e-4cca-a568-4828b2310fda ro initrd=/install/gtk/initrd.gz quiet\n   echo 'Cargando imagen de memoria inicial...'\n   initrd /boot/initrd.img-5.4.0-0.bpo.3-amd64\n}\nmenuentry 'Debian GNU/Linux, with Linux 5.4.0-0.bpo.3-amd64 (recovery mode)' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.4.0-0.bpo.3-amd64-recovery-bf8474c5-958e-4cca-a568-4828b2310fda' {\n   load_video   \n   insmod gzio\n   insmod part_msdos\n   insmod ext2\n   set root='hd0,msdos1'\n   search --no-floppy --fs-uuid --set=root bf8474c5-958e-4cca-a568-4828b2310fda\n   echo 'Cargando Linux 5.4.0-0.bpo.3-amd64...'\n   linux /boot/vmlinuz-5.4.0-0.bpo.3-amd64 root=UUID=bf8474c5-958e-4cca-a568-4828b2310fda ro single initrd=/install/gtk/initrd.gz\n   echo 'Cargando imagen de memoria inicial...'\n   initrd /boot/initrd.img-5.4.0-0.bpo.3-amd64\n } \n...\n\n\nFragmento /boot/grub/grub.cfg (Windows)\n...\n### BEGIN /etc/grub.d/30_os-prober ###\nmenuentry 'Windows 7 (en /dev/sdb1)' --class windows --class os $menuentry_id_option 'osprober-chain-DA3EBC4E3EBC2583' {\n   insmod part_msdos\n   insmod ntfs\n   set root='hd1,msdos1'\n   search --no-floppy --fs-uuid --set=root DA3EBC4E3EBC2583\n   parttool ${root} hidden-\n   chainloader +1\n}\n### END /etc/grub.d/30_os-prober ### \n..."
   },
   {
     "objectID": "tema03-arranque/latex-src/beamer.html#modo-monousuariomultiusuario",
     "href": "tema03-arranque/latex-src/beamer.html#modo-monousuariomultiusuario",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Objetivos",
     "section": "Modo monousuario/multiusuario",
     "text": "Modo monousuario/multiusuario\n\nOpciones avanzadas\n\n\n\n\nimage\n\n\n\n\n\nModo monousuario\n\n\n\n\nimage\n\n\n\n\n\nModo monousuario\n\nEstado del sistema definido para realizar tareas administrativas y de mantenimiento, que requieren un control completo y no compartido.\nSólo realiza el montaje del sistema de ficheros raíz (/), los otros SF están disponibles pero no están montados.\nSe puede acceder a todo el sistema, pero:\n\nMuy pocos demonios están en ejecución, sólo los necesarios.\nMuchas utilidades no están activas (impresión, red).\nSólo las órdenes del SF raíz están disponibles (si /usr está en otra partición, no está montado).\n\nPara entrar en modo monousuario el proceso Init crea el shell por defecto (/bin/sh) como usuario root:\n\nPero antes se ejecuta la orden /sbin/sulogin, que pide la contraseña de root para dejar entrar al sistema.\n\n\n\n\nModo monousuario\n\n¿Cómo se entra en modo monousuario?\n\nManualmente, indicando al cargador una opción o parámetro:\nmediante la interfaz de edición de GRUB, opción single a la entrada del núcleo.\nAutomáticamente, si hay problemas en el proceso de arranque que el sistema no puede solucionar por sí solo (p.e. problemas en el SF que fsck no puede solucionar, errores en los ficheros de arranque).\n\n¡Problema!: si cambiamos las opciones de GRUB y ponemos init=/bin/sh, no se llama a sulogin1.\n\nPermite tener acceso a todo el sistema, estando delante del ordenador.\n\n\n\n\nModo monousuario\n\nSolución: no existe una solución única sino un conjunto de medidas de mitigación para proteger ante accesos físicos al sistema.\nPor ejemplo, solicitar contraseña para la entrada de administración.\n\nFichero /etc/grub.d/40_custom (o donde esté la entrada).\nset superusers=\"user1\"\npassword_pbkdf2 user1 grub.pbkdf2.sha512.10000.086EB0CC8 ...\npassword_pbkdf2 user2 grub.pbkdf2.sha512.10000.045EB0CC8 ...\nModificar la entrada de administración, para que requiera password, incluyendo –users user1 (modificarlo en los scripts).\nEl password se puede generar usando:\npagutierrez@TOSHIBA:~$ grub-mkpasswd-pbkdf2\nEnter password: \nReenter password: \nYour PBKDF2 is grub.pbkdf2.sha512.10000.086EB0CC8CB1E39E2...\n\n\n\n\nModo monousuario\nVulnerabilidad en el sistema de contraseñas de grub y estrategias de mitigación:\n\nEnlace a la noticia (2016): https://www.genbeta.com/seguridad/una-vulnerabilidad-puede-darte-acceso-root-en-linux-pulsando-intro-durante-70-segundos\nAlgunas estrategias de mitigación frente a accesos físicos (2009): https://www.cyberciti.biz/tips/tips-to-protect-linux-servers-physical-console-access.html\n\n\n\nModo multiusuario\n\nPasos del proceso de arranque (I/II):\n\nChequea el sistema de ficheros raíz con fsck.\n\nSi al apagar el sistema, el sistema de ficheros se desmontó correctamente, no se chequea.\nSin embargo, algunos SOs con determinados SFs fuerzan el chequeo siempre, o cada cierto tiempo (cada 3 meses) o cada cierto número de montajes sin chequear (cada 20 veces).\nSi fsck encuentra problemas que no puede solucionar “sólo”, lleva al sistema a modo monousuario para que el administrador realice el chequeo manual.\n\nMonta el sistema de ficheros raíz en modo lectura-escritura.\nChequea el resto de SFs con fsck (idem al punto 1).\nMonta el resto de SFs.\nActiva las particiones de intercambio (swapping): swapon -a.\nActiva las cuotas de disco: quotacheck -a y quotaon -a.\n\n\n\n\nModo multiusuario\n\nPasos del proceso de arranque (II/II):\n\nLanza los procesos servidores o demonios:\ncrond, atd, cupsd, syslogd...\nActiva la red.\nLanza los demonios de red:\nxinetd, apache2, nagiosd, sshd, ntpd, nfsd, rpc.mountd, slapd...\nLimpia los sistemas de ficheros: /tmp, etc.\nPermite que los usuarios entren:\n\nCrea las terminales, lanzando getty en modo texto, y el terminal gráfico, si es preciso.\nBorra, en caso de que exista, el fichero /etc/nologin:\nSi el fichero /etc/nologin existe, los usuarios (excepto root) no pueden entrar al sistema. Algunos sistemas lo crean al iniciar el arranque."
   },
   {
     "objectID": "tema03-arranque/latex-src/beamer.html#niveles-de-ejecución",
     "href": "tema03-arranque/latex-src/beamer.html#niveles-de-ejecución",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Objetivos",
     "section": "Niveles de ejecución",
     "text": "Niveles de ejecución\n\nNiveles de ejecución en GNU/Linux\n\nEl SO puede estar en distintos niveles de ejecución (no solo modo monousuario y multiusuario).\nEn GNU/Linux, los niveles de ejecución son:\n\nNivel 0: Sistema apagado.\nNivel 1, s o S: Modo monousuario, rescue o troubleshooting.\nNivel 2: Modo multiusuario sin funciones de red.\nNivel 3: Modo multiusuario con funciones de red y terminales de texto.\nNivel 4: Sin usar, a redefinir por el administrador.\nNivel 5: Modo multiusuario con funciones de red e inicio de sesión gráfico.\nNivel 6: Sistema reiniciándose.\n\nEn Debian, por defecto, los niveles 2 al 5 son todos modo multiusuario con todas las funciones.\n\n\n\nNiveles de ejecución en GNU/Linux\n\n/sbin/runlevel \\(\\Rightarrow\\) saber en qué nivel está el sistema.\n/sbin/telinit \\(\\Rightarrow\\) cambiar de nivel de ejecución:\n\ntelinit 1 \\(\\rightarrow\\) a modo monousuario.\ntelinit 6 \\(\\rightarrow\\) reiniciar el sistema.\ntelinit 3 \\(\\rightarrow\\) cambiar al nivel 3.\nsystemctl isolate multi-user.target \\(\\rightarrow\\) cambiar al nivel 3 en systemd.\n\nEl nivel por defecto, establecido al arrancar, se encuentra:\n\nEn el fichero /etc/inittab\n\n\nid:2:initdefault:\n\nO con el siguiente comando (systemd)\n\n\nsystemctl set-default multi-user.target\n\n\nAl arrancar mediante GRUB, al núcleo se le puede pasar como parámetro un número indicando el nivel en el que queremos arrancar. En este caso se obviará el nivel por defecto.\n\n\n\nEquivalencias init y systemd\n\n\n\n\nimage\n\n\n\nFuente [Nemeth et al., 2018]."
   },
   {
     "objectID": "tema03-arranque/latex-src/beamer.html#ficheros-de-inicialización",
     "href": "tema03-arranque/latex-src/beamer.html#ficheros-de-inicialización",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Objetivos",
     "section": "Ficheros de inicialización",
-    "text": "Ficheros de inicialización\n\nFicheros de inicialización\n\nPersonalizar niveles de ejecución \\(\\Rightarrow\\) carpetas /etc/rc?.d/, donde ? es el nivel de ejecución.\nTodos ellos son ejecutados por Init durante el arranque.\nSe ejecutan al arrancar o al cambiar de nivel:\n\nEl nombre del script empieza por S o K, seguido de dos dígitos y un nombre descriptivo:\n\nK35smb K15httpd S40atd S50xinetd S60cups S99local\n\nLos ejecuta en orden alfabético, primero los K después los S, los dos dígitos establecen el orden entre todos los K y todos los S.\nFicheros K: detener demonios o matar procesos.\nFicheros S: lanzar demonios o ejecutar funciones de inicio.\nPara cada nivel de inicialización, se especifica qué demonios tienen que estar activos o no.\n\n\n\n\nFicheros de inicialización\n\nCarpetas /etc/rc?.d/:\n\nTodos los ficheros son enlaces simbólicos al fichero con el mismo nombre descriptivo localizado en /etc/init.d.\nLos scripts reciben varios parámetros: start, stop, restart...\nEsto permite lanzar o relanzar demonios sin reiniciar el sistema.\nrc ejecuta los ficheros K con el parámetro stop y los S con start.\nEstos scripts se mantienen por retrocompatibilidad, se tiende a utilizar systemd y el comando systemctl que actúa sobre unidades descritas en /etc/systemd/system/ para cada objetivo systemd.\n\n\n\n\nFicheros de inicialización\npedroa@pedroaLaptop:~$ ls /etc/rc2.d/ -la\ntotal 20\ndrwxr-xr-x   2 root root  4096 oct 27 12:05 .\ndrwxr-xr-x 146 root root 12288 feb 21 16:11 ..\n-rw-r--r--   1 root root   677 jul 14  2020 README\nlrwxrwxrwx   1 root root    14 jul 25  2020 S01motd -> ../init.d/motd\nlrwxrwxrwx   1 root root    17 jul 25  2020 S13rpcbind -> ../init.d/rpcbind\nlrwxrwxrwx   1 root root    17 jul 25  2020 S16rsyslog -> ../init.d/rsyslog\nlrwxrwxrwx   1 root root    14 jul 25  2020 S16sudo -> ../init.d/sudo\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17acpid -> ../init.d/acpid\nlrwxrwxrwx   1 root root    17 jul 25  2020 S17anacron -> ../init.d/anacron\nlrwxrwxrwx   1 root root    13 jul 25  2020 S17atd -> ../init.d/atd\nlrwxrwxrwx   1 root root    14 jul 25  2020 S17cron -> ../init.d/cron\nlrwxrwxrwx   1 root root    14 jul 25  2020 S17dbus -> ../init.d/dbus\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17exim4 -> ../init.d/exim4\nlrwxrwxrwx   1 root root    17 jul 26  2020 S17hddtemp -> ../init.d/hddtemp\nlrwxrwxrwx   1 root root    13 oct 27 12:05 S17ntp -> ../init.d/ntp\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17rsync -> ../init.d/rsync\nlrwxrwxrwx   1 root root    13 jul 25  2020 S17ssh -> ../init.d/ssh\nlrwxrwxrwx   1 root root    17 jul 27  2020 S19openvpn -> ../init.d/openvpn\nlrwxrwxrwx   1 root root    14 jul 27  2020 S20cups -> ../init.d/cups\nlrwxrwxrwx   1 root root    14 jul 27  2020 S20gdm3 -> ../init.d/gdm3\nlrwxrwxrwx   1 root root    15 jul 27  2020 S20saned -> ../init.d/saned\n\n\nManejar servicios\n# Arrancar un servicio (tradicional):\n/etc/init.d/myservice start\n# Arrancar un servicio (systemd):\nsystemctl start myservice\n# Parar un servicio (tradicional): \n/etc/init.d/myservice stop\n# Parar un servicio (systemd):\nsystemctl stop myservice\n# Listar servicios (tradicional):\nls /etc/init.d\n# Listar servicios (systemd):\nsystemctl list-units --type=service\n# Añadir un servicio a todos los niveles\nupdate-rc.d apache2 defaults\n# Eliminar un servicio a todos los niveles\nrm /etc/rc*/*myscript\n# Eliminar un servicio a todos los niveles\nupdate-rc.d apache2 remove"
+    "text": "Ficheros de inicialización\n\nFicheros de inicialización\n\nPersonalizar niveles de ejecución \\(\\Rightarrow\\) carpetas /etc/rc?.d/, donde ? es el nivel de ejecución.\nTodos ellos son ejecutados por Init durante el arranque.\nSe ejecutan al arrancar o al cambiar de nivel:\n\nEl nombre del script empieza por S o K, seguido de dos dígitos y un nombre descriptivo:\n\nK35smb K15httpd S40atd S50xinetd S60cups S99local\n\nLos ejecuta en orden alfabético, primero los K después los S, los dos dígitos establecen el orden entre todos los K y todos los S.\nFicheros K: detener demonios o matar procesos.\nFicheros S: lanzar demonios o ejecutar funciones de inicio.\nPara cada nivel de inicialización, se especifica qué demonios tienen que estar activos o no.\n\n\n\n\nFicheros de inicialización\n\nCarpetas /etc/rc?.d/:\n\nTodos los ficheros son enlaces simbólicos al fichero con el mismo nombre descriptivo localizado en /etc/init.d.\nLos scripts reciben varios parámetros: start, stop, restart...\nEsto permite lanzar o relanzar demonios sin reiniciar el sistema.\nrc ejecuta los ficheros K con el parámetro stop y los S con start.\nEstos scripts se mantienen por retrocompatibilidad, se tiende a utilizar systemd y el comando systemctl que actúa sobre unidades descritas en /etc/systemd/system/ para cada objetivo systemd.\n\n\n\n\nFicheros de inicialización\npedroa@pedroaLaptop:~$ ls /etc/rc2.d/ -la\ntotal 20\ndrwxr-xr-x   2 root root  4096 oct 27 12:05 .\ndrwxr-xr-x 146 root root 12288 feb 21 16:11 ..\n-rw-r--r--   1 root root   677 jul 14  2020 README\nlrwxrwxrwx   1 root root    14 jul 25  2020 S01motd -&gt; ../init.d/motd\nlrwxrwxrwx   1 root root    17 jul 25  2020 S13rpcbind -&gt; ../init.d/rpcbind\nlrwxrwxrwx   1 root root    17 jul 25  2020 S16rsyslog -&gt; ../init.d/rsyslog\nlrwxrwxrwx   1 root root    14 jul 25  2020 S16sudo -&gt; ../init.d/sudo\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17acpid -&gt; ../init.d/acpid\nlrwxrwxrwx   1 root root    17 jul 25  2020 S17anacron -&gt; ../init.d/anacron\nlrwxrwxrwx   1 root root    13 jul 25  2020 S17atd -&gt; ../init.d/atd\nlrwxrwxrwx   1 root root    14 jul 25  2020 S17cron -&gt; ../init.d/cron\nlrwxrwxrwx   1 root root    14 jul 25  2020 S17dbus -&gt; ../init.d/dbus\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17exim4 -&gt; ../init.d/exim4\nlrwxrwxrwx   1 root root    17 jul 26  2020 S17hddtemp -&gt; ../init.d/hddtemp\nlrwxrwxrwx   1 root root    13 oct 27 12:05 S17ntp -&gt; ../init.d/ntp\nlrwxrwxrwx   1 root root    15 jul 25  2020 S17rsync -&gt; ../init.d/rsync\nlrwxrwxrwx   1 root root    13 jul 25  2020 S17ssh -&gt; ../init.d/ssh\nlrwxrwxrwx   1 root root    17 jul 27  2020 S19openvpn -&gt; ../init.d/openvpn\nlrwxrwxrwx   1 root root    14 jul 27  2020 S20cups -&gt; ../init.d/cups\nlrwxrwxrwx   1 root root    14 jul 27  2020 S20gdm3 -&gt; ../init.d/gdm3\nlrwxrwxrwx   1 root root    15 jul 27  2020 S20saned -&gt; ../init.d/saned\n\n\nManejar servicios\n# Arrancar un servicio (tradicional):\n/etc/init.d/myservice start\n# Arrancar un servicio (systemd):\nsystemctl start myservice\n# Parar un servicio (tradicional): \n/etc/init.d/myservice stop\n# Parar un servicio (systemd):\nsystemctl stop myservice\n# Listar servicios (tradicional):\nls /etc/init.d\n# Listar servicios (systemd):\nsystemctl list-units --type=service\n# Añadir un servicio a todos los niveles\nupdate-rc.d apache2 defaults\n# Eliminar un servicio a todos los niveles\nrm /etc/rc*/*myscript\n# Eliminar un servicio a todos los niveles\nupdate-rc.d apache2 remove"
   },
   {
     "objectID": "tema03-arranque/latex-src/beamer.html#systemd",
     "href": "tema03-arranque/latex-src/beamer.html#systemd",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Objetivos",
     "section": "Systemd",
     "text": "Systemd\n\nSystemd\n\nEs un reemplazo del proceso Init que viene incorporándose en GNU/Linux desde el año 2015.\nAmplía funcionalidades, pudiendo gestionar cosas que Init no gestiona, por ejemplo el sistema de logs.\nFilosofía principal:\n\nMejorar la forma de expresar dependencias.\nPermitir que se realicen más tareas en paralelo.\nReducir la carga extra que supone el intérprete.\n\nCierta controversia:\n\nSistema muy complejo, que causa algunas dependencias innecesarias.\n\nSe gestiona mediante unidades (servicios) y targets (algo similar a los niveles de ejecución).\n\n\n\nSystemd\n\nEs compatible hacia atrás con los scripts SysV.\nPero incorpora su propio mecanismo (más potente) de gestión de servicios.\nCarpeta /etc/systemd:\n\nCada servicio es un fichero .conf. Ejemplo:\n\n\n\n[Unit]\nDescription=Servicio de ejemplo\nAfter=network.target\nStartLimitIntervalSec=0[Service]\nType=simple\nRestart=always\nRestartSec=1\nUser=pedroa\nExecStart=/ruta/ejecutable argumentos\n\n[Install]\nWantedBy=multi-user.target\n\n\nSystemd\n\nLa forma de describir dependencias es más flexible:\n\nAfter especifica qué necesita el servicio para poder ejecutarse.\nWantedBy especifica cuándo se lanzará el servicio.\n\nSe puede especificar el usuario con User.\nEl ejecutable se especifica con ExecStart.\nRestart=always hace que el servicio se re-ejecute si por, algún motivo, se para.\nRestartSec=1: el reinicio se hace tras 1 segundo.\nStartLimitIntervalSec=0[service]: se intenta el reinicio para siempre (no hay límite).\n\n\n\nResumen del proceso de arranque\n\nIniciador ROM (BIOS/UEFI)\n\nChequeo inicial del sistema.\nLee y almacena en memoria el programa cargador del SO.\nPasa el control al cargador del SO, saltando a la dirección de memoria donde lo ha almacenado.\n\nCargador del sistema operativo (GRUB) \\(\\Rightarrow\\) carga el núcleo del SO y le pasa el control, sabe dónde está el núcleo.\nNúcleo del SO:\n\nChequeo hardware.\nCreación e inicialización de las estructuras de datos, tablas...\nCrea el proceso Init y le pasa el control.\n\nProceso Init: termina el proceso de arranque, dejando el sistema preparado para ser usado (chequeo de SFs, montaje de SFs, activación de la swap, de cuotas, demonios, etc.)"
   },
   {
+    "objectID": "tema03-arranque/latex-src/beamer.html#footnotes",
+    "href": "tema03-arranque/latex-src/beamer.html#footnotes",
+    "title": "1 Objetivos",
+    "section": "Notas",
+    "text": "Notas\n\n\nhttps://blog.sleeplessbeastie.eu/2014/05/01/how-to-access-single-user-mode-without-password/↩︎"
+  },
+  {
     "objectID": "enlaces.html",
     "href": "enlaces.html",
+    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "section": "",
+    "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
+  },
+  {
+    "objectID": "enlaces.html#virtual-box-y-redes-virtuales",
+    "href": "enlaces.html#virtual-box-y-redes-virtuales",
     "title": "Programación y Administración de Sistemas (2022-2023)",
     "section": "",
     "text": "How To Create And Use NAT Network In VirtualBox\nVirtualBox Network Settings: Complete Guide"
@@ -602,11 +973,25 @@
     "text": "Conocer cuáles son los recursos básicos del sistema operativo (CPU, memoria y espacio en disco) y la necesidad e importancia de su monitorización y gestión.\nDefinir los procesos en GNU/Linux y distinguir los modos de ejecución básicos (modo usuario y modo núcleo).\nEstablecer los tipos de procesos que pueden ejecutarse en el sistema operativo.\nUtilizar la herramienta ps para ver los procesos en ejecución y sus atributos.\nExplicar el ciclo de vida de un proceso en GNU/Linux desde el punto de vista de su administración, detallando los distintos estados por los que puede pasar.\nConocer el mecanismo de planificación utilizado en GNU/Linux para ejecutar los procesos.\nUtilizar el número nice para modificar la prioridad de los procesos.\nEnviar señales a procesos para controlar su ejecución y distinguir entre el efecto de las distintas señales.\nMonitorizar el tiempo de actividad de un sistema mediante la herramienta uptime.\nMonitorizar el árbol de ejecución de procesos de un sistema mediante la herramienta pstree.\nMonitorizar los procesos en ejecución de forma interactiva mediante la herramienta top.\nObtener informes sobre la ejecución de procesos en un sistema mediante la herramienta vmstat.\nConocer el contenido de la carpeta /proc y los ficheros que en ella aparecen para cada uno de los procesos en ejecución.\nPostergar la ejecución de procesos mediante el uso de la herramienta at.\nPlanificar la ejecución periódica de procesos mediante la herramienta cron.\nRastrear señales y llamadas al sistema de un determinado proceso mediante la herramienta strace.\nMonitorizar la cantidad de memoria libre mediante la herramienta free.\nMonitorizar el uso de memoria mediante vmstat.\nDecidir el espacio de paginación necesario para un sistema operativo.\nControlar el espacio en disco mediante las herramientas df y du.\nMonitorizar el rendimiento de los discos mediante el uso de la herramienta iostat.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
   },
   {
+    "objectID": "tema05-recursos/tema05-recursos.html#objetivos",
+    "href": "tema05-recursos/tema05-recursos.html#objetivos",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "",
+    "text": "Conocer cuáles son los recursos básicos del sistema operativo (CPU, memoria y espacio en disco) y la necesidad e importancia de su monitorización y gestión.\nDefinir los procesos en GNU/Linux y distinguir los modos de ejecución básicos (modo usuario y modo núcleo).\nEstablecer los tipos de procesos que pueden ejecutarse en el sistema operativo.\nUtilizar la herramienta ps para ver los procesos en ejecución y sus atributos.\nExplicar el ciclo de vida de un proceso en GNU/Linux desde el punto de vista de su administración, detallando los distintos estados por los que puede pasar.\nConocer el mecanismo de planificación utilizado en GNU/Linux para ejecutar los procesos.\nUtilizar el número nice para modificar la prioridad de los procesos.\nEnviar señales a procesos para controlar su ejecución y distinguir entre el efecto de las distintas señales.\nMonitorizar el tiempo de actividad de un sistema mediante la herramienta uptime.\nMonitorizar el árbol de ejecución de procesos de un sistema mediante la herramienta pstree.\nMonitorizar los procesos en ejecución de forma interactiva mediante la herramienta top.\nObtener informes sobre la ejecución de procesos en un sistema mediante la herramienta vmstat.\nConocer el contenido de la carpeta /proc y los ficheros que en ella aparecen para cada uno de los procesos en ejecución.\nPostergar la ejecución de procesos mediante el uso de la herramienta at.\nPlanificar la ejecución periódica de procesos mediante la herramienta cron.\nRastrear señales y llamadas al sistema de un determinado proceso mediante la herramienta strace.\nMonitorizar la cantidad de memoria libre mediante la herramienta free.\nMonitorizar el uso de memoria mediante vmstat.\nDecidir el espacio de paginación necesario para un sistema operativo.\nControlar el espacio en disco mediante las herramientas df y du.\nMonitorizar el rendimiento de los discos mediante el uso de la herramienta iostat."
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#evaluación",
+    "href": "tema05-recursos/tema05-recursos.html#evaluación",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "",
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
+  },
+  {
     "objectID": "tema05-recursos/tema05-recursos.html#tareas-típicas",
     "href": "tema05-recursos/tema05-recursos.html#tareas-típicas",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Tareas típicas",
-    "text": "Tareas típicas\nEmpieza a ir lento un servicio, ¿qué puede pasar?\n\n¿Cuántos recursos gasta nuestro servidor web según aumentan las peticiones?\n\n\n¿cómo programo una tarea para que se ejecute repetidamente?"
+    "text": "Tareas típicas\nEmpieza a ir lento un servicio, ¿qué puede pasar?\n. . .\n¿Cuántos recursos gasta nuestro servidor web según aumentan las peticiones?\n. . .\n¿cómo programo una tarea para que se ejecute repetidamente?"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#introducción-1",
@@ -676,35 +1061,35 @@
     "href": "tema05-recursos/tema05-recursos.html#procesos-monitorizar-con-ps-1",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Procesos: monitorizar con ps",
-    "text": "Procesos: monitorizar con ps\n\n\nps: información sobre los procesos en ejecución\n\nSTAT estado del proceso:\n\nR: en ejecución\nS: durmiendo\nZ: proceso zombie\nD: durmiendo ininterrumpible (E/S)\nT: parado (señal o trace)\n\n\n\n\n\n\n\nSTAT banderas adicionales:\n\n<:prioridad más alta de lo normal (\\(<0\\)), N: más baja de lo normal (\\(>0\\))\nl: tiene multithread, +: proceso, foreground, s: líder de sesión\nL: tiene páginas bloqueadas en memoria"
+    "text": "Procesos: monitorizar con ps\n\n\nps: información sobre los procesos en ejecución\n\nSTAT estado del proceso:\n\nR: en ejecución\nS: durmiendo\nZ: proceso zombie\nD: durmiendo ininterrumpible (E/S)\nT: parado (señal o trace)\n\n\n\n\n\n\n\nSTAT banderas adicionales:\n\n&lt;:prioridad más alta de lo normal (\\(&lt;0\\)), N: más baja de lo normal (\\(&gt;0\\))\nl: tiene multithread, +: proceso, foreground, s: líder de sesión\nL: tiene páginas bloqueadas en memoria"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos",
     "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Procesos: estados de los procesos",
-    "text": "Procesos: estados de los procesos\n\n\n\n\nR: un proceso en ejecución está listo para ejecutarse en cuanto la CPU esté libre. Tiene todos los recursos que necesita y está esperando su cuanto para ejecutarse.\nS: durmiendo, esperando a que ocurra un evento específico (petición I/O, lectura de un socket…). bash y los demonios del sistema pasan casi todo su tiempo durmiendo, esperando la entrada por terminal o que un cliente haga una petición por la red. Estos procesos no recibirán tiempo de CPU hasta que el evento ocurra o que se reciba una señal específica."
+    "text": "Procesos: estados de los procesos\n\n\nR: un proceso en ejecución está listo para ejecutarse en cuanto la CPU esté libre. Tiene todos los recursos que necesita y está esperando su cuanto para ejecutarse.\nS: durmiendo, esperando a que ocurra un evento específico (petición I/O, lectura de un socket…). bash y los demonios del sistema pasan casi todo su tiempo durmiendo, esperando la entrada por terminal o que un cliente haga una petición por la red. Estos procesos no recibirán tiempo de CPU hasta que el evento ocurra o que se reciba una señal específica."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-1",
     "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-1",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Procesos: estados de los procesos",
-    "text": "Procesos: estados de los procesos\n\n\n\n\nD: durmiendo, espera ininterrumpible. Algunas operaciones causan este estado, en el que el proceso no maneja señales, solo despertará cuando pase el evento. Normalmente, el estado D es transitorio y no llegaríamos a verlo en el ps. Sin embargo, determinadas situaciones anómalas hacen que el estado se mantenga (p.ej. pedir un fichero a un servidor NFS al que no podemos acceder y que hemos montado con hard). Solo podemos reiniciar o arreglar el problema."
+    "text": "Procesos: estados de los procesos\n\n\nD: durmiendo, espera ininterrumpible. Algunas operaciones causan este estado, en el que el proceso no maneja señales, solo despertará cuando pase el evento. Normalmente, el estado D es transitorio y no llegaríamos a verlo en el ps. Sin embargo, determinadas situaciones anómalas hacen que el estado se mantenga (p.ej. pedir un fichero a un servidor NFS al que no podemos acceder y que hemos montado con hard). Solo podemos reiniciar o arreglar el problema."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-2",
     "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-2",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Procesos: estados de los procesos",
-    "text": "Procesos: estados de los procesos\n\n\n\n\nZ: zombie, el proceso termina correctamente pero el padre no recoge su código de error \\(\\rightarrow\\) Consultar el PPID para ver el origen del problema.\nT: proceso detenido temporalmente mediante señales (Ctrl+Z) o porque está siendo examinado (trace). Solo volverán a ejecutarse tras otra señal."
+    "text": "Procesos: estados de los procesos\n\n\nZ: zombie, el proceso termina correctamente pero el padre no recoge su código de error \\(\\rightarrow\\) Consultar el PPID para ver el origen del problema.\nT: proceso detenido temporalmente mediante señales (Ctrl+Z) o porque está siendo examinado (trace). Solo volverán a ejecutarse tras otra señal."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-3",
     "href": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-3",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Procesos: estados de los procesos",
-    "text": "Procesos: estados de los procesos\n\n\n\n\nI: idle, este estado se introdujo en 2017 con la versión 4.17 del núcleo. Significa que estamos ante un proceso ocioso de un hilo del núcleo, en espera ininterrumpible. A diferencia del estado D, solo se aplica a procesos del núcleo y no contribuye a la carga de la CPU."
+    "text": "Procesos: estados de los procesos\n\n\nI: idle, este estado se introdujo en 2017 con la versión 4.17 del núcleo. Significa que estamos ante un proceso ocioso de un hilo del núcleo, en espera ininterrumpible. A diferencia del estado D, solo se aplica a procesos del núcleo y no contribuye a la carga de la CPU."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#procesos-estados-de-los-procesos-4",
@@ -718,7 +1103,7 @@
     "href": "tema05-recursos/tema05-recursos.html#ejemplo-salida-ps",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Ejemplo salida ps",
-    "text": "Ejemplo salida ps\n$ ps aux | less #a-> Todos usuarios, x-> Procesos sin terminal, u -> Añadir nombre de usuario\nUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot           1  0.0  0.0 166852 11240 ?        Ss   11:50   0:02 /sbin/init\nroot           2  0.0  0.0      0     0 ?        S    11:50   0:00 [kthreadd]\nroot           3  0.0  0.0      0     0 ?        I<   11:50   0:00 [rcu_gp]\nroot           4  0.0  0.0      0     0 ?        I<   11:50   0:00 [rcu_par_gp]\nroot          12  0.0  0.0      0     0 ?        S    11:50   0:00 [ksoftirqd/0]\nroot          13  0.0  0.0      0     0 ?        I    11:50   0:30 [rcu_sched]\n...\npedroa     18651  0.0  0.0  14096  3400 pts/1    R+   20:36   0:00 ps aux\npedroa     18652  0.0  0.0   8140   912 pts/1    S+   20:36   0:00 less\n$ ps al #a-> Todos usuarios, l -> Formato \"long\"\nF   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND\n4     0    1323    1315  20   0 633340 217800 -   Ssl+ tty7      31:12 /usr/lib/xorg/Xorg :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch\n4     0    1324       1  20   0   8340  1760 -    Ss+  tty1       0:00 /sbin/agetty -o -p -- \\u --noclear tty1 linux\n0  1000   18303   18292  20   0  10644  4860 core_s Ss+  pts/0      0:00 bash\n0  1000   18649   18292  20   0  10644  4912 -    Ss   pts/1      0:00 bash\n4  1000   18718   18649  20   0  13816  1308 -    R+   pts/1      0:00 ps al"
+    "text": "Ejemplo salida ps\n$ ps aux | less #a-&gt; Todos usuarios, x-&gt; Procesos sin terminal, u -&gt; Añadir nombre de usuario\nUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot           1  0.0  0.0 166852 11240 ?        Ss   11:50   0:02 /sbin/init\nroot           2  0.0  0.0      0     0 ?        S    11:50   0:00 [kthreadd]\nroot           3  0.0  0.0      0     0 ?        I&lt;   11:50   0:00 [rcu_gp]\nroot           4  0.0  0.0      0     0 ?        I&lt;   11:50   0:00 [rcu_par_gp]\nroot          12  0.0  0.0      0     0 ?        S    11:50   0:00 [ksoftirqd/0]\nroot          13  0.0  0.0      0     0 ?        I    11:50   0:30 [rcu_sched]\n...\npedroa     18651  0.0  0.0  14096  3400 pts/1    R+   20:36   0:00 ps aux\npedroa     18652  0.0  0.0   8140   912 pts/1    S+   20:36   0:00 less\n$ ps al #a-&gt; Todos usuarios, l -&gt; Formato \"long\"\nF   UID     PID    PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND\n4     0    1323    1315  20   0 633340 217800 -   Ssl+ tty7      31:12 /usr/lib/xorg/Xorg :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch\n4     0    1324       1  20   0   8340  1760 -    Ss+  tty1       0:00 /sbin/agetty -o -p -- \\u --noclear tty1 linux\n0  1000   18303   18292  20   0  10644  4860 core_s Ss+  pts/0      0:00 bash\n0  1000   18649   18292  20   0  10644  4912 -    Ss   pts/1      0:00 bash\n4  1000   18718   18649  20   0  13816  1308 -    R+   pts/1      0:00 ps al"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#árbol-de-procesos-pstree",
@@ -886,14 +1271,14 @@
     "href": "tema05-recursos/tema05-recursos.html#programar-ejecución-de-procesos-con-at",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Programar ejecución de procesos con at",
-    "text": "Programar ejecución de procesos con at\nat: ejecutar tareas a una determinada hora (no viene instalado por defecto).\n\nPuede recibir un fichero de texto con las órdenes a ejecutar.\nDispone de un prompt para ir introduciendo las órdenes (Ctrl+D para finalizar introduce <EOT>).\natd: demonio que ejecuta las órdenes.\natq: consulta la lista de órdenes.\natrm: eliminar órdenes."
+    "text": "Programar ejecución de procesos con at\nat: ejecutar tareas a una determinada hora (no viene instalado por defecto).\n\nPuede recibir un fichero de texto con las órdenes a ejecutar.\nDispone de un prompt para ir introduciendo las órdenes (Ctrl+D para finalizar introduce &lt;EOT&gt;).\natd: demonio que ejecuta las órdenes.\natq: consulta la lista de órdenes.\natrm: eliminar órdenes."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#at-ejemplo",
     "href": "tema05-recursos/tema05-recursos.html#at-ejemplo",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "at: ejemplo",
-    "text": "at: ejemplo\n$ date\nlun 20 mar 2023 14:36:50 CET\n$ at 14:40\nwarning: commands will be executed using /bin/sh\nat> echo \"Hola Mundo\" > /tmp/saludo\nat> <EOT>\njob 3 at Mon Mar 20 14:40:00 2023\n$ atq \n3   Mon Mar 20 14:40:00 2023 a javi\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:37:39 CET\ncat: /tmp/saludo: No existe el archivo o el directorio\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:40:20 CET\nHola Mundo"
+    "text": "at: ejemplo\n$ date\nlun 20 mar 2023 14:36:50 CET\n$ at 14:40\nwarning: commands will be executed using /bin/sh\nat&gt; echo \"Hola Mundo\" &gt; /tmp/saludo\nat&gt; &lt;EOT&gt;\njob 3 at Mon Mar 20 14:40:00 2023\n$ atq \n3   Mon Mar 20 14:40:00 2023 a javi\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:37:39 CET\ncat: /tmp/saludo: No existe el archivo o el directorio\n$ date ; cat /tmp/saludo\nlun 20 mar 2023 14:40:20 CET\nHola Mundo"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#tareas-periódicas-con-cron",
@@ -910,11 +1295,32 @@
     "text": "crontab\n\nFormato de crontab: minuto hora día_mes mes día_semana [user] comando\nSe interpreta como una conjunción de condiciones, salvo para día_semana y día_mes (que sería disyunción).\nLos domingos son el día 0 y 7 de la semana.\n\n# Example of job definition:\n# .---------------- minute (0 - 59)\n# |  .------------- hour (0 - 23)\n# |  |  .---------- day of month (1 - 31)\n# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...\n# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat\n# |  |  |  |  |\n# *  *  *  *  * user-name command to be executed\n17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly\n25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )\n47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )\n52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )"
   },
   {
+    "objectID": "tema05-recursos/tema05-recursos.html#crontab-ejemplo",
+    "href": "tema05-recursos/tema05-recursos.html#crontab-ejemplo",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "crontab ejemplo",
+    "text": "crontab ejemplo\n\n# Hacer una copia de seguridad del home cada semana\n0 5 * * 1       tar -zcf /var/backups/home_$(date +\\%Y\\%m\\%d%S).tgz /home/\n# Otras tareas\n5 9 * * *       $HOME/tareadiaria     # 9:05\n15 14 1 * *     $HOME/tareames        # 14:15 el día 1 cada mes\n0 22 * * 1-5    $HOME/tareasemanal    # 22:0 de lunes a viernes\n21 0-23/2 * * * $HOME/tareacada2horas # 0h, 2h, 4h, 6h, y 21m\n5 4 * * sun     $HOME/tareadomingos   # Domingos a las 4:05\n0 9 1 * 5       $HOME/otratarea       # A las 9:00h el día 1 \n                                      # de cada mes O los viernes"
+  },
+  {
     "objectID": "tema05-recursos/tema05-recursos.html#anacron",
     "href": "tema05-recursos/tema05-recursos.html#anacron",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "anacron",
     "text": "anacron\n\nSi la máquina no está encendida cuando se ha requerido lanzar el proceso \\(\\Rightarrow\\) cron no lo lanza.\nSe podría hacer 0 10 */3 * * para conseguir algo parecido (lo intentaría a las 10h cada tres días).\nanacron: no asume que la máquina está siempre encendida.\n\nCombina el uso de scripts al inicio con el uso de cron.\nPermite especificar tareas diarias, semanales o mensuales, de forma muy simple.\nIntroducir aplicaciones o enlaces a las mismas en:\n\n/etc/cron.daily/, /etc/cron.hourly/, /etc/cron.monthly/, /etc/cron.weekly/"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#cron-anacron-y-systemd",
+    "href": "tema05-recursos/tema05-recursos.html#cron-anacron-y-systemd",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "cron, anacron y systemd",
+    "text": "cron, anacron y systemd\nsudo service anacron status\nLos timers de systemd son una alternativa a cron y anacron si bien systemd se encarga de integrarlos por compatibilidad hacia atrás. Puedes ver un ejemplo de timers aquí.\nEsto añade más posibilidades, por ejemplo, controlar que anacron se ejecute sólo cuando el portátil está conectado a la corriente (ver /lib/systemd/system/anacron.service.)"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-dónde-pondrías",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-dónde-pondrías",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio: ¿dónde pondrías…?",
+    "text": "Ejercicio: ¿dónde pondrías…?\n\nCopia de seguridad de un portátil\nProgramar el apagado de la máquina a una hora una sola vez\nCopia de seguridad en un servidor"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema",
@@ -928,7 +1334,7 @@
     "href": "tema05-recursos/tema05-recursos.html#rastreo-de-señales-y-llamadas-al-sistema-1",
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Rastreo de señales y llamadas al sistema",
-    "text": "Rastreo de señales y llamadas al sistema\n¿Algo así qué haría?\nATENCIÓN. No hacer esto fuera de tu máquina virtual controlada\nwhile 1\n    mkdir adir\n    cd adir\n    touch afile\nend\n\n\nNo consume mucho espacio, pero bloquea el uso del disco ¿por qué?.\nEl árbol que se genera es tan grande, que ni si quiera rm -R es capaz de manejarlo."
+    "text": "Rastreo de señales y llamadas al sistema\n¿Algo así qué haría?\nATENCIÓN. No hacer esto fuera de tu máquina virtual controlada\nwhile 1\n    mkdir adir\n    cd adir\n    touch afile\nend\n. . .\n\nNo consume mucho espacio, pero bloquea el uso del disco ¿por qué?.\nEl árbol que se genera es tan grande, que ni si quiera rm -R es capaz de manejarlo."
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#controlgestión-de-la-actividad-de-la-memoria",
@@ -964,6 +1370,20 @@
     "title": "Tema 5: Gestión de recursos del sistema",
     "section": "Uso de memoria: free",
     "text": "Uso de memoria: free\nfree: obtener información sobre el uso de memoria (mismos campos que top).\n$ free\ntotal        used        free      shared  buff/cache   available\nMem:     16203968     3778368     3046064      570784     9379536    11514988\nSwap:           0           0           0"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-paginación",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-paginación",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio: paginación",
+    "text": "Ejercicio: paginación\n\nConsulta si tienes la swap activada y la memoria con swapon -s y free\nComprueba si está en uso\nDesactívala\nActiva la swap en un fichero\nComprueba el resultado con swapon -s y free\nDeja todo como estaba"
+  },
+  {
+    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-memoria-en-uso",
+    "href": "tema05-recursos/tema05-recursos.html#ejercicio-memoria-en-uso",
+    "title": "Tema 5: Gestión de recursos del sistema",
+    "section": "Ejercicio: memoria en uso",
+    "text": "Ejercicio: memoria en uso\nUtiliza el siguiente código para reservar el 90% de la memoria libre del ordenador. Comprueba el efecto que tiene con vmstat y free.\n#include &lt;stdio.h&gt;\n#include &lt;sys/sysinfo.h&gt;\n#include &lt;stdlib.h&gt;\n#include &lt;math.h&gt;\n\nvoid printmemsize(char *str, unsigned long ramsize) {\n        printf(\"%s: %ld in bytes / %ld in KB / %ld in MB / %ld in GB\\n\",\n               str, ramsize, ramsize/1024, (ramsize/1024)/1024, ((ramsize/1024)/1024)/1024);\n}\n\nint main(int argc, char **argv) {\n        struct sysinfo info;\n        sysinfo(&info);\n        printf(\"uptime: %ld\\n\", info.uptime);\n        // print total ram size\n        printmemsize(\"totalram\", info.totalram);\n        printmemsize(\"freeram\", info.freeram);\n        printmemsize(\"sharedram\", info.sharedram);\n        printmemsize(\"bufferram\", info.bufferram);\n        printmemsize(\"freeswap\", info.freeswap);\n        printf(\"current running processes: %d\\n\", info.procs);\n\n    long *v = NULL;\n    unsigned long n; \n\n    n = info.freeram/sizeof(long);\n    printf(\"n: %ld; sizeof(long): %ld\\n\", n, sizeof(long));\n    n = ceill(0.9 * n);\n    \n    printmemsize(\"allocating 90% of free memory\", n);\n\n    v = malloc(n * sizeof(long));\n    if (v == NULL) {\n        perror(\"cannot allocate memory\\n\");\n        return -1;\n    }\n    for (unsigned long i = 0; i&lt;n; i++) {\n        v[i] = i;\n    }\n    getchar();\n\n    free(v);\n    return 0;\n}"
   },
   {
     "objectID": "tema05-recursos/tema05-recursos.html#espacio-en-disco-df",
@@ -1006,6 +1426,20 @@
     "title": "Tema 1: Introducción a la administración de sistemas",
     "section": "",
     "text": "Distinguir entre las distintas generaciones de sistemas operativos y cómo va surgiendo la necesidad de administrar dichos sistemas operativos o servicios.\nEnumerar los sistemas operativos más usuales.\nDefinir el sistema informático de una organización.\nDefinir el Departamento de Informática, sus funciones y su organización.\nDefinir el rol del administrador de sistemas dentro de una organización.\nEnumerar las tareas típicas del administrador de sistemas, incluyendo tareas a nivel hardware, mantenimiento software y documentación, soporte a usuarios, servicios, seguridad y copias de seguridad.\nDefinir estrategias y consejos genéricos en administración de sistemas.\n\n\n\n\n\nExplicar qué es GNULinux, cómo surge, su filosofía y las principales distribuciones de las que disponemos, destacando las más adecuadas para administración de sistemas.\nDefinir qué es el software libre y dar ejemplos de software que no sea libre.\nEnumerar las ventajas del software libre para la administración de sistemas.\nIdentificar el nivel de calado del software libre en administración de sistemas.\nEnumerar desventajas del software libre.\nEnumerar ventajas y desventajas del uso de interfaces gráficas de usuario en administración de sistemas.\nSaber qué es un superusuario y cómo se pueden realizar tareas como superusuario mediante la herramienta sudo.\nUsar herramientas de GNU/Linux para comunicarse con otros usuarios del sistema."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-introduccion.html#objetivos-del-aprendizaje-i",
+    "href": "tema01-introduccion/tema01-introduccion.html#objetivos-del-aprendizaje-i",
+    "title": "Tema 1: Introducción a la administración de sistemas",
+    "section": "",
+    "text": "Distinguir entre las distintas generaciones de sistemas operativos y cómo va surgiendo la necesidad de administrar dichos sistemas operativos o servicios.\nEnumerar los sistemas operativos más usuales.\nDefinir el sistema informático de una organización.\nDefinir el Departamento de Informática, sus funciones y su organización.\nDefinir el rol del administrador de sistemas dentro de una organización.\nEnumerar las tareas típicas del administrador de sistemas, incluyendo tareas a nivel hardware, mantenimiento software y documentación, soporte a usuarios, servicios, seguridad y copias de seguridad.\nDefinir estrategias y consejos genéricos en administración de sistemas."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-introduccion.html#objetivos-del-aprendizaje-ii",
+    "href": "tema01-introduccion/tema01-introduccion.html#objetivos-del-aprendizaje-ii",
+    "title": "Tema 1: Introducción a la administración de sistemas",
+    "section": "",
+    "text": "Explicar qué es GNULinux, cómo surge, su filosofía y las principales distribuciones de las que disponemos, destacando las más adecuadas para administración de sistemas.\nDefinir qué es el software libre y dar ejemplos de software que no sea libre.\nEnumerar las ventajas del software libre para la administración de sistemas.\nIdentificar el nivel de calado del software libre en administración de sistemas.\nEnumerar desventajas del software libre.\nEnumerar ventajas y desventajas del uso de interfaces gráficas de usuario en administración de sistemas.\nSaber qué es un superusuario y cómo se pueden realizar tareas como superusuario mediante la herramienta sudo.\nUsar herramientas de GNU/Linux para comunicarse con otros usuarios del sistema."
   },
   {
     "objectID": "tema01-introduccion/tema01-introduccion.html#generaciones-de-los-sistemas-operativos",
@@ -1243,7 +1677,105 @@
     "href": "tema01-introduccion/tema01-software-libre.html",
     "title": "Tema 1: Introducción al software libre y GNU/Linux",
     "section": "",
-    "text": "Los albores de la informática...\nAños 60-70\n\nPocas Computadoras:\n\nGrandes computadoras o mainframes\nMuy pocos y muy caros\n\nSe desarrolla software artesanal:\n\nEl negocio estaba en el hardware\nPoca variedad de software \\(\\Rightarrow\\) muy específico\nSe dispone del código fuente y los desarrolladores de software compartían libremente sus programas unos con otros\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAparecen las computadoras más modernas y más baratas \\(\\Rightarrow\\) necesidad de software.\nEl software privativo se hace fuerte (Vídeo: Piratas Silicon Valley):\n\nImpiden a los usuarios modificar el software\nEn caso de encontrar un error \\(\\Rightarrow\\) comunicar a la empresa desarrolladora de ese software\n\n\n\nFuente History of Microsoft\n\n\n\n\n\n\n\nAños 80: Emerge Richard Stallman\n\n1984: comenzó a trabajar en el proyecto GNU.\n1985: funda la Free Software Foundation (FSF). Se introdujeron los conceptos de:\n\nFree Software (as in speech)\nCopyleft\n\nNace el movimiento social del software libre.\n\n\n\n\n\n\n\n\n\n\n\nAños 90: en 1991 Linus Torvalds crea el primer núcleo del sistema operativo GNU/Linux.\n\n\n\n\n\n\n\nControversia: http://es.wikipedia.org/wiki/Controversia_por_la_denominaci%C3%B3n_GNU/Linux\n\n\n\n\n\nFuente: https://www.gnu.org/education/education.es.html\n\n\n\n\n\n\nLibertad 0: usar el programa, con cualquier propósito.\nLibertad 1: estudiar cómo funciona el programa, y adaptarlo a tus necesidades.\nLibertad 2: distribuir copias, con lo que puedes ayudar a tu vecino.\nLibertad 3: mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie.\n\n\n\n\n\n\n\n\n\n¿Y si alguien toma parte de mi software y lo utiliza de forma privativa?\n\n\ncopyleft: Restricción que se añade al software libre que impide que alguien distribuya copias o modificaciones restringiendo las 4 libertades\n\n\n\n\n\n\n\n\n\n\n\nLicencias libres (choosealicense.com)\n\nGarantizar las libertades\n\nSe utilizan licencias\nSe apoyan en el sistema de copyrigth (que pretenden reemplazar)\nNecesidad práctica no ideal\n\n\n\n\n\nCon copyleft:\n\nGPL/AGPL: GNU General Public License\nMPL: Mozilla Public License\nCC-sa: Creative Commons-Share Alike\n\n\nSin copyleft:\n\nBSD: Berkeley Software Distribution\nMIT: Massachusetts Institute of Technology\nCC: Creative Commons\n\n\n\n\n\n\n\n\n\n\n\nSegún la Free Software Foundation se entiende por software libre aquél que concede cuatro libertades a sus usuarios:\n\nLibertad 0: La libertad de usar el programa, con cualquier propósito. De modo que uno puede instalarlo en cuantas computadoras desee, sin pagar licencias, por tiempo ilimitado y para cualquier tipo de uso, incluyendo comerciales.\nLibertad 1: La libertad de estudiar cómo funciona el programa, y adaptarlo a sus necesidades. Así pues uno puede traducirlo a su idioma, corregir algún fallo o añadir alguna funcionalidad. No se depende de los intereses del productor original, sino que puede hacerlo uno mismo o encargárselo a alguien que tenga los conocimientos para hacerlo. Requiere el acceso al código.\n\n\n\n\n\nLibertad 2: La libertad de distribuir copias, con lo que un profesor puede dar copias del software a sus alumnos, y éstos copiárselo a sus amigos. Las copias no tienen porqué ser gratuitas, sino que es lícito cobrar por ellas. Al difundir el programa estaremos ayudando no sólo a otras personas, sino también al autor: su programa llega a más gente, y esto hace que reciba más sugerencias para mejorarlo, y más gente dispuesta a ayudarle en el desarrollo.\nLibertad 3: La libertad de mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie. El acceso al código fuente también es un requisito para ello. Lo más habitual es enviar las mejoras a los autores originales para que las incorporen al programa. Así llegan a todos los usuarios y no hay que volver a hacer las modificaciones en futuras versiones.\n\n\n\n\nEstas cuatro libertades son las que definen el modelo del software libre, y todas sus demás características son consecuencia de ellas.\nPara que un programa sea considerado software libre, debe facilitar todas y cada una de estas libertades.\nEl software que no es libre suele designarse con los términos “software privativo” o “software propietario”. Tanto el software libre como el privativo puede ser, o no ser, comercial.\n\n\n\n\nSoftware de dominio público: Se denomina software de dominio público a aquél que no tiene copyright (derechos de autor), porque el autor ha renunciado a ellos. En caso de que el código fuente del programa fuera también de dominio público, se trataría de un tipo de software libre. Sin embargo, la inmensa mayoría del software libre sí tiene derechos de autor, si bien los autores autorizan los usos descritos anteriormente.\nSoftware semilibre: El software semilibre es aquel que proporciona las mismas libertades que el software libre, siempre y cuando sea usado sin ánimo de lucro. Un ejemplo es el sistema de cifrado PGP.\n\n\n\n\n\nFreeware o software gratuito: Existen muchos programas que se pueden descargar gratuitamente de Internet. Estos programas son gratuitos, pero no libres. Normalmente no dan acceso al “código fuente”, por lo que no pueden modificarse, traducirse, etc. Con frecuencia también se prohíbe vender una copia a alguien dispuesto a comprarla. Por otra parte, el software libre no tiene porqué ser gratuito y se puede cobrar la cantidad que estime oportuna por proporcionar una copia. Dos ejemplos de freeware son Microsoft Edge (anterior Internet Explorer) y Adobe Reader.\nShareware: programas que el autor permite utilizar, pero condicionando su uso. Por ejemplo, puede exigir que se pague por él si se emplea más allá de un determinado periodo de evaluación. A veces se distribuye una versión reducida de los programas y hay que pagar para poder disfrutar del programa en toda su capacidad. Normalmente tampoco se ofrece el código fuente. El compresor de ficheros WinRAR, o el programa de chat mIRC son shareware.\n\n\n\n\n\nSoftware con fuentes: Con algunos programas se entrega el código fuente, para que el usuario pueda comprobar que no hace nada malicioso, pero eso no los hace libres, si su licencia no permite su modificación y redistribución sin condiciones excesivamente restrictivas. Las primeras versiones de Unix, bajo licencia de AT&T, incluían el código fuente, pero quedaba prohibida su redistribución a terceras partes. Además, a veces puede ser difícil asegurar que el código publicado corresponde al ejecutable."
+    "text": "Los albores de la informática...\nAños 60-70\n\nPocas Computadoras:\n\nGrandes computadoras o mainframes\nMuy pocos y muy caros\n\nSe desarrolla software artesanal:\n\nEl negocio estaba en el hardware\nPoca variedad de software \\(\\Rightarrow\\) muy específico\nSe dispone del código fuente y los desarrolladores de software compartían libremente sus programas unos con otros\n\n\n\n\n\n\n\n\n\n\n. . .\n\nAparecen las computadoras más modernas y más baratas \\(\\Rightarrow\\) necesidad de software.\nEl software privativo se hace fuerte (Vídeo: Piratas Silicon Valley):\n\nImpiden a los usuarios modificar el software\nEn caso de encontrar un error \\(\\Rightarrow\\) comunicar a la empresa desarrolladora de ese software\n\n\n\nFuente History of Microsoft\n\n\n\n\n\n\nAños 80: Emerge Richard Stallman\n\n1984: comenzó a trabajar en el proyecto GNU.\n1985: funda la Free Software Foundation (FSF). Se introdujeron los conceptos de:\n\nFree Software (as in speech)\nCopyleft\n\nNace el movimiento social del software libre.\n\n\n\n\n\n\n\n\n\n\n\nAños 90: en 1991 Linus Torvalds crea el primer núcleo del sistema operativo GNU/Linux.\n\n\n\n\n\n\n\nControversia: http://es.wikipedia.org/wiki/Controversia_por_la_denominaci%C3%B3n_GNU/Linux\n\n\n\n\n\nFuente: https://www.gnu.org/education/education.es.html\n\n\n\n\n\n\nLibertad 0: usar el programa, con cualquier propósito.\nLibertad 1: estudiar cómo funciona el programa, y adaptarlo a tus necesidades.\nLibertad 2: distribuir copias, con lo que puedes ayudar a tu vecino.\nLibertad 3: mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie.\n\n\n\n\n\n\n\n\n\n¿Y si alguien toma parte de mi software y lo utiliza de forma privativa?\n\n\ncopyleft: Restricción que se añade al software libre que impide que alguien distribuya copias o modificaciones restringiendo las 4 libertades\n\n\n\n\n\n\n\n\n\nLicencias libres (choosealicense.com)\n\nGarantizar las libertades\n\nSe utilizan licencias\nSe apoyan en el sistema de copyrigth (que pretenden reemplazar)\nNecesidad práctica no ideal\n\n\n\n\n\nCon copyleft:\n\nGPL/AGPL: GNU General Public License\nMPL: Mozilla Public License\nCC-sa: Creative Commons-Share Alike\n\n\nSin copyleft:\n\nBSD: Berkeley Software Distribution\nMIT: Massachusetts Institute of Technology\nCC: Creative Commons\n\n\n\n\n\n\n\n\n\n\n\nSegún la Free Software Foundation se entiende por software libre aquél que concede cuatro libertades a sus usuarios:\n\nLibertad 0: La libertad de usar el programa, con cualquier propósito. De modo que uno puede instalarlo en cuantas computadoras desee, sin pagar licencias, por tiempo ilimitado y para cualquier tipo de uso, incluyendo comerciales.\nLibertad 1: La libertad de estudiar cómo funciona el programa, y adaptarlo a sus necesidades. Así pues uno puede traducirlo a su idioma, corregir algún fallo o añadir alguna funcionalidad. No se depende de los intereses del productor original, sino que puede hacerlo uno mismo o encargárselo a alguien que tenga los conocimientos para hacerlo. Requiere el acceso al código.\n\n\n\n\n\nLibertad 2: La libertad de distribuir copias, con lo que un profesor puede dar copias del software a sus alumnos, y éstos copiárselo a sus amigos. Las copias no tienen porqué ser gratuitas, sino que es lícito cobrar por ellas. Al difundir el programa estaremos ayudando no sólo a otras personas, sino también al autor: su programa llega a más gente, y esto hace que reciba más sugerencias para mejorarlo, y más gente dispuesta a ayudarle en el desarrollo.\nLibertad 3: La libertad de mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie. El acceso al código fuente también es un requisito para ello. Lo más habitual es enviar las mejoras a los autores originales para que las incorporen al programa. Así llegan a todos los usuarios y no hay que volver a hacer las modificaciones en futuras versiones.\n\n\n\n\nEstas cuatro libertades son las que definen el modelo del software libre, y todas sus demás características son consecuencia de ellas.\nPara que un programa sea considerado software libre, debe facilitar todas y cada una de estas libertades.\nEl software que no es libre suele designarse con los términos “software privativo” o “software propietario”. Tanto el software libre como el privativo puede ser, o no ser, comercial.\n\n\n\n\nSoftware de dominio público: Se denomina software de dominio público a aquél que no tiene copyright (derechos de autor), porque el autor ha renunciado a ellos. En caso de que el código fuente del programa fuera también de dominio público, se trataría de un tipo de software libre. Sin embargo, la inmensa mayoría del software libre sí tiene derechos de autor, si bien los autores autorizan los usos descritos anteriormente.\nSoftware semilibre: El software semilibre es aquel que proporciona las mismas libertades que el software libre, siempre y cuando sea usado sin ánimo de lucro. Un ejemplo es el sistema de cifrado PGP.\n\n\n\n\n\nFreeware o software gratuito: Existen muchos programas que se pueden descargar gratuitamente de Internet. Estos programas son gratuitos, pero no libres. Normalmente no dan acceso al “código fuente”, por lo que no pueden modificarse, traducirse, etc. Con frecuencia también se prohíbe vender una copia a alguien dispuesto a comprarla. Por otra parte, el software libre no tiene porqué ser gratuito y se puede cobrar la cantidad que estime oportuna por proporcionar una copia. Dos ejemplos de freeware son Microsoft Edge (anterior Internet Explorer) y Adobe Reader.\nShareware: programas que el autor permite utilizar, pero condicionando su uso. Por ejemplo, puede exigir que se pague por él si se emplea más allá de un determinado periodo de evaluación. A veces se distribuye una versión reducida de los programas y hay que pagar para poder disfrutar del programa en toda su capacidad. Normalmente tampoco se ofrece el código fuente. El compresor de ficheros WinRAR, o el programa de chat mIRC son shareware.\n\n\n\n\n\nSoftware con fuentes: Con algunos programas se entrega el código fuente, para que el usuario pueda comprobar que no hace nada malicioso, pero eso no los hace libres, si su licencia no permite su modificación y redistribución sin condiciones excesivamente restrictivas. Las primeras versiones de Unix, bajo licencia de AT&T, incluían el código fuente, pero quedaba prohibida su redistribución a terceras partes. Además, a veces puede ser difícil asegurar que el código publicado corresponde al ejecutable."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#historia",
+    "href": "tema01-introduccion/tema01-software-libre.html#historia",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Los albores de la informática...\nAños 60-70\n\nPocas Computadoras:\n\nGrandes computadoras o mainframes\nMuy pocos y muy caros\n\nSe desarrolla software artesanal:\n\nEl negocio estaba en el hardware\nPoca variedad de software \\(\\Rightarrow\\) muy específico\nSe dispone del código fuente y los desarrolladores de software compartían libremente sus programas unos con otros"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#la-reacción-años-80",
+    "href": "tema01-introduccion/tema01-software-libre.html#la-reacción-años-80",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": ". . .\n\nAparecen las computadoras más modernas y más baratas \\(\\Rightarrow\\) necesidad de software.\nEl software privativo se hace fuerte (Vídeo: Piratas Silicon Valley):\n\nImpiden a los usuarios modificar el software\nEn caso de encontrar un error \\(\\Rightarrow\\) comunicar a la empresa desarrolladora de ese software\n\n\n\nFuente History of Microsoft"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#la-revolución",
+    "href": "tema01-introduccion/tema01-software-libre.html#la-revolución",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Años 80: Emerge Richard Stallman\n\n1984: comenzó a trabajar en el proyecto GNU.\n1985: funda la Free Software Foundation (FSF). Se introdujeron los conceptos de:\n\nFree Software (as in speech)\nCopyleft\n\nNace el movimiento social del software libre."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#el-sistema-se-completa-gnulinux",
+    "href": "tema01-introduccion/tema01-software-libre.html#el-sistema-se-completa-gnulinux",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Años 90: en 1991 Linus Torvalds crea el primer núcleo del sistema operativo GNU/Linux.\n\n\n\n\n\n\n\nControversia: http://es.wikipedia.org/wiki/Controversia_por_la_denominaci%C3%B3n_GNU/Linux"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#el-software-libre-en-la-educación",
+    "href": "tema01-introduccion/tema01-software-libre.html#el-software-libre-en-la-educación",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Fuente: https://www.gnu.org/education/education.es.html"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#las-4-libertades",
+    "href": "tema01-introduccion/tema01-software-libre.html#las-4-libertades",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Libertad 0: usar el programa, con cualquier propósito.\nLibertad 1: estudiar cómo funciona el programa, y adaptarlo a tus necesidades.\nLibertad 2: distribuir copias, con lo que puedes ayudar a tu vecino.\nLibertad 3: mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#el-copyleft",
+    "href": "tema01-introduccion/tema01-software-libre.html#el-copyleft",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "¿Y si alguien toma parte de mi software y lo utiliza de forma privativa?\n\n\ncopyleft: Restricción que se añade al software libre que impide que alguien distribuya copias o modificaciones restringiendo las 4 libertades"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#tipos-de-software",
+    "href": "tema01-introduccion/tema01-software-libre.html#tipos-de-software",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Licencias libres (choosealicense.com)\n\nGarantizar las libertades\n\nSe utilizan licencias\nSe apoyan en el sistema de copyrigth (que pretenden reemplazar)\nNecesidad práctica no ideal\n\n\n\n\n\nCon copyleft:\n\nGPL/AGPL: GNU General Public License\nMPL: Mozilla Public License\nCC-sa: Creative Commons-Share Alike\n\n\nSin copyleft:\n\nBSD: Berkeley Software Distribution\nMIT: Massachusetts Institute of Technology\nCC: Creative Commons"
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Según la Free Software Foundation se entiende por software libre aquél que concede cuatro libertades a sus usuarios:\n\nLibertad 0: La libertad de usar el programa, con cualquier propósito. De modo que uno puede instalarlo en cuantas computadoras desee, sin pagar licencias, por tiempo ilimitado y para cualquier tipo de uso, incluyendo comerciales.\nLibertad 1: La libertad de estudiar cómo funciona el programa, y adaptarlo a sus necesidades. Así pues uno puede traducirlo a su idioma, corregir algún fallo o añadir alguna funcionalidad. No se depende de los intereses del productor original, sino que puede hacerlo uno mismo o encargárselo a alguien que tenga los conocimientos para hacerlo. Requiere el acceso al código."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre-1",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre-1",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Libertad 2: La libertad de distribuir copias, con lo que un profesor puede dar copias del software a sus alumnos, y éstos copiárselo a sus amigos. Las copias no tienen porqué ser gratuitas, sino que es lícito cobrar por ellas. Al difundir el programa estaremos ayudando no sólo a otras personas, sino también al autor: su programa llega a más gente, y esto hace que reciba más sugerencias para mejorarlo, y más gente dispuesta a ayudarle en el desarrollo.\nLibertad 3: La libertad de mejorar el programa y hacer públicas las mejoras a los demás, de modo que toda la comunidad se beneficie. El acceso al código fuente también es un requisito para ello. Lo más habitual es enviar las mejoras a los autores originales para que las incorporen al programa. Así llegan a todos los usuarios y no hay que volver a hacer las modificaciones en futuras versiones."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre-2",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-es-software-libre-2",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Estas cuatro libertades son las que definen el modelo del software libre, y todas sus demás características son consecuencia de ellas.\nPara que un programa sea considerado software libre, debe facilitar todas y cada una de estas libertades.\nEl software que no es libre suele designarse con los términos “software privativo” o “software propietario”. Tanto el software libre como el privativo puede ser, o no ser, comercial."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-i",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-i",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Software de dominio público: Se denomina software de dominio público a aquél que no tiene copyright (derechos de autor), porque el autor ha renunciado a ellos. En caso de que el código fuente del programa fuera también de dominio público, se trataría de un tipo de software libre. Sin embargo, la inmensa mayoría del software libre sí tiene derechos de autor, si bien los autores autorizan los usos descritos anteriormente.\nSoftware semilibre: El software semilibre es aquel que proporciona las mismas libertades que el software libre, siempre y cuando sea usado sin ánimo de lucro. Un ejemplo es el sistema de cifrado PGP."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-ii",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-ii",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Freeware o software gratuito: Existen muchos programas que se pueden descargar gratuitamente de Internet. Estos programas son gratuitos, pero no libres. Normalmente no dan acceso al “código fuente”, por lo que no pueden modificarse, traducirse, etc. Con frecuencia también se prohíbe vender una copia a alguien dispuesto a comprarla. Por otra parte, el software libre no tiene porqué ser gratuito y se puede cobrar la cantidad que estime oportuna por proporcionar una copia. Dos ejemplos de freeware son Microsoft Edge (anterior Internet Explorer) y Adobe Reader.\nShareware: programas que el autor permite utilizar, pero condicionando su uso. Por ejemplo, puede exigir que se pague por él si se emplea más allá de un determinado periodo de evaluación. A veces se distribuye una versión reducida de los programas y hay que pagar para poder disfrutar del programa en toda su capacidad. Normalmente tampoco se ofrece el código fuente. El compresor de ficheros WinRAR, o el programa de chat mIRC son shareware."
+  },
+  {
+    "objectID": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-iii",
+    "href": "tema01-introduccion/tema01-software-libre.html#qué-no-es-software-libre-iii",
+    "title": "Tema 1: Introducción al software libre y GNU/Linux",
+    "section": "",
+    "text": "Software con fuentes: Con algunos programas se entrega el código fuente, para que el usuario pueda comprobar que no hace nada malicioso, pero eso no los hace libres, si su licencia no permite su modificación y redistribución sin condiciones excesivamente restrictivas. Las primeras versiones de Unix, bajo licencia de AT&T, incluían el código fuente, pero quedaba prohibida su redistribución a terceras partes. Además, a veces puede ser difícil asegurar que el código publicado corresponde al ejecutable."
   },
   {
     "objectID": "tema01-introduccion/tema01-software-libre.html#cronología-de-gnulinux",
@@ -1264,7 +1796,7 @@
     "href": "tema01-introduccion/tema01-software-libre.html#si-es-gratis...",
     "title": "Tema 1: Introducción al software libre y GNU/Linux",
     "section": "Si es gratis...",
-    "text": "Si es gratis...\n¿Quién piensas que desarrolla el Kernel de Linux?\n\n\nFuente: Who actually develops Linux? The answer might surprise you"
+    "text": "Si es gratis...\n¿Quién piensas que desarrolla el Kernel de Linux?\n. . .\n\nFuente: Who actually develops Linux? The answer might surprise you"
   },
   {
     "objectID": "tema01-introduccion/tema01-software-libre.html#distribuciones-de-gnulinux",
@@ -1285,7 +1817,7 @@
     "href": "tema01-introduccion/tema01-software-libre.html#distribuciones-de-gnulinux-ubuntu",
     "title": "Tema 1: Introducción al software libre y GNU/Linux",
     "section": "Distribuciones de GNU/Linux: Ubuntu",
-    "text": "Distribuciones de GNU/Linux: Ubuntu\n\n\n\n\n\n\nEnfocada a ordenadores de escritorio (Desktop/laptop Computers), aunque existe la versión para servidores. Filosofía Ubuntu.\nBasada en Debian, Ubuntu concentra su objetivo en la usabilidad, lanzamientos regulares y facilidad en la instalación.\nPatrocinado por Canonical Ltd., una empresa privada fundada y financiada por el empresario sudafricano Mark Shuttleworth.\n\nLTS (Long Term Support): soporte a largo plazo, Long Time Support (5 años).\nno-LTS: soporte <9 meses.\n\nProyectos: kubuntu, edubuntu, xubuntu, lubuntu, mint…"
+    "text": "Distribuciones de GNU/Linux: Ubuntu\n\n\n\n\n\n\nEnfocada a ordenadores de escritorio (Desktop/laptop Computers), aunque existe la versión para servidores. Filosofía Ubuntu.\nBasada en Debian, Ubuntu concentra su objetivo en la usabilidad, lanzamientos regulares y facilidad en la instalación.\nPatrocinado por Canonical Ltd., una empresa privada fundada y financiada por el empresario sudafricano Mark Shuttleworth.\n\nLTS (Long Term Support): soporte a largo plazo, Long Time Support (5 años).\nno-LTS: soporte &lt;9 meses.\n\nProyectos: kubuntu, edubuntu, xubuntu, lubuntu, mint…"
   },
   {
     "objectID": "tema01-introduccion/tema01-software-libre.html#distribuciones-de-gnulinux-red-hat",
@@ -1421,6 +1953,20 @@
     "text": "Definir qué son usuarios del sistema, las características de los mismos y sus ficheros de configuración.\nEnumerar y explicar los campos del fichero /etc/passwd y /etc/shadow.\nExplicar las características que deberían tener las contraseñas para los usuarios.\nExplicar el mecanismo de shadow passwords y el mecanismo de cifrado de contraseñas que evita guardar las contraseñas del sistema en texto plano.\nEnumerar los mecanismos de revocación de contraseñas, las restricciones de tiempo en cuanto a la validez de las contraseñas y las herramientas de administración que permiten configurarlas.\nCambiar el intérprete de órdenes por defecto de los usuarios.\nConfigurar cuentas restrictivas para usuarios especiales.\nEnumerar los pasos para añadir un usuario al sistema.\nUtilizar herramientas administrativas para añadir o modificar cuentas de usuario.\nEstablecer el objetivo de los grupos de usuarios, identificar grupo primario y grupo activo de un usuario, enumerar y explicar los campos del fichero /etc/group.\nConfigurar grupos con contraseñas.\nUtilizar las distintas herramientas administrativas para grupos.\nIdentificar usuarios y grupos estándar en un sistema GNU/Linux.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
   },
   {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#objetivos-de-aprendizaje",
+    "href": "tema04-usuarios/tema04-usuarios.html#objetivos-de-aprendizaje",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "",
+    "text": "Definir qué son usuarios del sistema, las características de los mismos y sus ficheros de configuración.\nEnumerar y explicar los campos del fichero /etc/passwd y /etc/shadow.\nExplicar las características que deberían tener las contraseñas para los usuarios.\nExplicar el mecanismo de shadow passwords y el mecanismo de cifrado de contraseñas que evita guardar las contraseñas del sistema en texto plano.\nEnumerar los mecanismos de revocación de contraseñas, las restricciones de tiempo en cuanto a la validez de las contraseñas y las herramientas de administración que permiten configurarlas.\nCambiar el intérprete de órdenes por defecto de los usuarios.\nConfigurar cuentas restrictivas para usuarios especiales.\nEnumerar los pasos para añadir un usuario al sistema.\nUtilizar herramientas administrativas para añadir o modificar cuentas de usuario.\nEstablecer el objetivo de los grupos de usuarios, identificar grupo primario y grupo activo de un usuario, enumerar y explicar los campos del fichero /etc/group.\nConfigurar grupos con contraseñas.\nUtilizar las distintas herramientas administrativas para grupos.\nIdentificar usuarios y grupos estándar en un sistema GNU/Linux."
+  },
+  {
+    "objectID": "tema04-usuarios/tema04-usuarios.html#evaluación",
+    "href": "tema04-usuarios/tema04-usuarios.html#evaluación",
+    "title": "Tema 4: Gestión de Usuarios",
+    "section": "",
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración."
+  },
+  {
     "objectID": "tema04-usuarios/tema04-usuarios.html#introducción-1",
     "href": "tema04-usuarios/tema04-usuarios.html#introducción-1",
     "title": "Tema 4: Gestión de Usuarios",
@@ -1467,7 +2013,7 @@
     "href": "tema04-usuarios/tema04-usuarios.html#contraseñas",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Contraseñas",
-    "text": "Contraseñas\n\npasswd <nombre_usuario> \\(\\Rightarrow\\) asignar contraseña a un usuario (o cambiarla).\nElección de una contraseña adecuada\nNo utilizar:\n\nLas contraseñas más usadas\nTu nombre, parte de él, o el de alguien cercano a ti.\nNúmeros significativos para ti o alguien cercano.\nNombre, nº, lugar o persona, relacionados con tu trabajo.\nNombres de gente famosa, lugares, películas, publicidad...\nPalabras que estén en el diccionario (ver cracklib)."
+    "text": "Contraseñas\n\npasswd &lt;nombre_usuario&gt; \\(\\Rightarrow\\) asignar contraseña a un usuario (o cambiarla).\nElección de una contraseña adecuada\nNo utilizar:\n\nLas contraseñas más usadas\nTu nombre, parte de él, o el de alguien cercano a ti.\nNúmeros significativos para ti o alguien cercano.\nNombre, nº, lugar o persona, relacionados con tu trabajo.\nNombres de gente famosa, lugares, películas, publicidad...\nPalabras que estén en el diccionario (ver cracklib)."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#contraseñas-1",
@@ -1544,21 +2090,21 @@
     "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Shadow passwords: Algoritmos de hash",
-    "text": "Shadow passwords: Algoritmos de hash\nDos algoritmos: MD5 y SHA\nMD5 (Message-Digest algorithm 5)\n\nAplica funciones no lineales a los 17 segmentos de 32 bits de un bloque de 512 bits.\nSe obtiene un resumen de 128 bits.\nObtener suma MD5 (GNU/Linux):\n\nmd5sum Fichero.ext > Fichero.md5\n\nChequear suma MD5 (GNU/Linux) (se busca un fichero con el nombre correcto en la carpeta actual):\n\nmd5sum -c Fichero.md5"
+    "text": "Shadow passwords: Algoritmos de hash\nDos algoritmos: MD5 y SHA\nMD5 (Message-Digest algorithm 5)\n\nAplica funciones no lineales a los 17 segmentos de 32 bits de un bloque de 512 bits.\nSe obtiene un resumen de 128 bits.\nObtener suma MD5 (GNU/Linux):\n\nmd5sum Fichero.ext &gt; Fichero.md5\n\nChequear suma MD5 (GNU/Linux) (se busca un fichero con el nombre correcto en la carpeta actual):\n\nmd5sum -c Fichero.md5"
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash-1",
     "href": "tema04-usuarios/tema04-usuarios.html#shadow-passwords-algoritmos-de-hash-1",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Shadow passwords: Algoritmos de hash",
-    "text": "Shadow passwords: Algoritmos de hash\n\nSHA (Secure Hash Algorithm):\n\nEstándar del NIST.\nParecido a MD5, pero genera resúmenes más grandes, que lo hacen más seguro contra ataques de fuerza bruta o del cumpleaños.\nSe pueden considerar 160, 224, 256, 384 o 512 bits para el resumen.\nObtener suma SHA (GNU/Linux):\n\nshasum [-anumBits] Fichero.ext > Fichero.sha\n\nChequear suma SHA (GNU/Linux):\n\nshasum -c Fichero.sha\n\nSHA-512 es el algoritmo utilizado por defecto en GNU/Linux para guardar la contraseña."
+    "text": "Shadow passwords: Algoritmos de hash\n\nSHA (Secure Hash Algorithm):\n\nEstándar del NIST.\nParecido a MD5, pero genera resúmenes más grandes, que lo hacen más seguro contra ataques de fuerza bruta o del cumpleaños.\nSe pueden considerar 160, 224, 256, 384 o 512 bits para el resumen.\nObtener suma SHA (GNU/Linux):\n\nshasum [-anumBits] Fichero.ext &gt; Fichero.sha\n\nChequear suma SHA (GNU/Linux):\n\nshasum -c Fichero.sha\n\nSHA-512 es el algoritmo utilizado por defecto en GNU/Linux para guardar la contraseña."
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#ejemplo-sha",
     "href": "tema04-usuarios/tema04-usuarios.html#ejemplo-sha",
     "title": "Tema 4: Gestión de Usuarios",
     "section": "Ejemplo SHA:",
-    "text": "Ejemplo SHA:\n\nshasum /etc/passwd > resumen_pw.sha \ncat resumen_pw.sha \nshasum -c resumen_pw.sha\n\n073070775bc5a6c360148c81c079d8ae47d555a6  /etc/passwd\n\n\n/etc/passwd: OK"
+    "text": "Ejemplo SHA:\n\nshasum /etc/passwd &gt; resumen_pw.sha \ncat resumen_pw.sha \nshasum -c resumen_pw.sha\n\n073070775bc5a6c360148c81c079d8ae47d555a6  /etc/passwd\n\n\n/etc/passwd: OK"
   },
   {
     "objectID": "tema04-usuarios/tema04-usuarios.html#restricciones-de-tiempo-etcshadow",
@@ -1736,6 +2282,20 @@
     "text": "Describir los elementos fundamentales de organización del sistema operativo GNU/Linux.\nIdentificar la importancia de los ficheros en GNU/Linux (“si algo no es un fichero, entonces es un proceso”).\nDescribir en líneas generales cómo se organiza el sistema de ficheros y qué son los nodos-i.\nDefinir qué papel tienen el usuario y el grupo propietario de un fichero y cómo pueden modificarse.\nInterpretar una cadena de permisos de GNU/Linux.\nCambiar los permisos de un fichero, tanto en modo simbólico como en modo absoluto.\nExplicar el objetivo de los permisos especiales (sticky bit, suid y sgid).\nUtilizar la máscara umask para cambiar los permisos por defecto con los que se crean los archivos y directorios.\nExplicar cómo se aplican los bits de permisos a la hora de decidir si un usuario puede realizar una determinada acción sobre un fichero.\nDistinguir todos los tipos de ficheros que se pueden utilizar en GNU/Linux y diferenciar claramente entre enlaces simbólicos y enlace físicos.\nDefinir el rol de los procesos en GNU/Linux, cuáles son sus atributos y qué tipos de procesos existen.\nExplicar cómo se represan los dispositivos en GNU/Linux.\nEnumerar las carpetas fundamentales de la estructura genérica del sistema de ficheros en GNU/Linux.\nDiferenciar entre contenidos estáticos y dinámicos y contenidos compartibles y no compartibles.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre."
   },
   {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#objetivos",
+    "href": "tema02-organizacion/tema02-ficheros.html#objetivos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "",
+    "text": "Describir los elementos fundamentales de organización del sistema operativo GNU/Linux.\nIdentificar la importancia de los ficheros en GNU/Linux (“si algo no es un fichero, entonces es un proceso”).\nDescribir en líneas generales cómo se organiza el sistema de ficheros y qué son los nodos-i.\nDefinir qué papel tienen el usuario y el grupo propietario de un fichero y cómo pueden modificarse.\nInterpretar una cadena de permisos de GNU/Linux.\nCambiar los permisos de un fichero, tanto en modo simbólico como en modo absoluto.\nExplicar el objetivo de los permisos especiales (sticky bit, suid y sgid).\nUtilizar la máscara umask para cambiar los permisos por defecto con los que se crean los archivos y directorios.\nExplicar cómo se aplican los bits de permisos a la hora de decidir si un usuario puede realizar una determinada acción sobre un fichero.\nDistinguir todos los tipos de ficheros que se pueden utilizar en GNU/Linux y diferenciar claramente entre enlaces simbólicos y enlace físicos.\nDefinir el rol de los procesos en GNU/Linux, cuáles son sus atributos y qué tipos de procesos existen.\nExplicar cómo se represan los dispositivos en GNU/Linux.\nEnumerar las carpetas fundamentales de la estructura genérica del sistema de ficheros en GNU/Linux.\nDiferenciar entre contenidos estáticos y dinámicos y contenidos compartibles y no compartibles."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ficheros.html#evaluación",
+    "href": "tema02-organizacion/tema02-ficheros.html#evaluación",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
+    "section": "",
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre."
+  },
+  {
     "objectID": "tema02-organizacion/tema02-ficheros.html#ficheros",
     "href": "tema02-organizacion/tema02-ficheros.html#ficheros",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
@@ -1824,7 +2384,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-suid-1",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Permisos especiales: suid",
-    "text": "Permisos especiales: suid\n\n¿Cómo es posible que cambiemos la contraseña desde un usuario corriente?\nEjecuta en tu máquina:\nls -l /etc/passwd /etc/shadow /usr/bin/passwd \n\n\n$ ls -l /etc/passwd /etc/shadow /usr/bin/passwd \n-rw-r--r-- 1 root root    2941 feb 13 10:21 /etc/passwd\n-rw-r----- 1 root shadow  1827 feb 13 10:21 /etc/shadow\n-rwsr-xr-x 1 root root   59640 nov 29 13:25 /usr/bin/passwd\nVeamos el código de passwd"
+    "text": "Permisos especiales: suid\n\n¿Cómo es posible que cambiemos la contraseña desde un usuario corriente?\nEjecuta en tu máquina:\nls -l /etc/passwd /etc/shadow /usr/bin/passwd \n\n. . .\n$ ls -l /etc/passwd /etc/shadow /usr/bin/passwd \n-rw-r--r-- 1 root root    2941 feb 13 10:21 /etc/passwd\n-rw-r----- 1 root shadow  1827 feb 13 10:21 /etc/shadow\n-rwsr-xr-x 1 root root   59640 nov 29 13:25 /usr/bin/passwd\nVeamos el código de passwd"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#permisos-especiales-sgid",
@@ -1887,7 +2447,7 @@
     "href": "tema02-organizacion/tema02-ficheros.html#ejemplo-enlaces-físicos-y-simbólicos",
     "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux",
     "section": "Ejemplo enlaces físicos y simbólicos",
-    "text": "Ejemplo enlaces físicos y simbólicos\n# Observad conteo de referencias (tercera columna, después de permisos).\ncd /tmp/\ntouch prueba\nln prueba enlace_fisico\nls -li prueba enlace_fisico\nln -s prueba enlace_simbolico\nls -li prueba enlace_simbolico\nResultado ejecución:\n$ touch prueba\n$ ln prueba enlace_fisico\n$ ls -li prueba enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba\n$ ln -s prueba enlace_simbolico\n$ ls -li prueba enlace_simbolico enlace_fisico \n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481314 lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico -> prueba\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba"
+    "text": "Ejemplo enlaces físicos y simbólicos\n# Observad conteo de referencias (tercera columna, después de permisos).\ncd /tmp/\ntouch prueba\nln prueba enlace_fisico\nls -li prueba enlace_fisico\nln -s prueba enlace_simbolico\nls -li prueba enlace_simbolico\nResultado ejecución:\n$ touch prueba\n$ ln prueba enlace_fisico\n$ ls -li prueba enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba\n$ ln -s prueba enlace_simbolico\n$ ls -li prueba enlace_simbolico enlace_fisico \n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 enlace_fisico\n12481314 lrwxrwxrwx 1 javi javi 6 feb 23 23:00 enlace_simbolico -&gt; prueba\n12481313 -rw-rw-r-- 2 javi javi 0 feb 23 23:00 prueba"
   },
   {
     "objectID": "tema02-organizacion/tema02-ficheros.html#procesos-1",
@@ -2009,45 +2569,73 @@
     "text": "Crea tres usuarios, dos de ellos tendrán un grupo común. Suponiendo que nuestro usuario de administración es pas, lo añadimos al grupo sudo como root:\n/sbin/usermod -aG sudo pas\nCreamos un grupo para la clase y tres usuarios de ejemplo, los dos primeros tendrá como grupo principal clase y el tercero no:\nsudo addgroup clase\nsudo adduser usuario1 --ingroup clase\nsudo adduser usuario2 --ingroup clase\nsudo adduser usuario3\n\n\n\nCon usuario1 Crear un archivo con el contenido HOLA!, utilizando la orden echo, y asignarle permisos para que solo puede ser consultado por su propietario y por los miembros del grupo clase.\nNOTA: Puede ser una buena idea tener varios terminales abiertos con cada usuario del sistema para probar que los permisos son efectivos.\n\n\n\nModifica los permisos por defecto con umask para que los ficheros creados:\n\nno puedan ser leídos por el resto de usuarios y los directorios no puedan ser listados.\npuedan ser leídos y escritos por el grupo.\n\nComprueba que tienen efecto creado ficheros y directorios de ejemplo.\nBusca cómo hacer permanentes en cada usuario los permisos umask.\n\n\n\n\nTransformar los siguientes permisos simbólicos en absolutos:\n\nrwxr-xr-x    r-xr--r--  rw-r-----  r-x--x--x\n\nTransformar los siguientes permisos absolutos en simbólicos:\n\n644    755    610    631\n\nFijar, en modo simbólico, los permisos de arch1 en modo 754.\nFijar, en modo absoluto, los permisos de arch1 en modo rwxr-x–x.\nFijar los permisos del directorio dir1 de modo que todos lo puedan leer y entrar, pero sólo el dueño pueda modificar sus archivos: 1) en modo simbólico; 2) en modo absoluto.\nModificar para que el grupo también pueda modificar archivos.\nFijar en modo simbólico los permisos del archivo ejecutable exec.tar para que sea ejecutable por todos, legible por el dueño y el grupo, y modificable solo por el dueño. Repetir en modo absoluto.\nFijar en modo absoluto los permisos del directorio dir1 de modo que sólo el dueño y el grupo lo puedan recorrer y leer, y sólo el dueño pueda grabar y borrar en él. Repetir en modo simbólico.\n\n\n\n\nSea la siguiente salida del comando ls -l:\n-rwSr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  controlar\n-rw-rw-r-- 1 pagutierrez docentes 2300  may 18 09:37  borrador.txt\n-rw-r--r-- 1 pagutierrez docentes 5895  may 15 12:08  index.htm\n-rwxr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  revisar\n-rwxr--r-- 1 pagutierrez docentes 29024 ene 1  16:29  mostrar\n  drwxrwxrwt 2 pagutierrez tecnicos 1024  may 1  17:23  trabajos\n  drwxr-xr-x 2 pagutierrez tecnicos 1024  oct 16  1998  netscape3\n  drwxrwx--x 2 pagutierrez tecnicos 1024  may 11  7:29  finanzas\n  drwxrwxr-x 2 pagutierrez tecnicos 1024  jul 7   6:54  redes\n  drwxr-xr-x 2 jsanchezm   docentes 1024  jun 17 19:35  corporacion\nEl usuario jsanchezm, del grupo docentes, tiene acceso al presente directorio. Indicar, si los hay:\n\nArchivos de los que puede mostrar contenido.\nArchivos que puede ejecutar como programa.\nArchivos en los que puede modificar contenido.\nSubdirectorios en los que puede ingresar.\nSubdirectorios en que puede crear/eliminar ficheros propios.\nSubdirectorios en los que puede borrar archivos de otros.\nSubdirectorios en los que puede entrar y ejecutar programas contenidos en ellos, pero no ver nombres de archivos.\nArchivos que puede ejecutar como programa con permisos del usuario pagutierrez.\n\n\n\n\nSea la siguiente salida del comando ls -l (suponemos que pagutierrez pertenece a staff):\n-rw-r--r--  1  root        root       33280 jun 12 19:40 Carta.doc\n  drwxrwxrwx 5  pagutierrez staff       1024 dic  4  1999 step\n  drwxrwxr-x 22 pagutierrez staff       1024 nov 20  1999 Office51\n  drwxr-x--- 6  pagutierrez staff       1024 may 7  16:43 argos\n  drwxrwxr-- 21 pagutierrez staff       1024 jul 11 18:22 bajados\n-rw-rw---- 3  root        root         542 jul 13 11:26 boor.exe\n  drwxrwxrwt 3  pagutierrez staff       1024 may 25 10:02 borrador\n-rwSrwSr-x 1  root        root        9218 jun 12 19:41 pph3\n  drwxrwx--x 2  pagutierrez pagutierrez 1024 may 7  16:47 cdir\n-rw-rw-r-- 3  root        root         542 jul 13 11:26 mysql-doc\n-rw-r-xr-- 3  pagutierrez staff       1084 ago 1  10:01 ver.exe\n-rwxr-xr-x 3  pagutierrez staff       1084 ago 1  10:01 ver\n  drwxr-xr-x 7  pagutierrez pagutierrez 1024 jul 25 11:48 lit\nIndicar, si los hay:\n\ndirectorios públicos (todo el mundo puede entrar, listar y borrar archivos);\narchivos que tienen enlaces hard o físicos;\narchivos ejecutables por el usuario pagutierrez;\ndirectorios navegables por todo el mundo;\ndirectorios donde miembros del grupo staff puede borrar archivos;\narchivos que son enlaces simbólicos.\narchivos ejecutables que adquieren permisos de usuario root.\n\n\n\n\nMarca todos los tipos de enlace que pueden establecerse en los siguientes casos (físico, simbólico o ambos).\n\nenlace hacia un archivo en el mismo directorio.\nenlace hacia un archivo en otro sistema de archivos.\nenlace hacia un directorio en el mismo sistema de archivos.\nenlace hacia un directorio en otro sistema de archivos."
   },
   {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#usuarios-y-grupos-de-ejemplo",
+    "href": "tema02-organizacion/tema02-ejercicios.html#usuarios-y-grupos-de-ejemplo",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Crea tres usuarios, dos de ellos tendrán un grupo común. Suponiendo que nuestro usuario de administración es pas, lo añadimos al grupo sudo como root:\n/sbin/usermod -aG sudo pas\nCreamos un grupo para la clase y tres usuarios de ejemplo, los dos primeros tendrá como grupo principal clase y el tercero no:\nsudo addgroup clase\nsudo adduser usuario1 --ingroup clase\nsudo adduser usuario2 --ingroup clase\nsudo adduser usuario3"
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#permisos",
+    "href": "tema02-organizacion/tema02-ejercicios.html#permisos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Con usuario1 Crear un archivo con el contenido HOLA!, utilizando la orden echo, y asignarle permisos para que solo puede ser consultado por su propietario y por los miembros del grupo clase.\nNOTA: Puede ser una buena idea tener varios terminales abiertos con cada usuario del sistema para probar que los permisos son efectivos."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#permisos-1",
+    "href": "tema02-organizacion/tema02-ejercicios.html#permisos-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Modifica los permisos por defecto con umask para que los ficheros creados:\n\nno puedan ser leídos por el resto de usuarios y los directorios no puedan ser listados.\npuedan ser leídos y escritos por el grupo.\n\nComprueba que tienen efecto creado ficheros y directorios de ejemplo.\nBusca cómo hacer permanentes en cada usuario los permisos umask."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#algunos-ejercicios-de-permisos",
+    "href": "tema02-organizacion/tema02-ejercicios.html#algunos-ejercicios-de-permisos",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Transformar los siguientes permisos simbólicos en absolutos:\n\nrwxr-xr-x    r-xr--r--  rw-r-----  r-x--x--x\n\nTransformar los siguientes permisos absolutos en simbólicos:\n\n644    755    610    631\n\nFijar, en modo simbólico, los permisos de arch1 en modo 754.\nFijar, en modo absoluto, los permisos de arch1 en modo rwxr-x–x.\nFijar los permisos del directorio dir1 de modo que todos lo puedan leer y entrar, pero sólo el dueño pueda modificar sus archivos: 1) en modo simbólico; 2) en modo absoluto.\nModificar para que el grupo también pueda modificar archivos.\nFijar en modo simbólico los permisos del archivo ejecutable exec.tar para que sea ejecutable por todos, legible por el dueño y el grupo, y modificable solo por el dueño. Repetir en modo absoluto.\nFijar en modo absoluto los permisos del directorio dir1 de modo que sólo el dueño y el grupo lo puedan recorrer y leer, y sólo el dueño pueda grabar y borrar en él. Repetir en modo simbólico."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#interpretar-salida-ls--l",
+    "href": "tema02-organizacion/tema02-ejercicios.html#interpretar-salida-ls--l",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Sea la siguiente salida del comando ls -l:\n-rwSr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  controlar\n-rw-rw-r-- 1 pagutierrez docentes 2300  may 18 09:37  borrador.txt\n-rw-r--r-- 1 pagutierrez docentes 5895  may 15 12:08  index.htm\n-rwxr-xr-x 1 pagutierrez docentes 29024 ene 1  16:29  revisar\n-rwxr--r-- 1 pagutierrez docentes 29024 ene 1  16:29  mostrar\n  drwxrwxrwt 2 pagutierrez tecnicos 1024  may 1  17:23  trabajos\n  drwxr-xr-x 2 pagutierrez tecnicos 1024  oct 16  1998  netscape3\n  drwxrwx--x 2 pagutierrez tecnicos 1024  may 11  7:29  finanzas\n  drwxrwxr-x 2 pagutierrez tecnicos 1024  jul 7   6:54  redes\n  drwxr-xr-x 2 jsanchezm   docentes 1024  jun 17 19:35  corporacion\nEl usuario jsanchezm, del grupo docentes, tiene acceso al presente directorio. Indicar, si los hay:\n\nArchivos de los que puede mostrar contenido.\nArchivos que puede ejecutar como programa.\nArchivos en los que puede modificar contenido.\nSubdirectorios en los que puede ingresar.\nSubdirectorios en que puede crear/eliminar ficheros propios.\nSubdirectorios en los que puede borrar archivos de otros.\nSubdirectorios en los que puede entrar y ejecutar programas contenidos en ellos, pero no ver nombres de archivos.\nArchivos que puede ejecutar como programa con permisos del usuario pagutierrez."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#interpretar-salida-ls--l-1",
+    "href": "tema02-organizacion/tema02-ejercicios.html#interpretar-salida-ls--l-1",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Sea la siguiente salida del comando ls -l (suponemos que pagutierrez pertenece a staff):\n-rw-r--r--  1  root        root       33280 jun 12 19:40 Carta.doc\n  drwxrwxrwx 5  pagutierrez staff       1024 dic  4  1999 step\n  drwxrwxr-x 22 pagutierrez staff       1024 nov 20  1999 Office51\n  drwxr-x--- 6  pagutierrez staff       1024 may 7  16:43 argos\n  drwxrwxr-- 21 pagutierrez staff       1024 jul 11 18:22 bajados\n-rw-rw---- 3  root        root         542 jul 13 11:26 boor.exe\n  drwxrwxrwt 3  pagutierrez staff       1024 may 25 10:02 borrador\n-rwSrwSr-x 1  root        root        9218 jun 12 19:41 pph3\n  drwxrwx--x 2  pagutierrez pagutierrez 1024 may 7  16:47 cdir\n-rw-rw-r-- 3  root        root         542 jul 13 11:26 mysql-doc\n-rw-r-xr-- 3  pagutierrez staff       1084 ago 1  10:01 ver.exe\n-rwxr-xr-x 3  pagutierrez staff       1084 ago 1  10:01 ver\n  drwxr-xr-x 7  pagutierrez pagutierrez 1024 jul 25 11:48 lit\nIndicar, si los hay:\n\ndirectorios públicos (todo el mundo puede entrar, listar y borrar archivos);\narchivos que tienen enlaces hard o físicos;\narchivos ejecutables por el usuario pagutierrez;\ndirectorios navegables por todo el mundo;\ndirectorios donde miembros del grupo staff puede borrar archivos;\narchivos que son enlaces simbólicos.\narchivos ejecutables que adquieren permisos de usuario root."
+  },
+  {
+    "objectID": "tema02-organizacion/tema02-ejercicios.html#enlaces",
+    "href": "tema02-organizacion/tema02-ejercicios.html#enlaces",
+    "title": "Tema 2: Organización de un sistema operativo tipo GNU/Linux (Ejercicios)",
+    "section": "",
+    "text": "Marca todos los tipos de enlace que pueden establecerse en los siguientes casos (físico, simbólico o ambos).\n\nenlace hacia un archivo en el mismo directorio.\nenlace hacia un archivo en otro sistema de archivos.\nenlace hacia un directorio en el mismo sistema de archivos.\nenlace hacia un directorio en otro sistema de archivos."
+  },
+  {
     "objectID": "tema02-organizacion/tema02-webuco.html",
     "href": "tema02-organizacion/tema02-webuco.html",
-    "title": "Programación y Administración de Sistemas (2022-2023)",
+    "title": "1 Cómo configurar tu cuenta para tu web personal en la UCO",
     "section": "",
-    "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/\n\n\n\n\n\nAbre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Web de ejemplo</title>\n</head>\n<body>\n    <p>¡Hola Mundo!</p>\n</body>\n</html>\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
+    "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/\n\n\n\n\n\nAbre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Web de ejemplo&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;p&gt;¡Hola Mundo!&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
   },
   {
-    "objectID": "tema05-recursos/tema05-recursos.html#crontab-ejemplo",
-    "href": "tema05-recursos/tema05-recursos.html#crontab-ejemplo",
-    "title": "Tema 5: Gestión de recursos del sistema",
-    "section": "crontab ejemplo",
-    "text": "crontab ejemplo\n\n# Hacer una copia de seguridad del home cada semana\n0 5 * * 1       tar -zcf /var/backups/home_$(date +\\%Y\\%m\\%d%S).tgz /home/\n# Otras tareas\n5 9 * * *       $HOME/tareadiaria     # 9:05\n15 14 1 * *     $HOME/tareames        # 14:15 el día 1 cada mes\n0 22 * * 1-5    $HOME/tareasemanal    # 22:0 de lunes a viernes\n21 0-23/2 * * * $HOME/tareacada2horas # 0h, 2h, 4h, 6h, y 21m\n5 4 * * sun     $HOME/tareadomingos   # Domingos a las 4:05\n0 9 1 * 5       $HOME/otratarea       # A las 9:00h el día 1 \n                                      # de cada mes O los viernes"
+    "objectID": "tema02-organizacion/tema02-webuco.html#recursos-y-enlaces",
+    "href": "tema02-organizacion/tema02-webuco.html#recursos-y-enlaces",
+    "title": "1 Cómo configurar tu cuenta para tu web personal en la UCO",
+    "section": "",
+    "text": "Antes de comenzar, repasa apuntes sobre permisos de ficheros y directorios en Linux. Hay muchos muy claros, como por ejemplo este de softzone.\nConexión remota gráfica a los servidores Linux de la Universidad de Córdoba: Thinstation Remoto.\nConexión SSH (sin interfaz gráfica) a los servidores de la UCO. Necesitas un cliente SSH, que viene de forma nativa en Linux y Mac, pero no en Windows (puedes usar Putty).\n\nssh login@ts.uco.es\nssh -X login@ts.uco.es exporta la salida gráfica a tu ordenador Linux (no funciona en Windows). Con esto podrás usar el Spyder de la UCO sin tener que instalar nada más.\n\nCómo conectarte a tu carpeta para enviar y descargar archivos:\n\nDe forma nativa a partir de Windows 10: How to map SFTP as a drive on Windows 10\nCon FileZilla: https://filezilla-project.org/"
   },
   {
-    "objectID": "tema05-recursos/tema05-recursos.html#cron-anacron-y-systemd",
-    "href": "tema05-recursos/tema05-recursos.html#cron-anacron-y-systemd",
-    "title": "Tema 5: Gestión de recursos del sistema",
-    "section": "cron, anacron y systemd",
-    "text": "cron, anacron y systemd\nsudo service anacron status\nLos timers de systemd son una alternativa a cron y anacron si bien systemd se encarga de integrarlos por compatibilidad hacia atrás. Puedes ver un ejemplo de timers aquí.\nEsto añade más posibilidades, por ejemplo, controlar que anacron se ejecute sólo cuando el portátil está conectado a la corriente (ver /lib/systemd/system/anacron.service.)"
-  },
-  {
-    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-dónde-pondrías",
-    "href": "tema05-recursos/tema05-recursos.html#ejercicio-dónde-pondrías",
-    "title": "Tema 5: Gestión de recursos del sistema",
-    "section": "Ejercicio: ¿dónde pondrías…?",
-    "text": "Ejercicio: ¿dónde pondrías…?\n\nCopia de seguridad de un portátil\nProgramar el apagado de la máquina a una hora una sola vez\nCopia de seguridad en un servidor"
-  },
-  {
-    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-paginación",
-    "href": "tema05-recursos/tema05-recursos.html#ejercicio-paginación",
-    "title": "Tema 5: Gestión de recursos del sistema",
-    "section": "Ejercicio: paginación",
-    "text": "Ejercicio: paginación\n\nConsulta si tienes la swap activada y la memoria con swapon -s y free\nComprueba si está en uso\nDesactívala\nActiva la swap en un fichero\nComprueba el resultado con swapon -s y free\nDeja todo como estaba"
-  },
-  {
-    "objectID": "tema05-recursos/tema05-recursos.html#ejercicio-memoria-en-uso",
-    "href": "tema05-recursos/tema05-recursos.html#ejercicio-memoria-en-uso",
-    "title": "Tema 5: Gestión de recursos del sistema",
-    "section": "Ejercicio: memoria en uso",
-    "text": "Ejercicio: memoria en uso\nUtiliza el siguiente código para reservar el 90% de la memoria libre del ordenador. Comprueba el efecto que tiene con vmstat y free.\n#include <stdio.h>\n#include <sys/sysinfo.h>\n#include <stdlib.h>\n#include <math.h>\n\nvoid printmemsize(char *str, unsigned long ramsize) {\n        printf(\"%s: %ld in bytes / %ld in KB / %ld in MB / %ld in GB\\n\",\n               str, ramsize, ramsize/1024, (ramsize/1024)/1024, ((ramsize/1024)/1024)/1024);\n}\n\nint main(int argc, char **argv) {\n        struct sysinfo info;\n        sysinfo(&info);\n        printf(\"uptime: %ld\\n\", info.uptime);\n        // print total ram size\n        printmemsize(\"totalram\", info.totalram);\n        printmemsize(\"freeram\", info.freeram);\n        printmemsize(\"sharedram\", info.sharedram);\n        printmemsize(\"bufferram\", info.bufferram);\n        printmemsize(\"freeswap\", info.freeswap);\n        printf(\"current running processes: %d\\n\", info.procs);\n\n    long *v = NULL;\n    unsigned long n; \n\n    n = info.freeram/sizeof(long);\n    printf(\"n: %ld; sizeof(long): %ld\\n\", n, sizeof(long));\n    n = ceill(0.9 * n);\n    \n    printmemsize(\"allocating 90% of free memory\", n);\n\n    v = malloc(n * sizeof(long));\n    if (v == NULL) {\n        perror(\"cannot allocate memory\\n\");\n        return -1;\n    }\n    for (unsigned long i = 0; i<n; i++) {\n        v[i] = i;\n    }\n    getchar();\n\n    free(v);\n    return 0;\n}"
+    "objectID": "tema02-organizacion/tema02-webuco.html#pasos",
+    "href": "tema02-organizacion/tema02-webuco.html#pasos",
+    "title": "1 Cómo configurar tu cuenta para tu web personal en la UCO",
+    "section": "",
+    "text": "Abre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Web de ejemplo&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;p&gt;¡Hola Mundo!&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
   }
 ]
