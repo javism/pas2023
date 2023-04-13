@@ -2637,5 +2637,131 @@
     "title": "1 Cómo configurar tu cuenta para tu web personal en la UCO",
     "section": "",
     "text": "Abre un terminal. En este tutorial usaremos de ejemplo el login i02samoj. Deberás cambiar este por el tuyo.\nCrea el directorio www-docs:\nmkdir www-docs\nAsigna permisos de ejecución a tu carpeta de usuario. Esto permitirá al servidor web (otros usuarios) pasar por esta carpeta sin listar ni acceder al contenido:\ncd ..\nchmod o+x i02samoj/\nVuelve a tu carpeta home y asigna los mismos permisos a www-docs:\ncd\nchmod  o+x www-docs\nVamos a comprobar que los permisos están bien configurados:\nEntra en la carpeta y crea un fichero llamado index.html:\ncd www-docs\ngedit index.html\nEsto creará el fichero. Introduce el siguiente contenido, guarda y cierra el editor:\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Web de ejemplo&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;p&gt;¡Hola Mundo!&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nTodos los ficheros bajo www-docs o sus subdirectorios deberán tener los permisos o+r para que el servidor web pueda leerlos. Por ejemplo, para el index.html:\nchmod o+r index.html\nTodos los subdirectorios que cuelguen de www-docs deberán tener los mismos permisos o+x.\nAhora abre la web https://www.uco.es/users/TULOGIN o alternativamente https://www.uco.es/~TULOGIN. Ejemplo https://www.uco.es/~i02samoj.\nSi todo va bien deberías ver una página web en blanco con el mensaje “¡Hola Mundo!”. Si obtienes algún error revisa los pasos y permisos.\nSi tienes curiosidad por HTML, el lenguaje de programación básico de páginas webs, puedes empezar por este tutorial de HTML de W3Schools."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#asignación-de-bloques-1",
+    "href": "tema06-sf/tema06-sf.html#asignación-de-bloques-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Asignación de bloques",
+    "text": "Asignación de bloques\nAsignación: cómo se hace la correspondencia entre los bloques físicos del disco y los bloques lógicos del archivo.\nMecanismos de asignación: Asignación de bloques contiguos:\n\nTodos los bloques del archivo se encuentran contiguos en el disco:\n\nMuy sencillo de implementar. \nAccesos secuencial y directo muy rápidos. \nNecesario saber el tamaño del archivo al crearlo. \nFragmentación del disco. \nPara añadir datos al archivo, puede que haya que moverlo. \n\nPor todo ello, no se utiliza."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#mecanismos-de-asignación",
+    "href": "tema06-sf/tema06-sf.html#mecanismos-de-asignación",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Mecanismos de asignación",
+    "text": "Mecanismos de asignación\nMecanismos de asignación: Asignación de bloques no contiguos:\n\nLos bloques del archivo se encuentran en cualquier posición del disco.\n\nSe produce menos fragmentación  el primer bloque asignado es el primero que hay libre. \nEs necesario traducir el número de bloque lógico al número de bloque en el dispositivo. \n\nEs la opción utilizada en la mayoría de SOs.\n\nPara tener constancia de qué bloques no contiguos pertenecen a cada archivo, se utilizan listas enlazadas o índices (que pueden ser multinivel).\n\nISO9660: Inicio y tamaño (fichero contiguo).\nSF MS-DOS: FAT (fichero enlazado).\nSF UNIX: i-nodo (fichero indexado). NTFS: Registro Windows (fichero indexado)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#lista-enlazada",
+    "href": "tema06-sf/tema06-sf.html#lista-enlazada",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Lista enlazada",
+    "text": "Lista enlazada\n\nLista enlazada:\n\nCada bloque tiene un apuntador al siguiente bloque que seguiría en el archivo.\nEl descriptor del archivo solo debe incluir la referencia al primer bloque.\n\nEl acceso secuencial es muy rápido. \nEl acceso aleatorio a un bloque concreto de un archivo es muy costoso. \nCada bloque incluye un apuntador que aumenta su tamaño (y complica el cálculo de espacio libre). \nLa pérdida de un bloque supone perder el archivo completo."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat",
+    "href": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Tabla de asignación de archivos (FAT)",
+    "text": "Tabla de asignación de archivos (FAT)\n\nTabla de asignación de archivos:\n\nEs una variación del método lista enlazada.\nLos apuntadores se almacenan en una tabla independiente de los bloques (File Allocation Table, FAT).\nLa tabla posee una entrada por cada bloque del SA.\nLa FAT ocupará un espacio prefijado en la partición.\nDescriptor fichero  incluye su primera posición en la tabla.\nAcceso aleatorio al archivo: recorriendo la tabla.\nLa tabla se aloja en caché para mejorar las prestaciones y se mantiene una copia doble en el disco para mayor fiabilidad. ¡La FAT puede llegar a ocupar mucho!  agrupaciones."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat-1",
+    "href": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Tabla de asignación de archivos (FAT)",
+    "text": "Tabla de asignación de archivos (FAT)"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat-2",
+    "href": "tema06-sf/tema06-sf.html#tabla-de-asignación-de-archivos-fat-2",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Tabla de asignación de archivos (FAT)",
+    "text": "Tabla de asignación de archivos (FAT)\n\n\n\nFAT de 12 bits: 4K agrupaciones.\nFAT de 16 bits: 64K agrupaciones.\nFAT de 32 bits: \\(2^{28}\\) agrupaciones (solo usa 28 bits). Tamaño de fichero en 32 bits. Tamaño máximo \\(2^{32} -1 = 4GB -1\\)\n\nMás información File System Functionality Comparison"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#índices",
+    "href": "tema06-sf/tema06-sf.html#índices",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Índices",
+    "text": "Índices\n\n\nLos punteros a los bloques están juntos y contiguos en una localización concreta  Bloques índice.\nCada archivo tiene un bloque índice.\nPara buscar el \\(i\\)-ésimo bloque de un fichero, buscamos la \\(i\\)-ésima entrada en su bloque índice.\n\nBuen acceso directo. \nSe evita la fragmentación. \n¿Tamaño del bloque índice?  debe fijarse un número de entradas y hay que reservar espacio para todas ellas. \nLimitamos el tamaño máximo de los archivos."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#índice-multinivel",
+    "href": "tema06-sf/tema06-sf.html#índice-multinivel",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Índice multinivel",
+    "text": "Índice multinivel\n\n\nConsiste en introducir \\(n\\) niveles de apuntadores, de manera que los apuntadores del descriptor apuntan a otros.\nÍndice multinivel de nivel 1: el bloque índice apunta a otros bloques índices que finalmente apunta a un bloque de datos del fichero.\nEvita tener que prefijar el tamaño del bloque índice (podemos poner apuntadores a NULL). \nEl bloque índice tendrá un número pequeño de entradas. \nCada nivel, supone un acceso a disco adicional. \nPara archivos pequeños, se desaprovechan muchos bloques índice."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#esquema-híbrido-nodos-i",
+    "href": "tema06-sf/tema06-sf.html#esquema-híbrido-nodos-i",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Esquema híbrido: nodos-i",
+    "text": "Esquema híbrido: nodos-i\n\nSolución UNIX  Esquema híbrido\n\nPor cada nodo-i incluir 15 punteros:\n\nPunteros directos a los 12 primeros bloques (para archivos pequeños). Nota: la siguiente figura indica 10 erróneamente.\nPuntero a un bloque índice de primer nivel (donde encontraremos punteros a bloques).\nPuntero a un bloque índice de segundo nivel (donde encontraremos punteros a punteros a bloques).\nPuntero a un bloque índice de tercer nivel (donde encontraremos punteros a punteros a punteros a bloques).\n\nBloques del disco: bloques de datos o bloques índice.\nEn ext4 y en NTFS existen los extents (bloques índice especiales que marcan una zona contigua del disco “numeroBloqueInicial, numeroBloques”)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#asignación-de-bloques-indexado-multinivel",
+    "href": "tema06-sf/tema06-sf.html#asignación-de-bloques-indexado-multinivel",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Asignación de bloques: indexado multinivel",
+    "text": "Asignación de bloques: indexado multinivel"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#asignación-de-bloques-indexado-multinivel-ext2",
+    "href": "tema06-sf/tema06-sf.html#asignación-de-bloques-indexado-multinivel-ext2",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Asignación de bloques: indexado multinivel Ext2",
+    "text": "Asignación de bloques: indexado multinivel Ext2"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-2",
+    "href": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-2",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Gestión del espacio libre",
+    "text": "Gestión del espacio libre\nGestión del espacio libre: se necesita para asignar espacio a los archivos nuevos o a los que se les desea añadir datos.\nSe mantienen mapas de recursos, implementados como mapas de bits o listas de recursos libres."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-mapas-de-bits",
+    "href": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-mapas-de-bits",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Gestión del espacio libre: Mapas de bits",
+    "text": "Gestión del espacio libre: Mapas de bits\nMapas de bits\n\nSe incluye un bit por recurso (descriptor de archivo, bloque o agrupación), que será 1 si el recurso esta libre y 0 en caso contrario.\n\nMuy sencillo de implementar y de usar. \nSi disco poco fragmentado  bloques libres al final, búsqueda muy eficiente. \nSi disco fragmentado  búsqueda más costosa. \nEspacio adicional requerido por el mapa. \n\nFAT: la propia tabla actúa como mapa de recursos."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-listas",
+    "href": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-listas",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Gestión del espacio libre: Listas",
+    "text": "Gestión del espacio libre: Listas\nListas de recursos libres\n\nMantener una lista de apuntadores a los recursos libres.\nAl ocupar un recurso lo borramos de la lista.\n\nMuy eficiente para discos muy llenos y fragmentados. \nDisco con mucho espacio libre  Ineficiente debido a que hay que cargar la lista. \n\nSolución  Incluir número de bloques libres consecutivos en la lista (siguiente imagen)."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-fat-lista-enlazada",
+    "href": "tema06-sf/tema06-sf.html#gestión-del-espacio-libre-fat-lista-enlazada",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Gestión del espacio libre: FAT + lista enlazada",
+    "text": "Gestión del espacio libre: FAT + lista enlazada"
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#incremento-de-prestaciones-1",
+    "href": "tema06-sf/tema06-sf.html#incremento-de-prestaciones-1",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Incremento de prestaciones",
+    "text": "Incremento de prestaciones\n\nAcceso a memoria  orden de nanosegundos.\nAcceso a disco  orden de milisegundos.\nAlmacenamiento intermedio de los datos\n\nMantener una caché de datos en Memoria Principal (MP).\nAprovecha la proximidad espacial y temporal en las referencias a los datos accedidos.\nCaché de nombres: lista {nombre,nodo-i}. Si se vuelve a acceder al archivo, no hay que hacer toda la búsqueda del nodo-i.\nCaché de bloques: colección de bloques leídos o escritos recientemente. Si se vuelve a acceder a ese bloque, no hay que cargarlo de nuevo."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#caché-de-bloques-i",
+    "href": "tema06-sf/tema06-sf.html#caché-de-bloques-i",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Caché de bloques (I)",
+    "text": "Caché de bloques (I)\nCaché de bloques:\n\nSi el bloque está en MP, se escribirá o leerá en MP.\nPosteriormente, se moverán los bloques de MP al dispositivo.\nSi la caché está llena, hay que eliminar algún bloque:\n\nPolíticas de reemplazo: First In First Out (FIFO), Most Recently Used (MRU), Least Recently Used (LRU)…\nLo más común es LRU: aprovecha que los bloques no utilizados durante mucho tiempo, posiblemente no volverán a ser utilizados. Peligroso si hay un fallo del SA."
+  },
+  {
+    "objectID": "tema06-sf/tema06-sf.html#caché-de-bloques-ii",
+    "href": "tema06-sf/tema06-sf.html#caché-de-bloques-ii",
+    "title": "Tema 6: Sistemas de ficheros y discos",
+    "section": "Caché de bloques (II)",
+    "text": "Caché de bloques (II)\nCaché de bloques:\n\nBloques sucios (cambiados en caché pero no en el disco). Distintas políticas a la hora de mantener la coherencia:\n\nEscritura inmediata (write-through)  Siempre actualizado.\nEscritura diferida (write-back)  Actualizamos cuando el bloque salga de la caché.\nEscritura periódica (delayed-write)  Establecer un tiempo periódico para las actualizaciones. Compromiso entre rendimiento y fiabilidad. Reduce la extensión de los posibles daños por caídas.\n\nSe puede distinguir entre bloques especiales (directorios, nodos-i o bloques índice) y bloques de datos. Bloques especiales  write-through.\nNo se debe quitar un disco del sistema sin antes volcar los datos de la cache (comando sync)."
   }
 ]

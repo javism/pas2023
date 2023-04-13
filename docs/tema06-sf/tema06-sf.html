@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.313">
+<meta name="generator" content="quarto-1.3.323">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,6 +74,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -94,6 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -218,7 +222,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sistema-de-ficheros" id="toc-sistema-de-ficheros" class="nav-link" data-scroll-target="#sistema-de-ficheros"><span class="header-section-number">3</span> Sistema de Ficheros</a></li>
   <li><a href="#servidor-de-archivos" id="toc-servidor-de-archivos" class="nav-link" data-scroll-target="#servidor-de-archivos"><span class="header-section-number">4</span> Servidor de archivos</a></li>
   <li><a href="#directorios-y-enlaces" id="toc-directorios-y-enlaces" class="nav-link" data-scroll-target="#directorios-y-enlaces"><span class="header-section-number">5</span> Directorios y enlaces</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">6</span> Referencias</a></li>
+  <li><a href="#asignación-de-bloques" id="toc-asignación-de-bloques" class="nav-link" data-scroll-target="#asignación-de-bloques"><span class="header-section-number">6</span> Asignación de bloques</a></li>
+  <li><a href="#gestión-del-espacio-libre-1" id="toc-gestión-del-espacio-libre-1" class="nav-link" data-scroll-target="#gestión-del-espacio-libre-1"><span class="header-section-number">7</span> Gestión del espacio libre</a></li>
+  <li><a href="#incremento-de-prestaciones" id="toc-incremento-de-prestaciones" class="nav-link" data-scroll-target="#incremento-de-prestaciones"><span class="header-section-number">8</span> Incremento de prestaciones</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">9</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -258,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">11 de abril de 2023</p>
+      <p class="date">13 de abril de 2023</p>
     </div>
   </div>
   
@@ -631,8 +638,232 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/enlaces.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="referencias" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Referencias</h1>
+<section id="asignación-de-bloques" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Asignación de bloques</h1>
+<section id="asignación-de-bloques-1" class="level2">
+<h2 class="anchored" data-anchor-id="asignación-de-bloques-1">Asignación de bloques</h2>
+<p><strong>Asignación</strong>: cómo se hace la correspondencia entre los bloques físicos del disco y los bloques lógicos del archivo.</p>
+<p><strong>Mecanismos de asignación</strong>: Asignación de <strong>bloques contiguos</strong>:</p>
+<ul>
+<li>Todos los bloques del archivo se encuentran contiguos en el disco:
+<ul>
+<li>Muy sencillo de implementar. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Accesos secuencial y directo muy rápidos. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Necesario saber el tamaño del archivo al crearlo. <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>Fragmentación del disco. <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>Para añadir datos al archivo, puede que haya que moverlo. <i class="fa-solid fa-times" aria-label="times"></i></li>
+</ul></li>
+<li>Por todo ello, no se utiliza.</li>
+</ul>
+</section>
+<section id="mecanismos-de-asignación" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="mecanismos-de-asignación">Mecanismos de asignación</h2>
+<p><strong>Mecanismos de asignación</strong>: Asignación de <strong>bloques no contiguos</strong>:</p>
+<ul>
+<li>Los bloques del archivo se encuentran en cualquier posición del disco.
+<ul>
+<li>Se produce menos <strong>fragmentación</strong> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> el primer bloque asignado es el primero que hay libre. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Es necesario traducir el número de bloque lógico al número de bloque en el dispositivo. <i class="fa-solid fa-times" aria-label="times"></i></li>
+</ul></li>
+<li>Es la opción utilizada en la mayoría de SOs.</li>
+</ul>
+<p>Para tener constancia de qué bloques no contiguos pertenecen a cada archivo, se utilizan <strong>listas enlazadas</strong> o <strong>índices</strong> (que pueden ser multinivel).</p>
+<ul>
+<li><p>ISO9660: Inicio y tamaño (fichero contiguo).</p></li>
+<li><p>SF MS-DOS: FAT (fichero enlazado).</p></li>
+<li><p>SF UNIX: i-nodo (fichero indexado). NTFS: Registro Windows (fichero indexado).</p></li>
+</ul>
+</section>
+<section id="lista-enlazada" class="level2">
+<h2 class="anchored" data-anchor-id="lista-enlazada">Lista enlazada</h2>
+<div class="exampleblock">
+<p>Lista enlazada:</p>
+<ul>
+<li><p>Cada bloque tiene un apuntador al siguiente bloque que seguiría en el archivo.</p></li>
+<li><p>El descriptor del archivo solo debe incluir la referencia al primer bloque.</p>
+<ul>
+<li>El acceso secuencial es muy rápido. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>El acceso aleatorio a un bloque concreto de un archivo es muy costoso. <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>Cada bloque incluye un apuntador que aumenta su tamaño (y complica el cálculo de espacio libre). <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>La pérdida de un bloque supone perder el archivo completo. <i class="fa-solid fa-times" aria-label="times"></i></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="tabla-de-asignación-de-archivos-fat" class="level2">
+<h2 class="anchored" data-anchor-id="tabla-de-asignación-de-archivos-fat">Tabla de asignación de archivos (FAT)</h2>
+<div class="exampleblock">
+<p>Tabla de asignación de archivos:</p>
+<ul>
+<li><p>Es una variación del <strong>método lista enlazada</strong>.</p></li>
+<li><p>Los apuntadores se almacenan en una tabla independiente de los bloques (<em>File Allocation Table</em>, FAT).</p></li>
+<li><p>La tabla posee una entrada por cada bloque del SA.</p></li>
+<li><p>La FAT ocupará un espacio prefijado en la partición.</p></li>
+<li><p>Descriptor fichero <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> incluye su primera posición en la tabla.</p></li>
+<li><p>Acceso aleatorio al archivo: recorriendo la tabla.</p></li>
+<li><p>La tabla se aloja en caché para mejorar las prestaciones y se mantiene una copia doble en el disco para mayor fiabilidad. ¡La FAT puede llegar a ocupar mucho! <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> agrupaciones.</p></li>
+</ul>
+</div>
+</section>
+<section id="tabla-de-asignación-de-archivos-fat-1" class="level2">
+<h2 class="anchored" data-anchor-id="tabla-de-asignación-de-archivos-fat-1">Tabla de asignación de archivos (FAT)</h2>
+<p><img src="images/fat.jpg" class="img-fluid"></p>
+</section>
+<section id="tabla-de-asignación-de-archivos-fat-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="tabla-de-asignación-de-archivos-fat-2">Tabla de asignación de archivos (FAT)</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>FAT de 12 bits: 4K agrupaciones.</p></li>
+<li><p>FAT de 16 bits: 64K agrupaciones.</p></li>
+<li><p>FAT de 32 bits: <span class="math inline">\(2^{28}\)</span> agrupaciones (solo usa 28 bits). Tamaño de fichero en 32 bits. Tamaño máximo <span class="math inline">\(2^{32} -1 = 4GB -1\)</span></p></li>
+</ul>
+<p>Más información <a href="https://learn.microsoft.com/en-us/windows/win32/fileio/filesystem-functionality-comparison">File System Functionality Comparison</a></p>
+</div><div class="column" style="width:60%;">
+<p><img src="images/fat2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="índices" class="level2">
+<h2 class="anchored" data-anchor-id="índices">Índices</h2>
+<div class="exampleblock">
+<ul>
+<li><p>Los punteros a los bloques están juntos y contiguos en una localización concreta <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> <strong>Bloques índice</strong>.</p></li>
+<li><p>Cada archivo tiene un bloque índice.</p></li>
+<li><p>Para buscar el <span class="math inline">\(i\)</span>-ésimo bloque de un fichero, buscamos la <span class="math inline">\(i\)</span>-ésima entrada en su bloque índice.</p>
+<ul>
+<li>Buen acceso directo. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Se evita la fragmentación. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>¿Tamaño del bloque índice? <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> debe fijarse un número de entradas y hay que reservar espacio para todas ellas. <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>Limitamos el tamaño máximo de los archivos. <i class="fa-solid fa-times" aria-label="times"></i></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="índice-multinivel" class="level2">
+<h2 class="anchored" data-anchor-id="índice-multinivel">Índice multinivel</h2>
+<div class="exampleblock">
+<ul>
+<li><p>Consiste en introducir <span class="math inline">\(n\)</span> <strong>niveles de apuntadores</strong>, de manera que los apuntadores del descriptor apuntan a otros.</p></li>
+<li><p>Índice multinivel de nivel 1: el bloque índice apunta a otros bloques índices que finalmente apunta a un bloque de datos del fichero.</p></li>
+<li><p>Evita tener que prefijar el tamaño del bloque índice (podemos poner apuntadores a NULL). <i class="fa-solid fa-check" aria-label="check"></i></p></li>
+<li><p>El bloque índice tendrá un número pequeño de entradas. <i class="fa-solid fa-check" aria-label="check"></i></p></li>
+<li><p>Cada nivel, supone un acceso a disco adicional. <i class="fa-solid fa-times" aria-label="times"></i></p></li>
+<li><p>Para archivos pequeños, se desaprovechan muchos bloques índice. <i class="fa-solid fa-times" aria-label="times"></i></p></li>
+</ul>
+</div>
+</section>
+<section id="esquema-híbrido-nodos-i" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="esquema-híbrido-nodos-i">Esquema híbrido: nodos-i</h2>
+<div class="exampleblock">
+<p>Solución UNIX <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Esquema híbrido</p>
+<ul>
+<li><p>Por cada nodo-i incluir 15 punteros:</p>
+<ul>
+<li><p>Punteros directos a los 12 primeros bloques (para archivos pequeños). <span class="rojo">Nota: la siguiente figura indica 10 erróneamente</span>.</p></li>
+<li><p>Puntero a un bloque índice de primer nivel (donde encontraremos punteros a bloques).</p></li>
+<li><p>Puntero a un bloque índice de segundo nivel (donde encontraremos punteros a punteros a bloques).</p></li>
+<li><p>Puntero a un bloque índice de tercer nivel (donde encontraremos punteros a punteros a punteros a bloques).</p></li>
+</ul></li>
+<li><p>Bloques del disco: bloques de datos o bloques índice.</p></li>
+<li><p>En <strong>ext4</strong> y en <strong>NTFS</strong> existen los <strong><em>extents</em></strong> (bloques índice especiales que marcan una zona contigua del disco “numeroBloqueInicial, numeroBloques”).</p></li>
+</ul>
+</div>
+</section>
+<section id="asignación-de-bloques-indexado-multinivel" class="level2">
+<h2 class="anchored" data-anchor-id="asignación-de-bloques-indexado-multinivel">Asignación de bloques: indexado multinivel</h2>
+<p><img src="images/indexadoMultinivel.jpg" class="img-fluid"></p>
+</section>
+<section id="asignación-de-bloques-indexado-multinivel-ext2" class="level2">
+<h2 class="anchored" data-anchor-id="asignación-de-bloques-indexado-multinivel-ext2">Asignación de bloques: indexado multinivel Ext2</h2>
+<p><img src="images/Ext2-inode.svg" class="img-fluid"></p>
+</section>
+</section>
+<section id="gestión-del-espacio-libre-1" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Gestión del espacio libre</h1>
+<section id="gestión-del-espacio-libre-2" class="level2">
+<h2 class="anchored" data-anchor-id="gestión-del-espacio-libre-2">Gestión del espacio libre</h2>
+<p><strong>Gestión del espacio libre</strong>: se necesita para asignar espacio a los archivos nuevos o a los que se les desea añadir datos.</p>
+<p>Se mantienen <strong>mapas de recursos</strong>, implementados como mapas de bits o listas de recursos libres.</p>
+</section>
+<section id="gestión-del-espacio-libre-mapas-de-bits" class="level2">
+<h2 class="anchored" data-anchor-id="gestión-del-espacio-libre-mapas-de-bits">Gestión del espacio libre: Mapas de bits</h2>
+<p><strong>Mapas de bits</strong></p>
+<ul>
+<li>Se incluye un bit por recurso (descriptor de archivo, bloque o agrupación), que será 1 si el recurso esta libre y 0 en caso contrario.
+<ul>
+<li>Muy sencillo de implementar y de usar. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Si disco poco fragmentado <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> bloques libres al final, búsqueda muy eficiente. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Si disco fragmentado <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> búsqueda más costosa. <i class="fa-solid fa-times" aria-label="times"></i></li>
+<li>Espacio adicional requerido por el mapa. <i class="fa-solid fa-check" aria-label="check"></i></li>
+</ul></li>
+<li><strong>FAT</strong>: la propia tabla actúa como mapa de recursos.</li>
+</ul>
+</section>
+<section id="gestión-del-espacio-libre-listas" class="level2">
+<h2 class="anchored" data-anchor-id="gestión-del-espacio-libre-listas">Gestión del espacio libre: Listas</h2>
+<p><strong>Listas de recursos libres</strong></p>
+<ul>
+<li><p>Mantener una lista de apuntadores a los recursos libres.</p></li>
+<li><p>Al ocupar un recurso lo borramos de la lista.</p>
+<ul>
+<li>Muy eficiente para discos muy llenos y fragmentados. <i class="fa-solid fa-check" aria-label="check"></i></li>
+<li>Disco con mucho espacio libre <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Ineficiente debido a que hay que cargar la lista. <i class="fa-solid fa-times" aria-label="times"></i></li>
+</ul></li>
+<li><p>Solución <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Incluir número de bloques libres consecutivos en la lista (siguiente imagen). <i class="fa-solid fa-check" aria-label="check"></i></p></li>
+</ul>
+</section>
+<section id="gestión-del-espacio-libre-fat-lista-enlazada" class="level2">
+<h2 class="anchored" data-anchor-id="gestión-del-espacio-libre-fat-lista-enlazada">Gestión del espacio libre: FAT + lista enlazada</h2>
+<p><img src="images/espacioLibre.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="incremento-de-prestaciones" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Incremento de prestaciones</h1>
+<section id="incremento-de-prestaciones-1" class="level2">
+<h2 class="anchored" data-anchor-id="incremento-de-prestaciones-1">Incremento de prestaciones</h2>
+<ul>
+<li><p>Acceso a <strong>memoria</strong> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> orden de nanosegundos.</p></li>
+<li><p>Acceso a <strong>disco</strong> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> orden de milisegundos.</p></li>
+<li><p><strong>Almacenamiento intermedio de los datos</strong></p>
+<ul>
+<li><p>Mantener una caché de datos en Memoria Principal (MP).</p></li>
+<li><p>Aprovecha la <strong>proximidad espacial</strong> y <strong>temporal</strong> en las referencias a los datos accedidos.</p></li>
+<li><p><strong>Caché de nombres</strong>: lista <code>{nombre,nodo-i}</code>. Si se vuelve a acceder al archivo, no hay que hacer toda la búsqueda del nodo-i.</p></li>
+<li><p><strong>Caché de bloques</strong>: colección de bloques leídos o escritos recientemente. Si se vuelve a acceder a ese bloque, no hay que cargarlo de nuevo.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="caché-de-bloques-i" class="level2">
+<h2 class="anchored" data-anchor-id="caché-de-bloques-i">Caché de bloques (I)</h2>
+<p><strong>Caché de bloques</strong>:</p>
+<ul>
+<li><p>Si el bloque está en MP, se escribirá o leerá en MP.</p></li>
+<li><p>Posteriormente, se moverán los bloques de MP al dispositivo.</p></li>
+<li><p>Si la caché está llena, hay que eliminar algún bloque:</p>
+<ul>
+<li><p><strong>Políticas de reemplazo</strong>: <em>First In First Out</em> (FIFO), <em>Most Recently Used</em> (MRU), <em>Least Recently Used</em> (LRU)…</p></li>
+<li><p>Lo más común es <strong>LRU</strong>: aprovecha que los bloques no utilizados durante mucho tiempo, posiblemente no volverán a ser utilizados. Peligroso si hay un fallo del SA.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="caché-de-bloques-ii" class="level2">
+<h2 class="anchored" data-anchor-id="caché-de-bloques-ii">Caché de bloques (II)</h2>
+<p><strong>Caché de bloques</strong>:</p>
+<ul>
+<li><p>Bloques sucios (cambiados en caché pero no en el disco). Distintas políticas a la hora de mantener la <strong>coherencia</strong>:</p>
+<ul>
+<li><p><strong>Escritura inmediata</strong> (<em>write-through</em>) <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Siempre actualizado.</p></li>
+<li><p><strong>Escritura diferida</strong> (<em>write-back</em>) <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Actualizamos cuando el bloque salga de la caché.</p></li>
+<li><p><strong>Escritura periódica</strong> (<em>delayed-write</em>) <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> Establecer un tiempo periódico para las actualizaciones. Compromiso entre rendimiento y fiabilidad. Reduce la extensión de los posibles daños por caídas.</p></li>
+</ul></li>
+<li><p>Se puede distinguir entre bloques <strong>especiales</strong> (directorios, nodos-i o bloques índice) y bloques de <strong>datos</strong>. Bloques especiales <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> <em>write-through</em>.</p></li>
+<li><p>No se debe quitar un disco del sistema sin antes volcar los datos de la cache (comando <strong><code>sync</code></strong>).</p></li>
+</ul>
+</section>
+</section>
+<section id="referencias" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Referencias</h1>
 <section id="referencias-1" class="level2">
 <h2 class="anchored" data-anchor-id="referencias-1">Referencias</h2>
 <p>Fernando Pérez-Costoya, Jesús Carretero-Pérez y Félix García-Carballeira. Problemas de Sistemas Operativos. De la base al diseño. Tema 8. Archivos y directorios. Sección 8.4. Sistemas de Archivos. Mc Graw Hill, Segunda Edición, 2003.</p>
