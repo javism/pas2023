@@ -209,6 +209,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../tema07-administracionsf/tema07-RAID-cuotas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tema 7: Receta RAID + Cuotas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../enlaces.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Enlaces</span></a>
   </div>
@@ -230,8 +236,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comprobación-del-sistema-de-ficheros" id="toc-comprobación-del-sistema-de-ficheros" class="nav-link" data-scroll-target="#comprobación-del-sistema-de-ficheros"><span class="header-section-number">5</span> Comprobación del sistema de ficheros</a></li>
   <li><a href="#sistema-de-journaling" id="toc-sistema-de-journaling" class="nav-link" data-scroll-target="#sistema-de-journaling"><span class="header-section-number">6</span> Sistema de journaling</a></li>
   <li><a href="#creación-de-sistemas-de-ficheros" id="toc-creación-de-sistemas-de-ficheros" class="nav-link" data-scroll-target="#creación-de-sistemas-de-ficheros"><span class="header-section-number">7</span> Creación de sistemas de ficheros</a></li>
-  <li><a href="#cuotas" id="toc-cuotas" class="nav-link" data-scroll-target="#cuotas"><span class="header-section-number">8</span> Cuotas</a></li>
-  <li><a href="#administración-de-volúmenes-dinámicos" id="toc-administración-de-volúmenes-dinámicos" class="nav-link" data-scroll-target="#administración-de-volúmenes-dinámicos"><span class="header-section-number">9</span> Administración de volúmenes dinámicos</a></li>
+  <li><a href="#administración-de-volúmenes-dinámicos" id="toc-administración-de-volúmenes-dinámicos" class="nav-link" data-scroll-target="#administración-de-volúmenes-dinámicos"><span class="header-section-number">8</span> Administración de volúmenes dinámicos</a></li>
+  <li><a href="#cuotas" id="toc-cuotas" class="nav-link" data-scroll-target="#cuotas"><span class="header-section-number">9</span> Cuotas</a></li>
   <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">10</span> Referencias</a></li>
   </ul>
 </nav>
@@ -272,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de abril de 2023</p>
+      <p class="date">24 de abril de 2023</p>
     </div>
   </div>
   
@@ -309,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Cuestionarios objetivos.</p></li>
 <li><p>Pruebas de respuesta libre.</p></li>
 <li><p>Tareas de administración.</p></li>
-<li><p><strong>NOTA</strong>: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la adminstración de sistemas de ficheros.</p></li>
+<li><p><strong>NOTA</strong>: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la administración de sistemas de ficheros.</p></li>
 </ul>
 </section>
 </section>
@@ -343,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-background-color="lightgreen" class="anchored" data-anchor-id="receta-disco-i">Receta disco (I)</h2>
 <ol type="1">
 <li><p>Apagar el ordenador, conectar el disco y encender.</p></li>
-<li><p>Usamos <code>lsblk</code> para idenfiticar dispositivos de bloques y particiones. Ej. <code>/dev/sdb</code>.</p></li>
+<li><p>Usamos <code>lsblk</code> para identificar dispositivos de bloques y particiones. Ej. <code>/dev/sdb</code>.</p></li>
 <li><p>Particionar el disco (<code>parted</code>, <code>gparted</code>, <code>fdisk</code>…): <code>sudo fdisk /dev/sdb</code>:</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pas@debianpas:~$</span> sudo fdisk /dev/sdb</span>
@@ -431,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="monitorización-con-fuser-y-lsof">Monitorización con <code>fuser</code> y <code>lsof</code></h2>
 <ul>
 <li><p><code>fuser</code> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> saber qué ficheros se están usando y qué procesos los usan (<code>f</code>: fichero abierto para lectura, <code>F</code>: fichero abierto para escritura, <code>c</code>: directorio de trabajo, <code>e</code>: ejecutando el fichero, <code>m</code>: memoria compartida, etc.)</p></li>
-<li><p><code>lsof</code> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> obtener un listado de todos los ficheros abiertos. Se puede filtar por procesos, usuarios, directorios, etc.</p></li>
+<li><p><code>lsof</code> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> obtener un listado de todos los ficheros abiertos. Se puede filtrar por procesos, usuarios, directorios, etc.</p></li>
 </ul>
 </section>
 <section id="fuser-y-lsof" class="level2">
@@ -612,7 +618,7 @@ TxEnd(tid);</code></pre>
 <section id="obtener-información-del-journal-curiosidad" class="level2" data-background-color="lightgreen">
 <h2 data-background-color="lightgreen" class="anchored" data-anchor-id="obtener-información-del-journal-curiosidad">Obtener información del journal (curiosidad)</h2>
 <ol start="7" type="1">
-<li>Información sobre soporte journal en el sistema de ficheros:</li>
+<li>Información sobre soporte <em>journal</em> en el sistema de ficheros:</li>
 </ol>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dumpe2fs /dev/sda2 <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> journal</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="8" type="1">
@@ -698,91 +704,8 @@ TxEnd(tid);</code></pre>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="cuotas" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Cuotas</h1>
-<section id="concepto-de-cuotas-de-disco" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="concepto-de-cuotas-de-disco">Concepto de cuotas de disco</h2>
-<div class="block">
-<p>Las <strong>cuotas</strong> de disco permiten limitar el número de bloques y/o ficheros (nodos-i) que un usuario puede usar en una partición (también se pueden establecer para grupos de usuarios).</p>
-</div>
-<ul>
-<li><p>Hay dos tipos de límites:</p>
-<ul>
-<li><p><strong>Límite <em>hard</em></strong>: el usuario no puede sobrepasarlo. Si lo hace, ya no podrá usar más bloques o crear más ficheros.</p></li>
-<li><p><strong>Límite <em>soft</em></strong>: es inferior al límite <em>hard</em> y se puede sobrepasar durante cierto tiempo, siempre que no se alcance el límite <em>hard</em>.</p></li>
-</ul></li>
-<li><p><strong>Periodo de gracia</strong>: tiempo durante el que se puede sobrepasar el límite <em>soft</em>. Se informa al usuario de que ha superado el límite y que debe liberar espacio o nodos-i (ficheros).</p>
-<ul>
-<li>Los periodos y los límites se establecen, de forma independiente, para bloques y nodos-i.</li>
-</ul></li>
-</ul>
-</section>
-<section id="establecer-cuotas-de-disco-i" class="level2">
-<h2 class="anchored" data-anchor-id="establecer-cuotas-de-disco-i">Establecer cuotas de disco (I)</h2>
-<p>Pasos a realizar para establecer las cuotas de disco:</p>
-<ol type="1">
-<li><p>Instalar el paquete <code>quota</code>:</p>
-<pre><code>apt-get install quota</code></pre></li>
-<li><p>Indicarlo en <code>fstab</code> (<code>ext4</code> con cuota integrada en el <em>journal</em> y en <code>ext3</code>):</p>
-<pre><code>/dev/sdb1 /home   ext4  defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv1  0  2
-
-/dev/sdb1 /home   ext3  defaults,usrquota,grpquota 0  2</code></pre></li>
-<li><p>Remontar la partición para que se activen las opciones: <code>mount -o remount /home</code>.</p></li>
-</ol>
-</section>
-<section id="establecer-cuotas-de-disco-ii" class="level2">
-<h2 class="anchored" data-anchor-id="establecer-cuotas-de-disco-ii">Establecer cuotas de disco (II)</h2>
-<ol start="4" type="1">
-<li><code>quotacheck -avugm</code>: añade el contenido de los ficheros de control de cuotas.</li>
-</ol>
-<ul>
-<li><p><strong>a</strong>: todos los dispositivos con cuotas.</p></li>
-<li><p><strong>v</strong>: <em>verbose</em>.</p></li>
-<li><p><strong>u</strong>: cuotas para usuarios.</p></li>
-<li><p><strong>g</strong>: cuotas para grupos.</p></li>
-<li><p><strong>m</strong>: no remontar los archivos en modo solo lectura.</p></li>
-</ul>
-<ol start="5" type="1">
-<li><p>Activar las cuotas: <code>quotaon -avug</code>.</p></li>
-<li><p>Desactivarlas: <code>quotaoff -avug</code>.</p></li>
-</ol>
-</section>
-<section id="establecer-cuotas-de-disco-iii" class="level2">
-<h2 class="anchored" data-anchor-id="establecer-cuotas-de-disco-iii">Establecer cuotas de disco (III)</h2>
-<ol start="7" type="1">
-<li>Editar la cuota del usuario pagutierrez: <code>edquota pagutierrez</code></li>
-</ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Cuotas</span> de disco para user pagutierrez <span class="er">(</span><span class="ex">uid</span> 1008<span class="kw">)</span><span class="bu">:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Sist.</span> arch. bloques    blando      duro inodos blando  duro</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/dev/sdb1</span>  39884712 130000000 140000000 507523      0     0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="8" type="1">
-<li>Establecer el periodo de gracia: <code>edquota -t</code></li>
-</ol>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Período</span> de gracia antes de imponer límites blandos para users:</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">La</span> unidad de tiempo puede ser: días, horas, minutos, o segundos</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Sist.</span> arch.          Periodo gracia bloque   Periodo gracia inodo</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/dev/sdb1</span>                    7día                 7día</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="9" type="1">
-<li>Copiar cuotas: <code>edquota -up pagutierrez jsanchez</code></li>
-</ol>
-</section>
-<section id="establecer-cuotas-de-disco-iv" class="level2">
-<h2 class="anchored" data-anchor-id="establecer-cuotas-de-disco-iv">Establecer cuotas de disco (IV)</h2>
-<ol start="10" type="1">
-<li>Estadísticas de las cuotas: <code>repquota /dev/sdb1</code></li>
-</ol>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">***</span> Informe para user quotas en dispositivo /dev/sdb1</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Periodo</span> de gracia de bloque: 7días<span class="kw">;</span> <span class="ex">periodo</span> de gracia de inodo: 7días</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                        <span class="ex">Límites</span> de bloque límites de archivo</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Usuario</span>        usado       blando      duro       usado blando duro</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">----------------------------------------------------------------------</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="ex">root</span>      <span class="at">--</span> 10093264         0         0      199316     0     0</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pagutierrez</span> <span class="at">--</span> 39884712 130000000 140000000      507523     0     0</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ex">jsanchezm</span>  <span class="at">--</span>  31940744 130000000 140000000      864578     0     0</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="administración-de-volúmenes-dinámicos" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Administración de volúmenes dinámicos</h1>
+<section id="administración-de-volúmenes-dinámicos" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Administración de volúmenes dinámicos</h1>
 <section id="raid-y-lvm" class="level2">
 <h2 class="anchored" data-anchor-id="raid-y-lvm">RAID y LVM</h2>
 <ul>
@@ -792,6 +715,14 @@ TxEnd(tid);</code></pre>
 <li><p>Se pueden implementar por <em>software</em> o por <em>hardware</em>.</p></li>
 </ul></li>
 <li><p><strong>LVM</strong> (<strong><em>Logical Volume Management</em></strong>) : agrupar las particiones de uno o distintos discos en volúmenes. Permite redimensionar y mover particiones.</p></li>
+</ul>
+</section>
+<section id="raid-y-sistemas-de-ficheros-contemporáneos" class="level2">
+<h2 class="anchored" data-anchor-id="raid-y-sistemas-de-ficheros-contemporáneos">RAID y sistemas de ficheros contemporáneos</h2>
+<ul>
+<li><p>La mayoría de sistemas de ficheros necesitan una implementación a parte (hardware o software) de LVM sobre la que construir un RAID.</p></li>
+<li><p>Los sistemas de ficheros <strong>ZFS</strong>, <strong>Btrfs</strong> o <strong>XFS</strong> están diseñados para integrar distintos dispositivos físicos <strong>como parte del sistema de ficheros</strong> sin gestores LVM externos.</p></li>
+<li><p>Al ser este soporte nativo y a medida de estos sistemas de ficheros el rendimiento y robustez es mayor. Para más información ver <a href="https://en.wikipedia.org/wiki/ZFS#RAID_(%22RAID-Z%22)">RAID-Z</a> en Wikipedia.</p></li>
 </ul>
 </section>
 <section id="raid-0" class="level2">
@@ -914,6 +845,26 @@ TxEnd(tid);</code></pre>
 </table>
 </section>
 </section>
+<section id="cuotas" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Cuotas</h1>
+<section id="concepto-de-cuotas-de-disco" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="concepto-de-cuotas-de-disco">Concepto de cuotas de disco</h2>
+<div class="block">
+<p>Las <strong>cuotas</strong> de disco permiten limitar el número de bloques y/o ficheros (nodos-i) que un usuario puede usar en una partición (también se pueden establecer para grupos de usuarios).</p>
+</div>
+<ul>
+<li><p>Hay dos tipos de límites:</p>
+<ul>
+<li><p><strong>Límite <em>hard</em></strong>: el usuario no puede sobrepasarlo. Si lo hace, ya no podrá usar más bloques o crear más ficheros.</p></li>
+<li><p><strong>Límite <em>soft</em></strong>: es inferior al límite <em>hard</em> y se puede sobrepasar durante cierto tiempo, siempre que no se alcance el límite <em>hard</em>.</p></li>
+</ul></li>
+<li><p><strong>Periodo de gracia</strong>: tiempo durante el que se puede sobrepasar el límite <em>soft</em>. Se informa al usuario de que ha superado el límite y que debe liberar espacio o nodos-i (ficheros).</p>
+<ul>
+<li>Los periodos y los límites se establecen, de forma independiente, para bloques y nodos-i.</li>
+</ul></li>
+</ul>
+</section>
+</section>
 <section id="referencias" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Referencias</h1>
 <section id="referencias-1" class="level2">
@@ -921,6 +872,9 @@ TxEnd(tid);</code></pre>
 <p>Evi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley y Dan Mackin. Unix and Linux system administration handbook. Capítulo 20. <em>Storage</em>, Addison-Wesley. 5th Edition. 2018.</p>
 <p>Aeleen Frisch. Essential system administration. Capítulo 10. <em>Filesystems and disks</em>. O’Reilly and Associates. Tercera edición. 2002.</p>
 <p>Ext4 Design. <a href="https://ext4.wiki.kernel.org/index.php/Ext4_Design" class="uri">https://ext4.wiki.kernel.org/index.php/Ext4_Design</a></p>
+<p>Anatomy of the Linux virtual file system switch. <a href="https://developer.ibm.com/technologies/linux/tutorials/l-virtual-filesystem-switch/" class="uri">https://developer.ibm.com/technologies/linux/tutorials/l-virtual-filesystem-switch/</a></p>
+<p>Overview of the Linux Virtual File System. <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html" class="uri">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a></p>
+<p>Wikipedia. Standard RAID levels. <a href="https://en.wikipedia.org/wiki/Standard_RAID_levels" class="uri">https://en.wikipedia.org/wiki/Standard_RAID_levels</a></p>
 
 
 </section>

@@ -557,7 +557,7 @@
     "href": "index.html#contenido-en-pdf",
     "title": "Programación y Administración de Sistemas",
     "section": "Contenido en PDF",
-    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios\nTema 5: Gestión de Recursos\nTema 6: Sistemas de ficheros y discos\nTema 7: Administración de sistemas de ficheros"
+    "text": "Contenido en PDF\nPuedes acceder también al contenido de esta asignatura en formato PDF imprimible:\n\nInicio\nTema 0: Presentación\nTema 1: Presentación\nTema 1: Software Libre y Linux\nTema 2: Organización de un sistema operativo tipo GNU/Linux\n\nTema 2: Ejercicios permisos\nTema 2: Web personal\n\nTema 3: Arranque y parada\nTema 4: Gestión de Usuarios\nTema 5: Gestión de Recursos\nTema 6: Sistemas de ficheros y discos\nTema 7: Administración de sistemas de ficheros\n\nTema 7: Implementación RAID y cuotas"
   },
   {
     "objectID": "index.html#evi-nemeth",
@@ -984,7 +984,7 @@
     "href": "tema07-administracionsf/tema07-administracionsf.html",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "",
-    "text": "Explicar la importancia de la administración del sistema de ficheros en la labor de administración de sistemas informáticos.\nExplicar qué sucede en el sistema operativo cuando se montan y desmontan dispositivos en el sistema de ficheros.\nUtilizar la herramienta mount (y umount) para montar (y desmontar) sistemas de ficheros.\nConfigurar los dispositivos de almacenamiento principales del sistema mediante el fichero /etc/fstab.\nExplicar la necesidad del chequeo del sistema de ficheros y utilizar las principales herramientas de chequeo.\nExplicar cómo funciona el sistema de journaling.\nEnumerar los pasos necesarios para añadir un nuevo dispositivo de disco al sistema operativo.\nExplicar las diferencias fundamentales entre los sistemas de ficheros ext2, ext3 y ext4.\nJustificar la necesidad del uso de cuotas de disco en sistemas informáticos compartidos.\nConfigurar cuotas de disco para los distintos usuarios de un sistema GNU/Linux.\nJustificar la necesidad del uso de arrays redundantes de discos (RAID) en sistemas informáticos.\nElegir el mecanismo RAID más adecuado: RAID0, RAID1 o RAID4/5.\nEjemplificar el mecanismo de redundancia para RAID basado en paridad.\nMontar un sistema RAID por software en GNU/Linux.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\nNOTA: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la adminstración de sistemas de ficheros."
+    "text": "Explicar la importancia de la administración del sistema de ficheros en la labor de administración de sistemas informáticos.\nExplicar qué sucede en el sistema operativo cuando se montan y desmontan dispositivos en el sistema de ficheros.\nUtilizar la herramienta mount (y umount) para montar (y desmontar) sistemas de ficheros.\nConfigurar los dispositivos de almacenamiento principales del sistema mediante el fichero /etc/fstab.\nExplicar la necesidad del chequeo del sistema de ficheros y utilizar las principales herramientas de chequeo.\nExplicar cómo funciona el sistema de journaling.\nEnumerar los pasos necesarios para añadir un nuevo dispositivo de disco al sistema operativo.\nExplicar las diferencias fundamentales entre los sistemas de ficheros ext2, ext3 y ext4.\nJustificar la necesidad del uso de cuotas de disco en sistemas informáticos compartidos.\nConfigurar cuotas de disco para los distintos usuarios de un sistema GNU/Linux.\nJustificar la necesidad del uso de arrays redundantes de discos (RAID) en sistemas informáticos.\nElegir el mecanismo RAID más adecuado: RAID0, RAID1 o RAID4/5.\nEjemplificar el mecanismo de redundancia para RAID basado en paridad.\nMontar un sistema RAID por software en GNU/Linux.\n\n\n\n\n\nCuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\nNOTA: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la administración de sistemas de ficheros."
   },
   {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#objetivos",
@@ -998,7 +998,7 @@
     "href": "tema07-administracionsf/tema07-administracionsf.html#evaluación",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "",
-    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\nNOTA: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la adminstración de sistemas de ficheros."
+    "text": "Cuestionarios objetivos.\nPruebas de respuesta libre.\nTareas de administración.\nNOTA: Como en otros temas, aquí veremos muchos parámetros de configuración que no tiene sentido memorizar, pero si hay que saber qué posibilidades tenemos en la administración de sistemas de ficheros."
   },
   {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#introducción-1",
@@ -1019,7 +1019,7 @@
     "href": "tema07-administracionsf/tema07-administracionsf.html#receta-disco-i",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "Receta disco (I)",
-    "text": "Receta disco (I)\n\nApagar el ordenador, conectar el disco y encender.\nUsamos lsblk para idenfiticar dispositivos de bloques y particiones. Ej. /dev/sdb.\nParticionar el disco (parted, gparted, fdisk…): sudo fdisk /dev/sdb:\n\npas@debianpas:~$ sudo fdisk /dev/sdb\n[sudo] password for pas: \n\nWelcome to fdisk (util-linux 2.36.1).\nChanges will remain in memory only, until you decide to write them.\nBe careful before using the write command.\n\nDevice does not contain a recognized partition table.\nCreated a new DOS disklabel with disk identifier 0x11e147da.\n\nCommand (m for help): g\nCreated a new GPT disklabel (GUID: 01C5F77B-F13F-6348-B35F-2BD08E33989A).\n\nCommand (m for help): n\nPartition number (1-128, default 1): 1\nFirst sector (2048-204766, default 2048): \nLast sector, +/-sectors or +/-size{K,M,G,T,P} (2048-204766, default 204766): \n\nCreated a new partition 1 of type 'Linux filesystem' and of size 99 MiB.\n\nCommand (m for help): w\nThe partition table has been altered.\nCalling ioctl() to re-read partition table.\nSyncing disks."
+    "text": "Receta disco (I)\n\nApagar el ordenador, conectar el disco y encender.\nUsamos lsblk para identificar dispositivos de bloques y particiones. Ej. /dev/sdb.\nParticionar el disco (parted, gparted, fdisk…): sudo fdisk /dev/sdb:\n\npas@debianpas:~$ sudo fdisk /dev/sdb\n[sudo] password for pas: \n\nWelcome to fdisk (util-linux 2.36.1).\nChanges will remain in memory only, until you decide to write them.\nBe careful before using the write command.\n\nDevice does not contain a recognized partition table.\nCreated a new DOS disklabel with disk identifier 0x11e147da.\n\nCommand (m for help): g\nCreated a new GPT disklabel (GUID: 01C5F77B-F13F-6348-B35F-2BD08E33989A).\n\nCommand (m for help): n\nPartition number (1-128, default 1): 1\nFirst sector (2048-204766, default 2048): \nLast sector, +/-sectors or +/-size{K,M,G,T,P} (2048-204766, default 204766): \n\nCreated a new partition 1 of type 'Linux filesystem' and of size 99 MiB.\n\nCommand (m for help): w\nThe partition table has been altered.\nCalling ioctl() to re-read partition table.\nSyncing disks."
   },
   {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#receta-disco-ii",
@@ -1061,7 +1061,7 @@
     "href": "tema07-administracionsf/tema07-administracionsf.html#monitorización-con-fuser-y-lsof",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "Monitorización con fuser y lsof",
-    "text": "Monitorización con fuser y lsof\n\nfuser  saber qué ficheros se están usando y qué procesos los usan (f: fichero abierto para lectura, F: fichero abierto para escritura, c: directorio de trabajo, e: ejecutando el fichero, m: memoria compartida, etc.)\nlsof  obtener un listado de todos los ficheros abiertos. Se puede filtar por procesos, usuarios, directorios, etc."
+    "text": "Monitorización con fuser y lsof\n\nfuser  saber qué ficheros se están usando y qué procesos los usan (f: fichero abierto para lectura, F: fichero abierto para escritura, c: directorio de trabajo, e: ejecutando el fichero, m: memoria compartida, etc.)\nlsof  obtener un listado de todos los ficheros abiertos. Se puede filtrar por procesos, usuarios, directorios, etc."
   },
   {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#fuser-y-lsof",
@@ -1176,46 +1176,18 @@
     "text": "Parámetros del SF ext4\n$ sudo tune2fs -l /dev/sda2 \ntune2fs 1.45.5 (07-Jan-2020)\nFilesystem volume name:   &lt;none&gt;\nLast mounted on:          /\nFilesystem UUID:          1ccdff3f-4fa5-4222-85b9-81f463ac9da1\nFilesystem magic number:  0xEF53\nFilesystem revision #:    1 (dynamic)\nFilesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum\nFilesystem flags:         signed_directory_hash \nDefault mount options:    user_xattr acl\nFilesystem state:         clean\nErrors behavior:          Continue\nFilesystem OS type:       Linux\nInode count:              2433024\nBlock count:              9701161\n..."
   },
   {
-    "objectID": "tema07-administracionsf/tema07-administracionsf.html#concepto-de-cuotas-de-disco",
-    "href": "tema07-administracionsf/tema07-administracionsf.html#concepto-de-cuotas-de-disco",
-    "title": "Tema 7: Administración de sistemas de ficheros",
-    "section": "Concepto de cuotas de disco",
-    "text": "Concepto de cuotas de disco\n\nLas cuotas de disco permiten limitar el número de bloques y/o ficheros (nodos-i) que un usuario puede usar en una partición (también se pueden establecer para grupos de usuarios).\n\n\nHay dos tipos de límites:\n\nLímite hard: el usuario no puede sobrepasarlo. Si lo hace, ya no podrá usar más bloques o crear más ficheros.\nLímite soft: es inferior al límite hard y se puede sobrepasar durante cierto tiempo, siempre que no se alcance el límite hard.\n\nPeriodo de gracia: tiempo durante el que se puede sobrepasar el límite soft. Se informa al usuario de que ha superado el límite y que debe liberar espacio o nodos-i (ficheros).\n\nLos periodos y los límites se establecen, de forma independiente, para bloques y nodos-i."
-  },
-  {
-    "objectID": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-i",
-    "href": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-i",
-    "title": "Tema 7: Administración de sistemas de ficheros",
-    "section": "Establecer cuotas de disco (I)",
-    "text": "Establecer cuotas de disco (I)\nPasos a realizar para establecer las cuotas de disco:\n\nInstalar el paquete quota:\napt-get install quota\nIndicarlo en fstab (ext4 con cuota integrada en el journal y en ext3):\n/dev/sdb1 /home   ext4  defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv1  0  2\n\n/dev/sdb1 /home   ext3  defaults,usrquota,grpquota 0  2\nRemontar la partición para que se activen las opciones: mount -o remount /home."
-  },
-  {
-    "objectID": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-ii",
-    "href": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-ii",
-    "title": "Tema 7: Administración de sistemas de ficheros",
-    "section": "Establecer cuotas de disco (II)",
-    "text": "Establecer cuotas de disco (II)\n\nquotacheck -avugm: añade el contenido de los ficheros de control de cuotas.\n\n\na: todos los dispositivos con cuotas.\nv: verbose.\nu: cuotas para usuarios.\ng: cuotas para grupos.\nm: no remontar los archivos en modo solo lectura.\n\n\nActivar las cuotas: quotaon -avug.\nDesactivarlas: quotaoff -avug."
-  },
-  {
-    "objectID": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-iii",
-    "href": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-iii",
-    "title": "Tema 7: Administración de sistemas de ficheros",
-    "section": "Establecer cuotas de disco (III)",
-    "text": "Establecer cuotas de disco (III)\n\nEditar la cuota del usuario pagutierrez: edquota pagutierrez\n\nCuotas de disco para user pagutierrez (uid 1008):\n  Sist. arch. bloques    blando      duro inodos blando  duro\n  /dev/sdb1  39884712 130000000 140000000 507523      0     0\n\nEstablecer el periodo de gracia: edquota -t\n\nPeríodo de gracia antes de imponer límites blandos para users:\nLa unidad de tiempo puede ser: días, horas, minutos, o segundos\n  Sist. arch.          Periodo gracia bloque   Periodo gracia inodo\n  /dev/sdb1                    7día                 7día\n\nCopiar cuotas: edquota -up pagutierrez jsanchez"
-  },
-  {
-    "objectID": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-iv",
-    "href": "tema07-administracionsf/tema07-administracionsf.html#establecer-cuotas-de-disco-iv",
-    "title": "Tema 7: Administración de sistemas de ficheros",
-    "section": "Establecer cuotas de disco (IV)",
-    "text": "Establecer cuotas de disco (IV)\n\nEstadísticas de las cuotas: repquota /dev/sdb1\n\n*** Informe para user quotas en dispositivo /dev/sdb1\nPeriodo de gracia de bloque: 7días; periodo de gracia de inodo: 7días\n                        Límites de bloque límites de archivo\nUsuario        usado       blando      duro       usado blando duro\n----------------------------------------------------------------------\nroot      -- 10093264         0         0      199316     0     0\npagutierrez -- 39884712 130000000 140000000      507523     0     0\njsanchezm  --  31940744 130000000 140000000      864578     0     0"
-  },
-  {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#raid-y-lvm",
     "href": "tema07-administracionsf/tema07-administracionsf.html#raid-y-lvm",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "RAID y LVM",
     "text": "RAID y LVM\n\nRAID: Array redundante de discos independientes.\n\nVarias unidades de disco se ven como una sola unidad lógica.\nSe pueden implementar por software o por hardware.\n\nLVM (Logical Volume Management) : agrupar las particiones de uno o distintos discos en volúmenes. Permite redimensionar y mover particiones."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-administracionsf.html#raid-y-sistemas-de-ficheros-contemporáneos",
+    "href": "tema07-administracionsf/tema07-administracionsf.html#raid-y-sistemas-de-ficheros-contemporáneos",
+    "title": "Tema 7: Administración de sistemas de ficheros",
+    "section": "RAID y sistemas de ficheros contemporáneos",
+    "text": "RAID y sistemas de ficheros contemporáneos\n\nLa mayoría de sistemas de ficheros necesitan una implementación a parte (hardware o software) de LVM sobre la que construir un RAID.\nLos sistemas de ficheros ZFS, Btrfs o XFS están diseñados para integrar distintos dispositivos físicos como parte del sistema de ficheros sin gestores LVM externos.\nAl ser este soporte nativo y a medida de estos sistemas de ficheros el rendimiento y robustez es mayor. Para más información ver RAID-Z en Wikipedia."
   },
   {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#raid-0",
@@ -1253,11 +1225,102 @@
     "text": "Paridad: recuperación\nParidad: Si uno de los discos falla (p.ej. el disco 4), el contenido se puede restaurar a partir de la paridad:\n\n\n\nDisco 1:\n00101010\n(Datos)\n\n\nDisco 2:\n10001110\n(Datos)\n\n\nDisco 3:\n11110111\n(Datos)\n\n\nDisco 5:\n11100110\n(Paridad)\n\n\nDisco 4:\n10110101\n(Datos)"
   },
   {
+    "objectID": "tema07-administracionsf/tema07-administracionsf.html#concepto-de-cuotas-de-disco",
+    "href": "tema07-administracionsf/tema07-administracionsf.html#concepto-de-cuotas-de-disco",
+    "title": "Tema 7: Administración de sistemas de ficheros",
+    "section": "Concepto de cuotas de disco",
+    "text": "Concepto de cuotas de disco\n\nLas cuotas de disco permiten limitar el número de bloques y/o ficheros (nodos-i) que un usuario puede usar en una partición (también se pueden establecer para grupos de usuarios).\n\n\nHay dos tipos de límites:\n\nLímite hard: el usuario no puede sobrepasarlo. Si lo hace, ya no podrá usar más bloques o crear más ficheros.\nLímite soft: es inferior al límite hard y se puede sobrepasar durante cierto tiempo, siempre que no se alcance el límite hard.\n\nPeriodo de gracia: tiempo durante el que se puede sobrepasar el límite soft. Se informa al usuario de que ha superado el límite y que debe liberar espacio o nodos-i (ficheros).\n\nLos periodos y los límites se establecen, de forma independiente, para bloques y nodos-i."
+  },
+  {
     "objectID": "tema07-administracionsf/tema07-administracionsf.html#referencias-1",
     "href": "tema07-administracionsf/tema07-administracionsf.html#referencias-1",
     "title": "Tema 7: Administración de sistemas de ficheros",
     "section": "Referencias",
-    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley y Dan Mackin. Unix and Linux system administration handbook. Capítulo 20. Storage, Addison-Wesley. 5th Edition. 2018.\nAeleen Frisch. Essential system administration. Capítulo 10. Filesystems and disks. O’Reilly and Associates. Tercera edición. 2002.\nExt4 Design. https://ext4.wiki.kernel.org/index.php/Ext4_Design"
+    "text": "Referencias\nEvi Nemeth, Garth Snyder, Trent R. Hein, Ben Whaley y Dan Mackin. Unix and Linux system administration handbook. Capítulo 20. Storage, Addison-Wesley. 5th Edition. 2018.\nAeleen Frisch. Essential system administration. Capítulo 10. Filesystems and disks. O’Reilly and Associates. Tercera edición. 2002.\nExt4 Design. https://ext4.wiki.kernel.org/index.php/Ext4_Design\nAnatomy of the Linux virtual file system switch. https://developer.ibm.com/technologies/linux/tutorials/l-virtual-filesystem-switch/\nOverview of the Linux Virtual File System. https://www.kernel.org/doc/html/latest/filesystems/vfs.html\nWikipedia. Standard RAID levels. https://en.wikipedia.org/wiki/Standard_RAID_levels"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "",
+    "text": "En esta receta vamos a implementar una configuración típica:\n\nRAID software para la carpeta /home para aumentar tamaño, fiabilidad ante fallos…\nUso de cuotas para restringir el espacio y cantidad de ficheros/directorios por usuarios o grupos.\n\nEsta combinación, junto con el uso de NFS (y obviamente más cosas), es la que tenemos en las aulas de prácticas de la UCO.\nNecesitarás añadir al menos dos discos duros virtuales en VirtualBox. No necesitan ser formateados previamente."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#receta-1",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#receta-1",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "",
+    "text": "En esta receta vamos a implementar una configuración típica:\n\nRAID software para la carpeta /home para aumentar tamaño, fiabilidad ante fallos…\nUso de cuotas para restringir el espacio y cantidad de ficheros/directorios por usuarios o grupos.\n\nEsta combinación, junto con el uso de NFS (y obviamente más cosas), es la que tenemos en las aulas de prácticas de la UCO.\nNecesitarás añadir al menos dos discos duros virtuales en VirtualBox. No necesitan ser formateados previamente."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#herramienta-mdadm",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#herramienta-mdadm",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Herramienta mdadm",
+    "text": "Herramienta mdadm\n\nLa herramienta mdadm permite crear o administrar un dispositivo RAID, convertir un disco ``normal’’ en parte de un RAID…\nTiene distintos modos de funcionamiento create: configurar y activar sistemas RAID.\n/proc/mdstat lista todos los sistemas RAID (dispositivos md) activos con información sobre su estado.\nLas particiones que formen el RAID tienen que un flag RAID (Linux raid auto), de esta manera serán detectadas y activadas en el proceso de arranque."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#instalación-mdadm",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#instalación-mdadm",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Instalación mdadm",
+    "text": "Instalación mdadm\nsudo apt update\nsudo apt upgrade\nsudo apt install mdadm"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#ejemplo-de-creación-de-un-raid0",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#ejemplo-de-creación-de-un-raid0",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Ejemplo de creación de un RAID0",
+    "text": "Ejemplo de creación de un RAID0\nListar dispositivos RAID previos:\n$ cat /proc/mdstat\nPersonalities : \nunused devices: &lt;none&gt;\nSi existe alguno tendrás que reiniciarlos.\nEncontrar los dispositivos sobre los que construiremos el RAID (sdb y sdb en nuestro caso):\nlsblk \nSalida:\nNAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT\nsda      8:0    0    4G  0 disk \n├─sda1   8:1    0  1,6G  0 part /\n├─sda2   8:2    0    1K  0 part \n├─sda5   8:5    0  976M  0 part [SWAP]\n└─sda6   8:6    0  1,4G  0 part /home\nsdb      8:16   0  100M  0 disk \nsdc      8:32   0  100M  0 disk \nsr0     11:0    1 1024M  0 rom  \nCrear el RAID 0:\nsudo mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/sdb /dev/sdc\nSalida:\nmdadm: chunk size defaults to 512K\nmdadm: Defaulting to version 1.2 metadata\nmdadm: array /dev/md0 started.\nConfirmar que se ha creado:\ncat /proc/mdstat\nCrear un sistema de archivos en el RAID:\nsudo mkfs.ext4 -F /dev/md0\nA continuación, crear un punto de montaje para montar el nuevo sistema de archivos:\nsudo mkdir -p /mnt/md0\nPuedes montar el sistema de archivos con el siguiente comando:\nsudo mount /dev/md0 /mnt/md0\nDespués, comprueba si el nuevo espacio está disponible:\ndf -h -x devtmpfs -x tmpfs\nSalida:\nS.ficheros     Tamaño Usados  Disp Uso% Montado en\n/dev/sda1        1,6G   1,1G  424M  73% /\n/dev/sda6        1,4G   479M  844M  37% /home\n/dev/md0         185M    14K  171M   1% /mnt/md0\nInformación sobre el estado:\nsudo mdadm --detail --scan\nPara asegurarnos de que la configuración se aplica en cada inicio y se incluye en el initramfs (ver tema de arranque):\nsudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf\nsudo update-initramfs -u\nFinalmente añadimos el punto de montaje nuevo:\necho '/dev/md0 /mnt/md0 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#nuevo-home",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#nuevo-home",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Nuevo /home",
+    "text": "Nuevo /home\nIdealmente el /home se montaría sobre un RAID1 o RAID5 (mínimo 3 discos):\n\nRAID1: --level=1\nRAID5: --level=5 --raid-devices=3"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#migración-al-home",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#migración-al-home",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Migración al /home",
+    "text": "Migración al /home\n¿Cómo migraríamos y usaríamos este volumen como /home?:\nPara reemplazar el /home, una vez listo todo lo anterior, tendrás que:\n\nPoner el sistema en modo monousuario de forma programada y avisando previamente a usuarios.\nCopiar todo el contenido de la partición antigua a la nueva. Por ejemplo con rsync.\nEliminar anterior partición y añadir nueva en /etc/fstab.\n\n/dev/md1 /home ext4 defaults 1 2\n\nAplicar cambios con mount -a.\nVolver a modo multiusuario."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-i",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-i",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Establecer cuotas de disco (I)",
+    "text": "Establecer cuotas de disco (I)\nPasos a realizar para establecer las cuotas de disco:\n\nInstalar las utilidades de cuota:\n\napt-get install quota\n\nOpcional. En algunas imágenes de servidores virtuales puede no estar disponible el módulo del kernel y será necesario instalar:\n\nsudo apt install linux-image-extra-virtual\n\nIndicarlo en fstab (ext4 con cuota integrada en el journal y en ext3):\n\n# ext4 con cuota integrada en journal\n/dev/sdb1 /home   ext4  defaults,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv1  0  2\n# ext3 sin cuota integrada en journal\n/dev/sdb1 /home   ext3  defaults,usrquota,grpquota 0  2\n\nRemontar la partición para que se activen las opciones:\n\nmount -o remount /home`.\n#Puedes verificar con \ncat /proc/mounts | grep ' /home '"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-ii",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-ii",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Establecer cuotas de disco (II)",
+    "text": "Establecer cuotas de disco (II)\n\nAntes de activar finalmente el sistema de cuotas, es necesario ejecutar manualmente el comando quotacheck una vez. Este comando crea los archivos /home/aquota.user y /home/aquota.group que contienen información sobre los límites y el uso del sistema de archivos, y deben existir antes de activar la supervisión de cuotas.\n\nquotacheck -avugm\nquotacheck -avugm: añade el contenido de los ficheros de control de cuotas.\n\na: todos los dispositivos con cuotas.\nv: verbose.\nu: cuotas para usuarios.\ng: cuotas para grupos.\nm: no remontar los archivos en modo solo lectura."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-iii",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-iii",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Establecer cuotas de disco (III)",
+    "text": "Establecer cuotas de disco (III)\n\nActivar las cuotas: quotaon -avug.\nDesactivarlas: quotaoff -avug.\nEditar la cuota del usuario pagutierrez (esto abre un editor de texto por defecto):\n\nedquota pagutierrez\nCuotas de disco para user pagutierrez (uid 1008):\n  Sist. arch. bloques    blando      duro inodos blando  duro\n  /dev/sdb1  39884712 130000000 140000000 507523      0     0\n\nNota: El concepto de bloque no está bien especificado y puede cambiar dependiendo de muchos factores, incluyendo la herramienta de línea de comandos que los esté proporcionando. En el contexto de cuotas en Ubuntu, es bastante seguro asumir que 1 bloque equivale a 1 kilobyte de espacio en disco."
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-iv",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#establecer-cuotas-de-disco-iv",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Establecer cuotas de disco (IV)",
+    "text": "Establecer cuotas de disco (IV)\n\nEstablecer el periodo de gracia: edquota -t\n\nPeríodo de gracia antes de imponer límites blandos para users:\nLa unidad de tiempo puede ser: días, horas, minutos, o segundos\n  Sist. arch.          Periodo gracia bloque   Periodo gracia inodo\n  /dev/sdb1                    7día                 7día\n\nCopiar cuotas: edquota -up pagutierrez jsanchez\nEstadísticas de las cuotas: repquota /dev/sdb1 (-s muestra información en formato entendible por personas)\n\n*** Informe para user quotas en dispositivo /dev/sdb1\nPeriodo de gracia de bloque: 7días; periodo de gracia de inodo: 7días\n                        Límites de bloque límites de archivo\nUsuario        usado       blando      duro       usado blando duro\n----------------------------------------------------------------------\nroot      -- 10093264         0         0      199316     0     0\npagutierrez -- 39884712 130000000 140000000      507523     0     0\njsanchezm  --  31940744 130000000 140000000      864578     0     0"
+  },
+  {
+    "objectID": "tema07-administracionsf/tema07-RAID-cuotas.html#referencias",
+    "href": "tema07-administracionsf/tema07-RAID-cuotas.html#referencias",
+    "title": "Tema 7: Implementación RAID software y cuotas",
+    "section": "Referencias",
+    "text": "Referencias\nHow To Create RAID Arrays with mdadm on Ubuntu 22.04 https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-ubuntu-22-04\nHow To Set Filesystem Quotas on Ubuntu 20.04 https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-20-04"
   },
   {
     "objectID": "enlaces.html",
